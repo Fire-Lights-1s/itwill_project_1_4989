@@ -11,11 +11,8 @@ import com.itwillbs.service.MyPageService;
 @Controller
 @RequestMapping("/mypage/*")
 public class MyPageController {
-
-	@Inject
-	private MyPageService myPageService;
 	
-	@GetMapping
+	@GetMapping("/myprofile")
 	public String profile() {
 		System.out.println("MyPageController profile()");
 		return "mypage/myprofile";
