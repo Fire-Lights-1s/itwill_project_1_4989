@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내 프로필</title>
 </head>
 <body>
-
+<h2>내 프로필</h2>
+<a href="">회원 정보 수정</a>
+<img src="">
+<p>닉네임</p>
+<p>누적 거래 횟수</p>
 </body>
 </html>
