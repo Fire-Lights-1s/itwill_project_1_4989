@@ -17,6 +17,7 @@ public class MyPageController {
 	
 	@GetMapping
 	public String profile() {
+		System.out.println("MyPageController profile()");
 		return "mypage/myprofile";
 	}
 	
