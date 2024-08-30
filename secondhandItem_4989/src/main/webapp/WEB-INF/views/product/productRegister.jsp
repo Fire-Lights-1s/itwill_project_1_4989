@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -87,16 +86,27 @@
             gap: 20px;
         }
     </style>
+<!--     이미지 미리보기 -->
+     <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('preview');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+        </script>
 </head>
 <body>
 
 <div class="container">
-    <form action="submit.jsp" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <div class="image-upload">
-                <img src="https://via.placeholder.com/150" alt="이미지 업로드">
-                <p>0/5</p>
-            </div>
+    <form action="/uploadImage" method="post" enctype="multipart/form-data">
+        <div class="form-group image-upload">
+            <img id="preview" src="https://via.placeholder.com/150" alt="이미지 미리보기">
+            <br>
+            <label class="upload-btn" for="imageInput">사진 선택</label>
+            <input type="file" id="imageInput" name="file" accept="image/*" onchange="previewImage(event)">
         </div>
         
         <div class="form-group inline-group">
@@ -137,16 +147,18 @@
         <div class="form-group">
             <label>거래 방식</label>
             <div class="radio-group">
-                <label><input type="radio" name="deal-method" value="delivery"> 택배</label>
-                <label><input type="radio" name="deal-method" value="direct"> 직거래</label>
+                <label><input type="radio" name="deal-method" value="delivery">택배</label>
+                <label><input type="radio" name="deal-method" value="direct">직거래</label>
+                <label><input type="radio" name="deal-method" value="all">모두 가능</label>
             </div>
         </div>
 
         <div class="form-group">
             <label>결제 방식</label>
             <div class="radio-group">
-                <label><input type="radio" name="payment-method" value="cash"> 현금</label>
-                <label><input type="radio" name="payment-method" value="kakaopay"> 4989페이</label>
+                <label><input type="radio" name="payment-method" value="cash">현금</label>
+                <label><input type="radio" name="payment-method" value="pay">4989페이</label>
+                <label><input type="radio" name="payment-method" value="all">모두 가능</label>
             </div>
         </div>
 
