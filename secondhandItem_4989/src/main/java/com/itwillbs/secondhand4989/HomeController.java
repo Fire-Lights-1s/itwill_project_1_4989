@@ -33,7 +33,19 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "redirect:/product/main";
+		return "index";
 	}
+	
+	
+	@RequestMapping("/sample1")
+	public String sample1() {
+		return "sample_content";
+	}
+	
+	@RequestMapping("/sample2")
+	public String sample2() {
+		return "sample_side_content";
+	}
+	
 	
 }
