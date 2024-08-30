@@ -310,6 +310,7 @@ nav .wrapper{
 
 header {
 	position: fixed;
+	z-index: 99;
 	top:70px;
 	width: 100%;
 	background-color:#a698dc;
