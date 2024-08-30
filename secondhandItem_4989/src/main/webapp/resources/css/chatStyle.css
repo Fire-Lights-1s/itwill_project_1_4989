@@ -30,8 +30,15 @@ div#chatRoom::-webkit-scrollbar-track {
 .type_select {
   box-sizing: border-box;
   position: relative;
-  width: 50px;
-  height: 44px;
+  width: 90px;
+  height: 40px;
+  border:1px solid black;
+  border-radius: 20px;
+  background-color: #eee;
+  font-size: 1.3rem;
+}
+.type_select:hover{
+	
 }
 
 #search_bar{
@@ -52,12 +59,13 @@ div#chatRoom::-webkit-scrollbar-track {
 	width: 900px;
 }
 #chatList{
-	background-color: #fff;
+	padding-top:10px; 
 	width: 500px;
 	height: 900px;
+	background-color: #fff;
 }
 #chatRoom{
-	background-color: #faf;
+	background-color: #ddbbff;
 	width: 500px;
 	height: 900px;
 	overflow-y: scroll;

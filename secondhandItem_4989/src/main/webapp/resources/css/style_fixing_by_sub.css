@@ -207,6 +207,9 @@ nav .wrapper{
     #close-btn:checked ~ .btn.menu-btn{
         display: block;
     }
+    .nav-links *{
+    	z-index: 98;
+    }
     .nav-links li{
         margin: 15px 10px;
     }
@@ -310,7 +313,7 @@ nav .wrapper{
 
 header {
 	position: fixed;
-	z-index: 99;
+	z-index: 50;
 	top:70px;
 	width: 100%;
 	background-color:#a698dc;
@@ -369,6 +372,7 @@ aside {
 
 #main-container {
 	margin-top: 130px;
+    padding: 20px;
     min-height: calc(100vh - 130px);
 }
 
