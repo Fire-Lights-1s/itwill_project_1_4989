@@ -484,7 +484,7 @@
                     <a href="#">운영정책</a>   |
                     <a href="#">개인정보처리방침</a>   |
                     <a href="#">사이트맵</a>
-                </p>
+                </p> 
             </div>
             <div class="row">
                 <div class="col-md-8">
