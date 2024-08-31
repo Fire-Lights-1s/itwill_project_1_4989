@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.profile-circle {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

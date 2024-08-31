@@ -3,7 +3,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<jsp:include page="inc/header_head.jsp"></jsp:include>
+<jsp:include page="inc/bootstrapLink.jsp"></jsp:include>
+<title>4989 : IT기기 중고거래플랫폼</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+<script src="${pageContext.request.contextPath }/resources/js/script.js"></script>
 </head>
 <body>
 <jsp:include page="inc/header.jsp"></jsp:include>
