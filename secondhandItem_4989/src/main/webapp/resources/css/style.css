@@ -579,6 +579,17 @@ aside {
 }
 /* 슬라이더 끝 */
 
+.profile-circle {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .flex-container {
     display: flex;
@@ -605,6 +616,7 @@ aside {
     text-decoration: none;
     font-size: 15px;
 }
+
 
 
 

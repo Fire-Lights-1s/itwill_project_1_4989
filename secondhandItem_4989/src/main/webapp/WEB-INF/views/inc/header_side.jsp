@@ -1,25 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>4989 : IT기기 중고거래플랫폼</title>
-    <link rel="stylesheet" href=${pageContext.request.contextPath }/resources/css/style.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://raw.githubusercontent.com/daneden/animate.css/master/animate.css" rel="stylesheet">
-    <script src="${pageContext.request.contextPath }/resources/js/script.js"></script>
-    
-    
-    
-</head>
-
-<body>
     <nav>
         <div class="wrapper absolute-center ">
-            <div class="logo"><a href="index.html"><img src="${pageContext.request.contextPath }/resources/img/Logo_BW2.png" style="height:25px;"></a></div>
+            <div class="logo"><a href="index"><img src="${pageContext.request.contextPath }/resources/img/Logo_BW2.png" style="height:25px;"></a></div>
             <ul class="nav-links">
                 <li>
                     <a href="#" class="category_btn desktop-item" style="margin-right:20px;">三</a>
@@ -60,11 +43,11 @@
                 </li>
                 <li><a href="#">채팅</a></li>
                 <li>
-                    <a href="#" class="desktop-item">마이페이지</a>
+                    <a href="${pageContext.request.contextPath }/mypage/myprofile" class="desktop-item">마이페이지</a>
                     <input type="checkbox" class="invisible" id="showDrop">
                     <label for="showDrop" class="mobile-item">Dropdown Menu</label>
                     <ul class="drop-menu">
-                        <li><a href="#">내 프로필</a></li>
+                        <li><a href="${pageContext.request.contextPath }/mypage/myprofile">내 프로필</a></li>
                         <li><a href="#">4989 페이</a></li>
                         <li><a href="#">찜 목록</a></li>
                         <li><a href="#">판매내역</a></li>
@@ -79,10 +62,4 @@
             <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
         </div>
         </nav>
-        <header>
-        	<div id="menu-name">
-    			메뉴 이름
-    		</div>
-       </header>
-</body>
-</html>
+        
