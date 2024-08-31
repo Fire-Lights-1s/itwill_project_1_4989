@@ -3,24 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-.profile-circle {
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background-color: #d3d3d3;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-</style>
 <meta charset="UTF-8">
 <title>내 프로필</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 </head>
 <body>
-<jsp:include page="../inc/header_side.jsp"></jsp:include>
+<jsp:include page="../inc/header.jsp"></jsp:include>
 <section>
 	<div class="content-container">
 		<jsp:include page="../inc/myPageLefter.jsp"></jsp:include>
