@@ -6,6 +6,7 @@
             <ul class="nav-links">
                 <li>
                     <a href="#" class="category_btn desktop-item" style="margin-right:20px;">三</a>
+<!--                     id = showDrop 이부분이 3곡에서 쓰인다고 브라우저에서 경고뜹니다-->
                     <input type="checkbox" class="invisible" id="showDrop">
                     <label for="showDrop" class="mobile-item">Dropdown Menu</label>
                     <ul class="drop-menu">

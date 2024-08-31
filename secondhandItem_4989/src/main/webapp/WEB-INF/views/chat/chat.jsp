@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <jsp:include page="../inc/bootstrapLink.jsp"></jsp:include>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_fixing_by_sub.css?">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_Editing_by_sub.css?">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/chatStyle.css?">
 <script src="${pageContext.request.contextPath }/resources/js/script.js"></script>
 
