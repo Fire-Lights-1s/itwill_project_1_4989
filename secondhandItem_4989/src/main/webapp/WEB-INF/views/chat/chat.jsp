@@ -13,28 +13,37 @@
 </head>
 <body>
 	<jsp:include page="../inc/header.jsp"></jsp:include>
-	<div id="main-container">
+	<div id="main-container-chat">
 		<div id="container">
-			<table>
-				<tr>
-					<td>
-						<div id="chatList">
-							<div id="searchBar">
-							<a class="type_select" href="#" onclick="">
-							전체 목록
-							</a>
-							<input type="text" id="search_bar">
-							</div>	
-							<div id="chatRoomList"></div>	
+			<div id="chatList">
+				<div class="flexBox ">
+					<a class="type_select form-control" href="#" onclick="">전체 목록</a>
+					<input type="search" id="searchText" placeholder="제목을 입력하세요">
+					<button class="search-btn">
+						<img alt="search" src="${pageContext.request.contextPath }/resources/img/icon/search.png">
+					</button>
+				</div>	
+				<div id="chatTotalRoom">
+					<div>
+						<div class="profile">
+							<img alt="" src="">
 						</div>
-					</td>
-					<td>
-						<div id="chatRoom">
-						
+						<div class="descript">
+							<div >
+								<p>채팅방 제목</p>
+								<p>채팅방 내용</p>
+							</div>
+							<div >
+								<p>오후 2:40</p>
+								<p id="alamIcon">1</p>
+							</div>
 						</div>
-					</td>
-				</tr>
-			</table>
+					</div>
+				</div>	
+			</div>
+			<div id="chatRoom">
+			
+			</div>
 		</div>
 	</div>
   <jsp:include page="../inc/footer.jsp"></jsp:include>
