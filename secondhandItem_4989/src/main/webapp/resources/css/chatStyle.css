@@ -92,6 +92,8 @@ a:hover{
 #chatTotalRoom{
 	display: flex;
 	flex-direction: column;
+	height:740px;
+	overflow: scroll;
 }
 #chatTotalRoom > div{
 	display: flex;
@@ -111,25 +113,47 @@ a:hover{
 	width:80px;
 	height: 80px;
 }
-#chatTotalRoom > div > .descript{
+#chatTotalRoom > div > .chatDescript{
 	margin:10px;
 	flex-grow: 1;
 	height: 80px;
 }
-.descript{
+div#chatTotalRoom::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+div#chatTotalRoom::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #db92fe; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+div#chatTotalRoom::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+.chatDescript{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 }
-.descript > div{
+.chatDescript > div{
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 }
-.descript:nth-child(2){
-	justify-content: space-between;
+.chatContnet p:nth-child(1){
+	font-weight: 900;
 }
-.descript #alamIcon{
+
+.chatContnet p{
+	font-size: 1.2rem;
+}
+.chatDescript .alamIcon{
+	margin: 0 auto;
+	margin-top:10px;
 	padding: 2px 6px;
+	padding-top:1px;
 	width:min-content;
 	min-width : 25px;
 	min-height : 25px;
@@ -140,10 +164,11 @@ a:hover{
 }
 
 #chatRoom{
+	display: flex;
+	flex-direction: column;
 	background-color: #ddbbff;
 	width: 500px;
 	height: 800px;
-	overflow-y: scroll;
 }
 
 div#chatRoom::-webkit-scrollbar {

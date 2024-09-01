@@ -28,21 +28,128 @@
 						<div class="profile">
 							<img alt="" src="">
 						</div>
-						<div class="descript">
-							<div >
+						<div class="chatDescript">
+							<div class="chatContnet">
 								<p>채팅방 제목</p>
 								<p>채팅방 내용</p>
 							</div>
-							<div >
+							<div>
 								<p>오후 2:40</p>
-								<p id="alamIcon">1</p>
+								<p class="alamIcon">1</p>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="profile">
+							<img alt="" src="">
+						</div>
+						<div class="chatDescript">
+							<div class="chatContnet">
+								<p>채팅방 제목</p>
+								<p>채팅방 내용</p>
+							</div>
+							<div>
+								<p>오후 2:40</p>
+								<p class="alamIcon">1</p>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="profile">
+							<img alt="" src="">
+						</div>
+						<div class="chatDescript">
+							<div class="chatContnet">
+								<p>채팅방 제목</p>
+								<p>채팅방 내용</p>
+							</div>
+							<div>
+								<p>오후 2:40</p>
+								<p class="alamIcon">1</p>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="profile">
+							<img alt="" src="">
+						</div>
+						<div class="chatDescript">
+							<div class="chatContnet">
+								<p>채팅방 제목</p>
+								<p>채팅방 내용</p>
+							</div>
+							<div>
+								<p>오후 2:40</p>
+								<p class="alamIcon">1</p>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="profile">
+							<img alt="" src="">
+						</div>
+						<div class="chatDescript">
+							<div class="chatContnet">
+								<p>채팅방 제목</p>
+								<p>채팅방 내용</p>
+							</div>
+							<div>
+								<p>오후 2:40</p>
+								<p class="alamIcon">1</p>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="profile">
+							<img alt="" src="">
+						</div>
+						<div class="chatDescript">
+							<div class="chatContnet">
+								<p>채팅방 제목</p>
+								<p>채팅방 내용</p>
+							</div>
+							<div>
+								<p>오후 2:40</p>
+								<p class="alamIcon">1</p>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="profile">
+							<img alt="" src="">
+						</div>
+						<div class="chatDescript">
+							<div class="chatContnet">
+								<p>채팅방 제목</p>
+								<p>채팅방 내용</p>
+							</div>
+							<div>
+								<p>오후 2:40</p>
+								<p class="alamIcon">1</p>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="profile">
+							<img alt="" src="">
+						</div>
+						<div class="chatDescript">
+							<div class="chatContnet">
+								<p>채팅방 제목</p>
+								<p>채팅방 내용</p>
+							</div>
+							<div>
+								<p>오후 2:40</p>
+								<p class="alamIcon">1</p>
 							</div>
 						</div>
 					</div>
 				</div>	
 			</div>
 			<div id="chatRoom">
-			
+				<div></div>
+				<div></div>
+				<div></div>
 			</div>
 		</div>
 	</div>
