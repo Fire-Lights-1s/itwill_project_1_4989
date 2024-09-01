@@ -15,6 +15,12 @@
 
   <jsp:include page="inc/header.jsp"></jsp:include>
 
+    <header>
+    	<div id="menu-name">
+			메뉴(현재 페이지의 대메뉴: 마이페이지, 매입신청 등) 이름
+		</div>
+   </header>
+   
   <section>
 	<div id="main-container">
 	  <main>

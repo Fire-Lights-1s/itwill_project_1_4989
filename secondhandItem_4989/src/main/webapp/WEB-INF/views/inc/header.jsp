@@ -31,9 +31,9 @@
             <ul class="nav-links">
                 <li><a href="product/register">판매등록</a></li>
                 <li>
-                    <a href="purchase/intro" class="desktop-item">매입신청</a>
+                    <a href="purchase" class="desktop-item">매입신청</a>
                     <ul class="drop-menu">
-                        <li><a href="purchase/intro">서비스 소개</a></li>
+                        <li><a href="purchase">서비스 소개</a></li>
                         <li><a href="purchase/category">매입 신청하기</a></li>
                     </ul>
                 </li>
@@ -56,9 +56,4 @@
         </div>
     </nav>
     
-    <header>
-    	<div id="menu-name">
-			메뉴(현재 페이지의 대메뉴: 마이페이지, 매입신청 등) 이름
-		</div>
-   </header>
        
