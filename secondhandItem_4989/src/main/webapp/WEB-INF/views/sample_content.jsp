@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 </head>
 <body>
 
@@ -19,9 +20,9 @@
 	  <main>
 
 
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		<h1>본문 영역</h1>
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
 
