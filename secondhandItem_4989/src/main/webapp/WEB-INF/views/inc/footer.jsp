@@ -50,11 +50,11 @@
                <p><br>- 운영시간: 9시~18시 (주말, 공휴일 휴무)</p>
                <div style="text-align: center; margin:0 auto;">
                    <p class="footer-links">
-					<a href="cs/notice" class="link-1">공지사항</a>
+					<a href="${pageContext.request.contextPath}/cs/notice" class="link-1">공지사항</a>
 					
-					<a href="cs/faq">자주 묻는 질문</a>
+					<a href="${pageContext.request.contextPath}/cs/faq">자주 묻는 질문</a>
 				
-					<a href="cs/inquiry">1:1 문의하기</a>
+					<a href="${pageContext.request.contextPath}/cs/inquiry">1:1 문의하기</a>
 				</p>
                </div>
             </div>
