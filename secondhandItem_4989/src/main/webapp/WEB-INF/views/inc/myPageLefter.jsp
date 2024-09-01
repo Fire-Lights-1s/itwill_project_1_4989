@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileStyle.css">
 <aside class="side-nav">
-	<h2>마이 페이지</h2>
-	<br>
+	<h1>마이 페이지</h1>
+	
 	<br>
 	<ul>
-		<li><a href="#"><font size="5em">내 프로필</font></a></li>
-		<li><a href="#"><font size="5em">4989 페이</font></a></li>
-		<li><a href="#"><font size="5em">찜 목록</font></a></li>
-		<li><a href="#"><font size="5em">판매 내역</font></a></li>
-		<li><a href="#"><font size="5em">구매 내역</font></a></li>
-		<li><a href="#"><font size="5em">매입 신청 내역</font></a></li>
-		<li><a href="#"><font size="5em">정보 수정</font></a></li>
+		<li><a href="${pageContext.request.contextPath}/my/profile">내 프로필</a></li>
+		<li><a href="#">4989 페이</a></li>
+		<li><a href="#">찜 목록</a></li>
+		<li><a href="#">판매 내역</a></li>
+		<li><a href="#">구매 내역</a></li>
+		<li><a href="#">매입 신청 내역</a></li>
+		<li><a href="#">정보 수정</a></li>
 	</ul>
 </aside>

@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.itwillbs.service.MyPageService;
 
 @Controller
-@RequestMapping("/mypage/*")
+@RequestMapping("/my/*")
 public class MyPageController {
 	
-	@GetMapping("/myprofile")
+	@GetMapping("/profile")
 	public String profile() {
 		System.out.println("MyPageController profile()");
-		return "mypage/myprofile";
+		return "my/profile";
 	}
 	
 	
