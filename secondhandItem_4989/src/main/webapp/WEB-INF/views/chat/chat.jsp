@@ -147,9 +147,9 @@
 				</div>	
 			</div>
 			<div id="chatRoom">
-				<div></div>
-				<div></div>
-				<div></div>
+				<div id="productInfo"></div>
+				<div id="chatContent"></div>
+				<div id="input"></div>
 			</div>
 		</div>
 	</div>

@@ -16,7 +16,7 @@ a:hover{
 	text-decoration: none;
 }
 #main-container-chat{
-	margin-top: 130px;
+	margin-top: 70px;
 }
 #container{
 	display: grid;
@@ -170,18 +170,28 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 	width: 500px;
 	height: 800px;
 }
-
-div#chatRoom::-webkit-scrollbar {
+#productInfo{
+	flex:2 1 auto;
+	background-color: #efefef;
+}
+#chatContent{
+	flex:6 1 auto;
+}
+div#chatContent::-webkit-scrollbar {
     width: 8px;  /* 스크롤바의 너비 */
 }
 
-div#chatRoom::-webkit-scrollbar-thumb {
+div#chatContent::-webkit-scrollbar-thumb {
     height: 30%; /* 스크롤바의 길이 */
     background: #217af4; /* 스크롤바의 색상 */
     
     border-radius: 10px;
 }
 
-div#chatRoom::-webkit-scrollbar-track {
+div#chatContent::-webkit-scrollbar-track {
     background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+#input{
+	background-color: #efefef;
+	flex:1 1 auto;
 }
