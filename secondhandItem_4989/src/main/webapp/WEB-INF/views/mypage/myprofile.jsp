@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>내 프로필</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/profileStyle.css">
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"></jsp:include>
