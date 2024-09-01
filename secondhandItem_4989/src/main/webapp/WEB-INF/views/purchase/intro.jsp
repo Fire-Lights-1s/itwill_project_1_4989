@@ -10,6 +10,11 @@
 <style>
 h1 { text-align:center;}
 
+.content-container {
+	background-color: white;
+}
+
+
 </style>
 </head>
 <body>
@@ -18,21 +23,31 @@ h1 { text-align:center;}
 
 <header>
    	<div id="menu-name">
-		매입신청
+		매입신청 > 서비스 소개
 	</div>
 </header>
+<!-- 메뉴 아래 시작 -->
+<section>
+	<div class="content-container">
 
-  <section>
-	<div id="main-container">
+      <jsp:include page="inc_side.jsp"></jsp:include>
+
+<!-- 본문영역 시작 -->
+	<div id="main-container-side">
 	  <main>
 
-	<h1>매입서비스 소개</h1>
-	
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<h1>매입 서비스 소개</h1>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 
 
 	  </main>
 	</div>
-  </section>
+  </div>
+</section>
+
+<!-- 본문영역 끝 -->
   
   <jsp:include page="../inc/footer.jsp"></jsp:include>
   
