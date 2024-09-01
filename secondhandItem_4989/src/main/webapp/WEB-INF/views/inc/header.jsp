@@ -34,7 +34,7 @@
                     <a href="${pageContext.request.contextPath}/purchase/intro" class="desktop-item">매입신청</a>
                     <ul class="drop-menu">
                         <li><a href="${pageContext.request.contextPath}/purchase/intro">서비스 소개</a></li>
-                        <li><a href="${pageContext.request.contextPath}/purchase/category">매입 신청하기</a></li>
+                        <li><a href="${pageContext.request.contextPath}/purchase/register">매입 신청하기</a></li>
                     </ul>
                 </li>
                 <li><a href="${pageContext.request.contextPath}/chat">채팅</a></li>

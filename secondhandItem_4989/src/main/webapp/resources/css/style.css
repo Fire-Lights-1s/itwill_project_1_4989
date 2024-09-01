@@ -338,6 +338,7 @@ header {
 
 
 aside {
+	min-width: 200px;
     background-color: #f4f4f4;
 }
 

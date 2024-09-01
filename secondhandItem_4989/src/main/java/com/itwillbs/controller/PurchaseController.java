@@ -13,6 +13,9 @@ public class PurchaseController {
 		return "purchase/intro";
 	}
 	
-	
+	@GetMapping("/register")
+	public String category() {
+		return "purchase/regi/category";
+	}
 	
 }
