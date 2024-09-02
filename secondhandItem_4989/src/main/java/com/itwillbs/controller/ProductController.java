@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/product/*")
 public class ProductController {
-	@GetMapping("/main")
+	@GetMapping("/register")
 	public String main() {
-		return "/main/main";
+		return "/product/register";
 	}
 }
