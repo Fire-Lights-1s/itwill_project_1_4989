@@ -6,12 +6,12 @@ body {
     justify-content: space-between;
     align-items: center;
     height: 100vh;
-    background-color: #f1f1f1;
+    background-color: #f8f8f8;
     margin: 0;
 }
 
 .login-container {
-    background: #f1f1f1;
+    background: #f8f8f8;
     padding: 40px;
     border-radius: 10px;
     text-align: center;
