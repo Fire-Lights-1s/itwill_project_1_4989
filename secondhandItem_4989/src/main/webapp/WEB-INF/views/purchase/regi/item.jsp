@@ -90,9 +90,9 @@ th, td {
 		<tr>
 			<td>-</td>
 			<td>+</td>
-			<td><a href="">10,000</a></td>
-			<td><a href="">10,000</a></td>
-			<td><a href="">10,000</a></td>
+			<td><a href="form?name=name&expected_grade=s">10,000</a></td>
+			<td><a href="form?name=name&expected_grade=s">10,000</a></td>
+			<td><a href="form?name=name&expected_grade=s">10,000</a></td>
 		</tr>
 		
 		</table>
