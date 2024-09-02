@@ -13,6 +13,7 @@
 </head>
 <body>
 	<jsp:include page="../inc/header.jsp"></jsp:include>
+	<section>
 	<div id="main-container-chat">
 		<div id="container">
 			<div id="chatList">
@@ -147,7 +148,7 @@
 				</div>	
 			</div>
 			<div id="chatRoom">
-				<div id="productInfo">
+				<div id="productInfo" class="flexBox">
 					<div>
 						<img alt="product" src="">
 					</div>
@@ -156,19 +157,28 @@
 				</div>
 				<div id="chatContent">
 					<div class="reciveMessage">
+						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasda</p>
 						<p>오후 2:40</p>
 					</div>
 					<div class="sendMessage">
+						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasdasd</p>
 						<p>오후 2:40</p>
 					</div>
 				
 				</div>
-				<div id="input">
-					<textarea name="message">
+				<div id="input" class="flexBox">
+					<button>
+						<img alt="" src="${pageContext.request.contextPath }/resources/img/icon/plus_icon.png">
+					</button>
+					<textarea name="message"></textarea>
+					<button>
+						<img alt="" src="${pageContext.request.contextPath }/resources/img/icon/chat_send.png">
+					</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	</section>
   <jsp:include page="../inc/footer.jsp"></jsp:include>
 </body>
 </html>

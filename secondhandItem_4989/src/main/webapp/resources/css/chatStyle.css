@@ -1,10 +1,10 @@
 @charset "UTF-8";
-/* *{ */
-/* 	margin: 0; */
-/* 	padding: 0; */
-/* 	box-sizing: border-box; */
-/* 	font-family: "Noto Sans KR", sans-serif; */
-/* } */
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Noto Sans KR", sans-serif;
+}
 a{
 	text-decoration: none;
 }
@@ -82,6 +82,7 @@ a:hover{
 	border-radius: 0 20px 20px 0;
 	width: 50px;
 	height: 40px;
+	background-color: white;
 	margin-right: 10px;
 }
 .search-btn > img{
@@ -166,15 +167,20 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 #chatRoom{
 	display: flex;
 	flex-direction: column;
+	justify-content:space-between;
 	background-color: #ddbbff;
-	width: 500px;
+	width: 600px;
 	height: 800px;
 }
 #productInfo{
-	flex:2 1 auto;
-	display: flex;
-	flex-direction: row;
+	padding: 10px;
+	height: 160px;
 	background-color: #efefef;
+}
+#productInfo div:nth-child(2){
+	background-color: white;
+	width: 50px;
+	height: 100%;
 }
 #chatContent{
 	flex:6 1 auto;
@@ -193,7 +199,56 @@ div#chatContent::-webkit-scrollbar-thumb {
 div#chatContent::-webkit-scrollbar-track {
     background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }
+.reciveMessage{
+	margin: 20px auto 20px 20px;
+	padding: 10px 20px; 
+	border-radius: 20px;
+	background-color: white;
+	width: auto;
+	min-width:30px;
+	max-width: 400px; 
+}
+.reciveMessage p:first-child{
+	overflow-wrap: anywhere;
+	margin-bottom: 10px;
+}
+.reciveMessage p:last-child{
+	text-align: right;
+}
+.sendMessage{
+	margin: 20px 20px auto 20px;
+	padding: 10px 20px; 
+	border-radius: 20px;
+	background-color: #eef;
+	width: auto;
+	min-width:30px;
+	max-width: 400px;
+}
+.sendMessage p:first-child{
+	overflow-wrap: anywhere; 
+	margin-bottom: 10px;
+}
 #input{
-	background-color: #efefef;
-	flex:1 1 auto;
+	padding: 10px;
+	height: 80px;
+	justify-content: center;
+}
+#input *{
+	background-color: white;
+	border: 0px;
+}
+#input button:first-child{
+	border-radius: 20px 0 0 20px;	
+}
+#input button:last-child{
+	border-radius: 0 20px 20px 0;	
+}
+#input button{
+	padding: 10px;
+	width: 60px;
+	height: 60px;
+}
+#input textarea{
+	resize: none;
+	flex-grow: 1;
 }
