@@ -1,0 +1,144 @@
+@charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f8f8;
+    margin: 0;
+}
+
+.login-container {
+    background: #f8f8f8;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    width: 500px;
+    margin-top: auto; /* 상단과 하단의 간격을 자동으로 동일하게 조정 */
+    margin-bottom: auto; /* 하단과 상단의 간격을 자동으로 동일하게 조정 */
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #000;
+    font-weight: bold;
+}
+
+.input-group {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: #666;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin: 3px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.checkbox-login-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.checkbox-group {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 30px; /* 간격을 넓게 조정 */
+    gap: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #007bff;
+}
+
+.login-bttn {
+    padding: 10px 20px; /* 버튼의 내부 패딩 설정 */
+    background-color: #4b0082; /* 배경색 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    margin-top: 0; /* 상단 마진을 없애서 버튼을 더 위로 */
+    margin-left: 10px; /* 오른쪽으로 약간의 여백을 줘서 위치 조정 */
+}
+
+.links a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.signup-btn,
+.kakao-btn,
+.naver-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.login-bttn:active,
+.signup-btn:active,
+.kakao-btn:active,
+.naver-btn:active {
+    transform: scale(0.98);
+}
+
+.signup-btn {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.kakao-btn {
+    background-color: #ffe812;
+    color: #3c1e1e;
+}
+
+.naver-btn {
+    background-color: #1ec800;
+    color: #3c1e1e;
+}
+
+.signup-btn:hover {
+    background-color: #f1f1f1;
+}
+
+.kakao-btn:hover {
+    background-color: #ffde00;
+}
+
+.naver-btn:hover {
+    background-color: #17b000;
+}
