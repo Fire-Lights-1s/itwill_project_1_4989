@@ -50,7 +50,7 @@
 							</div>
 							<div>
 								<p>오후 2:40</p>
-								<p class="alamIcon">1</p>
+								<p></p>
 							</div>
 						</div>
 					</div>
@@ -80,7 +80,7 @@
 							</div>
 							<div>
 								<p>오후 2:40</p>
-								<p class="alamIcon">1</p>
+								<p></p>
 							</div>
 						</div>
 					</div>
@@ -147,9 +147,25 @@
 				</div>	
 			</div>
 			<div id="chatRoom">
-				<div id="productInfo"></div>
-				<div id="chatContent"></div>
-				<div id="input"></div>
+				<div id="productInfo">
+					<div>
+						<img alt="product" src="">
+					</div>
+					<div></div>
+					<div></div>
+				</div>
+				<div id="chatContent">
+					<div class="reciveMessage">
+						<p>오후 2:40</p>
+					</div>
+					<div class="sendMessage">
+						<p>오후 2:40</p>
+					</div>
+				
+				</div>
+				<div id="input">
+					<textarea name="message">
+				</div>
 			</div>
 		</div>
 	</div>
