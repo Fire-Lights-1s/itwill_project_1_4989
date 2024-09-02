@@ -1,106 +1,133 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상품 등록</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            width: 60%;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #f8f8f8;
-            border-radius: 5px;
-            margin-top: 50px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        input[type="text"],
-        input[type="number"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[type="radio"] {
-            margin-right: 5px;
-        }
-        textarea {
-            height: 100px;
-        }
-        .submit-btn {
-            width: 100%;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 15px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .submit-btn:hover {
-            background-color: #0056b3;
-        }
-        .image-upload {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .image-upload img {
-            width: 150px;
-            height: 150px;
-            border: 1px solid #ddd;
-            background-color: #f8f8f8;
-            padding: 20px;
-        }
-        .inline-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .inline-group label {
-            margin-right: 10px;
-            width: 100px;
-        }
-        .inline-group input,
-        .inline-group select {
-            flex: 1;
-        }
-        .radio-group {
-            display: flex;
-            justify-content: flex-start;
-            gap: 20px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>물품등록</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <style>
+     body {
+         font-family: Arial, sans-serif;
+     }
+     .container {
+         width: 60%;
+         margin: 0 auto;
+         padding: 20px;
+         border: 1px solid #ddd;
+         background-color: #f8f8f8;
+         border-radius: 5px;
+         margin-top: 50px;
+     }
+     .form-group {
+         margin-bottom: 20px;
+     }
+     label {
+         display: block;
+         font-weight: bold;
+         margin-bottom: 8px;
+     }
+     input[type="text"],
+     input[type="number"],
+     select,
+     textarea {
+         width: 100%;
+         padding: 10px;
+         font-size: 14px;
+         border: 1px solid #ccc;
+         border-radius: 5px;
+     }
+     input[type="radio"] {
+         margin-right: 5px;
+     }
+     textarea {
+         height: 100px;
+     }
+     .submit-btn {
+         width: 100%;
+         background-color: #007bff;
+         color: white;
+         border: none;
+         padding: 15px;
+         font-size: 16px;
+         border-radius: 5px;
+         cursor: pointer;
+     }
+     .submit-btn:hover {
+         background-color: #0056b3;
+     }
+     .image-upload {
+         width: 100%;
+         text-align: center;
+         margin-bottom: 20px;
+     }
+     .image-upload img {
+         width: 150px;
+         height: 150px;
+         border: 1px solid #ddd;
+         background-color: #f8f8f8;
+         padding: 20px;
+     }
+     .inline-group {
+         display: flex;
+         align-items: center;
+         margin-bottom: 10px;
+     }
+     .inline-group label {
+         margin-right: 10px;
+         width: 100px;
+     }
+     .inline-group input,
+     .inline-group select {
+         flex: 1;
+     }
+     .radio-group {
+         display: flex;
+         justify-content: flex-start;
+         gap: 20px;
+     }
+ </style>
+    
+    
 <!--     이미지 미리보기 -->
-     <script>
-        function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                const output = document.getElementById('preview');
-                output.src = reader.result;
-            }
-            reader.readAsDataURL(event.target.files[0]);
+ <script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const output = document.getElementById('preview');
+            output.src = reader.result;
         }
-        </script>
+        reader.readAsDataURL(event.target.files[0]);
+    }
+    </script>
+
 </head>
 <body>
 
+  <jsp:include page="../inc/header.jsp"></jsp:include>
+
+    <header>
+    	<div id="menu-name">
+			물품등록
+		</div>
+   </header>
+   
+  <section>
+	<div id="main-container">
+	  <main>
+
+<%
+//로그인해야 글쓰기가능. 
+String a = (String)session.getAttribute("id");
+%>
+
+
+
 <div class="container">
+<!-- 	registerPro로 이동? -->
     <form action="/uploadImage" method="post" enctype="multipart/form-data">
         <div class="form-group image-upload">
             <img id="preview" src="https://via.placeholder.com/150" alt="이미지 미리보기">
@@ -113,9 +140,13 @@
             <label for="category">카테고리</label>
             <select id="category" name="category">
                 <option value="" disabled selected>선택</option>
-                <option value="electronics">전자제품</option>
-                <option value="fashion">패션</option>
-                <option value="furniture">가구</option>
+                <option value="phone">휴대폰</option>
+                <option value="tablet">태블릿</option>
+                <option value="watch">스마트워치</option>
+                <option value="computer">PC/노트북</option>
+                <option value="acc">PC주변기기</option>
+                <option value="game">게임기기</option>
+                <option value="etc">기타</option>
             </select>
         </div>
 
@@ -173,5 +204,12 @@
     </form>
 </div>
 
+	  </main>
+	</div>
+  </section>
+  
+  <jsp:include page="../inc/footer.jsp"></jsp:include>
+  
 </body>
 </html>
+
