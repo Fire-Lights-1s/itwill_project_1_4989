@@ -8,10 +8,10 @@
 <!-- 		insert into members3(id, pass, name, phone, email, gender, agree, content, date)  -->
 <!-- 		values(#{id}, #{pass}, #{name}, #{phone}, #{email}, #{gender}, #{agree}, #{content}, #{date}) -->
 <!-- 	</insert> -->
-<!-- 	<select id="userCheck" resultType="com.itwillbs.domain.MemberDTO"> -->
-<!-- 		select * from members3 -->
-<!-- 		where id=#{id} and pass = #{pass}  -->
-<!-- 	</select> -->
+	<select id="userCheck" resultType="com.itwillbs.domain.MemberDTO">
+		select * from member3
+		where id=#{id} and pass = #{pass} 
+	</select>
 <!-- 	<select id="getMember" resultType="com.itwillbs.domain.MemberDTO"> -->
 <!-- 		select id,name,phone, email, gender, agree, date from members3 -->
 <!-- 		where id=#{id} -->

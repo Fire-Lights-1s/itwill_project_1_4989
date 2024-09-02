@@ -4,12 +4,12 @@ import java.sql.Timestamp;
 
 public class MemberDTO {
 
-    private String userId;
-    private String password;
+    private String id;
+    private String pass;
     private String nickname;
     private String name;
     private String jumin;  // 주민등록번호
-    private String phoneNumber;
+    private String phone;
     private String email;
     private Timestamp date;
 
@@ -20,31 +20,31 @@ public class MemberDTO {
     // 모든 필드를 받는 생성자
     public MemberDTO(String userId, String password, String nickname, String name,
                      String jumin, String phoneNumber, String email, Timestamp date) {
-        this.userId = userId;
-        this.password = password;
+        this.id = userId;
+        this.pass = password;
         this.nickname = nickname;
         this.name = name;
         this.jumin = jumin;
-        this.phoneNumber = phoneNumber;
+        this.phone = phoneNumber;
         this.email = email;
         this.date = date;
     }
 
     // getter와 setter 메서드
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPass() {
+        return pass;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public String getNickname() {
@@ -71,12 +71,12 @@ public class MemberDTO {
         this.jumin = jumin;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -99,12 +99,12 @@ public class MemberDTO {
     @Override
     public String toString() {
         return "MemberDTO{" +
-                "userId='" + userId + '\'' +
-                ", password='" + password + '\'' +
+                "id='" + id + '\'' +
+                ", pass='" + pass + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", name='" + name + '\'' +
                 ", jumin='" + jumin + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", date=" + date +
                 '}';
