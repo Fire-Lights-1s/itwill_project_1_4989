@@ -5,8 +5,18 @@
     height: 500px;
     border-radius: 50%;
     background-color: #d3d3d3;
-    position: relative;
-    display: flex;
     align-items: center;
     justify-content: center;
+    position:relative;
+    left:295px;
+    margin-bottom:10px;
+}
+
+.edit-info {
+	text-align:right;
+}
+.profile-nickname{
+	text-align:center;
+	font-weight:600;
+	font-size:1.2em;
 }
