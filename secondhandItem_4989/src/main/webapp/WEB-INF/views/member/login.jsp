@@ -5,10 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4989 회원가입</title>
+    <title>4989 로그인</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/login.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+<script>
+        function redirectToSignup() {
+            window.location.href = '${pageContext.request.contextPath}/member/join'; // 회원가입 페이지로 이동
+        }
+    </script>
 </head>
 <body>
 
@@ -45,7 +50,7 @@
                 <a href="findId.jsp">아이디 찾기</a>
                 <a href="findPassword.jsp">비밀번호 찾기</a>
             </div>
-            <button type="button" class="signup-btn">회원가입</button>
+            <button type="button" class="signup-btn" onclick="redirectToSignup()">회원가입</button>
             <button type="button" class="kakao-btn">카카오톡으로 시작하기</button>
             <button type="button" class="naver-btn">네이버로 시작하기</button>
         </form>

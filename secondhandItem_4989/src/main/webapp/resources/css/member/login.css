@@ -108,7 +108,10 @@ h1 {
     text-align: center;
 }
 
-button:active {
+.login-bttn:active,
+.signup-btn:active,
+.kakao-btn:active,
+.naver-btn:active {
     transform: scale(0.98);
 }
 

@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 	
 	@GetMapping("/login")
-	public String intro() {
+	public String login() {
 		return "/member/login";
+	}
+	
+	@GetMapping("/join")
+	public String join() {
+		return "/member/join";
 	}
 	
 	
