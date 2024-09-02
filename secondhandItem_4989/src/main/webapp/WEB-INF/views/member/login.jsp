@@ -30,7 +30,7 @@
 	  <main>
     <div class="login-container">
         <h1>4989에 오신 것을 환영합니다.</h1>
-        <form action="login.jsp" method="post">
+        <form action="loginPro" method="post">
             <div class="input-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="userId" name="userId" placeholder="아이디">

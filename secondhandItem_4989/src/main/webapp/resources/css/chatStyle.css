@@ -172,6 +172,8 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 }
 #productInfo{
 	flex:2 1 auto;
+	display: flex;
+	flex-direction: row;
 	background-color: #efefef;
 }
 #chatContent{
