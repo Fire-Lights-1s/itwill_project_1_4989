@@ -32,7 +32,10 @@
 			<div class="profile-circle-div">
 				<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-circle">
 			</div>
-		<form action="yourActionUrl" method="post" class="">
+			
+			
+			
+		<form action="#" method="post" class="profile-update-form">
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="userId" name="userId" value="아이디" readonly>
@@ -40,13 +43,13 @@
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" value="1234" required readonly>
-                <button type="button">비밀 변경</button>                
+                <input type="password" id="password" name="password" value="1234" required readonly>                
                 <p>영문자, 숫자, 특수문자 중 2가지 이상 사용하여 8자 이상으로 입력해주세요.</p>
             </div>
             <div class="form-group">
                 <label for="confirmPassword">비밀번호 확인</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" value="1234" required readonly>
+                <button type="button">비밀 번호 변경</button>
             </div>
             <div class="form-group">
                 <label for="nickname">닉네임</label>
@@ -58,10 +61,6 @@
                 <input type="text" id="name" name="name" placeholder="이름" required>
             </div>
             <div class="form-group">
-                <label for="residentRegNumber">주민등록번호</label>
-                <input type="text" id="residentRegNumber" name="residentRegNumber" maxlength="13" placeholder="주민등록번호 13자리" required>
-            </div>
-            <div class="form-group">
                 <label for="phoneNumber">휴대폰 번호</label>
                 <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" placeholder="01012345678" required>
             </div>
@@ -69,7 +68,7 @@
                 <label for="email">이메일</label>
                 <input type="email" id="email" name="email" placeholder="abcd@efgh.com" required>
             </div>
-            <button type="submit" class="submit-button">인증하기</button>
+            <button type="submit" class="submit-button">수정 완료</button>
         </form>
 		</main>
 		</div>
