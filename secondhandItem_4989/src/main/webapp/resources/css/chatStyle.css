@@ -98,6 +98,9 @@ a:hover{
     opacity: 1;
     visibility: visible;
 }
+.items .drop-menu li:hover{
+	background-color: #400080;
+}
 #searchText{
 	padding: 5px 10px;
 	flex-grow: 1;
