@@ -28,6 +28,11 @@ public class MemberController {
 		return "/member/join";
 	}
 	
+	@GetMapping("/social")
+	public String social() {
+		return "/member/social";
+	}
+	
 	@PostMapping("/loginPro")
 	public String loginPro(MemberDTO memberDTO,HttpSession session) {
 		System.out.println("MemberController loginPro");

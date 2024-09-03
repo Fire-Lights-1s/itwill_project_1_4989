@@ -10,8 +10,12 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <script>
-        function redirectToSignup() {
+        function redirectToJoin() {
             window.location.href = '${pageContext.request.contextPath}/member/join'; // 회원가입 페이지로 이동
+        }
+        
+        function redirectToSocial() {
+            window.location.href = '${pageContext.request.contextPath}/member/social'; // 소셜회원가입 페이지로 이동
         }
     </script>
 </head>
@@ -50,9 +54,9 @@
                 <a href="findId.jsp">아이디 찾기</a>
                 <a href="findPassword.jsp">비밀번호 찾기</a>
             </div>
-            <button type="button" class="signup-btn" onclick="redirectToSignup()">회원가입</button>
-            <button type="button" class="kakao-btn">카카오톡으로 시작하기</button>
-            <button type="button" class="naver-btn">네이버로 시작하기</button>
+            <button type="button" class="signup-btn" onclick="redirectToJoin()">회원가입</button>
+            <button type="button" class="kakao-btn" onclick="redirectToSocial()">카카오톡으로 시작하기</button>
+            <button type="button" class="naver-btn" onclick="redirectToSocial()">네이버로 시작하기</button>
         </form>
     </div>
 
