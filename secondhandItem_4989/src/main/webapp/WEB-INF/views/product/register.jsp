@@ -98,7 +98,8 @@
         }        
     </style>
 
-<!--     <script>
+<!--  이전 미리보기
+    <script>
         function previewImages(event) {
             const files = event.target.files;
             const previewContainer = document.getElementById('imagePreviewContainer');
@@ -118,6 +119,8 @@
             }
         }
     </script> -->
+    
+<!--     이미지 업로드, 미리보기 함수 정의 -->
     <script>
         function addFileInput() {
             document.getElementById('imageInput').click();
@@ -175,7 +178,7 @@
     <section>
         <div id="main-container">
             <main>
-<!-- 					  기존 이미지 미리보기 영역
+<!-- 					  기존 이미지 미리보기 영역 (추후 삭제)
               <div class="addBox">
                     <form id="addForm" name="addForm" class="add-form" action="ProductRegistSuccess" method="post" enctype="multipart/form-data">
                         <hr style="border:0; height:3px; color:black;">
@@ -196,7 +199,7 @@
                         <div class="container">
                             <div class="form-group image-upload">
                                 <label for="imageInput">사진 선택</label>
-                                <input type="file" id="imageInput" name="file" accept="image/*" multiple onchange="setThumbnail(event)">
+                                <input type="file" src="/src/main/webapp/resources/img/product/register_upload.png"id="imageInput" name="file" accept="image/*" multiple onchange="setThumbnail(event)">
                             </div> 
                            
                             <div id="imagePreviewContainer" class="image-preview-container">

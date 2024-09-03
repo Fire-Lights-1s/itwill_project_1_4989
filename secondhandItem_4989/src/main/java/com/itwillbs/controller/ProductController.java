@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/product/*")
 public class ProductController {
 	@GetMapping("/register")
-	public String main() {
+	public String main1() {
 		return "/product/register";
 	}
 	
+	
+	@GetMapping("/all")
+	public String main() {
+		return "/product/all";
+	}
 
 }//ProductController()
 
