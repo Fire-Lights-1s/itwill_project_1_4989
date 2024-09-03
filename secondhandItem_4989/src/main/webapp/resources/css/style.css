@@ -157,14 +157,14 @@ nav .wrapper{
 
 .login-btn {
 	font-family: "Noto Sans KR", sans-serif;
-    color: #000000 !important;
-    background: #ffffff;
+    color: #fff !important;
+    background: #4e229e !important;
 }
 
 .login-btn:hover{
 	font-family: "Noto Sans KR", sans-serif;
-    background: #4e229e !important;
-    color: #fff;
+    background: #ffffff !important;
+    color: black !important;
 }
 
 
