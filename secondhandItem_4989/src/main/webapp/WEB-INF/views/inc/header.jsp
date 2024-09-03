@@ -47,7 +47,7 @@
                         <li><a href="${pageContext.request.contextPath}/my/sell">판매내역</a></li>
                         <li><a href="${pageContext.request.contextPath}/my/buy">구매내역</a></li>
                         <li><a href="${pageContext.request.contextPath}/my/purch/list">매입신청내역</a></li>
-                        <li><a href="${pageContext.request.contextPath}/my/info/check">정보 수정</a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/infoUpdate">정보 수정</a></li>
                     </ul>
                 </li>
                 <li style="width:30px;"></li>

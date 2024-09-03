@@ -322,10 +322,14 @@ header {
 
 #menu-name {
 	margin: auto;
-	padding-left:200px;
-	font-size: 16pt;
+	padding-left:330px;
+	font-size: 14pt;
 	font-weight:900;
-	color:#372161
+	color:#372161;
+}
+
+#menu-name a {
+	text-decoration:none;
 }
 
 .content-container {
