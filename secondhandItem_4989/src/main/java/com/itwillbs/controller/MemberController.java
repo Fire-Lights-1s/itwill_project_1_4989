@@ -60,4 +60,10 @@ public class MemberController {
 		return "/member/findid";
 	}
 	
+	@GetMapping("/findpass")
+	public String findpass() {
+		return "/member/findpass";
+	}
+	
+	
 }
