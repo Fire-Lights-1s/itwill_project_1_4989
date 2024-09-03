@@ -43,11 +43,11 @@ h1, h3 { text-align:center; }
 }
 
 .category-list li:hover {
-    background-color: #222; /* 호버 시 배경색 변화 */
+	background-color: #53308F; /* 호버 시 배경색 변화 */
 }
 
 .category-list li:active {
-    background-color: #53308F; /* 클릭 시 배경색 변화 */
+    bbackground-color: #222; /* 클릭 시 배경색 변화 */
 }
 
 .category-list li a {
@@ -88,13 +88,13 @@ h1, h3 { text-align:center; }
 		
 		<div class="category-list">
 			<ul>
-			<a href="item?category=phone"><li>휴대폰</li></a>
-			<a href="item?category=tablet"><li>태블릿</li></a>
-			<a href="item?category=watch"><li>스마트워치</li></a>
-			<a href="item?category=computer"><li>PC/노트북</li></a>
-			<a href="item?category=acc"><li>PC주변기기</li></a>
-			<a href="item?category=game"><li>게임기기</li></a>
-			<a href="item?category=etc"><li>기타</li></a>
+			<a href="item?category_name=phone"><li>휴대폰</li></a>
+			<a href="item?category_name=tablet"><li>태블릿</li></a>
+			<a href="item?category_name=watch"><li>스마트워치</li></a>
+			<a href="item?category_name=computer"><li>PC/노트북</li></a>
+			<a href="item?category_name=acc"><li>PC주변기기</li></a>
+			<a href="item?category_name=game"><li>게임기기</li></a>
+			<a href="item?category_name=etc"><li>기타</li></a>
 			</ul>
 		</div>
 		<br><br><br><br><br>
