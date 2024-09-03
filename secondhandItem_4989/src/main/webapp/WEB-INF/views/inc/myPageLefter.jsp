@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileStyle.css">
 <aside class="side-nav">
 	<h1>마이 페이지</h1>
-	
 	<br>
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/my/profile">내 프로필</a></li>
