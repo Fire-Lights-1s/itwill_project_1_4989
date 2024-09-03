@@ -4,10 +4,10 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.itwillbs.mapper.MemberMapper">
-<!-- 	<insert id="insertMember"> -->
-<!-- 		insert into members3(id, pass, name, phone, email, gender, agree, content, date)  -->
-<!-- 		values(#{id}, #{pass}, #{name}, #{phone}, #{email}, #{gender}, #{agree}, #{content}, #{date}) -->
-<!-- 	</insert> -->
+	<insert id="insertMember">
+		insert into Mem(member_id, pass, nickname, name, phone, email, created_at) 
+		values(#{member_id}, #{pass}, #{nickname}, #{name}, #{phone}, #{email}, #{created_at})
+	</insert>
 	<select id="userCheck" resultType="com.itwillbs.domain.MemberDTO">
 		select * from Mem
 		where member_id=#{member_id} and pass = #{pass} 

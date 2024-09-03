@@ -65,5 +65,15 @@ public class MemberController {
 		return "/member/findpass";
 	}
 	
+	@PostMapping("/joinPro")
+	public String insertPro(MemberDTO memberDTO) {
+		System.out.println("MemberController joinPro");
+		System.out.println(memberDTO);
+		
+		memberService.insertMember(memberDTO);
+		
+		// 로그인 주소변경 이동
+		return "redirect:/member/login";
+	}
 	
 }

@@ -47,3 +47,7 @@ p {
     width:300px;
     border:none;
 }
+
+.main-page-button {
+	cursor : pointer;
+}
