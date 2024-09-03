@@ -36,12 +36,12 @@ public class MemberController {
 		MemberDTO memberDTO2 = memberService.userCheck(memberDTO);
 		if(memberDTO2 != null) {
 			
-			session.setAttribute("id", memberDTO.getId());
+			session.setAttribute("id", memberDTO.getMember_id());
 			// 메인페이지로 이동
 			return "redirect:/main/main";
 		}else {
 			
-			return "/member/login";
+			return "redirect:/member/login";
 		}
 	}
 	

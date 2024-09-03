@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class MemberDTO {
 
-    private String id;
+    private String member_id;
     private String pass;
     private String nickname;
     private String name;
@@ -18,9 +18,9 @@ public class MemberDTO {
     }
 
     // 모든 필드를 받는 생성자
-    public MemberDTO(String userId, String password, String nickname, String name,
+    public MemberDTO(String member_id, String password, String nickname, String name,
                      String jumin, String phoneNumber, String email, Timestamp date) {
-        this.id = userId;
+        this.member_id = member_id;
         this.pass = password;
         this.nickname = nickname;
         this.name = name;
@@ -31,12 +31,12 @@ public class MemberDTO {
     }
 
     // getter와 setter 메서드
-    public String getId() {
-        return id;
+    public String getMember_id() {
+        return member_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setMember_id(String member_id) {
+        this.member_id = member_id;
     }
 
     public String getPass() {
@@ -99,7 +99,7 @@ public class MemberDTO {
     @Override
     public String toString() {
         return "MemberDTO{" +
-                "id='" + id + '\'' +
+                "member_id='" + member_id + '\'' +
                 ", pass='" + pass + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", name='" + name + '\'' +

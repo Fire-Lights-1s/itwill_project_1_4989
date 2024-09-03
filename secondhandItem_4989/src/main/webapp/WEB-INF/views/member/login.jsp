@@ -32,12 +32,12 @@
         <h1>4989에 오신 것을 환영합니다.</h1>
         <form action="loginPro" method="post">
             <div class="input-group">
-                <label for="userId">아이디</label>
-                <input type="text" id="userId" name="userId" placeholder="아이디">
+                <label for="member_id">아이디</label>
+                <input type="text" id="member_id" name="member_id" placeholder="아이디">
             </div>
             <div class="input-group">
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" placeholder="비밀번호">
+                <label for="pass">비밀번호</label>
+                <input type="password" id="pass" name="pass" placeholder="비밀번호">
             </div>
              <div class="checkbox-login-group">
                 <div class="checkbox-group">
