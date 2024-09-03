@@ -14,14 +14,10 @@ body {
     border-radius: 8px;
 }
 
-h1 {
+h2 {
     text-align: center;
-    font-size: 32px;
     margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
+    font-size: 1.5em;
 }
 
 label {
@@ -30,11 +26,24 @@ label {
     margin-bottom: 5px;
 }
 
-#userId,
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.nickname-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+#idNumber,
 #nickname,
-#name,
-#residentRegNumber,
-input[type="password"],
 input[type="tel"],
 input[type="email"] {
     width: calc(100% - 100px);
@@ -43,33 +52,25 @@ input[type="email"] {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 10px;
-}
-
-input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-.checkbox-group {
-    display: flex;
-    align-items: center;
     margin-bottom: 10px;
 }
 
-button[type="button"] {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #333;
-    cursor: pointer;
-}
-
 .check-btn {
+    padding: 10px;
     background-color: #333;
     color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 40px;
 }
 
-button[type="submit"] {
+.check-btn:hover {
+    background-color: #555;
+}
+
+.submit-btn {
     width: 100%;
     padding: 12px;
     font-size: 16px;
@@ -81,8 +82,16 @@ button[type="submit"] {
     margin-top: 20px;
 }
 
-p {
-    font-size: 12px;
-    color: #666;
-    margin-top: 5px;
+.checkbox-group {
+    margin-top: 0px;
+    font-size: 0.9em;
+}
+
+.checkbox-group label {
+    display: block;
+    margin-bottom: 0px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 5px;
 }

@@ -7,7 +7,7 @@
 <title>4989 회원가입</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/member/join.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/join.css">
 </head>
 <body>
 
@@ -29,7 +29,7 @@
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="userId" name="userId" placeholder="아이디" required>
-                <button type="button">중복 확인</button>
+                <button type="button" class="check-btn">중복 확인</button>
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
@@ -43,7 +43,7 @@
             <div class="form-group">
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nickname" name="nickname" placeholder="닉네임" required>
-                <button type="button">중복 확인</button>
+                <button type="button" class="check-btn">중복 확인</button>
             </div>
             <div class="form-group">
                 <label for="name">이름</label>
