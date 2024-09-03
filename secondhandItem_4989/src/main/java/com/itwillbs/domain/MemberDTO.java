@@ -4,39 +4,39 @@ import java.sql.Timestamp;
 
 public class MemberDTO {
 
-    private String id;
+    private String member_id;
     private String pass;
     private String nickname;
     private String name;
     private String jumin;  // 주민등록번호
     private String phone;
     private String email;
-    private Timestamp date;
+    private Timestamp created_at;
 
     // 기본 생성자
     public MemberDTO() {
     }
 
     // 모든 필드를 받는 생성자
-    public MemberDTO(String userId, String password, String nickname, String name,
-                     String jumin, String phoneNumber, String email, Timestamp date) {
-        this.id = userId;
+    public MemberDTO(String member_id, String password, String nickname, String name,
+                     String jumin, String phoneNumber, String email, Timestamp created_at) {
+        this.member_id = member_id;
         this.pass = password;
         this.nickname = nickname;
         this.name = name;
         this.jumin = jumin;
         this.phone = phoneNumber;
         this.email = email;
-        this.date = date;
+        this.created_at = created_at;
     }
 
     // getter와 setter 메서드
-    public String getId() {
-        return id;
+    public String getMember_id() {
+        return member_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setMember_id(String member_id) {
+        this.member_id = member_id;
     }
 
     public String getPass() {
@@ -63,11 +63,11 @@ public class MemberDTO {
         this.name = name;
     }
 
-    public String getjumin() {
+    public String getJumin() {
         return jumin;
     }
 
-    public void jumin(String jumin) {
+    public void setJumin(String jumin) {
         this.jumin = jumin;
     }
 
@@ -87,26 +87,26 @@ public class MemberDTO {
         this.email = email;
     }
 
-    public Timestamp date() {
-        return date;
+    public Timestamp getCreated_at() {
+        return created_at;
     }
 
-    public void setdate(Timestamp date) {
-        this.date = date;
+    public void setCreated_at(Timestamp created_at) {
+        this.created_at = created_at;
     }
 
     // toString 메서드 (디버깅용)
     @Override
     public String toString() {
         return "MemberDTO{" +
-                "id='" + id + '\'' +
+                "member_id='" + member_id + '\'' +
                 ", pass='" + pass + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", name='" + name + '\'' +
                 ", jumin='" + jumin + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", date=" + date +
+                ", created_at=" + created_at +
                 '}';
     }
 }
