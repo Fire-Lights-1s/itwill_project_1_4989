@@ -6,6 +6,7 @@ public class PurchaseRequestDTO {
 	private int pc_item_id;
 	private String member_id;
 	private char expected_grade;
+	private String shipping_method;
 	private String purchse_status;
 	private String transfer_bank;
 	private String transfer_account;
@@ -60,13 +61,21 @@ public class PurchaseRequestDTO {
 	public void setTransfer_holder(String transfer_holder) {
 		this.transfer_holder = transfer_holder;
 	}
+	public String getShipping_method() {
+		return shipping_method;
+	}
+	public void setShipping_method(String shipping_method) {
+		this.shipping_method = shipping_method;
+	}
+	
 	@Override
 	public String toString() {
 		return "PurchaseRequestDTO [purchase_id=" + purchase_id + ", pc_item_id=" + pc_item_id + ", member_id="
-				+ member_id + ", expected_grade=" + expected_grade + ", purchse_status=" + purchse_status
-				+ ", transfer_bank=" + transfer_bank + ", transfer_account=" + transfer_account + ", transfer_holder="
-				+ transfer_holder + "]";
+				+ member_id + ", expected_grade=" + expected_grade + ", shipping_method=" + shipping_method
+				+ ", purchse_status=" + purchse_status + ", transfer_bank=" + transfer_bank + ", transfer_account="
+				+ transfer_account + ", transfer_holder=" + transfer_holder + "]";
 	}
+	
 	
 	
 	

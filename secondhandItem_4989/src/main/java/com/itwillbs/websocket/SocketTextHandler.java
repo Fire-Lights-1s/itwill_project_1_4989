@@ -13,11 +13,17 @@ public class SocketTextHandler extends TextWebSocketHandler {
 
     private final Set<WebSocketSession> sessions = ConcurrentHashMap.newKeySet();
 
+    /**
+     * websocket 연결 성공 시
+     */
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessions.add(session);
     }
 
+    /**
+     * websocket 메세지 수신 및 송신
+     */
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
@@ -27,6 +33,9 @@ public class SocketTextHandler extends TextWebSocketHandler {
         }
     }
 
+    /**
+     * websocket 연결 종료 시
+     */
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         sessions.remove(session);
