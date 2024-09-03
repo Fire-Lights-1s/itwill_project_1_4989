@@ -10,21 +10,14 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <script>
-<<<<<<< HEAD
-	function redirectToSignup() {
-		window.location.href = '${pageContext.request.contextPath}/member/join'; // 회원가입 페이지로 이동
-	}
-</script>
-=======
-        function redirectToJoin() {
-            window.location.href = '${pageContext.request.contextPath}/member/join'; // 회원가입 페이지로 이동
-        }
-        
-        function redirectToSocial() {
-            window.location.href = '${pageContext.request.contextPath}/member/social'; // 소셜회원가입 페이지로 이동
-        }
-    </script>
->>>>>>> branch 'Dev' of https://github.com/Fire-Lights-1s/itwill_project_1_4989.git
+       function redirectToJoin() {
+           window.location.href = '${pageContext.request.contextPath}/member/join'; // 회원가입 페이지로 이동
+       }
+       
+       function redirectToSocial() {
+           window.location.href = '${pageContext.request.contextPath}/member/social'; // 소셜회원가입 페이지로 이동
+       }
+   </script>
 </head>
 <body>
 
