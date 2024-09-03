@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디 찾기</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/findid.css">
 </head>
 <body>
 
@@ -14,7 +15,7 @@
 
     <header>
     	<div id="menu-name">
-			메뉴(현재 페이지의 대메뉴: 마이페이지, 매입신청 등) 이름
+			아이디 찾기
 		</div>
    </header>
    

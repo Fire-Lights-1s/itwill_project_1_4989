@@ -51,8 +51,8 @@
                 <button type="submit" class="login-bttn">로그인</button>
             </div>
             <div class="links">
-                <a href="findId.jsp">아이디 찾기</a>
-                <a href="findPassword.jsp">비밀번호 찾기</a>
+                <a href="${pageContext.request.contextPath }/member/findid">아이디 찾기</a>
+                <a href="${pageContext.request.contextPath }/member/findpass">비밀번호 찾기</a>
             </div>
             <button type="button" class="signup-btn" onclick="redirectToJoin()">회원가입</button>
             <button type="button" class="kakao-btn" onclick="redirectToSocial()">카카오톡으로 시작하기</button>
