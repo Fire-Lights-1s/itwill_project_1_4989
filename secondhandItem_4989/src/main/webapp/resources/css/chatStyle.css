@@ -19,11 +19,12 @@ a:hover{
 	margin-top: 70px;
 }
 #container{
-	display: grid;
+	display: flex;
+	flex-direction:row;
 	grid-template-columns: 1fr 1fr;
   	justify-content: center;
 	margin: 0 auto;
-	width: 900px;
+	width: auto;
 }
 
 #chatList{
@@ -32,14 +33,14 @@ a:hover{
 	background-color: #fff;
 }
 
-.flexBox{
+.flexBoxRow{
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
     width: 100%;
 	padding:10px 0;
 }
-.flexBox>.form-control{
+.flexBoxRow>.form-control{
 	position: relative;
     flex: 1 1 auto;
     width: 1%;
@@ -50,19 +51,53 @@ a:hover{
  	margin-left: 10px;
  	margin-right: 10px;
  	padding: 5px 10px;
+ 	width:120px;
 	height: 40px;
-	border-radius: 20px;
-	background-color: #e8a2e2;
+	border-radius: 10px;
+	background-color: #8000ff;
 	text-align: center;
 	font-size: 1.2rem;
 	font-weight: 900;
-	color: black;
+	color: white;
 }
 .type_select:hover{
-	background-color: #e083d9;
+	background-color: #400080;
 	color: black;
 }
-
+.items{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width:140px;
+	align-items:center;
+	text-align: center;
+}
+.items ul{
+	list-style: none;
+}
+.items li a{
+	padding: 0;
+	font-size: 1.2rem;
+	font-weight:900;
+	color: white;
+}
+.items .drop-menu{
+	position: absolute;
+    background: #8000ff;
+    border-radius: 10px;
+    width: 120px;
+    line-height: 45px;
+    top: 55px;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+.items:hover .drop-menu{
+	transition: all 0.3s ease;
+    top: 40px;
+    opacity: 1;
+    visibility: visible;
+}
 #searchText{
 	padding: 5px 10px;
 	flex-grow: 1;
@@ -70,7 +105,7 @@ a:hover{
 	height: 40px;
 	border: 1px solid black;
 	border-right: 0px;
-	border-radius: 20px 0 0 20px;
+	border-radius: 10px 0 0 10px;
 }
 #searchText::placeholder{
 	font-size: 1.1rem;
@@ -79,7 +114,7 @@ a:hover{
 .search-btn{
 	border:1px solid black;
 	border-left: 0px;
-	border-radius: 0 20px 20px 0;
+	border-radius: 0 10px 10px 0;
 	width: 50px;
 	height: 40px;
 	background-color: white;
@@ -94,7 +129,7 @@ a:hover{
 	display: flex;
 	flex-direction: column;
 	height:740px;
-	overflow: scroll;
+	overflow-Y: scroll;
 }
 #chatTotalRoom > div{
 	display: flex;
@@ -175,15 +210,45 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 #productInfo{
 	padding: 10px;
 	height: 160px;
-	background-color: #efefef;
+	background-color: #fff;
+	box-shadow: 0 6px 5px rgba(0,0,0,0.15);
+}
+#productInfo div:nth-child(1){
+	margin-right: 10px;
+	width: 140px;
+	background-color: #eee;
 }
 #productInfo div:nth-child(2){
-	background-color: white;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content:space-between;
 	width: 50px;
 	height: 100%;
 }
+#productInfo div:nth-child(3){
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content:space-between;
+	width: 50px;
+	height: 100%;
+}
+#productInfo div button{
+	height:40px;
+	border: 0;
+	border-radius:20px; 
+	background-color: #d940ff;
+	font-size: 1.2rem;
+	font-weight: 900;
+	color: white;
+}
+#productInfo div button:hover{
+	background-color: #b300df;
+}
 #chatContent{
 	flex:6 1 auto;
+	overflow-Y: scroll;
 }
 div#chatContent::-webkit-scrollbar {
     width: 8px;  /* 스크롤바의 너비 */
@@ -191,7 +256,7 @@ div#chatContent::-webkit-scrollbar {
 
 div#chatContent::-webkit-scrollbar-thumb {
     height: 30%; /* 스크롤바의 길이 */
-    background: #217af4; /* 스크롤바의 색상 */
+    background: #db92fe; /* 스크롤바의 색상 */
     
     border-radius: 10px;
 }
@@ -216,7 +281,7 @@ div#chatContent::-webkit-scrollbar-track {
 	text-align: right;
 }
 .sendMessage{
-	margin: 20px 20px auto 20px;
+	margin: 20px 20px 20px auto;
 	padding: 10px 20px; 
 	border-radius: 20px;
 	background-color: #eef;
