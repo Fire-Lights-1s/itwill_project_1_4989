@@ -3,17 +3,17 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4989 로그인</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/login.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4989 로그인</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <script>
-        function redirectToSignup() {
-            window.location.href = '${pageContext.request.contextPath}/member/join'; // 회원가입 페이지로 이동
-        }
-    </script>
+	function redirectToSignup() {
+		window.location.href = '${pageContext.request.contextPath}/member/join'; // 회원가입 페이지로 이동
+	}
+</script>
 </head>
 <body>
 
