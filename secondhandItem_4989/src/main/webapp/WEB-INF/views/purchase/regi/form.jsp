@@ -50,12 +50,12 @@ h1, h3 { text-align:center; }
 	<div class="form-container">
     <div class="form-group">
         <label for="productName">매입제품</label>
-        <span id="productName">아이폰14Pro 512GB</span>
+        <span id="productName">${pc_item_name }</span>
     </div>
 
     <div class="form-group">
         <label for="grade">등급/매입가</label>
-        <span id="grade">S / 900,000원</span>
+        <span id="grade">${expected_grade } / ${expected_price }</span>
         <p>※ 등급 및 매입가는 실제 검수 결과에 따라 달라질 수 있습니다.</p>
     </div>
 
@@ -118,13 +118,6 @@ h1, h3 { text-align:center; }
     </div>
 </div>
 		
-		
-		
-		
-		
-		
-
-
 	  </main>
 	</div>
   </div>

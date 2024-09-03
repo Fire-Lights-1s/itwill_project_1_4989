@@ -14,6 +14,10 @@ h1 { text-align:center;}
 	background-color: white;
 }
 
+#info-img img {
+	width: 100%;
+}
+
 
 </style>
 </head>
@@ -34,13 +38,21 @@ h1 { text-align:center;}
 
 <!-- 본문영역 시작 -->
 	<div id="main-container-side">
-	  <main>
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		<h1>매입 서비스 소개</h1>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-
+  	  <main>
+		<br>
+		<h1 style="text-align:center;">매입 서비스 소개</h1>
+		
+		<div id="info-img" style="padding:0; margin:50px auto; width:900px;">
+			<img src="${pageContext.request.contextPath }/resources/img/purchase_001.png"
+			alt="4989 매입 서비스는 4989가 직접 고객의 전자제품을 최적의 가격에 매입하는 서비스입니다.">
+			<img src="${pageContext.request.contextPath }/resources/img/purchase_002.png"
+			alt="매입절차: 고객 신청/접수 - 상담/검수 - 매입대금 입금">
+			<img src="${pageContext.request.contextPath }/resources/img/purchase_003.png"
+			alt="매입서비스 이용 시 유의사항: 정해진 품목만 매입, 본인 소유 정품만 매입, 기기 데이터는 고객이 미리 백업,
+			신청 등급기준과 다른 경우 해당 매입신청건은 취소, 택배 반송의 경우 착불, 기기보험은 고객이 직접 해지,
+			문의처는 고객센터(1000-0001, help@4989.com)">
+			
+		</div>
 
 	  </main>
 	</div>
