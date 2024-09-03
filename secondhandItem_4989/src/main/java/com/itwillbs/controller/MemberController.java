@@ -41,9 +41,9 @@ public class MemberController {
 		MemberDTO memberDTO2 = memberService.userCheck(memberDTO);
 		if(memberDTO2 != null) {
 			
-			session.setAttribute("id", memberDTO.getMember_id());
-			// 메인페이지로 이동
-			return "redirect:/main/main";
+			session.setAttribute("member_id", memberDTO.getMember_id());
+			
+			return "redirect:/member/welcome";
 		}else {
 			
 			return "redirect:/member/login";
@@ -53,6 +53,11 @@ public class MemberController {
 	@GetMapping("/welcome")
 	public String welcome() {
 		return "/member/welcome";
+	}
+	
+	@GetMapping("/findid")
+	public String findid() {
+		return "/member/findid";
 	}
 	
 }

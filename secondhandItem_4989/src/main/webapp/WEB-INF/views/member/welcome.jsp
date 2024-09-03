@@ -24,6 +24,7 @@ function redirectToMain() {
 		</div>
    </header>
    
+   
   <section>
 	<div id="main-container">
 	  <main>
@@ -40,7 +41,7 @@ function redirectToMain() {
 	  </main>
 	</div>
   </section>
-  
+    
   <jsp:include page="../inc/footer.jsp"></jsp:include>
   
 </body>
