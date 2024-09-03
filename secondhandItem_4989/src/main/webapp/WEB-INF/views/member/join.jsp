@@ -7,7 +7,7 @@
 <title>4989 회원가입</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/member/join.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/join.css">
 </head>
 <body>
 
@@ -25,15 +25,15 @@
 
 <div class="container">
         <h1>회원정보를 입력해주세요</h1>
-        <form action="yourActionUrl" method="post">
+        <form action="joinPro" method="post">
             <div class="form-group">
                 <label for="userId">아이디</label>
-                <input type="text" id="userId" name="userId" placeholder="아이디" required>
-                <button type="button">중복 확인</button>
+                <input type="text" id="userId" name="member_id" placeholder="아이디" required>
+                <button type="button" class="check-btn">중복 확인</button>
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" placeholder="비밀번호" required>
+                <input type="password" id="password" name="pass" placeholder="비밀번호" required>
                 <p>영문자, 숫자, 특수문자 중 2가지 이상 사용하여 8자 이상으로 입력해주세요.</p>
             </div>
             <div class="form-group">
@@ -43,7 +43,7 @@
             <div class="form-group">
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nickname" name="nickname" placeholder="닉네임" required>
-                <button type="button">중복 확인</button>
+                <button type="button" class="check-btn">중복 확인</button>
             </div>
             <div class="form-group">
                 <label for="name">이름</label>
@@ -55,7 +55,7 @@
             </div>
             <div class="form-group">
                 <label for="phoneNumber">휴대폰 번호</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" placeholder="01012345678" required>
+                <input type="tel" id="phoneNumber" name="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" placeholder="01012345678" required>
             </div>
             <div class="form-group">
                 <label for="email">이메일</label>

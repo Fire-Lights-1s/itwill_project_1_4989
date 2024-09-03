@@ -28,6 +28,11 @@ public class MemberController {
 		return "/member/join";
 	}
 	
+	@GetMapping("/social")
+	public String social() {
+		return "/member/social";
+	}
+	
 	@PostMapping("/loginPro")
 	public String loginPro(MemberDTO memberDTO,HttpSession session) {
 		System.out.println("MemberController loginPro");
@@ -36,14 +41,39 @@ public class MemberController {
 		MemberDTO memberDTO2 = memberService.userCheck(memberDTO);
 		if(memberDTO2 != null) {
 			
-			session.setAttribute("id", memberDTO.getMember_id());
-			// 메인페이지로 이동
-			return "redirect:/main/main";
+			session.setAttribute("member_id", memberDTO.getMember_id());
+			
+			return "redirect:/member/welcome";
 		}else {
 			
 			return "redirect:/member/login";
 		}
 	}
 	
+	@GetMapping("/welcome")
+	public String welcome() {
+		return "/member/welcome";
+	}
+	
+	@GetMapping("/findid")
+	public String findid() {
+		return "/member/findid";
+	}
+	
+	@GetMapping("/findpass")
+	public String findpass() {
+		return "/member/findpass";
+	}
+	
+	@PostMapping("/joinPro")
+	public String insertPro(MemberDTO memberDTO) {
+		System.out.println("MemberController joinPro");
+		System.out.println(memberDTO);
+		
+		memberService.insertMember(memberDTO);
+		
+		// 로그인 주소변경 이동
+		return "redirect:/member/login";
+	}
 	
 }

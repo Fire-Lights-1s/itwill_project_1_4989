@@ -157,14 +157,14 @@ nav .wrapper{
 
 .login-btn {
 	font-family: "Noto Sans KR", sans-serif;
-    color: #000000 !important;
-    background: #ffffff;
+    color: #fff !important;
+    background: #4e229e !important;
 }
 
 .login-btn:hover{
 	font-family: "Noto Sans KR", sans-serif;
-    background: #4e229e !important;
-    color: #fff;
+    background: #ffffff !important;
+    color: black !important;
 }
 
 
@@ -322,10 +322,14 @@ header {
 
 #menu-name {
 	margin: auto;
-	padding-left:200px;
-	font-size: 16pt;
+	padding-left:330px;
+	font-size: 14pt;
 	font-weight:900;
-	color:#372161
+	color:#372161;
+}
+
+#menu-name a {
+	text-decoration:none;
 }
 
 .content-container {

@@ -10,6 +10,6 @@
 		<li><a href="#">판매 내역</a></li>
 		<li><a href="#">구매 내역</a></li>
 		<li><a href="#">매입 신청 내역</a></li>
-		<li><a href="#">정보 수정</a></li>
+		<li><a href="${pageContext.request.contextPath}/my/infoUpdate">정보 수정</a></li>
 	</ul>
 </aside>

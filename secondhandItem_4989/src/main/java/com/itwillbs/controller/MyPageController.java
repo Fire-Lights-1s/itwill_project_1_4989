@@ -18,5 +18,16 @@ public class MyPageController {
 		return "my/profile";
 	}
 	
+	@GetMapping("/infoCheck")
+	public String infoCheck() {
+		System.out.println("MyPageController infoCheck()");
+		return "my/infoCheck";
+	}
+	
+	@GetMapping("/infoUpdate")
+	public String infoUpdate() {
+		System.out.println("MyPageController infoUpdate()");
+		return "my/infoUpdate";
+	}
 	
 }
