@@ -39,10 +39,7 @@ h1 { text-align:center;}
 <!-- 본문영역 시작 -->
 	<div id="main-container-side">
   	  <main>
-		<br>
-		<h1 style="text-align:center;">매입 서비스 소개</h1>
-		
-		<div id="info-img" style="padding:0; margin:50px auto; width:900px;">
+		<div id="info-img" style="padding:0; margin:30px auto; width:900px;">
 			<img src="${pageContext.request.contextPath }/resources/img/purchase_001.png"
 			alt="4989 매입 서비스는 4989가 직접 고객의 전자제품을 최적의 가격에 매입하는 서비스입니다.">
 			<img src="${pageContext.request.contextPath }/resources/img/purchase_002.png"

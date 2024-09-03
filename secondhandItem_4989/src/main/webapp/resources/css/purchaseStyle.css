@@ -1,0 +1,219 @@
+@charset "UTF-8";
+
+
+/* ---------- 매입신청 상품 검색 ---------- */
+
+#search_item {
+	margin: 0 auto;
+	width:600px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 요소들 사이에 약간의 간격을 줌 */
+}
+
+#select-category {
+    font-size: 15px;
+    padding: 8px;
+    height: 42px; /* 다른 요소와 높이를 맞추기 위해 설정 */
+    border: 1px solid #999;
+    border-radius: 5px;
+}
+
+#search-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    border: 1px solid #999;
+    border-radius: 5px;
+    background-color: #fff;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+#search-text {
+    width: 100%;
+    padding: 11px 0 11px 1em;
+    font-size: 14px;
+    color: #333;
+    border: none;
+    outline: none;
+    background: transparent;
+    height: 40px;
+}
+
+#search-button {
+    height: 42px; /* 다른 요소들과 동일한 높이로 설정 */
+    width: 80px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #4e229e;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-button span {
+    display: block;
+    line-height: 1; /* 텍스트가 버튼의 중앙에 오도록 */
+}
+
+#search-box input[type="text"]::placeholder {
+    color: #ddd;
+}
+
+
+/* ---------- 매입신청 상품 목록 ---------- */
+
+#result {
+    margin: 20px auto;
+    width: 70%;
+    border: 2px solid #999; /* 전체 테이블을 감싸는 외곽선 */
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#result table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+    text-align: center;
+}
+
+#result th {
+    background-color: #d6c1f4; /* 연보라 배경 */
+    font-weight: bold; /* 굵은 글씨 */
+    padding: 10px;
+    border-bottom: 2px solid #999;
+}
+
+#result td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* 일반 행 아래에 짙은 회색 실선 */
+}
+
+#result tr:hover {
+    background-color: #f0f0f0; /* 마우스가 올라간 행 강조 */
+}
+
+.subheader {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    margin-top: 5px;
+}
+
+.pricebox a {
+    color: #4e229e;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.pricebox a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- 매입신청 제출 폼 ---------- */
+
+
+#form-container {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc; /* 테두리 추가 */
+    border-radius: 10px;
+    background-color: #fff; /* 배경 흰색 */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+/
+#service-center-box {
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.checkbox-group {
+    margin-top: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+
+label {
+    font-weight: bold;
+}
+
+.info_span {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* 입력 필드 및 버튼 스타일링 */
+#bank {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+#accountNumber {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    width: 250px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#account_confirm {
+    background-color: #4e229e;
+    color: #fff;
+}
+
+#reset {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #333;
+}
+
+#submit_form {
+    background-color: #4e229e;
+    color: #fff;
+}
+
+/* 체크박스 스타일 */
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+}
