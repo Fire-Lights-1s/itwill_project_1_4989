@@ -50,5 +50,9 @@ public class MemberController {
 		}
 	}
 	
+	@GetMapping("/welcome")
+	public String welcome() {
+		return "/member/welcome";
+	}
 	
 }

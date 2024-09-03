@@ -23,10 +23,25 @@
 	  <main>
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		<h1>본문 영역</h1>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+ <div class="container">
+        <h1>아이디 찾기</h1>
+        <p>회원가입 시 입력한 정보를 입력해주세요.</p>
+        <form action="findId.jsp" method="post">
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" id="name" name="name" placeholder="이름" required>
+            </div>
+            <div class="form-group">
+                <label for="idNumber">주민등록번호</label>
+                <input type="text" id="jumin" name="jumin" placeholder="주민등록번호 13자리" maxlength="13" required>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">휴대폰 번호</label>
+                <input type="text" id="phone" name="phone" placeholder="01012345678" maxlength="11" required>
+            </div>
+            <button type="submit" class="btn">아이디 찾기</button>
+        </form>
+    </div>
 
 
 	  </main>

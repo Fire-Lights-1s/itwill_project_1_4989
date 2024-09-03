@@ -4,9 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입 완료</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/welcome.css">
+<script>
+function redirectToMain() {
+    window.location.href = '${pageContext.request.contextPath}/main/main'; // 회원가입 페이지로 이동
+}
+</script>
 </head>
 <body>
 
@@ -14,7 +20,7 @@
 
     <header>
     	<div id="menu-name">
-			메뉴(현재 페이지의 대메뉴: 마이페이지, 매입신청 등) 이름
+			회원가입 완료
 		</div>
    </header>
    
@@ -23,9 +29,11 @@
 	  <main>
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		<h1>본문 영역</h1>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="container">
+        <h1>회원가입이 완료되었습니다.</h1>
+        <p>4989에 오신것을 환영합니다.</p>
+    	<button type="button" class="main-page-button" onclick="redirectToMain()">쇼핑하러 가기</button>
+    </div>
 
 
 
