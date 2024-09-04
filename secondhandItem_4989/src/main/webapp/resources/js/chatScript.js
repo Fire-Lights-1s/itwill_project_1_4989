@@ -3,7 +3,7 @@
 // 1. SockJS라이브러리 추가 -> main.jsp 추가 
 
 //2. SockJS를 이용해서 클라리언트용 웹소켓 객체 생성
-let testSock = new SockJS("/chatting");
+let testSock = new SockJS("/secondhand4989/chatting");
 
 function sendMessage(name,str){
     //매개변수 JS객체에 저장 
@@ -12,7 +12,7 @@ function sendMessage(name,str){
     obj.name = name;  // 객체에 일치하는 key가 없다면 자동으로 추가 
     obj.str = str;
 
-    //console.log(obj);
+    console.log(obj);
 
     // 웹 소켓 연결된 곳으로 메세지를 보냄
     testSock.send(JSON.stringify(obj));
