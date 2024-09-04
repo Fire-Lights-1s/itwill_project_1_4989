@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.profile-update-form {
+	padding-left:300px;
+	padding-right:300px;
+}
+
+.profile-update-form p {
+	font-size:14px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+#userId,
+#nickname,
+#name,
+#residentRegNumber,
+input[type="password"],
+input[type="tel"],
+input[type="email"] {
+    width: calc(100% - 100px);
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+button {
+	font-size: 15px;
+	border-radius: 8px;
+	border:none;
+	background-color: #4b0082;
+	color: white;
+	padding:12px;
+	cursor: pointer;
+}
+
+button[type="submit"] {
+    width:100%;
+    margin-top:20px;
+}

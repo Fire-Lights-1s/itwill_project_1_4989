@@ -1,0 +1,97 @@
+@charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.nickname-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+#idNumber,
+#nickname,
+input[type="tel"],
+input[type="email"] {
+    width: calc(100% - 100px);
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.check-btn {
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 40px;
+}
+
+.check-btn:hover {
+    background-color: #555;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4b0082;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.checkbox-group {
+    margin-top: 0px;
+    font-size: 0.9em;
+}
+
+.checkbox-group label {
+    display: block;
+    margin-bottom: 0px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 5px;
+}

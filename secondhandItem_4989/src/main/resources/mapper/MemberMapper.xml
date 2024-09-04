@@ -5,20 +5,22 @@
   
 <mapper namespace="com.itwillbs.mapper.MemberMapper">
 	<insert id="insertMember">
-		insert into members3(id, pass, name, phone, email, gender, agree, content, date) 
-		values(#{id}, #{pass}, #{name}, #{phone}, #{email}, #{gender}, #{agree}, #{content}, #{date})
+		insert into Mem(member_id, pass, nickname, name, phone, email, created_at) 
+		values(#{member_id}, #{pass}, #{nickname}, #{name}, #{phone}, #{email}, #{created_at})
 	</insert>
 	<select id="userCheck" resultType="com.itwillbs.domain.MemberDTO">
-		select * from members3
-		where id=#{id} and pass = #{pass} 
+		select * from Mem
+		where member_id=#{member_id} and pass = #{pass} 
 	</select>
-	<select id="getMember" resultType="com.itwillbs.domain.MemberDTO">
-		select id,name,phone, email, gender, agree, date from members3
-		where id=#{id}
-	</select>
-	<update id="updateMember">
-		update members3 
-		set name=#{name}, phone=#{phone}, email=#{email}, gender=#{gender}, agree=#{agree}
-		where id=#{id} and pass=#{pass}
-	</update>
+<!-- 	<select id="getMember" resultType="com.itwillbs.domain.MemberDTO"> -->
+<!-- 		select id,name,phone, email, gender, agree, date from members3 -->
+<!-- 		where id=#{id} -->
+<!-- 	</select> -->
+<!-- 	<update id="updateMember"> -->
+<!-- 		update members3  -->
+<!-- 		set name=#{name}, phone=#{phone}, email=#{email}, gender=#{gender}, agree=#{agree} -->
+<!-- 		where id=#{id} and pass=#{pass} -->
+<!-- 	</update> -->
+	
+
 </mapper>

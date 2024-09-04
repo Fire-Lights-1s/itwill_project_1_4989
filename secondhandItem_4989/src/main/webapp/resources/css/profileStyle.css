@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+aside {
+	height:450px;
+}
+
+h2 {
+	font-size:30px;
+	margin-top:20px;
+}
+
+main {
+	width:1050px;
+}
+
+.infoUpdate-container {
+	text-align:center;
+	align-items:center;
+	width:500px;
+}
+
+.main-container-side-profile {
+	flex-grow:1;
+    padding: 20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.profile-circle {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
+    margin-bottom:10px;
+}
+
+.profile-circle-div {
+	display:flex;
+	align-items: center;
+    justify-content: center;
+}
+
+.edit-info {
+	text-align:right;
+	font-size:19px;
+}
+
+.profile-nickname{
+	text-align:center;
+	font-weight:600;
+	font-size:1.2em;
+}
+
+.profile-update-form {
+	display:flex;
+	flex-direction:column;
+}
+
+.login-container {
+    background: #f8f8f8;
+    display:flex;
+    flex-direction:column;
+    padding: 40px;
+    text-align:center;
+    margin-top:80px;
+    margin-bottom:150px;
+    align-items:center;
+    justify-content:center;
+}
+
+.login-bttn {
+    padding: 10px 20px; /* 버튼의 내부 패딩 설정 */
+    background-color: #4b0082; /* 배경색 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    margin-top: 0; /* 상단 마진을 없애서 버튼을 더 위로 */
+    margin-left: 10px; /* 오른쪽으로 약간의 여백을 줘서 위치 조정 */
+}
+
+.input-group {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: #666;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin: 3px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
