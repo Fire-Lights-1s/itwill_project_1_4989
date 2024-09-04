@@ -25,9 +25,6 @@
 		<div class="main-container-side-profile">
 		<main>
 			<h2>내 프로필</h2>
-			<div class="edit-info">
-				<a href="${pageContext.request.contextPath}/my/infoUpdate">회원 정보 수정</a>
-			</div>
 			<div class="profile-circle-div">
 				<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-circle">
 			</div>

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+a {
+	text-decoration:none;
+}
+
 aside {
 	height:450px;
 }
@@ -41,9 +45,18 @@ main {
     justify-content: center;
 }
 
-.edit-info {
+.profile-edit-a {
 	text-align:right;
 	font-size:19px;
+}
+
+.profile-a {
+	text-align:right;
+	font-size:19px;
+}
+
+.profile-a a {
+	text-decoration:none;
 }
 
 .profile-nickname{
@@ -113,13 +126,49 @@ main {
 	height:700px;
 	margin-top:10px;
 	display:flex;
+	flex-wrap:wrap;
+	justify-content:flex-start;
+	align-items:flex-start;	
 }
 
 .profile-item-list-piece {
 	border:1px solid black;
 	border-radius:10px;
-	height:250px;
-	width:230px;
-	align-items:center;
+	height:320px;
+	width:250px;
+	margin:1px;
+}
+
+.profile-item-image {
+	border-radius:10px 10px 0 0;
+	height:190px;
+	width:238px;
+	margin:5px 5px 0 5px;
+}
+
+.profile-item-image-div {
+	display:flex;
+	flex-direction:column;	
+}
+
+.profile-item-image-cover {
+	background-color:black;
+	color:white;
+	text-align:center;
+	border-radius:0 0 10px 10px;
+	width:238px;	
+	margin:0 auto;
+}
+
+.profile-item-name {
+	text-align:center;	
+}
+
+.profile-item-review {
+	text-align:center;
+}
+
+.profile-item-date {
+	
 }
 

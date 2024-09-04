@@ -26,7 +26,7 @@
 		<div class="main-container-side-profile">
 		<main>
 			<h2>회원 정보 수정</h2>
-			<div class="edit-info">
+			<div class="profile-a">
 					<a href="${pageContext.request.contextPath}/my/infoUpdate">회원 탈퇴</a>
 			</div>
 			<div class="profile-circle-div">

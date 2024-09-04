@@ -25,14 +25,170 @@
 		<div class="main-container-side-profile">
 		<main>
 			<h2>판매 내역</h2>
+			<div class="profile-a">
+				<a href="#">가격 순 |</a>
+				<a href="#">날짜 순</a>
+			</div>
 			<div class="profile-item-list">
 				<div class="profile-item-list-piece">
+					<div class="profile-item-image-div">
+						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
+						<div class="profile-item-image-cover">
+							판매 중
+						</div>
+					</div>
+					<div class="profile-item-name">
+						Galaxy Note3<br>
+						800,000원
+					</div>
+					<div class="profile-item-review">
+						<a href="#">구매자 후기</a>&emsp;&emsp;
+						<a href="#">판매 취소</a>
+					</div>
+					<div class="profile-item-review">
+						평점 : 4.7&emsp;&emsp;
+						1개월전
+					</div>
 				</div>
 				<div class="profile-item-list-piece">
+					<div class="profile-item-image-div">
+						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
+						<div class="profile-item-image-cover">
+							판매 중
+						</div>
+					</div>
+					<div class="profile-item-name">
+						Galaxy Note3<br>
+						800,000원
+					</div>
+					<div class="profile-item-review">
+						<a href="#">구매자 후기</a>&emsp;&emsp;
+						<a href="#">판매 취소</a>
+					</div>
+					<div class="profile-item-review">
+						평점 : 4.7&emsp;&emsp;
+						1개월전
+					</div>
 				</div>
 				<div class="profile-item-list-piece">
+					<div class="profile-item-image-div">
+						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
+						<div class="profile-item-image-cover">
+							판매 중
+						</div>
+					</div>
+					<div class="profile-item-name">
+						Galaxy Note3<br>
+						800,000원
+					</div>
+					<div class="profile-item-review">
+						<a href="#">구매자 후기</a>&emsp;&emsp;
+						<a href="#">판매 취소</a>
+					</div>
+					<div class="profile-item-review">
+						평점 : 4.7&emsp;&emsp;
+						1개월전
+					</div>
 				</div>
 				<div class="profile-item-list-piece">
+					<div class="profile-item-image-div">
+						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
+						<div class="profile-item-image-cover">
+							판매 중
+						</div>
+					</div>
+					<div class="profile-item-name">
+						Galaxy Note3<br>
+						800,000원
+					</div>
+					<div class="profile-item-review">
+						<a href="#">구매자 후기</a>&emsp;&emsp;
+						<a href="#">판매 취소</a>
+					</div>
+					<div class="profile-item-review">
+						평점 : 4.7&emsp;&emsp;
+						1개월전
+					</div>
+				</div>
+				<div class="profile-item-list-piece">
+					<div class="profile-item-image-div">
+						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
+						<div class="profile-item-image-cover">
+							판매 중
+						</div>
+					</div>
+					<div class="profile-item-name">
+						Galaxy Note3<br>
+						800,000원
+					</div>
+					<div class="profile-item-review">
+						<a href="#">구매자 후기</a>&emsp;&emsp;
+						<a href="#">판매 취소</a>
+					</div>
+					<div class="profile-item-review">
+						평점 : 4.7&emsp;&emsp;
+						1개월전
+					</div>
+				</div>
+				<div class="profile-item-list-piece">
+					<div class="profile-item-image-div">
+						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
+						<div class="profile-item-image-cover">
+							판매 중
+						</div>
+					</div>
+					<div class="profile-item-name">
+						Galaxy Note3<br>
+						800,000원
+					</div>
+					<div class="profile-item-review">
+						<a href="#">구매자 후기</a>&emsp;&emsp;
+						<a href="#">판매 취소</a>
+					</div>
+					<div class="profile-item-review">
+						평점 : 4.7&emsp;&emsp;
+						1개월전
+					</div>
+				</div>
+				<div class="profile-item-list-piece">
+					<div class="profile-item-image-div">
+						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
+						<div class="profile-item-image-cover">
+							판매 중
+						</div>
+					</div>
+					<div class="profile-item-name">
+						Galaxy Note3<br>
+						800,000원
+					</div>
+					<div class="profile-item-review">
+						<a href="#">구매자 후기</a>&emsp;&emsp;
+						<a href="#">판매 취소</a>
+					</div>
+					<div class="profile-item-review">
+						평점 : 4.7&emsp;&emsp;
+						1개월전
+					</div>
+				</div>
+				<div class="profile-item-list-piece">
+					<div class="profile-item-image-div">
+						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
+						<div class="profile-item-image-cover">
+							판매 중
+						</div>
+					</div>
+					<div class="profile-item-name">
+						Galaxy Note3<br>
+						800,000원
+					</div>
+					<div class="profile-item-review">
+						<a href="#">구매자 후기</a>&emsp;&emsp;
+						<a href="#">판매 취소</a>
+					</div>
+					<div class="profile-item-review">
+						평점 : 4.7&emsp;&emsp;
+						1개월전
+					</div>
 				</div>
 			</div>
 		</main>
