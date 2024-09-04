@@ -9,10 +9,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 </head>
 <body>
 
-<jsp:include page="inc/header_side.jsp"></jsp:include>
+<jsp:include page="inc/header.jsp"></jsp:include>
+
+    <header>
+    	<div id="menu-name">
+			메뉴(현재 페이지의 대메뉴: 마이페이지, 매입신청 등) 이름
+		</div>
+   </header>
 
 <!-- 메뉴 아래 시작 -->
 <section>
@@ -29,14 +36,16 @@
             <li><a href="#">메뉴 4</a></li>
         </ul>
       </aside>
-       
+
+<!-- 사이드 메뉴 끝 -->
+
 <!-- 본문영역 시작 -->
 	<div id="main-container-side">
 	  <main>
 
-
-	<h1>본문 영역</h1>
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<h1>본문 영역</h1>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
 
@@ -44,6 +53,8 @@
 	</div>
   </div>
 </section>
+
+<!-- 본문영역 끝 -->
 
 <jsp:include page="inc/footer.jsp"></jsp:include>
 
