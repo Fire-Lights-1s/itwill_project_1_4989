@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.dao.PurchaseDAO;
 import com.itwillbs.domain.PurchaseItemsDTO;
+import com.itwillbs.domain.PurchaseRequestDTO;
 
 @Service
 public class PurchaseService {
@@ -23,6 +24,12 @@ public class PurchaseService {
 
 	public List<PurchaseItemsDTO> getItemsBySearch(String category_name, String query) {
 		return purchaseDAO.getItemsBySearch(category_name, query);
+	}
+
+
+	public void register(PurchaseRequestDTO purchaseRequestDTO) {
+//		purchaseRequestDTO.setPurchase_id(purchaseDAO.getMaxNum() + 1);
+		purchaseDAO.register(purchaseRequestDTO);
 	}
 
 }
