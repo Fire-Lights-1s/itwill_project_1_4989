@@ -43,7 +43,7 @@ public class MemberController {
 			
 			session.setAttribute("member_id", memberDTO.getMember_id());
 			
-			return "redirect:/member/welcome";
+			return "redirect:/";
 		}else {
 			
 			return "redirect:/member/login";
@@ -73,7 +73,16 @@ public class MemberController {
 		memberService.insertMember(memberDTO);
 		
 		// 로그인 주소변경 이동
-		return "redirect:/member/login";
+		return "redirect:/member/welcome";
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		System.out.println("MemberController logout");
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	
 	
 }

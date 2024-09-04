@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/welcome.css">
 <script>
 function redirectToMain() {
-    window.location.href = '${pageContext.request.contextPath}/main/main'; // 회원가입 페이지로 이동
+    window.location.href = '${pageContext.request.contextPath}/member/login';
 }
 </script>
 </head>

@@ -21,4 +21,6 @@
 <!-- 		set name=#{name}, phone=#{phone}, email=#{email}, gender=#{gender}, agree=#{agree} -->
 <!-- 		where id=#{id} and pass=#{pass} -->
 <!-- 	</update> -->
+	
+
 </mapper>
