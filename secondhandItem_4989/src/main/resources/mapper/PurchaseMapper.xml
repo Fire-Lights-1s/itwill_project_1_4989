@@ -19,5 +19,13 @@
     	</if>
 	</select>
 
+<!-- 	<select id="getMaxNum" resultType="java.lang.Integer"> -->
+<!-- 		SELECT MAX(purchase_id) FROM board -->
+<!-- 	</select> -->
+	
+	<insert id="register">
+		INSERT INTO PurchaseRequest(pc_item_name, member_id, expected_grade, expected_price, shipping_method, transfer_bank, transfer_account)
+		VALUES(#{pc_item_name}, #{member_id}, #{expected_grade}, #{expected_price}, #{shipping_method}, #{transfer_bank}, #{transfer_account})
+	</insert>
 
 </mapper>

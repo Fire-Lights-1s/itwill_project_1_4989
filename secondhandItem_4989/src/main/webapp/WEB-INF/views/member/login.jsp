@@ -18,6 +18,10 @@
            window.location.href = '${pageContext.request.contextPath}/member/social'; // 소셜회원가입 페이지로 이동
        }
    </script>
+   
+<!--    네이버 로그인 라이브러리 적용 샘플코드 -->
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 
@@ -55,8 +59,39 @@
                 <a href="${pageContext.request.contextPath }/member/findpass">비밀번호 찾기</a>
             </div>
             <button type="button" class="signup-btn" onclick="redirectToJoin()">회원가입</button>
+           
             <button type="button" class="kakao-btn" onclick="redirectToSocial()">카카오톡으로 시작하기</button>
-            <button type="button" class="naver-btn" onclick="redirectToSocial()">네이버로 시작하기</button>
+           
+            <button type="button" class="naver-btn" id="naver_id_login" onclick="redirectToSocial()">네이버로 시작하기</button>
+            <!-- 네이버아디디로로그인 초기화 Script -->
+<script type="text/javascript">
+	var naver_id_login = new naver_id_login("ssrtomoya", "http://localhost:8080/secondhand4989/member/social");
+	var state = naver_id_login.getUniqState();
+	naver_id_login.setButton("green", 3,50);
+	naver_id_login.setDomain(".service.com");
+	naver_id_login.setState(state);
+	naver_id_login.setPopup();
+	naver_id_login.init_naver_id_login();
+</script>
+<!-- // 네이버 로그인 초기화 Script -->
+
+<!-- 네이버아디디로로그인 Callback페이지 처리 Script -->
+<script type="text/javascript">
+	// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+	function naverSignInCallback() {
+		// naver_id_login.getProfileData('프로필항목명');
+		// 프로필 항목은 개발가이드를 참고하시기 바랍니다.
+		alert(naver_id_login.getProfileData('email'));
+		alert(naver_id_login.getProfileData('nickname'));
+		alert(naver_id_login.getProfileData('age'));
+	}
+
+
+	// 네이버 사용자 프로필 조회
+	naver_id_login.get_naver_userprofile("naverSignInCallback()");
+</script>
+<!-- //네이버아디디로로그인 Callback페이지 처리 Script -->
+
         </form>
     </div>
 

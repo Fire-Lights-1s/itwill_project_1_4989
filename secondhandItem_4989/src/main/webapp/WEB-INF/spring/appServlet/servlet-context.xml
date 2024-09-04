@@ -24,14 +24,14 @@
 	</beans:bean>
 	
 	<!-- web socket handler -->
-    <beans:bean id="socketTextHandler" class="com.itwillbs.websocket.SocketTextHandler"/>
-	<websocket:handlers>
-        <websocket:mapping path="/chatting" handler="socketTextHandler"/>
-        <websocket:handshake-interceptors>
-			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
-		</websocket:handshake-interceptors>
-        <websocket:sockjs></websocket:sockjs>
-    </websocket:handlers>
+<!--     <beans:bean id="socketTextHandler" class="com.itwillbs.websocket.SocketTextHandler"/> -->
+<!-- 	<websocket:handlers> -->
+<!--         <websocket:mapping path="/chatting" handler="socketTextHandler"/> -->
+<!--         <websocket:handshake-interceptors> -->
+<!-- 			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/> -->
+<!-- 		</websocket:handshake-interceptors> -->
+<!--         <websocket:sockjs websocket-enabled="true"/> -->
+<!--     </websocket:handlers> -->
  	
 
 	
