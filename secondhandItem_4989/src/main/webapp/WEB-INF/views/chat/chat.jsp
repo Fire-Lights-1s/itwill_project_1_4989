@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_Editing_by_sub.css?">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
-<script src="${pageContext.request.contextPath }/resources/js/chatScript.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/chatStyle.css?">
-
+<script src="${pageContext.request.contextPath }/resources/js/chatScript.js"></script>
 </head>
 <body>
 	<jsp:include page="../inc/header.jsp"></jsp:include>
