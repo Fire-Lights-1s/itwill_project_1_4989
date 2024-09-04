@@ -1,5 +1,16 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+    // 세션에서 로그인된 사용자 아이디 가져오기
+    HttpSession session2 = request.getSession();
+    String loginId = (String) session.getAttribute("loginId");
+    
+    if (loginId == null) {
+        // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +19,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 	우편번호  -->
+	    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="//cdn.poesis.kr/post/popup.min.js" charset="UTF-8"></script>
 
     <style>
         body {
@@ -146,8 +160,8 @@
                             </div>
 
                             <div class="form-group inline-group">
-                                <label for="product-name">제품명</label>
-                                <input type="text" id="product-name" name="product-name" placeholder="브랜드명, 모델명 함께 입력해주세요.">
+                                <label for="productName">제품명</label>
+                                <input type="text" id="productName" name="productName" placeholder="브랜드명, 모델명 함께 입력해주세요.">
                             </div>
 
                             <div class="form-group inline-group">
@@ -171,16 +185,33 @@
                                 <label for="region">거래 지역</label>
                                 <select id="region" name="region">
                                     <option value="" disabled selected>선택</option>
-                                    <option value="seoul">서울</option>
-                                    <option value="busan">부산</option>
-                                    <option value="incheon">인천</option>
+                                    
                                     <!-- 지역 추가 가능 -->
                                 </select>
+                                <div>
+    <p>
+        <label>우편번호</label><input type="text" size="4" class="postcodify_postcode6_1" /> &ndash;
+        <label></label><input type="text" size="4" class="postcodify_postcode6_2" /> &nbsp;
+        <button id="search_button">검색</button>
+    </p>
+    <p><label>도로명주소</label><input type="text" class="postcodify_address" /></p>
+    <p><label>상세주소</label><input type="text" class="postcodify_details" /></p>
+    <p><label>참고항목</label><input type="text" class="postcodify_extra_info" /></p>
+    <p><label>영문주소</label><input type="text" class="postcodify_english_address" /></p>
+    <p><label>지번주소</label><input type="text" class="postcodify_jibeon_address" /></p>
+</div>
+<!-- Postcodify 셋팅 -->
+ 
+<script type="text/javascript">
+    $("#search_button").postcodifyPopUp();
+</script>
+
+                                
                             </div>
 
                             <div class="form-group inline-group">
-                                <label for="deal-method">거래 방식</label>
-                                <select id="deal-method" name="deal-method">
+                                <label for="dealMethod">거래 방식</label>
+                                <select id="dealMethod" name="dealMethod">
                                     <option value="" disabled selected>선택</option>
                                     <option value="delivery">택배</option>
                                     <option value="direct">직거래</option>
@@ -189,8 +220,8 @@
                             </div>
 
                             <div class="form-group inline-group">
-                                <label for="payment-method">결제 방식</label>
-                                <select id="payment-method" name="payment-method">
+                                <label for="payMethod">결제 방식</label>
+                                <select id="payMethod" name="payMethod">
                                     <option value="" disabled selected>선택</option>
                                     <option value="cash">현금</option>
                                     <option value="pay">4989페이</option>
@@ -199,8 +230,8 @@
                             </div>
 
                             <div class="form-group inline-group">
-                                <label for="description">물품 상태</label>
-                                <textarea id="description" name="description" placeholder="물품 상태(미개봉/신품/중고), 하자 등 상세내용을 적어주세요."></textarea>
+                                <label for="productDesc">물품 상태</label>
+                                <textarea id="productDesc" name="productDesc" placeholder="물품 상태(미개봉/신품/중고), 하자 등 상세내용을 적어주세요."></textarea>
                             </div>
 
                             <div class="form-group">
