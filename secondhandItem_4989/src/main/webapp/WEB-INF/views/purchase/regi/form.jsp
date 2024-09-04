@@ -50,6 +50,11 @@ h1, h3 { text-align:center; }
 		
 	<div id="form-container">
     <div class="form-group">
+        <label for="productName">신청인 아이디</label>
+        <input type="text" name="pc_item_name" value="${sessionScope.member_id}" readonly>
+    </div>
+    
+    <div class="form-group">
         <label for="productName">매입제품</label>
         <input type="text" name="pc_item_name" value="${pc_item_name }" readonly>
     </div>

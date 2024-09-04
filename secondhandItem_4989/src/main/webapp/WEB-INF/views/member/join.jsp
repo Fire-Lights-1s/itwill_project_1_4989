@@ -28,7 +28,7 @@
         <form action="joinPro" method="post">
             <div class="form-group">
                 <label for="userId">아이디</label>
-                <input type="text" id="userId" name="member_id" placeholder="아이디" required>
+                <input type="text" id="member_id" name="member_id" placeholder="아이디" required>
                 <button type="button" class="check-btn">중복 확인</button>
             </div>
             <div class="form-group">
@@ -48,10 +48,6 @@
             <div class="form-group">
                 <label for="name">이름</label>
                 <input type="text" id="name" name="name" placeholder="이름" required>
-            </div>
-            <div class="form-group">
-                <label for="residentRegNumber">주민등록번호</label>
-                <input type="text" id="residentRegNumber" name="residentRegNumber" maxlength="13" placeholder="주민등록번호 13자리" required>
             </div>
             <div class="form-group">
                 <label for="phoneNumber">휴대폰 번호</label>

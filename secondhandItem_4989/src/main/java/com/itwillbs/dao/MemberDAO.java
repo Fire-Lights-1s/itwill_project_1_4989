@@ -26,4 +26,6 @@ public class MemberDAO {
 		sqlSession.insert(namespace + ".insertMember", memberDTO);
 	}
 	
+	
+	
 }

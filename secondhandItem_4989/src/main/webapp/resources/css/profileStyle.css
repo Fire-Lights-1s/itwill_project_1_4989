@@ -105,3 +105,21 @@ main {
     box-sizing: border-box;
     font-size: 16px;
 }
+
+.profile-item-list {
+	border:1px solid black;
+	border-radius:20px;
+	padding:20px;
+	height:700px;
+	margin-top:10px;
+	display:flex;
+}
+
+.profile-item-list-piece {
+	border:1px solid black;
+	border-radius:10px;
+	height:250px;
+	width:230px;
+	align-items:center;
+}
+
