@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
     <nav>
         <div class="wrapper absolute-center ">
@@ -51,9 +52,21 @@
                     </ul>
                 </li>
                 <li style="width:30px;"></li>
+                
+                 <c:if test="${empty sessionScope.member_id }">
                 <li><a class="login-btn" href="${pageContext.request.contextPath}/member/login">로그인 / 회원가입</a></li>
+                </c:if>
+                <c:if test="${!empty sessionScope.member_id }">
+                <li>
+                <a class="login-btn" href="${pageContext.request.contextPath}/my/profile">${sessionScope.member_id}님 접속 중</a>
+                	<ul class="drop-menu">
+                		<c:if test="${sessionScope.member_id eq 'admin' }">
+                		<li><a href="${pageContext.request.contextPath}/admin">관리자 홈</a></li>
+                		</c:if>
+                        <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
+                    </ul>
+                </li>
+                </c:if>
             </ul>
         </div>
     </nav>
-    
-       
