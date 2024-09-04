@@ -30,4 +30,9 @@ public class MyPageController {
 		return "my/infoUpdate";
 	}
 	
+	@GetMapping("/sell")
+	public String sell() {
+		System.out.println("MyPageController sell()");
+		return "my/sell";
+	}
 }
