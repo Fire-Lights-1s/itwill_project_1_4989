@@ -44,7 +44,7 @@
 		<h1 style="text-align:center;">매입 서비스 소개</h1>
   	 	<br>
   	  <div style="text-align:right; padding-right:100px;">
-  	  <a href="${pageContext.request.contextPath}/my/purchase"><button id="submit_form" style="width:200px;">나의 매입 신청내역 확인</button></a>
+  	  <a href="${pageContext.request.contextPath}/my/purchlist"><button id="submit_form" style="width:200px;">나의 매입 신청내역 확인</button></a>
   	  </div>
 		<div id="info-img" style="padding:0; margin:30px auto; width:900px;">
 			<img src="${pageContext.request.contextPath }/resources/img/purchase_001.png"
