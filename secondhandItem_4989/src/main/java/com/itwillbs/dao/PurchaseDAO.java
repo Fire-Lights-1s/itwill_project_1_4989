@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.PurchaseItemsDTO;
+import com.itwillbs.domain.PurchaseRequestDTO;
 
 @Repository
 public class PurchaseDAO {
@@ -35,7 +36,19 @@ public class PurchaseDAO {
 	    }
 		
 		    return sqlSession.selectList(namespace + ".getItemsBySearch", params);
-	} 
+	}
+
+	public void register(PurchaseRequestDTO purchaseRequestDTO) {
+		sqlSession.insert(namespace + ".register", purchaseRequestDTO);
+	}
+
+//	public int getMaxNum() {
+//		int maxNum = sqlSession.selectOne(namespace + ".getMaxNum");
+//		if (maxNum == 0) {
+//			maxNum = 1;
+//		}
+//		return maxNum;
+//	} 
 	
 	
 	

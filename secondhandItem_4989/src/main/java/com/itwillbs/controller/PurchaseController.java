@@ -41,7 +41,7 @@ public class PurchaseController {
 	}
 	
 	@GetMapping("/item")
-	public String getItemsByCategory(@RequestParam("category_name") String category_name, Model model) {
+	public String getItemsByCategory(@RequestParam String category_name, Model model) {
 		List<PurchaseItemsDTO> items = purchaseService.getItemsByCategory(category_name);
 		model.addAttribute("category_name", category_name);
 		model.addAttribute("items", items);
@@ -49,8 +49,7 @@ public class PurchaseController {
 	}
 	
 	@GetMapping("/search")
-	public String getItemsByCategory(
-			@RequestParam("category_name") String category_name, @RequestParam("query") String query, Model model) {
+	public String getItemsByCategory(@RequestParam String category_name, @RequestParam String query, Model model) {
 		List<PurchaseItemsDTO> items = purchaseService.getItemsBySearch(category_name, query);
 		model.addAttribute("category_name", category_name);
 		model.addAttribute("items", items);
@@ -58,14 +57,23 @@ public class PurchaseController {
 	}
 	
 	@GetMapping("/form")
-	public String getForm(
-			@RequestParam("name") String name, @RequestParam("grade") String grade, @RequestParam("price") int price, Model model) {
+	public String getForm(@RequestParam String name, @RequestParam String grade, @RequestParam int price, Model model) {
 		model.addAttribute("pc_item_name", name);
 		model.addAttribute("expected_grade", grade);
 		model.addAttribute("expected_price", price);	
 		return "purchase/regi/form";
 	}
 
-
+	@PostMapping("/registerPurchase")
+	public String registerPurchase(PurchaseRequestDTO purchaseRequestDTO) {
+		purchaseService.register(purchaseRequestDTO);
+		return "redirect:pcComplete";
+	}
+	
+	@GetMapping("/pcComplete")
+	public String purchaseComplete() {
+		return "purchase/regi/complete";
+	}
+	
 	
 }

@@ -3,15 +3,14 @@ package com.itwillbs.domain;
 public class PurchaseRequestDTO {
 	
 	private int purchase_id;
-	private int pc_item_id;
+	private String pc_item_name;
 	private String member_id;
 	private char expected_grade;
+	private int expected_price;
 	private String shipping_method;
 	private String purchse_status;
 	private String transfer_bank;
 	private String transfer_account;
-	private String transfer_holder;
-	
 	
 	public int getPurchase_id() {
 		return purchase_id;
@@ -19,11 +18,11 @@ public class PurchaseRequestDTO {
 	public void setPurchase_id(int purchase_id) {
 		this.purchase_id = purchase_id;
 	}
-	public int getPc_item_id() {
-		return pc_item_id;
+	public String getPc_item_name() {
+		return pc_item_name;
 	}
-	public void setPc_item_id(int pc_item_id) {
-		this.pc_item_id = pc_item_id;
+	public void setPc_item_name(String pc_item_name) {
+		this.pc_item_name = pc_item_name;
 	}
 	public String getMember_id() {
 		return member_id;
@@ -36,6 +35,18 @@ public class PurchaseRequestDTO {
 	}
 	public void setExpected_grade(char expected_grade) {
 		this.expected_grade = expected_grade;
+	}
+	public int getExpected_price() {
+		return expected_price;
+	}
+	public void setExpected_price(int expected_price) {
+		this.expected_price = expected_price;
+	}
+	public String getShipping_method() {
+		return shipping_method;
+	}
+	public void setShipping_method(String shipping_method) {
+		this.shipping_method = shipping_method;
 	}
 	public String getPurchse_status() {
 		return purchse_status;
@@ -55,26 +66,15 @@ public class PurchaseRequestDTO {
 	public void setTransfer_account(String transfer_account) {
 		this.transfer_account = transfer_account;
 	}
-	public String getTransfer_holder() {
-		return transfer_holder;
-	}
-	public void setTransfer_holder(String transfer_holder) {
-		this.transfer_holder = transfer_holder;
-	}
-	public String getShipping_method() {
-		return shipping_method;
-	}
-	public void setShipping_method(String shipping_method) {
-		this.shipping_method = shipping_method;
-	}
-	
 	@Override
 	public String toString() {
-		return "PurchaseRequestDTO [purchase_id=" + purchase_id + ", pc_item_id=" + pc_item_id + ", member_id="
-				+ member_id + ", expected_grade=" + expected_grade + ", shipping_method=" + shipping_method
-				+ ", purchse_status=" + purchse_status + ", transfer_bank=" + transfer_bank + ", transfer_account="
-				+ transfer_account + ", transfer_holder=" + transfer_holder + "]";
+		return "PurchaseRequestDTO [purchase_id=" + purchase_id + ", pc_item_name=" + pc_item_name + ", member_id="
+				+ member_id + ", expected_grade=" + expected_grade + ", expected_price=" + expected_price
+				+ ", shipping_method=" + shipping_method + ", purchse_status=" + purchse_status + ", transfer_bank="
+				+ transfer_bank + ", transfer_account=" + transfer_account + "]";
 	}
+	
+	
 	
 	
 	
