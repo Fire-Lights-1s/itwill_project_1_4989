@@ -15,10 +15,10 @@ public class ProductDAO {
 	
 	private static final String namespace="com.itwillbs.mapper.ProductMapper";
 
-	public int getMaxNum() {
-		System.out.println("BoardDAO getMaxNum()");
-		return sqlSession.selectOne(namespace + ".getMaxNum");
-	}
+//	public int getMaxNum() {
+//		System.out.println("BoardDAO getMaxNum()");
+//		return sqlSession.selectOne(namespace + ".getMaxNum");
+//	}
 
 	public void insertProduct(ProductDTO productDTO) {
 		sqlSession.insert(namespace + ".insertProduct", productDTO);

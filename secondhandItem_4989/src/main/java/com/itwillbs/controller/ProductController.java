@@ -14,22 +14,49 @@ import com.itwillbs.service.ProductService;
 @Controller
 @RequestMapping("/product/*")
 public class ProductController {
-//	@Inject
-//	private ProductService productService;
+	
+	@Inject
+	private ProductService productService;
+
 	
 	@GetMapping("/register")
 	public String main() {
-		return "/product/registerSample";
+		return "/product/register";
 	}
 
-//	@PostMapping("/registerPro")
-//	public String registerPro(ProductDTO productDTO) {
-//		productService.insertProduct(productDTO);
-//		return "redirect:/prouct/all";
-//		
-//	}
+	@PostMapping("/registerPro")
+	public String registerPro(ProductDTO productDTO) {
+	     System.out.println("ProductController registerPro()");
+	     System.out.println(productDTO);
+	     productService.registerProduct(productDTO);
+	     return "redirect:/product/all";
+	    }
+	
+	@GetMapping("/all")
+	public String all() {
+		return "/product/all";
+	}
+	
+	}//ProductController()
+	
 
 
-}//ProductController()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
