@@ -30,6 +30,16 @@ public class MemberService {
 		
 		memberDAO.insertMember(memberDTO);
 	}
+
+	public MemberDTO getMember(String id) {
+		System.out.println("MemberService getMember()");
+		return memberDAO.getMember(id);
+	}
+
+	public void updateMember(MemberDTO memberDTO) {
+		System.out.println("MemberService updateMember()");
+		memberDAO.updateMember(memberDTO);		
+	}
 	
 	
 	

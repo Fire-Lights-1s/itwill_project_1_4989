@@ -28,7 +28,7 @@
 			<div class="profile-circle-div">
 				<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-circle">
 			</div>
-			<p class="profile-nickname">닉네임</p>
+			<p class="profile-nickname">${memberDTO.nickname}</p>
 			<p class="profile-nickname">누적 거래 횟수</p>
 			<p class="profile-nickname">7</p>
 		</main>

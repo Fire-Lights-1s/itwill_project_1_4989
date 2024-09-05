@@ -32,41 +32,38 @@
 			<div class="profile-circle-div">
 				<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-circle">
 			</div>
-			
-			
-			
-		<form action="#" method="post" class="profile-update-form">
+		<form action="${pageContext.request.contextPath}/my/infoUpdatePro" method="post" class="profile-update-form" name="">
             <div class="form-group">
                 <label for="userId">아이디</label>
-                <input type="text" id="userId" name="userId" value="아이디" readonly>
+                <input type="text" id="userId" name="member_id" value="${memberDTO.member_id}" readonly>
                 <button type="button">중복 확인</button>
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" value="1234" required readonly>                
+                <input type="password" id="password" name="pass" value="${memberDTO.pass}" required readonly>                
                 <p>영문자, 숫자, 특수문자 중 2가지 이상 사용하여 8자 이상으로 입력해주세요.</p>
             </div>
             <div class="form-group">
                 <label for="confirmPassword">비밀번호 확인</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" value="1234" required readonly>
-                <button type="button">비밀 번호 변경</button>
+                <input type="password" id="confirmPassword" name="confirmPassword" value="${memberDTO.pass}" required readonly>
+                <button type="button" onclick="removeReadonly()">비밀 번호 변경</button>
             </div>
             <div class="form-group">
                 <label for="nickname">닉네임</label>
-                <input type="text" id="nickname" name="nickname" placeholder="닉네임" required>
+                <input type="text" id="nickname" name="nickname" value="${memberDTO.nickname}" required>
                 <button type="button">중복 확인</button>
             </div>
             <div class="form-group">
                 <label for="name">이름</label>
-                <input type="text" id="name" name="name" placeholder="이름" required>
+                <input type="text" id="name" name="name" value="${memberDTO.name}" required>
             </div>
             <div class="form-group">
                 <label for="phoneNumber">휴대폰 번호</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" placeholder="01012345678" required>
+                <input type="tel" id="phoneNumber" name="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="${memberDTO.phone}" required>
             </div>
             <div class="form-group">
                 <label for="email">이메일</label>
-                <input type="email" id="email" name="email" placeholder="abcd@efgh.com" required>
+                <input type="email" id="email" name="email" value="${memberDTO.email}" required>
             </div>
             <button type="submit" class="submit-button">수정 완료</button>
         </form>
@@ -75,5 +72,16 @@
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+<script type="text/javascript">
+	function removeReadonly() {
+		let pass1 = document.getElementById('password');
+		let pass2 = document.getElementById('confirmPassword');
+        pass1.removeAttribute('readonly');
+        pass2.removeAttribute('readonly');
+		pass1.value = "";
+		pass2.value = "";
+		pass1.focus();
+	}
+</script>
 </body>
 </html>

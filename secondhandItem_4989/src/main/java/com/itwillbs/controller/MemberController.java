@@ -39,9 +39,10 @@ public class MemberController {
 		System.out.println(memberDTO);
 		
 		MemberDTO memberDTO2 = memberService.userCheck(memberDTO);
+		System.out.println(memberDTO2);
 		if(memberDTO2 != null) {
 			
-			session.setAttribute("member_id", memberDTO.getMember_id());
+			session.setAttribute("member_id", memberDTO2.getMember_id());
 			
 			return "redirect:/";
 		}else {

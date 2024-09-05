@@ -25,14 +25,14 @@
 		<div class="main-container-side-profile">
 		<main>
 		<h2>본인 확인</h2>
-		<form action="loginPro" method="post" class="login-container">
+		<form action="${pageContext.request.contextPath}/my/infoCheckPro" method="post" class="login-container">
             <div class="input-group">
                 <label for="userId">아이디</label>
-                <input type="text" id="userId" name="userId" placeholder="아이디">
+                <input type="text" id="userId" name="member_id" placeholder="아이디">
             </div>
             <div class="input-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" placeholder="비밀번호">
+                <input type="password" id="password" name="pass" placeholder="비밀번호">
             </div>
             <button type="submit" class="login-bttn">확인</button>
         </form>

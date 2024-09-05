@@ -25,6 +25,16 @@ public class MemberDAO {
 		
 		sqlSession.insert(namespace + ".insertMember", memberDTO);
 	}
+
+	public MemberDTO getMember(String id) {
+		System.out.println("MemberDAO getMember()");
+		return sqlSession.selectOne(namespace + ".getMember", id);
+	}
+
+	public void updateMember(MemberDTO memberDTO) {
+		System.out.println("MemberDAO updateMember()");
+		sqlSession.update(namespace + ".updateMember", memberDTO);
+	}
 	
 	
 	

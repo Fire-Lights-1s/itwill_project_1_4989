@@ -10,17 +10,17 @@
 	</insert>
 	<select id="userCheck" resultType="com.itwillbs.domain.MemberDTO">
 		select * from Mem
-		where member_id=#{member_id} and pass = #{pass} 
+		where member_id = #{member_id} and pass = #{pass} 
 	</select>
-<!-- 	<select id="getMember" resultType="com.itwillbs.domain.MemberDTO"> -->
-<!-- 		select id,name,phone, email, gender, agree, date from members3 -->
-<!-- 		where id=#{id} -->
-<!-- 	</select> -->
-<!-- 	<update id="updateMember"> -->
-<!-- 		update members3  -->
-<!-- 		set name=#{name}, phone=#{phone}, email=#{email}, gender=#{gender}, agree=#{agree} -->
-<!-- 		where id=#{id} and pass=#{pass} -->
-<!-- 	</update> -->
+	<select id="getMember" resultType="com.itwillbs.domain.MemberDTO">
+		select * from Mem
+		where member_id = #{member_id}
+	</select>
+	<update id="updateMember">
+		update Mem
+		set pass = #{pass}, nickname = #{nickname}, name = #{name}, phone = #{phone}, email = #{email}
+		where member_id = #{member_id}
+	</update>
 	
 
 </mapper>
