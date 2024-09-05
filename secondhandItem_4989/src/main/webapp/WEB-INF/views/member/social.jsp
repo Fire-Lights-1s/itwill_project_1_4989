@@ -11,6 +11,8 @@
 </head>
 <body>
 
+
+
   <jsp:include page="../inc/header.jsp"></jsp:include>
 
     <header>
@@ -18,10 +20,11 @@
 			소셜회원가입
 		</div>
    </header>
-   
+
   <section>
 	<div id="main-container">
 	  <main>
+
 
 
   <div class="container">
@@ -35,8 +38,6 @@
                 </div>
             </div>
 
-            <label for="idNumber">주민등록번호</label>
-            <input type="text" id="idNumber" name="idNumber" placeholder="주민등록번호 13자리" maxlength="13" required>
 
             <label for="phone">휴대폰 번호</label>
             <input type="tel" id="phone" name="phone" placeholder="01012345678" required>
