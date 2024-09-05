@@ -18,17 +18,17 @@ public class MemberDTO {
     }
 
     // 모든 필드를 받는 생성자
-    public MemberDTO(String member_id, String password, String nickname, String name,
-                     String jumin, String phoneNumber, String email, Timestamp created_at) {
-        this.member_id = member_id;
-        this.pass = password;
-        this.nickname = nickname;
-        this.name = name;
-        this.jumin = jumin;
-        this.phone = phoneNumber;
-        this.email = email;
-        this.created_at = created_at;
-    }
+//    public MemberDTO(String member_id, String password, String nickname, String name,
+//                     String jumin, String phoneNumber, String email, Timestamp created_at) {
+//        this.member_id = member_id;
+//        this.pass = password;
+//        this.nickname = nickname;
+//        this.name = name;
+//        this.jumin = jumin;
+//        this.phone = phoneNumber;
+//        this.email = email;
+//        this.created_at = created_at;
+//    }
 
     // getter와 setter 메서드
     public String getMember_id() {
