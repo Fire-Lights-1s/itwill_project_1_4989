@@ -33,10 +33,9 @@ public class MemberController {
 		return "/member/social";
 	}
 	
+	//로그인 처리기능
 	@PostMapping("/loginPro")
 	public String loginPro(MemberDTO memberDTO,HttpSession session) {
-		System.out.println("MemberController loginPro");
-		System.out.println(memberDTO);
 		
 		MemberDTO memberDTO2 = memberService.userCheck(memberDTO);
 		System.out.println(memberDTO2);
@@ -66,6 +65,7 @@ public class MemberController {
 		return "/member/findpass";
 	}
 	
+	//회원가입 처리기능
 	@PostMapping("/joinPro")
 	public String insertPro(MemberDTO memberDTO) {
 		System.out.println("MemberController joinPro");
@@ -77,6 +77,7 @@ public class MemberController {
 		return "redirect:/member/welcome";
 	}
 	
+	//로그아웃 처리기능(세션값 제거)
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		System.out.println("MemberController logout");
