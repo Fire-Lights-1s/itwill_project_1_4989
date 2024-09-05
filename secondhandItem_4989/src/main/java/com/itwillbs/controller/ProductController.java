@@ -37,6 +37,18 @@ public class ProductController {
 		return "/product/all";
 	}
 	
+	@GetMapping("/seller")
+	public String seller() {
+		System.out.println("ProductController seller()");
+		return "/product/seller";
+	}
+	
+	@GetMapping("/sellerHistory")
+	public String sellerHistory() {
+		System.out.println("ProductController sellerHistory()");
+		return "/product/sellerHistory";
+	}
+	
 	}//ProductController()
 	
 

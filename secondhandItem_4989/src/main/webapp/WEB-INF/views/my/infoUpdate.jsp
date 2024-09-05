@@ -36,7 +36,6 @@
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="userId" name="member_id" value="${memberDTO.member_id}" readonly>
-                <button type="button">중복 확인</button>
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
