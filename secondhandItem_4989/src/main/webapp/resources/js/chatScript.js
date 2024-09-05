@@ -14,14 +14,14 @@
         }
         $("#chatting").html("");
     }
-    function connect(){
+    function connect( roomID){
         let socket = new SockJS('/secondhand4989/chatting');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function(frame){
             //setConnected(true);
             console.log('Connected: ', frame);
 
-            stompClient.subscribe('/topic/' + roomIdJs, function (chatMessage){
+            stompClient.subscribe('/topic/' + roomID, function (chatMessage){
             	console.log('chatMessage: ', chatMessage);
                 showChat(JSON.parse(chatMessage.body));
             });
@@ -31,7 +31,7 @@
         if ($("#message").val() != "") {
             stompClient.send("/send/"+roomId, {},
                 JSON.stringify({
-                    'sender': sender,
+                    'user_id': sender,
                     'message' : $("#message").val()
                 }));
             $("#message").val('');
@@ -39,16 +39,7 @@
     }
     //보낸 채팅 보기
     function showChat(chatMessage) {
-        if (chatMessage.senderEmail == senderEmail) {
-            $("#chatting").append(
-                "<div class = 'chatting_own'><tr><td>" + chatMessage.message + "</td></tr></div>"
-            );
-        } else {
-            $("#chatting").append(
-                "<div class = 'chatting'><tr><td>" + "[" + chatMessage.sender + "] " + chatMessage.message + "</td></tr></div>"
-            );
-        }
-        $('.col-md-12').scrollTop($('.col-md-12')[0].scrollHeight);
+            console.log(chatMessage);
     }
 
 	//저장된 채팅 불러오기
