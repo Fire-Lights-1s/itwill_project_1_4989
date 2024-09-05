@@ -240,8 +240,15 @@
 }
 
 .header-button {
+	margin-left: auto;
     display: flex;
     gap: 30px; /* 버튼 사이 간격 조정 */
 }
 
-
+.header-desktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+}
