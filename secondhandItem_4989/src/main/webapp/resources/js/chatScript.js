@@ -1,31 +1,70 @@
+    let stompClient = null;
+    let roomIdJs = 'asddas';
+    //let chatListJs = ${chatList};
+	//let sender = ${userName};
+	
+	function setConnected(connected) {
+        $("#connect").prop("disabled", connected);
+        $("#disconnect").prop("disabled", !connected);
+        if (connected) {
+            $("#conversation").show();
+        }
+        else {
+            $("#conversation").hide();
+        }
+        $("#chatting").html("");
+    }
+    function connect(){
+        let socket = new SockJS('/secondhand4989/chatting');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function(frame){
+            //setConnected(true);
+            console.log('Connected: ', frame);
 
-// 웹소켓 테스트
-// 1. SockJS라이브러리 추가 -> main.jsp 추가 
+            stompClient.subscribe('/topic/' + roomIdJs, function (chatMessage){
+            	console.log('chatMessage: ', chatMessage);
+                showChat(JSON.parse(chatMessage.body));
+            });
+        });
+    }
+	function sendChat() {
+        if ($("#message").val() != "") {
+            stompClient.send("/send/"+roomId, {},
+                JSON.stringify({
+                    'sender': sender,
+                    'message' : $("#message").val()
+                }));
+            $("#message").val('');
+        }
+    }
+    //보낸 채팅 보기
+    function showChat(chatMessage) {
+        if (chatMessage.senderEmail == senderEmail) {
+            $("#chatting").append(
+                "<div class = 'chatting_own'><tr><td>" + chatMessage.message + "</td></tr></div>"
+            );
+        } else {
+            $("#chatting").append(
+                "<div class = 'chatting'><tr><td>" + "[" + chatMessage.sender + "] " + chatMessage.message + "</td></tr></div>"
+            );
+        }
+        $('.col-md-12').scrollTop($('.col-md-12')[0].scrollHeight);
+    }
 
-//2. SockJS를 이용해서 클라리언트용 웹소켓 객체 생성
-let testSock = new SockJS("/secondhand4989/chatting");
-
-function sendMessage(name,str){
-    //매개변수 JS객체에 저장 
-    let obj = {}; // 비어있는 객체 
-
-    obj.name = name;  // 객체에 일치하는 key가 없다면 자동으로 추가 
-    obj.str = str;
-
-    console.log(obj);
-
-    // 웹 소켓 연결된 곳으로 메세지를 보냄
-    testSock.send(JSON.stringify(obj));
-                // JS객체 -> JSON으로 보냄! 
-
-            
-}
-// 웹소켓 객체(testSock)가 서버로 부터 전달 받은 메세지가 있을경우
-testSock.onmessage = e => {
-    // e: 이벤트 객체
-    // onmessage: 이벤트가 오는걸 감지
-    // e.data : 전달 받은 메세지(JSON)
-    let obj = JSON.parse(e.data); // JSON -> JS객체 
-    console.log(`보낸사람 : ${obj.name} / ${obj.str}`);
-
-}
+	//저장된 채팅 불러오기
+    function loadChat(chatList){
+        if(chatList != null) {
+            for(chat in chatList) {
+                if (chatList[chat].senderEmail == senderEmail) {
+                    $("#chatting").append(
+                        "<div class = 'chatting_own'><tr><td>" + chatList[chat].message + "</td></tr></div>"
+                    );
+                } else {
+                    $("#chatting").append(
+                        "<div class = 'chatting'><tr><td>" + "[" + chatList[chat].sender + "] " + chatList[chat].message + "</td></tr></div>"
+                    );
+                }
+            }
+        }
+        $('.col-md-12').scrollTop($('.col-md-12')[0].scrollHeight); // 채팅이 많아질시에 자동 스크롤
+    }

@@ -1,5 +1,7 @@
 package com.itwillbs.domain;
 
+import java.sql.Timestamp;
+
 public class ChatMessageDTO {
 	private String chat_id;
 	private String chat_room_id;
@@ -7,7 +9,18 @@ public class ChatMessageDTO {
 	private String alarm;
 	private String user_id;
 	private String message;
-	private String send_time;
+	private Timestamp send_time;
+	
+	//기본생성자 생성하기
+    public ChatMessageDTO(String roomId,
+    		String sender, 
+    		String message) {
+        this.chat_room_id = roomId;
+        this.user_id = sender;
+        this.message = message;
+        this.send_time = new Timestamp(System.currentTimeMillis());
+    }
+	
 	public String getChat_id() {
 		return chat_id;
 	}
@@ -44,10 +57,10 @@ public class ChatMessageDTO {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getSend_time() {
+	public Timestamp getSend_time() {
 		return send_time;
 	}
-	public void setSend_time(String send_time) {
+	public void setSend_time(Timestamp send_time) {
 		this.send_time = send_time;
 	}
 	

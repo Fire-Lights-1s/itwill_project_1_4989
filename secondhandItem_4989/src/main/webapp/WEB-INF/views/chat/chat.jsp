@@ -8,6 +8,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_Editing_by_sub.css?">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/chatStyle.css?">
+<!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
+<script src="${pageContext.request.contextPath }/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
+<script src="${pageContext.request.contextPath }/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/chatScript.js"></script>
 </head>
 <body>
 	<jsp:include page="../inc/header.jsp"></jsp:include>
@@ -205,7 +209,6 @@
 	</div>
 	</section>
   <jsp:include page="../inc/footer.jsp"></jsp:include>
-<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/chatScript.js"></script>
+
 </body>
 </html>
