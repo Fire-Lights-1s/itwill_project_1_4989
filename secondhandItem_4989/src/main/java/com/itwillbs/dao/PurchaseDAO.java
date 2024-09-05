@@ -42,14 +42,18 @@ public class PurchaseDAO {
 		sqlSession.insert(namespace + ".register", purchaseRequestDTO);
 	}
 
-//	public int getMaxNum() {
-//		int maxNum = sqlSession.selectOne(namespace + ".getMaxNum");
-//		if (maxNum == 0) {
-//			maxNum = 1;
-//		}
-//		return maxNum;
-//	} 
-	
-	
+	public List<PurchaseRequestDTO> getPurchList(String member_id) {
+		return sqlSession.selectList(namespace + ".getPurchList", member_id);
+	}
+
+	public PurchaseRequestDTO getPurchDetail(int purchase_id) {
+		return sqlSession.selectOne(namespace + ".getPurchDetail", purchase_id);
+	}
+
+	public void cancelRequest(int purchase_id) {
+		sqlSession.update(namespace + ".cancelRequest", purchase_id);
+		
+	}
+
 	
 }

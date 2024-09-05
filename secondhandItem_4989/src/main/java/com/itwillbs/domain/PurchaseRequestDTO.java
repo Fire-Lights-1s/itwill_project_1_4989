@@ -1,5 +1,7 @@
 package com.itwillbs.domain;
 
+import java.sql.Timestamp;
+
 public class PurchaseRequestDTO {
 	
 	private int purchase_id;
@@ -8,9 +10,11 @@ public class PurchaseRequestDTO {
 	private char expected_grade;
 	private int expected_price;
 	private String shipping_method;
-	private String purchse_status;
+	private String purchase_status;
 	private String transfer_bank;
 	private String transfer_account;
+	private Timestamp request_date;
+	
 	
 	public int getPurchase_id() {
 		return purchase_id;
@@ -48,11 +52,11 @@ public class PurchaseRequestDTO {
 	public void setShipping_method(String shipping_method) {
 		this.shipping_method = shipping_method;
 	}
-	public String getPurchse_status() {
-		return purchse_status;
+	public String getPurchase_status() {
+		return purchase_status;
 	}
-	public void setPurchse_status(String purchse_status) {
-		this.purchse_status = purchse_status;
+	public void setPurchase_status(String purchase_status) {
+		this.purchase_status = purchase_status;
 	}
 	public String getTransfer_bank() {
 		return transfer_bank;
@@ -66,12 +70,19 @@ public class PurchaseRequestDTO {
 	public void setTransfer_account(String transfer_account) {
 		this.transfer_account = transfer_account;
 	}
+	public Timestamp getRequest_date() {
+		return request_date;
+	}
+	public void setRequest_date(Timestamp request_date) {
+		this.request_date = request_date;
+	}
+	
 	@Override
 	public String toString() {
 		return "PurchaseRequestDTO [purchase_id=" + purchase_id + ", pc_item_name=" + pc_item_name + ", member_id="
 				+ member_id + ", expected_grade=" + expected_grade + ", expected_price=" + expected_price
-				+ ", shipping_method=" + shipping_method + ", purchse_status=" + purchse_status + ", transfer_bank="
-				+ transfer_bank + ", transfer_account=" + transfer_account + "]";
+				+ ", shipping_method=" + shipping_method + ", purchase_status=" + purchase_status + ", transfer_bank="
+				+ transfer_bank + ", transfer_account=" + transfer_account + ", request_date=" + request_date + "]";
 	}
 	
 	

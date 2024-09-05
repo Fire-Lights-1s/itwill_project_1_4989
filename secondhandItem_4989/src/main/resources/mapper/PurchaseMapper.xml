@@ -27,5 +27,17 @@
 		INSERT INTO PurchaseRequest(pc_item_name, member_id, expected_grade, expected_price, shipping_method, transfer_bank, transfer_account)
 		VALUES(#{pc_item_name}, #{member_id}, #{expected_grade}, #{expected_price}, #{shipping_method}, #{transfer_bank}, #{transfer_account})
 	</insert>
+	
+	<select id="getPurchList" resultType="com.itwillbs.domain.PurchaseRequestDTO">
+		SELECT purchase_id, pc_item_name, expected_grade, request_date, purchase_status FROM PurchaseRequest WHERE member_id=#{member_id}
+	</select>
+
+	<select id="getPurchDetail" resultType="com.itwillbs.domain.PurchaseRequestDTO">
+		SELECT * FROM PurchaseRequest WHERE purchase_id=#{purchase_id}
+	</select>
+
+	<update id="cancelRequest">
+		UPDATE PurchaseRequest SET purchase_status="매입 취소" WHERE purchase_id=#{purchase_id}
+	</update>
 
 </mapper>
