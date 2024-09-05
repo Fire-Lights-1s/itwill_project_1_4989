@@ -109,8 +109,8 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <div class="header-button">
-                             <a href="/main" class="btn-home">홈페이지로 가기</a>
-        					<a href="/logout" class="btn-logout">로그아웃</a>
+                             <a href="${pageContext.request.contextPath}/" class="btn-home">홈페이지로 가기</a>
+        					<a href="${pageContext.request.contextPath}/member/logout" class="btn-logout">로그아웃</a>
 <!--                             관리자 버튼(판매사이트로 이동&로그아웃) 추가 예정 -->
                             </div>
                         </div>
