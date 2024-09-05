@@ -18,7 +18,7 @@
            window.location.href = '${pageContext.request.contextPath}/member/social'; // 소셜회원가입 페이지로 이동
        }
    </script>
-
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 </head>
 <body>
 
@@ -60,7 +60,15 @@
             <button type="button" class="kakao-btn" onclick="redirectToSocial()">카카오톡으로 시작하기</button>
            
             <button type="button" class="naver-btn" id="naver_id_login">네이버로 시작하기</button>
-
+			<script type="text/javascript">
+	var naver_id_login = new naver_id_login("i_o3Jb0ojMsUwp5niV4T", "http://localhost:8080/secondhand4989/member/social");
+	var state = naver_id_login.getUniqState();
+	naver_id_login.setButton("green", 3,40);
+	naver_id_login.setDomain(".service.com");
+	naver_id_login.setState(state);
+	naver_id_login.setPopup();
+	naver_id_login.init_naver_id_login();
+	</script>
 
         </form>
     </div>
@@ -70,6 +78,8 @@
   </section>
   
   <jsp:include page="../inc/footer.jsp"></jsp:include>
+  
+  
   
 </body>
 </html>

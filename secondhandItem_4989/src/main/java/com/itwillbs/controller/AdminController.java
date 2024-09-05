@@ -23,7 +23,7 @@ public class AdminController {
         }
 
         // member_id가 admin인 경우 admin 페이지로 이동
-        return "/admin/sample";
+        return "/admin/main";
     }
 	
 	

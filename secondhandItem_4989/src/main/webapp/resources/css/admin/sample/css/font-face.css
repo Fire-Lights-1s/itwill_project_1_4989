@@ -252,3 +252,12 @@
     padding: 10px 20px;
     background-color: #f1f1f1;
 }
+
+.js-sub-list {
+    display: none;
+}
+
+.js-sub-list.show {
+    display: block;
+}
+
