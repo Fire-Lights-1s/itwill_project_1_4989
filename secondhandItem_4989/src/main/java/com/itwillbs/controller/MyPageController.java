@@ -25,6 +25,9 @@ public class MyPageController {
 		System.out.println("MyPageController profile()");
 		String id = (String)session.getAttribute("member_id");
 		MemberDTO memberDTO = memberService.getMember(id);
+		if(memberDTO == null) {
+			return "member/login";
+		}
 		System.out.println(memberDTO);
 		model.addAttribute("memberDTO", memberDTO);
 		return "my/profile";
