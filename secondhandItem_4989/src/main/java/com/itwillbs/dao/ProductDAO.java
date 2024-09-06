@@ -14,16 +14,25 @@ public class ProductDAO {
 	private SqlSession sqlSession;
 	
 	private static final String namespace="com.itwillbs.mapper.ProductMapper";
-
+	
+//글 조회수
 //	public int getMaxNum() {
 //		System.out.println("BoardDAO getMaxNum()");
 //		return sqlSession.selectOne(namespace + ".getMaxNum");
 //	}
 
 	public void insertProduct(ProductDTO productDTO) {
+		System.out.println("ProductDAO insertProduct()");
 		sqlSession.insert(namespace + ".insertProduct", productDTO);
 		
 	}
+	
+//	public List<ProductDTO> getProductList (ProductDTO productDTO){
+//		System.out.println("ProductDAO getProductList()");
+//		return sqlSession.selectList(namespace, ".getProductList", productDTO);
+//	}
+	
+	
 
 
 }

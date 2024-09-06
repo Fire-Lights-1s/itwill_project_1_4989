@@ -166,31 +166,28 @@
         <div class="grid-container">
             <!-- Example of one card -->
             <div class="card">
-                <img src="https://via.placeholder.com/200" alt="상품 이미지">
-                <h3>상품명</h3>
-                <p>가격: 100,000원</p>
-                <p>거래방식: 택배 / 직거래 (서울)</p>
-                <p>등록 시간: 1시간 전</p>
-                <button>상세보기</button>
-            </div>
+        <img src="https://via.placeholder.com/200" alt="상품 이미지">
+        <h3>상품명</h3>
+        <p>가격: 100,000원</p>
+        <p>거래방식: 택배 / 직거래 (서울)</p>
+        <p>등록 시간: 1시간 전</p>
+        <form action="${pageContext.request.contextPath}/product/detail?" method="get">
+            <input type="hidden" name="productId" value="1">
+            <button type="submit">상세보기</button>
+        </form>
+    </div>
 
-            <div class="card">
-                <img src="https://via.placeholder.com/200" alt="상품 이미지">
-                <h3>상품명</h3>
-                <p>가격: 200,000원</p>
-                <p>거래방식: 택배 / 직거래 (부산)</p>
-                <p>등록 시간: 2시간 전</p>
-                <button>상세보기</button>
-            </div>
-
-            <div class="card">
-                <img src="https://via.placeholder.com/200" alt="상품 이미지">
-                <h3>상품명</h3>
-                <p>가격: 150,000원</p>
-                <p>거래방식: 택배 / 직거래 (인천)</p>
-                <p>등록 시간: 3시간 전</p>
-                <button>상세보기</button>
-            </div>
+    <div class="card">
+        <img src="https://via.placeholder.com/200" alt="상품 이미지">
+        <h3>상품명</h3>
+        <p>가격: 200,000원</p>
+        <p>거래방식: 택배 / 직거래 (부산)</p>
+        <p>등록 시간: 2시간 전</p>
+        <form action="${pageContext.request.contextPath}/detail.jsp" method="get">
+            <input type="hidden" name="productId" value="2">
+            <button type="submit">상세보기</button>
+        </form>
+    </div>
 
             <div class="card">
                 <img src="https://via.placeholder.com/200" alt="상품 이미지">
@@ -198,7 +195,10 @@
                 <p>가격: 300,000원</p>
                 <p>거래방식: 택배 / 직거래 (대구)</p>
                 <p>등록 시간: 4시간 전</p>
-                <button>상세보기</button>
+                <form action="${pageContext.request.contextPath}/detail.jsp" method="get">
+            <input type="hidden" name="productId" value="2">
+            <button type="submit">상세보기</button>
+        </form>
             </div>
 
             <!-- Add more cards as necessary -->

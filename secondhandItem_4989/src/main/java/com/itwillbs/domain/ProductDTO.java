@@ -212,13 +212,13 @@ public class ProductDTO {
 	}
 
 
-	public String getTrade_area() {
-		return trade_area;
-	}
-
-	public void setTrade_area(String trade_area) {
-		this.trade_area = trade_area;
-	}
+//	public String getTrade_area() {
+//		return trade_area;
+//	}
+//
+//	public void setTrade_area(String trade_area) {
+//		this.trade_area = trade_area;
+//	}
     
 //	@Override
 //	public String toString() {

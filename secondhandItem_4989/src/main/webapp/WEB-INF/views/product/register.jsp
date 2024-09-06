@@ -1,6 +1,14 @@
-<!-- 0905 백업 파일. 1.DB 등록 2.이미지 업로드 3.주소찾기-->
+<!-- 0906 백업 파일. 1.DB 등록 2.이미지 업로드 3.지역검색-->
 
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<!-- 로그인한 사람만 상품 등록 -->
+<%
+    String id = (String) session.getAttribute("member_id");
+    if (id == null) {
+        response.sendRedirect("login.jsp");
+        return; 
+    }
+%>
 
 <!DOCTYPE html>
 <html>
@@ -149,13 +157,14 @@
         <main>
         <!-- 본문 영역 -->
             <div class="addBox">
-                <form id="addForm" name="addForm" class="add-form" action="${pageContext.request.contextPath}/product/registerPro" method="post" >
+                <form action="${pageContext.request.contextPath}/product/registerPro" id="addForm" name="addForm" class="add-form" method="post" enctype="multipart/form-data">
                     <hr style="border:0; height:3px; color:black;">
                     <div class="container">
                         <!-- 이미지 업로드 및 미리보기 영역 -->
                         <div class="form-group image-upload">
                             <label for="imageInput">사진 선택</label>
-                            <input type="file" id="imageInput" name="product_img1" accept="image/*" multiple onchange="setThumbnail(event)">
+                            <input type="file" id="product_img1" name="product_img1" accept="image/*" multiple onchange="setThumbnail(event)">
+<!--                             <input type="file" id="product_img2" name="product_img2" accept="image/*" multiple onchange="setThumbnail(event)"> -->
                         </div>
                         
                         <div id="imagePreviewContainer" class="image-preview-container"></div>
@@ -200,9 +209,9 @@
                             <div class="form-group inline-group">
                                 <label for="region">거래 지역</label>
                                 <select id="region" name="trade_area">
-                                    <option value="" disabled selected>선택</option>
-                                    
-                                    
+                                    <option value="1">서울특별시</option>
+                                    <option value="2">부산광역시</option>
+
                                 </select>
 
                             <div class="form-group inline-group">
