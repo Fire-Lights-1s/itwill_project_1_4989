@@ -29,6 +29,16 @@
     }
 	function sendChat() {
         if ($("#message").val() != "") {
+        	let data = {
+        	"chat_id":null,
+        	"chat_room_id":null,
+        	"message_type":null,
+        	"alarm":null,
+        	"user_id":"test2",
+        	"message":"test Message",
+        	"send_time":null
+        	}
+        	
             stompClient.send("/send/"+roomId, {},
                 JSON.stringify({
                     'user_id': sender,

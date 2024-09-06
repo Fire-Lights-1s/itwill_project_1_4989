@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.BanksDTO;
 import com.itwillbs.domain.PurchaseItemsDTO;
 import com.itwillbs.domain.PurchaseRequestDTO;
 
@@ -53,6 +54,14 @@ public class PurchaseDAO {
 	public void cancelRequest(int purchase_id) {
 		sqlSession.update(namespace + ".cancelRequest", purchase_id);
 		
+	}
+
+	public List<BanksDTO> getBankInfo() {
+		return sqlSession.selectList(namespace + ".getBankInfo");		
+	}
+
+	public String getMemberName(String member_id) {
+		return sqlSession.selectOne(namespace + ".getMemberName", member_id);
 	}
 
 	

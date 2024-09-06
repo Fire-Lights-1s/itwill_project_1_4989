@@ -6,21 +6,29 @@ public class ChatMessageDTO {
 	private String chat_id;
 	private String chat_room_id;
 	private String message_type; //MESSAGE - 메세지 or IMG - 이미지 주소 저장
-	private String alarm;
+	private boolean alarm;
 	private String user_id;
 	private String message;
 	private Timestamp send_time;
 	
 	//기본생성자 생성하기
-    public ChatMessageDTO(String roomId,
-    		String sender, 
+	public ChatMessageDTO() {}
+	
+    public ChatMessageDTO(String chat_room_id,
+    		String user_id, 
     		String message) {
-        this.chat_room_id = roomId;
-        this.user_id = sender;
+        this.chat_room_id = chat_room_id;
+        this.alarm = true;
+        this.user_id = user_id;
         this.message = message;
         this.send_time = new Timestamp(System.currentTimeMillis());
     }
 	
+	@Override
+	public String toString() {
+		return "ChatMessageDTO[user_id = "+user_id+", message = "+message+"]";
+	}
+
 	public String getChat_id() {
 		return chat_id;
 	}
@@ -39,10 +47,10 @@ public class ChatMessageDTO {
 	public void setMessage_type(String message_type) {
 		this.message_type = message_type;
 	}
-	public String getAlarm() {
+	public boolean getAlarm() {
 		return alarm;
 	}
-	public void setAlarm(String alarm) {
+	public void setAlarm(boolean alarm) {
 		this.alarm = alarm;
 	}
 	public String getUser_id() {

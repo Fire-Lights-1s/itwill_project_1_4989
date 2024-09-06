@@ -85,6 +85,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/naver")
+	public String naver() {
+		return "/member/naverlogin";
+	}
 	
+	@GetMapping("/result")
+	public String result() {
+		return "/member/result";
+	}
 	
 }

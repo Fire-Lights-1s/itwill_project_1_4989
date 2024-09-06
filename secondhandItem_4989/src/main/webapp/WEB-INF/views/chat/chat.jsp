@@ -34,7 +34,7 @@
 					</button>
 				</div>	
 				<div id="chatTotalRoom">
-					<div>
+					<div id="testRoom1">
 						<div class="profile">
 							<img alt="" src="">
 						</div>
@@ -49,7 +49,7 @@
 							</div>
 						</div>
 					</div>
-					<div>
+					<div id="testRoom2">
 						<div class="profile">
 							<img alt="" src="">
 						</div>
