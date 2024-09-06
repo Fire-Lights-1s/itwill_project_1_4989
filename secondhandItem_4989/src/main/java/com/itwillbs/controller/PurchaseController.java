@@ -29,14 +29,11 @@ import com.itwillbs.service.PurchaseService;
 @RequestMapping("/purchase")
 public class PurchaseController {
 	
-	private final PurchaseService purchaseService;
-	private final AccountApiService accountApiService;
-	
 	@Inject
-	public PurchaseController(PurchaseService purchaseService, AccountApiService accountApiService) {
-		this.purchaseService = purchaseService;
-		this.accountApiService = accountApiService;
-	}
+	private PurchaseService purchaseService;
+	@Inject
+	private AccountApiService accountApiService;
+	
 	
 	@ModelAttribute("formData")
 	public PurchaseRequestDTO formData() {
@@ -84,6 +81,11 @@ public class PurchaseController {
 	
 	@PostMapping("/validate-account")
 	public ResponseEntity<Map<String, Boolean>> validateAccount(@RequestBody Map<String, String> request) {
+		
+		if (accountApiService == null) {
+	        throw new IllegalStateException("accountApiService is null!");
+	    }
+		
 		String bank_code = request.get("bank_code");
 		String bank_account = request.get("bank_account");
 		String member_name = request.get("member_name");
