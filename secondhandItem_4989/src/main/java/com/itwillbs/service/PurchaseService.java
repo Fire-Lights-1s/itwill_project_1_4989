@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.dao.PurchaseDAO;
+import com.itwillbs.domain.BanksDTO;
 import com.itwillbs.domain.PurchaseItemsDTO;
 import com.itwillbs.domain.PurchaseRequestDTO;
 
@@ -40,6 +41,14 @@ public class PurchaseService {
 	public void cancelRequest(int purchase_id) {
 		purchaseDAO.cancelRequest(purchase_id);
 		
+	}
+	
+	public List<BanksDTO> getBankInfo() {
+		return purchaseDAO.getBankInfo();
+	}
+
+	public String getMemberName(String member_id) {
+		return purchaseDAO.getMemberName(member_id);
 	}
 
 }

@@ -39,5 +39,14 @@
 	<update id="cancelRequest">
 		UPDATE PurchaseRequest SET purchase_status="매입 취소" WHERE purchase_id=#{purchase_id}
 	</update>
+	
+	<select id="getBankInfo" resultType="com.itwillbs.domain.BanksDTO">
+		SELECT * FROM Banks ORDER BY bank_code
+	</select>
+	
+	<select id="getMemberName" resultType="java.lang.String">
+		SELECT name FROM Mem WHERE member_id = #{member_id};
+	</select>
 
 </mapper>
+
