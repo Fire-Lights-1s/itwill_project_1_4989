@@ -12,7 +12,7 @@
     String clientId = "i_o3Jb0ojMsUwp5niV4T"; 
     
     // 네이버 로그인 후 리다이렉트될 URI (수정된 부분)
-    String redirectURI = URLEncoder.encode("http://localhost:8080/secondhand4989/member/result", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://localhost:8080/secondhand4989/member/call", "UTF-8");
     
     // state 값을 랜덤하게 생성 (보안 목적으로 사용)
     SecureRandom random = new SecureRandom();
