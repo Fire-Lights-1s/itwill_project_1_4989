@@ -130,6 +130,7 @@ h1, h3 { text-align:center; }
   
   
 <script>
+
 	document.getElementById('account_confirm').addEventListener('click', function(event) {
     event.preventDefault();
     
@@ -143,12 +144,12 @@ h1, h3 { text-align:center; }
 		headers: {
 			'Content-Type': 'application/json'
 		},	
-		body: JSON, stringify({
+		body: JSON.stringify({
 			bank_code: bank_code,
 			bank_account: bank_account,
 			member_name: member_name
 		})
-	}
+	})
 		.then(response => response.json())
 		.then(data => {
 			if (data.valid) {
@@ -161,7 +162,6 @@ h1, h3 { text-align:center; }
 		})
 		.catch(error => console.error('Error:', error));
 	});
-
 
 </script>
   

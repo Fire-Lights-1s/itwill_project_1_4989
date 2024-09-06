@@ -4,17 +4,20 @@ import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 // 은행 계좌 - 예금주 조회 기능
 
+@Service
 public class AccountApiService {
 
 	private final RestTemplate restTemplate;
-	
 	
 	public AccountApiService(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
@@ -50,7 +53,7 @@ public class AccountApiService {
 		
 	// 예금주 조회
 		public String getAccountHolder(String bank_code, String bank_num) {
-			
+			System.out.println("getAccountHolder까지 왔다!!!!!!!!!!!!!");
 			String apiKey = "2632446146310815";
 			String apiSecret = "ZspV4eZ5izjb1uWRc3oE2oq09H6cwFVXrHPqarlUwbqEyswTU6JOUBCuaYVIT2amp6YQ3Q7zF47Vt0eZ";
 			String token = getAccessToken(apiKey, apiSecret);
@@ -67,21 +70,27 @@ public class AccountApiService {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);		// http 헤더에 콘텐츠 설정
 			headers.set("Authorization", "Bearer " + token);
-			
+					
 			HttpEntity<Void> entity = new HttpEntity<>(headers);
 			
-			ResponseEntity<String> response = restTemplate.exchange(
-				    url, HttpMethod.GET, entity, String.class
-				);
-			
-			if (response.getStatusCode().is2xxSuccessful()) { // 정상 처리(code: 200) 되면
-				JSONObject responseBody = new JSONObject(response.getBody()); // json 객체에 응답 받기
-				System.out.println("응답확인 " + responseBody);
-				JSONObject responseObject = responseBody.getJSONObject("response"); // "response" 객체
-				return responseObject.getString("bank_holder"); // 인증키 정보 반환
-			} else {
-				return null;
-			}
+			try {
+		        ResponseEntity<String> response = restTemplate.exchange(
+		                url, HttpMethod.GET, entity, String.class
+		        );
+		        
+		        if (response.getStatusCode().is2xxSuccessful()) {  // 정상 처리(code: 200) 되면
+		            JSONObject responseBody = new JSONObject(response.getBody());  // JSON 객체에 응답 받기
+		            System.out.println("응답확인 " + responseBody);
+		            JSONObject responseObject = responseBody.getJSONObject("response");  // "response" 객체
+		            return responseObject.getString("bank_holder");  // 예금주 정보 반환
+		        }
+		        return "";
+		        
+		    } catch (HttpClientErrorException e) {
+		        // 404 Not Found일 때 처리
+		        return "";
+		    }
+		
 		}
 	
 }

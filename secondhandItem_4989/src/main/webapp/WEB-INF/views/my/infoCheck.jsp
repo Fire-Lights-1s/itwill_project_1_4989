@@ -25,7 +25,7 @@
 		<div class="main-container-side-profile">
 		<main>
 		<h2>본인 확인</h2>
-		<form action="${pageContext.request.contextPath}/my/infoCheckPro" method="post" class="login-container">
+		<form action="${pageContext.request.contextPath}/my/infoCheckPro" method="post" class="login-container" onsubmit="loginCheck();">
             <div class="input-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="userId" name="member_id" placeholder="아이디">
@@ -41,5 +41,20 @@
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+<script type="text/javascript">
+	function loginCheck() {
+		const id = document.getElementById('userId').value;
+		const pass = document.getElementById('password').value;
+		
+		if(id === "") {
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+		if(pass === "") {
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		}
+	}
+</script>
 </body>
 </html>

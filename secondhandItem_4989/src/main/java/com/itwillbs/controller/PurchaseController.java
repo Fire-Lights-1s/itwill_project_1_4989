@@ -3,10 +3,12 @@ package com.itwillbs.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +31,9 @@ public class PurchaseController {
 	
 	@Inject
 	private PurchaseService purchaseService;
+	@Inject
 	private AccountApiService accountApiService;
+	
 	
 	@ModelAttribute("formData")
 	public PurchaseRequestDTO formData() {
@@ -77,13 +81,25 @@ public class PurchaseController {
 	
 	@PostMapping("/validate-account")
 	public ResponseEntity<Map<String, Boolean>> validateAccount(@RequestBody Map<String, String> request) {
+		
+		if (accountApiService == null) {
+	        throw new IllegalStateException("accountApiService is null!");
+	    }
+		
 		String bank_code = request.get("bank_code");
 		String bank_account = request.get("bank_account");
 		String member_name = request.get("member_name");
 		
-        // 유효성 검사 예시
-        boolean isValid = accountApiService.getAccountHolder(bank_code, bank_account).equals(member_name);
-
+		System.out.println(bank_code);
+		System.out.println(bank_account);
+		System.out.println(member_name);
+		
+		
+        // 유효성 검사 (예금주 = 사용자이름 ?)
+		String accountHolder = accountApiService.getAccountHolder(bank_code, bank_account);
+		System.out.println(accountHolder);
+	    boolean isValid = Objects.equals(accountHolder, member_name);
+	    
         Map<String, Boolean> response = new HashMap<>();
         response.put("valid", isValid);
         

@@ -32,7 +32,7 @@
 			<div class="profile-circle-div">
 				<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-circle">
 			</div>
-		<form action="${pageContext.request.contextPath}/my/infoUpdatePro" method="post" class="profile-update-form" name="">
+		<form action="${pageContext.request.contextPath}/my/infoUpdatePro" method="post" class="profile-update-form">
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="userId" name="member_id" value="${memberDTO.member_id}" readonly>
@@ -64,7 +64,7 @@
                 <label for="email">이메일</label>
                 <input type="email" id="email" name="email" value="${memberDTO.email}" required>
             </div>
-            <button type="submit" class="submit-button">수정 완료</button>
+            <button type="submit" class="submit-button" onclick="updateCheck();">수정 완료</button>
         </form>
 		</main>
 		</div>
@@ -72,14 +72,42 @@
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 <script type="text/javascript">
+	const pass1 = document.getElementById('password');
+	const pass2 = document.getElementById('confirmPassword');
+	const nickname = document.getElementById('nickname');
+	const name = document.getElementById('name');
+	const phone = document.getElementById('phoneNumber');
+	const email = document.getElementById('email');
+	
 	function removeReadonly() {
-		let pass1 = document.getElementById('password');
-		let pass2 = document.getElementById('confirmPassword');
         pass1.removeAttribute('readonly');
         pass2.removeAttribute('readonly');
 		pass1.value = "";
 		pass2.value = "";
 		pass1.focus();
+	}
+	function updateCheck() {
+		if(pass1.value === "" || pass2.value === "") {
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		}
+		if(nickname.value === "") {
+			alert("닉네임을 입력해주세요.");
+			return false;
+		}
+		if(name.value === "") {
+			alert("이름을 입력해주세요.");
+			return false;
+		}
+		if(phone.value === "") {
+			alert("휴대폰 번호를 입력해주세요.");
+			return false;
+		}
+		if(email.value === "") {
+			alert("이메일을 입력해주세요.");
+			return false;
+		}
+		
 	}
 </script>
 </body>
