@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" th:inline="javascript">
+	let sessionUserId = '<%=(String)session.getAttribute("member_id")%>';
+</script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_Editing_by_sub.css?">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/chatStyle.css?">
 <!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
+<script type="text/javascript" src="//code.jquery.com/jquery-3.4.0.min.js"></script>
 <script src="${pageContext.request.contextPath }/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
 <script src="${pageContext.request.contextPath }/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/chatScript.js"></script>
@@ -34,7 +39,7 @@
 					</button>
 				</div>	
 				<div id="chatTotalRoom">
-					<div id="testRoom1">
+					<div id="testRoom1" onclick="connect($(this).attr('id'));">
 						<div class="profile">
 							<img alt="" src="">
 						</div>
@@ -49,7 +54,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="testRoom2">
+					<div id="testRoom2" onclick="connect($(this).attr('id'));">
 						<div class="profile">
 							<img alt="" src="">
 						</div>
@@ -61,96 +66,6 @@
 							<div>
 								<p>오후 2:40</p>
 								<p></p>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div class="profile">
-							<img alt="" src="">
-						</div>
-						<div class="chatDescript">
-							<div class="chatContnet">
-								<p>채팅방 제목</p>
-								<p>채팅방 내용</p>
-							</div>
-							<div>
-								<p>오후 2:40</p>
-								<p class="alamIcon">1</p>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div class="profile">
-							<img alt="" src="">
-						</div>
-						<div class="chatDescript">
-							<div class="chatContnet">
-								<p>채팅방 제목</p>
-								<p>채팅방 내용</p>
-							</div>
-							<div>
-								<p>오후 2:40</p>
-								<p></p>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div class="profile">
-							<img alt="" src="">
-						</div>
-						<div class="chatDescript">
-							<div class="chatContnet">
-								<p>채팅방 제목</p>
-								<p>채팅방 내용</p>
-							</div>
-							<div>
-								<p>오후 2:40</p>
-								<p class="alamIcon">1</p>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div class="profile">
-							<img alt="" src="">
-						</div>
-						<div class="chatDescript">
-							<div class="chatContnet">
-								<p>채팅방 제목</p>
-								<p>채팅방 내용</p>
-							</div>
-							<div>
-								<p>오후 2:40</p>
-								<p class="alamIcon">1</p>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div class="profile">
-							<img alt="" src="">
-						</div>
-						<div class="chatDescript">
-							<div class="chatContnet">
-								<p>채팅방 제목</p>
-								<p>채팅방 내용</p>
-							</div>
-							<div>
-								<p>오후 2:40</p>
-								<p class="alamIcon">1</p>
-							</div>
-						</div>
-					</div>
-					<div>
-						<div class="profile">
-							<img alt="" src="">
-						</div>
-						<div class="chatDescript">
-							<div class="chatContnet">
-								<p>채팅방 제목</p>
-								<p>채팅방 내용</p>
-							</div>
-							<div>
-								<p>오후 2:40</p>
-								<p class="alamIcon">1</p>
 							</div>
 						</div>
 					</div>
@@ -195,12 +110,12 @@
 					</div>
 				
 				</div>
-				<div id="input" class="flexBoxRow">
+				<div id="inputMessage" class="flexBoxRow">
 					<button>
 						<img alt="" src="${pageContext.request.contextPath }/resources/img/icon/plus_icon.png">
 					</button>
-					<textarea name="message"></textarea>
-					<button>
+					<textarea id="message"></textarea>
+					<button onclick="sendChat()">
 						<img alt="" src="${pageContext.request.contextPath }/resources/img/icon/chat_send.png">
 					</button>
 				</div>
