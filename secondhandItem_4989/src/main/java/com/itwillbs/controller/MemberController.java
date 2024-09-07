@@ -90,9 +90,20 @@ public class MemberController {
 		return "/member/naverlogin";
 	}
 	
+	@GetMapping("/call")
+	public String call() {
+		return "/member/callback";
+	}
+	
 	@GetMapping("/result")
 	public String result() {
 		return "/member/result";
+	}
+	
+	@GetMapping("/result1")
+	public String result1() {
+		
+		return "/member/result1";
 	}
 	
 }

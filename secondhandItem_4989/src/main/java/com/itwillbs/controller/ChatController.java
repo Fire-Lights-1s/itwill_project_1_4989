@@ -1,9 +1,11 @@
 package com.itwillbs.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -28,9 +30,18 @@ public class ChatController {
 	
 	@GetMapping("/chat")
 	public String chat(HttpServletRequest request, Model model) {
-		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("id") != null) {
+			model.addAttribute("sessionUserId", session.getAttribute("id"));
+		}
 		return "/chat/chat";
 	}
+	@MessageMapping("/{roomId}/reciveList")
+	public List<ChatMessageDTO> chatMessageList(){
+		
+		return null;
+	}
+	
 	@MessageMapping("/{roomId}")
 	@SendTo("/topic/{roomId}")
     public ChatMessageDTO chat(@DestinationVariable("roomId") String roomId, 
@@ -38,7 +49,7 @@ public class ChatController {
 		System.out.println(message);
 		//클라이언트에서 받아야하는 DTO 변수 chat_room_id, message_type, user_id, message
 		ChatMessageDTO chat = chatService.createChat(roomId ,message);
-		return message;
+		return chat;
         //simpMessagingTemplate.convertAndSend("/topic/"+roomId,data);
     }
 }
