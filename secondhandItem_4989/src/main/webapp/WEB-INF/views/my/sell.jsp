@@ -31,7 +31,7 @@
 				<a href="#">날짜 순</a>
 			</div>
 			<div class="profile-item-list">
-<%-- 			<c:forEach var="productDTO" items="${}"> --%>
+			<c:forEach var="productDTO" items="${productList}">
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
 						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
@@ -52,7 +52,7 @@
 						1개월전
 					</div>
 				</div>
-<%-- 			</c:forEach> --%>
+			</c:forEach>
 			</div>
 			<div class="pagination">
 				<a href="#" class="firstpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></a>

@@ -6,11 +6,15 @@
 <mapper namespace="com.itwillbs.mapper.MyPageMapper">
 
 	<select id="getProductList" resultType="com.itwillbs.domain.ProductDTO">
-		select * from Mem
+		select * from Product
+		where seller_id = #{seller_id}
+<!-- 		order by trade_status desc  -->
+		limit #{startRow},#{pageSize}
 	</select>
 	
-	<select id="getProductCount" resultType="java.lang.Integer">
-		select count(seller_id) from Product
+	<select id="getProductCount" resultType="com.itwillbs.domain.ProductDTO">
+		select count(*) from Product
+		where seller_id = #{seller_id}
 	</select>
 
 </mapper>

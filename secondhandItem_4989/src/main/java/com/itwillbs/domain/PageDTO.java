@@ -13,7 +13,15 @@ public class PageDTO {
 	private int pageCount;//
 	private String pageNum;//
 	private String search;
+	private String seller_id;
 	
+	
+	public String getSeller_id() {
+		return seller_id;
+	}
+	public void setSeller_id(String seller_id) {
+		this.seller_id = seller_id;
+	}
 	public String getSearch() {
 		return search;
 	}

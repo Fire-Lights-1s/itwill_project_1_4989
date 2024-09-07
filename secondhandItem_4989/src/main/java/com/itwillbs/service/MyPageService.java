@@ -19,12 +19,17 @@ public class MyPageService {
 
 	public List<ProductDTO> getProductList(PageDTO pageDTO) {
 		System.out.println("MyPageService getProductList()");
+		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
+		int endRow = startRow + pageDTO.getPageSize() - 1;
+//		               limit 시작하는 행번호 - 1, 글개수
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
 		return myPageDAO.getProductList(pageDTO);
 	}
 
-	public int getProductCount(MemberDTO memberDTO) {
+	public int getProductCount(ProductDTO productDTO) {
 		System.out.println("MyPageService getProductCount()");
-		return myPageDAO.getProductCount(memberDTO);
+		return myPageDAO.getProductCount(productDTO);
 	}
 
 }

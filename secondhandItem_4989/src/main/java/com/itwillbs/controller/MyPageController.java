@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.itwillbs.domain.BoardDTO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
@@ -95,46 +94,58 @@ public class MyPageController {
 			return "redirect:/member/login";
 		}
 		String pageNum = request.getParameter("pageNum");
+		System.out.println("1");
 		if(pageNum == null) {
 			pageNum = "1";
 		}
+		System.out.println("2");
 		int currentPage = Integer.parseInt(pageNum);
 		int pageSize = 8;
+		System.out.println("3");
 		PageDTO pageDTO = new PageDTO();
+		System.out.println("4");
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		pageDTO.setPageSize(pageSize);
+		System.out.println("5");
 		List<ProductDTO> productList = myPageService.getProductList(pageDTO);
+		System.out.println("6");
 		ProductDTO productDTO = new ProductDTO();
+		System.out.println("7");
 		productDTO.setSeller_id(id);
-		
+		System.out.println(productDTO.getSeller_id());
+		System.out.println("8");
 		// 검색어 포함
-		int count = myPageService.getProductCount(memberDTO);
-			
+		int count = myPageService.getProductCount(productDTO);
+		System.out.println("9");	
 		// 한 화면에 보여줄 페이지 개수
 		int pageBlock = 5;
-		
+		System.out.println("10");
 		// 시작하는 페이지 번호
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
-		
+		System.out.println("11");
 		// 끝나는 페이지 번호
 		int endPage = startPage + pageBlock - 1;
-		
+		System.out.println("12");
 		// 전체 글갯수 구하기
 		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-		
+		System.out.println("13");
 		// endPage 전체 글갯수 비교 => endPage 크면 전체 글갯수 변경
 		if(endPage > pageCount) {
 			endPage = pageCount;
 		}
+		System.out.println("14");
 		pageDTO.setCount(count);
 		pageDTO.setPageBlock(pageBlock);
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
-		model.addAttribute("boardList", boardList);
+		pageDTO.setSeller_id(id);
+		System.out.println(pageDTO);
+		System.out.println(productDTO);
+		System.out.println(productList);
+		System.out.println(count);
 		model.addAttribute("pageDTO", pageDTO);
-		geService.getProductList(pageDTO);
 		model.addAttribute("productList", productList);
 		return "my/sell";
 	}
@@ -158,7 +169,7 @@ public class MyPageController {
 		if(memberDTO == null) {
 			return "redirect:/member/login";
 		}
-		List<ProductDTO> zzimList = myPageService.getProductList();
+//		List<ProductDTO> zzimList = myPageService.getProductList();
 		return "my/zzim";
 	}
 }
