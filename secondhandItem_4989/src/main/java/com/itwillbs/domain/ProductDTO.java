@@ -5,7 +5,8 @@ public class ProductDTO {
     private int product_id;
 //    private int category_id;
     private String category_name;
-    private int seller_id;
+    //판매자 ID
+    private String seller_id;
     //제품명
     private String product_name;
     //판매가격
@@ -62,12 +63,12 @@ public class ProductDTO {
 	}
 
 
-	public int getSeller_id() {
+	public String getSeller_id() {
 		return seller_id;
 	}
 
 
-	public void setSeller_id(int seller_id) {
+	public void setSeller_id(String seller_id) {
 		this.seller_id = seller_id;
 	}
 
