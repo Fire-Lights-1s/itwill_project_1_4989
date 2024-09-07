@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -81,23 +82,28 @@
         <div style="width:80%; margin:0 auto;" class="py-5 bg-light">
         <h1 style="text-align: center; margin-top: 50px;"><b>인기 상품</b></h1>
         <h5 style="text-align: center; margin: 30px 0 80px 0;">바로 지금, 다른 사람들이 주목하고 있는 상품이에요!</h5>
-        <div class="container px-4 px-lg-5 mt-5" style="margin-top:100px;">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
+        <div class="container px-1 px-lg-1 mt-1" style="margin-top:100px;">
+            <div class="row gx-4 gx-lg-5 justify-content-center"> <!-- 수정 -->
+                
+		<c:forEach var="popList" items="${popList}">
+			<div class="col-12 col-md-6 col-lg-3 mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <img class="card-img-top" src="${popList.product_img1 }" alt="..." />
                         <!-- 페이 뱃지 -->
+                    <c:if test="${popList.pay_method eq '페이' }">
                         <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>
+                    </c:if>
                         <!-- Product details-->
                         <div class="card-body pt-3">
                             <div class="text-center">
                                 <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
+                                <h5 class="fw-bolder">${popList.product_name }</h5>
                                 <!-- 가격 -->
-                                <h5>100,000원</h5>
+                                <h5>${popList.product_price }</h5>
                                 <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">택배 / 직거래 (부산)</small>
+                                <small style="margin-top:5px;">${popList.trade_method }
+                                <c:if test="${popList.trade_method eq '직거래'}">(   )</c:if></small>
                                 <br>
                                 <!-- 경과시간 -->
                                 <small style="text-align:right;">1시간 전</small>
@@ -109,7 +115,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
+       </c:forEach>
+                
+                <div class="col-12 col-md-6 col-lg-3 mb-5">
+
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
@@ -135,7 +144,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
+                
+                <div class="col-12 col-md-6 col-lg-3 mb-5">
+
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
@@ -161,7 +172,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
+                
+                <div class="col-12 col-md-6 col-lg-3 mb-5">
+
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
@@ -187,11 +200,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="container px-4 px-lg-5 mt-5" style="margin-top:100px;">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
+           
+                <div class="col-12 col-md-6 col-lg-3 mb-5">
+
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
@@ -217,7 +228,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
+                <div class="col-12 col-md-6 col-lg-3 mb-5">
+
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
@@ -243,7 +255,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
+                <div class="col-12 col-md-6 col-lg-3 mb-5">
+
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
@@ -269,7 +282,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
+                <div class="col-12 col-md-6 col-lg-3 mb-5">
+
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
@@ -295,11 +309,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="container px-4 px-lg-5 mt-5" style="margin-top:100px;">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
+            
+                <div class="col-12 col-md-6 col-lg-3 mb-5">
+
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
@@ -325,7 +337,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
+                <div class="col-12 col-md-6 col-lg-3 mb-5">
+
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
@@ -351,7 +364,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
+                <div class="col-12 col-md-6 col-lg-3 mb-5">
+
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
@@ -377,7 +391,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
+                <div class="col-12 col-md-6 col-lg-3 mb-5">
+
                     <div class="card h-100">
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
