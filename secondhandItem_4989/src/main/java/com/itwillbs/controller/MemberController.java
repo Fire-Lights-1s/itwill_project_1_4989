@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,8 @@ public class MemberController {
 		return "/member/social";
 	}
 	
+	
+	
 	//로그인 처리기능
 	@PostMapping("/loginPro")
 	public String loginPro(MemberDTO memberDTO,HttpSession session) {
@@ -42,6 +45,7 @@ public class MemberController {
 		if(memberDTO2 != null) {
 			
 			session.setAttribute("member_id", memberDTO2.getMember_id());
+			session.setAttribute("nickname", memberDTO2.getNickname());
 			
 			return "redirect:/";
 		}else {
@@ -103,7 +107,52 @@ public class MemberController {
 	@GetMapping("/result1")
 	public String result1() {
 		
+		
+		
+		
 		return "/member/result1";
+	}
+	
+	@GetMapping("/asd")
+	public String asd() {
+		return "/member/asd";
+	}
+	
+	
+	@GetMapping("/callPro")
+	public String callPro(MemberDTO memberDTO,HttpSession session) {
+		
+		MemberDTO memberDTO3 = memberService.SocialCheck(memberDTO);
+		if(memberDTO3 == session.getAttribute("email")) {
+			session.setAttribute("member_id", memberDTO3.getMember_id());
+			return "redirect:/";
+		} else {
+			
+			return "redirect:/member/social";
+		}
+		
+	}
+	
+	@PostMapping("/socialPro")
+	public String socialPro(MemberDTO memberDTO, HttpSession session, HttpServletRequest request) {
+		System.out.println("MemberController socialPro");
+		System.out.println(memberDTO);
+		session = request.getSession();
+        String member_id = (String) session.getAttribute("member_id");
+        String name = (String) session.getAttribute("name");
+        String email = (String) session.getAttribute("email");
+
+        // MemberDTO 객체 생성
+        
+        memberDTO.setMember_id(member_id);
+        memberDTO.setName(name);
+        memberDTO.setEmail(email);
+		
+		
+		memberService.insertSocial(memberDTO);
+		System.out.println(memberDTO);
+		// 로그인 주소변경 이동
+		return "redirect:/member/welcome";
 	}
 	
 }

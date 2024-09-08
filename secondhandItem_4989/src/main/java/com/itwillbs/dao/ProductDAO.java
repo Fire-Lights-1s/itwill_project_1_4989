@@ -26,6 +26,12 @@ public class ProductDAO {
 		sqlSession.insert(namespace + ".insertProduct", productDTO);
 		
 	}
+
+	public ProductDTO getProductDetail(String product_id) {
+		System.out.println("ProductDAO productDetail()");
+		return sqlSession.selectOne(namespace + ".getProductDetail", product_id);
+		
+	}
 	
 //	public List<ProductDTO> getProductList (ProductDTO productDTO){
 //		System.out.println("ProductDAO getProductList()");

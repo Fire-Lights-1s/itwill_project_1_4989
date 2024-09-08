@@ -1,34 +1,44 @@
 package com.itwillbs.domain;
 
 public class ProductDTO {
-//	
+	//거래상품 ID	
     private int product_id;
-//    private int category_id;
+    
+    //카테고리명
     private String category_name;
     //판매자 ID
     private String seller_id;
-    //제품명
+    
+    //상품명
     private String product_name;
-    //판매가격
+    //상품가격
 	private int product_price;
-	//구입연도
+	//구매연도
     private int year_purchase;
-    //물품 상태
+    //상품설명
     private String product_desc;
     private String product_img1;
     private String product_img2;
     private String product_img3;
     private String product_img4;
     private String product_img5;
+    //상품등록일시
     private String created_datetime;
+    //조회수
     private int view_count;
+    //찜수
     private int like_count;
+    //거래방법
     private String trade_method;
+    //결제수단
     private String pay_method;
     //거래 지역
     private String trade_area;
+    //거래상태
 //    private String trade_status;
+    //임시저장
 //    private boolean temp_save;
+    
     
     
     @Override
@@ -210,6 +220,11 @@ public class ProductDTO {
 
 	public void setPay_method(String pay_method) {
 		this.pay_method = pay_method;
+	}
+
+	// product image from online
+	public void setProduct_img(String imageUrl) {
+	    this.product_img1 = imageUrl;
 	}
 
 

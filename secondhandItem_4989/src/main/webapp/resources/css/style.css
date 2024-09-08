@@ -166,9 +166,29 @@ nav .wrapper{
     background: #ffffff !important;
     color: black !important;
 }
+ 
+.heart-badge {
+    width: 30px; /* 원의 지름 */
+    height: 30px; /* 원의 지름 */
+    background-color: #d8c9f3; /* 배경색 */
+    color: white; /* 텍스트 색 */
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    border-radius: 50%; /* 원형으로 만들기 */
+    font-size: 18px; /* 하트 기호 크기 */
+    cursor: pointer;
+}
 
+.heart-badge:hover {
+    color: #4e229e; /* 호버 시 하트색 변경 */
+}
 
-
+.heart-badge .active {
+    color: #4e229e; /* 클릭 시 하트색 변경 */
+}
+ 
+ 
 @media screen and (max-width: 970px) {
     .wrapper .btn{
         display: block;

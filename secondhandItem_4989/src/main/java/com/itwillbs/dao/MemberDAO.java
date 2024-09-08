@@ -1,6 +1,8 @@
 package com.itwillbs.dao;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +10,8 @@ import com.itwillbs.domain.MemberDTO;
 
 @Repository
 public class MemberDAO {
+	
+	HttpSession session;
 	
 	@Inject
 	private SqlSession sqlSession;
@@ -36,6 +40,17 @@ public class MemberDAO {
 		sqlSession.update(namespace + ".updateMember", memberDTO);
 	}
 	
+	public MemberDTO SocialCheck(MemberDTO memberDTO) {
+		System.out.println("MemberDAO SocialCheck()");
+		
+		return sqlSession.selectOne(namespace + ".SocialCheck", memberDTO);
+	}
 	
+	public void insertSocial(MemberDTO memberDTO) {
+		System.out.println("MemberDAO insertSocial()");
+		
+		
+		sqlSession.insert(namespace + ".insertSocial", memberDTO);
+	}
 	
 }
