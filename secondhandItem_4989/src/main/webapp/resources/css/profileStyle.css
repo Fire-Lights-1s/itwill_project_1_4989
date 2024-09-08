@@ -59,6 +59,10 @@ main {
 	text-decoration:none;
 }
 
+.profile-a button {
+	font-size:1em;
+}
+
 .profile-nickname{
 	text-align:center;
 	font-weight:600;
@@ -120,6 +124,7 @@ main {
 }
 
 .profile-item-list {
+	width:1038px;
 	border:1px solid black;
 	border-radius:20px;
 	padding:20px;
@@ -135,14 +140,14 @@ main {
 	border:1px solid black;
 	border-radius:10px;
 	height:320px;
-	width:250px;
+	width:245px;
 	margin:1px;
 }
 
 .profile-item-image {
 	border-radius:10px 10px 0 0;
 	height:190px;
-	width:238px;
+	width:233px;
 	margin:5px 5px 0 5px;
 }
 
@@ -156,12 +161,15 @@ main {
 	color:white;
 	text-align:center;
 	border-radius:0 0 10px 10px;
-	width:238px;	
+	width:233px;	
 	margin:0 auto;
 }
 
 .profile-item-name {
 	text-align:center;	
+	white-space:nowrap; /* 줄바꿈 방지 */
+    overflow:hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
 }
 
 .profile-item-review {

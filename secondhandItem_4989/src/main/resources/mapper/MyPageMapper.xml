@@ -7,7 +7,8 @@
 
 	<select id="getProductList" resultType="com.itwillbs.domain.ProductDTO">
 		select * from Product
-		where seller_id = #{seller_id}
+		where seller_id = 'test'
+		and 
 <!-- 		order by trade_status desc  -->
 		limit #{startRow},#{pageSize}
 	</select>

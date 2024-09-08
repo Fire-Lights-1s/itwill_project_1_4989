@@ -112,11 +112,11 @@ public class MyPageController {
 		System.out.println("6");
 		ProductDTO productDTO = new ProductDTO();
 		System.out.println("7");
-		productDTO.setSeller_id(id);
-		System.out.println(productDTO.getSeller_id());
+		productDTO.setSeller_id("test");
 		System.out.println("8");
 		// 검색어 포함
-		int count = myPageService.getProductCount(productDTO);
+		int count = 10;
+//		int count = myPageService.getProductCount(productDTO);
 		System.out.println("9");	
 		// 한 화면에 보여줄 페이지 개수
 		int pageBlock = 5;
