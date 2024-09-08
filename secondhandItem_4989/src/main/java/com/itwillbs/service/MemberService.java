@@ -62,4 +62,10 @@ public class MemberService {
 		memberDAO.insertSocial(memberDTO);
 	}
 	
+	public MemberDTO idCheck(MemberDTO memberDTO) {
+		System.out.println("MemberService idCheck()");
+		
+		return memberDAO.idCheck(memberDTO);
+	}
+	
 }

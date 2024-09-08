@@ -32,5 +32,11 @@
 		insert into Mem(member_id, pass, nickname, name, phone, email, created_at) 
 		values(#{member_id}, #{member_id}, #{nickname}, #{name}, #{phone}, #{email}, #{created_at})
 	</insert>
-
+	
+	<select id="idCheck" resultType="com.itwillbs.domain.MemberDTO">
+		select * from Mem
+		where name = #{name} and pass = #{email} and phone = #{phone} 
+	</select>
+	
+	
 </mapper>

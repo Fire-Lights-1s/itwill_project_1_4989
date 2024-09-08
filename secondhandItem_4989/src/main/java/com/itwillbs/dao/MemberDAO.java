@@ -53,4 +53,10 @@ public class MemberDAO {
 		sqlSession.insert(namespace + ".insertSocial", memberDTO);
 	}
 	
+	public MemberDTO idCheck(MemberDTO memberDTO) {
+		System.out.println("MemberDAO idCheck()");
+		
+		return sqlSession.selectOne(namespace + ".idCheck", memberDTO);
+	}
+	
 }

@@ -133,6 +133,8 @@ public class MemberController {
 		
 	}
 	
+	
+	
 	@PostMapping("/socialPro")
 	public String socialPro(MemberDTO memberDTO, HttpSession session, HttpServletRequest request) {
 		System.out.println("MemberController socialPro");
@@ -153,6 +155,29 @@ public class MemberController {
 		System.out.println(memberDTO);
 		// 로그인 주소변경 이동
 		return "redirect:/member/welcome";
+	}
+	
+	@PostMapping("/resultid")
+	public String resultid() {
+		return "/member/resultid";
+	}
+	
+	@PostMapping("/findidPro")
+	public String findidPro(MemberDTO memberDTO,HttpSession session) {
+		
+		MemberDTO memberDTO2 = memberService.idCheck(memberDTO);
+		System.out.println(memberDTO2);
+	
+		
+		if(memberDTO2 != null && memberDTO2.getName().equals(session.getAttribute("name")) && memberDTO2.getEmail().equals(session.getAttribute("email")) && memberDTO2.getPhone().equals(session.getAttribute("phone")) ) {
+			
+			session.setAttribute("member_id", memberDTO2.getMember_id());
+			System.out.println(session.getAttribute("member_id"));
+			return "redirect:/member/resultid";
+		}else {
+			
+			return "redirect:/member/findid";
+		}
 	}
 	
 }
