@@ -4,19 +4,16 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.itwillbs.mapper.MyPageMapper">
-
 	<select id="getProductList" resultType="com.itwillbs.domain.ProductDTO">
 		select * from Product
 		where seller_id = 'test'
-		and 
-<!-- 		order by trade_status desc  -->
+		order by trade_status, created_datetime desc
 		limit #{startRow},#{pageSize}
 	</select>
-	
+		
 	<select id="getProductCount" resultType="com.itwillbs.domain.ProductDTO">
 		select count(*) from Product
 		where seller_id = #{seller_id}
 	</select>
-
 </mapper>
 

@@ -22,7 +22,7 @@ public class MyPageDAO {
 		System.out.println("MyPageDAO getProductList()");
 		return sqlSession.selectList(namespace + ".getProductList", pageDTO);
 	}
-
+	
 	public int getProductCount(ProductDTO productDTO) {
 		System.out.println("MyPageDAO getProductCount()");
 		return sqlSession.selectOne(namespace + ".getProductCount", productDTO);

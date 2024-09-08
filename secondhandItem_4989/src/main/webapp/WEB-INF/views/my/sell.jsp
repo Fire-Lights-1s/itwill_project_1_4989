@@ -83,39 +83,35 @@
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 <script>
 
-let isPriceAscending = true;
-let isOrderAscending = true;
-
-function fetchDataAndSort(sortBy) {
-    fetch('${pageContext.request.contextPath}/my/sell') // 서버에서 데이터 가져오기
-        .then(response => response.json())
-        .then(data => {
-            if (sortBy === 'price') {
-                data.sort((a, b) => isPriceAscending ? a.price - b.price : b.price - a.price);
-                isPriceAscending = !isPriceAscending;
-            } else if (sortBy === 'order') {
-                data.sort((a, b) => isOrderAscending ? new Date(a.date) - new Date(b.date) : new Date(b.date) - new Date(a.date));
-                isOrderAscending = !isOrderAscending;
-            }
-            displayItems(data); // 정렬된 데이터 표시
-        })
-        .catch(error => console.error('Error fetching data:', error));
-}
-
-function displayItems(items) {
-    const container = document.querySelector('.profile-item-list');
-    container.innerHTML = ''; // 기존 항목 제거
-    items.forEach(item => {
-        container.innerHTML += `
-            <div class="item">
-                <p>가격: ${item.price}</p>
-                <p>등록 날짜: ${item.date}</p>
-            </div>`;
-    });
-}
-
-document.getElementById('priceSortBtn').addEventListener('click', () => fetchDataAndSort('price'));
-document.getElementById('orderSortBtn').addEventListener('click', () => fetchDataAndSort('order'));
+	let isPriceAscending = true;
+	let isOrderAscending = true;
+	
+	function sortItems(sortBy) {
+	    const itemsContainer = document.querySelector('.profile-item-list');
+	    const items = Array.from(document.querySelectorAll('.profile-item-list-piece'));
+	
+	    items.sort((a, b) => {
+	        if (sortBy === 'price') {
+	            const priceA = parseInt(a.dataset.price);
+	            const priceB = parseInt(b.dataset.price);
+	            return isPriceAscending ? priceA - priceB : priceB - priceA;
+	        } else if (sortBy === 'order') {
+	            const dateA = new Date(a.dataset.date);
+	            const dateB = new Date(b.dataset.date);
+	            return isOrderAscending ? dateA - dateB : dateB - dateA;
+	        }
+	    });
+	
+	    // 정렬된 항목을 다시 표시
+	    items.forEach(item => itemsContainer.appendChild(item));
+	
+	    // 정렬 순서 토글
+	    if (sortBy === 'price') isPriceAscending = !isPriceAscending;
+	    if (sortBy === 'order') isOrderAscending = !isOrderAscending;
+	}
+	
+	document.getElementById('priceSortBtn').addEventListener('click', () => sortItems('price'));
+	document.getElementById('orderSortBtn').addEventListener('click', () => sortItems('order'));
 
 </script>
 </body>

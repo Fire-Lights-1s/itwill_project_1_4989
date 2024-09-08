@@ -26,7 +26,7 @@ public class MyPageService {
 		pageDTO.setEndRow(endRow);
 		return myPageDAO.getProductList(pageDTO);
 	}
-
+	
 	public int getProductCount(ProductDTO productDTO) {
 		System.out.println("MyPageService getProductCount()");
 		return myPageDAO.getProductCount(productDTO);

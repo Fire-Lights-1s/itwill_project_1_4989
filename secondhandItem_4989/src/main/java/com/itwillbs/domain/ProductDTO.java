@@ -35,7 +35,7 @@ public class ProductDTO {
     //거래 지역
     private String trade_area;
     //거래상태
-//    private String trade_status;
+    private String trade_status;
     //임시저장
 //    private boolean temp_save;
     
@@ -50,6 +50,16 @@ public class ProductDTO {
 				+ ", product_img5=" + product_img5 + ", created_datetime=" + created_datetime + ", view_count="
 				+ view_count + ", like_count=" + like_count + ", trade_method=" + trade_method + ", pay_method="
 				+ pay_method + ", trade_area=" + trade_area + "]";
+	}
+
+
+	public String getTrade_status() {
+		return trade_status;
+	}
+
+
+	public void setTrade_status(String trade_status) {
+		this.trade_status = trade_status;
 	}
 
 
