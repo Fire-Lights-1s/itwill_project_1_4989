@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -120,21 +125,22 @@
     </header>
     
     <section>
+    	<c:set var="productDTO" value="${productDTO}"/>
         <div id="main-container">
             <main>
                 <div class="container">
                     <!-- 이미지 영역 -->
                     <div class="image-box">
                         <div class="card">
-                            <img src="https://image8.coupangcdn.com/image/retail/images/7896945556900075-1815af42-e5cb-4624-b7b0-b4f0900f8121.jpg" alt="Product Image">
+                            <img src="${productDTO.product_img1}" alt="Product Image">
                         </div>
                     </div>
 
                     <!-- 상품 상세 정보 영역 -->
                     <div class="details-box">
                         <div class="card">
-                            <div class="product-title">LG전자 2024 그램 16 코어Ultra5 인텔 14세대</div>
-                            <div class="product-price">950,000원</div>
+                            <div class="product-title">${productDTO.product_name}</div>
+                            <div class="product-price">${productDTO.product_price}</div>
                             <div class="product-meta">
                                 <span class="meta-item">1시간 전</span>
                                 <span class="meta-item">조회수 20</span>
@@ -146,15 +152,15 @@
 
                             <!-- 거래 지역 및 방식 버튼 -->
                             <div class="product-info">
-                                <button class="info-button">부산시 진구</button>
-                                <button class="info-button">직거래</button>
-                                <button class="info-button">택배 가능</button>
+                                <button class="info-button">부산광역시</button>
+                               
+                                
                             </div>
 
                             <!-- 판매자 정보 및 결제 방식 (일반 텍스트) -->
                             <div class="product-info">
-                                <strong>판매자 정보:</strong> 아이티웰<br>
-                                <strong>결제 방식:</strong> 현금, 4989페이
+                                <strong>판매자 정보:</strong>${productDTO.seller_id}<br>
+                                <strong>결제 방식:</strong> ${productDTO.pay_method}
                             </div>
 
                             <!-- 버튼 그룹 -->
@@ -170,7 +176,7 @@
                 <!-- 상품 설명 -->
                 <div class="product-description">
                     <h3>상품 정보</h3>
-                    <p>LG전자 그램 16 코어Ultra5 인텔 14세대 모델을 판매합니다. 새 제품이고, 2024년 4월에 구매했습니다. 상품 상태는 매우 양호하며 보증기간도 남아있습니다. 자세한 정보는 채팅으로 문의해 주세요.</p>
+                    <p>${productDTO.product_desc }</p>
                 </div>
 
             </main>

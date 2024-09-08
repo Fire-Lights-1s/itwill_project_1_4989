@@ -223,7 +223,7 @@ public class ProductDTO {
 	}
 
 	// product image from online
-	public void setProduct_imgRandom(String imageUrl) {
+	public void setProduct_img(String imageUrl) {
 	    this.product_img1 = imageUrl;
 	}
 

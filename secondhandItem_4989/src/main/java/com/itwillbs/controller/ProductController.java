@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,9 +57,10 @@ public class ProductController {
 	}
 	
 	@GetMapping("/detail")
-	public String detail(HttpServletRequest request) {
+	public String detail(HttpServletRequest request, Model model) {
 		String product_id = request.getParameter("product_id");
 		ProductDTO productDTO = productService.getProductDetail(product_id);
+		model.addAttribute("productDTO", productDTO);
 		return "/product/detail";
 		
 	}
