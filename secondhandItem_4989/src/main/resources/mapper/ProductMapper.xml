@@ -5,9 +5,19 @@
   
 <mapper namespace="com.itwillbs.mapper.ProductMapper">
     <insert id="insertProduct">
-        insert into Product (category_name, product_name, product_price, year_purchase, product_desc, product_img1, trade_method, pay_method, trade_area)
-        values (#{category_name}, #{product_name}, #{product_price}, #{year_purchase}, #{product_desc}, #{product_img1}, #{trade_method}, #{pay_method}, #{trade_area})
+        insert into Product (seller_id, category_name, product_name, product_price, year_purchase, product_desc, product_img1, trade_method, pay_method, trade_area)
+        values (#{seller_id}, #{category_name}, #{product_name}, #{product_price}, #{year_purchase}, #{product_desc}, #{product_img1}, #{trade_method}, #{pay_method}, #{trade_area})
     </insert>
+    
+    <!-- SELECT 구문: product_id로 특정 상품 검색 -->
+    <select id="getProductDetail" resultType="com.itwillbs.domain.ProductDTO">
+        select product_id, category_name, seller_id, product_name, product_price, 
+               year_purchase, product_desc, product_img1, product_img2, product_img3, 
+               product_img4, product_img5, created_datetime, view_count, 
+               like_count, trade_method, pay_method, trade_area
+        from Product
+        where product_id = #{product_id}
+    </select>
 
 	
 </mapper>

@@ -18,6 +18,12 @@ public class ProductService {
         productDAO.insertProduct(productDTO);  // DB에 상품 정보 저장
     }
 
+	public ProductDTO getProductDetail(String product_id) {
+		// TODO Auto-generated method stub
+		
+		return productDAO.getProductDetail(product_id);
+	}
+
 
 	
 }//ProductService

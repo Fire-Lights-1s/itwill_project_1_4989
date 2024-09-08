@@ -2,13 +2,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!-- 로그인한 사람만 상품 등록 -->
-<%
-    String id = (String) session.getAttribute("member_id");
-    if (id == null) {
-        response.sendRedirect("login.jsp");
-        return; 
-    }
-%>
+
 
 <!DOCTYPE html>
 <html>
@@ -157,13 +151,13 @@
         <main>
         <!-- 본문 영역 -->
             <div class="addBox">
-                <form action="${pageContext.request.contextPath}/product/registerPro" id="addForm" name="addForm" class="add-form" method="post" enctype="multipart/form-data">
+                <form action="${pageContext.request.contextPath}/product/registerPro" id="addForm" name="addForm" class="add-form" method="post" >
                     <hr style="border:0; height:3px; color:black;">
                     <div class="container">
                         <!-- 이미지 업로드 및 미리보기 영역 -->
                         <div class="form-group image-upload">
                             <label for="imageInput">사진 선택</label>
-                            <input type="file" id="product_img1" name="product_img1" accept="image/*" multiple onchange="setThumbnail(event)">
+                            <input type="text" id="product_img1" name="product_img1" >
 <!--                             <input type="file" id="product_img2" name="product_img2" accept="image/*" multiple onchange="setThumbnail(event)"> -->
                         </div>
                         
@@ -197,6 +191,9 @@
                                     <option value="2024">2024</option>
                                     <option value="2023">2023</option>
                                     <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
                                     <!-- 필요한 연도 추가 -->
                                 </select>
                             </div>
@@ -218,9 +215,9 @@
                                 <label for="dealMethod">거래 방식</label>
                                 <select id="dealMethod" name="trade_method">
                                     <option value="" disabled selected>선택</option>
-                                    <option value="delivery">택배</option>
-                                    <option value="direct">직거래</option>
-                                    <option value="both">모두 가능</option>
+                                    <option value="택배">택배</option>
+                                    <option value="직거래">직거래</option>
+                                    <option value="모두 가능">모두 가능</option>
                                 </select>
                             </div>
 
@@ -228,9 +225,9 @@
                                 <label for="payMethod">결제 방식</label>
                                 <select id="payMethod" name="pay_method">
                                     <option value="" disabled selected>선택</option>
-                                    <option value="cash">현금</option>
-                                    <option value="pay">4989페이</option>
-                                    <option value="both">모두 가능</option>
+                                    <option value="현금">현금</option>
+                                    <option value="페이">4989페이</option>
+                                    <option value="모두가능">모두 가능</option>
                                 </select>
                             </div>
 
