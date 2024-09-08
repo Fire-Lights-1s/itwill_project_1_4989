@@ -1,3 +1,6 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.security.SecureRandom"%>
+<%@page import="java.math.BigInteger"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,7 +32,7 @@
 
   <div class="container">
         <h2>회원정보를 입력해주세요</h2>
-        <form action="submitForm.jsp" method="post">
+        <form action="socialPro" method="post">
             <div class="nickname-group">
                 <label for="nickname">닉네임</label>
                 <div class="input-group">
@@ -41,9 +44,6 @@
 
             <label for="phone">휴대폰 번호</label>
             <input type="tel" id="phone" name="phone" placeholder="01012345678" required>
-
-            <label for="email">이메일</label>
-            <input type="email" id="email" name="email" placeholder="abcd@efgh.com" required>
 
             <div class="checkbox-group">
                 <label><input type="checkbox" name="terms" required> 4989 이용약관(필수)</label><br>
