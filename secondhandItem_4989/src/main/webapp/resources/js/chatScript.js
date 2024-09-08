@@ -4,8 +4,9 @@
 	let userId = sessionUserId;
 	
     $(document).ready(function(){
-        if(userId == 'null'){
-            location.replace("../");
+        if(userId == 'null' || userId == ''){
+            location.replace("../secondhand4989/");
+            alert('로그인 후 이용해주세요.');
         }
     });
 

@@ -5,7 +5,7 @@
 	<br>
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/my/profile">내 프로필</a></li>
-		<li><a href="#">4989 페이</a></li>
+		<li><a href="${pageContext.request.contextPath}/my/payPoint">4989 페이</a></li>
 		<li><a href="${pageContext.request.contextPath}/my/zzim">찜 목록</a></li>
 		<li><a href="${pageContext.request.contextPath}/my/sell">판매 내역</a></li>
 		<li><a href="${pageContext.request.contextPath}/my/buy">구매 내역</a></li>

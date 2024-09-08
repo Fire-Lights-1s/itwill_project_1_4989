@@ -43,7 +43,7 @@
                     <a href="${pageContext.request.contextPath}/my/profile" class="desktop-item">마이페이지</a>
                     <ul class="drop-menu">
                         <li><a href="${pageContext.request.contextPath}/my/profile">내 프로필</a></li>
-                        <li><a href="${pageContext.request.contextPath}/my/pay/point">4989 페이</a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/payPoint">4989 페이</a></li>
                         <li><a href="${pageContext.request.contextPath}/my/zzim">찜 목록</a></li>
                         <li><a href="${pageContext.request.contextPath}/my/sell">판매내역</a></li>
                         <li><a href="${pageContext.request.contextPath}/my/buy">구매내역</a></li>

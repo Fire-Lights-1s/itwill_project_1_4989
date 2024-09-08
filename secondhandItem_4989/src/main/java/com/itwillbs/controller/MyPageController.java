@@ -172,4 +172,17 @@ public class MyPageController {
 //		List<ProductDTO> zzimList = myPageService.getProductList();
 		return "my/zzim";
 	}
+	
+	@GetMapping("/payPoint")
+	public String payPoint(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("member_id");
+		MemberDTO memberDTO = memberService.getMember(id);
+		
+		if(memberDTO == null) {
+			return "redirect:/member/login";
+		}
+		model.addAttribute("memberDTO", memberDTO);
+		
+		return "/my/pay/point";
+	}
 }

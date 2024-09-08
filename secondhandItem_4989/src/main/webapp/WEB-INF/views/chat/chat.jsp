@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:set var="sessionUID" value="${sessionScope.member_id }"></c:set>
 <script type="text/javascript" th:inline="javascript">
-	let sessionUserId = '<%=(String)session.getAttribute("member_id")%>';
+	let sessionUserId = '<c:out value="${sessionUID}"/>';
 </script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style_Editing_by_sub.css?">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css?">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/chatStyle.css?">
 <!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
