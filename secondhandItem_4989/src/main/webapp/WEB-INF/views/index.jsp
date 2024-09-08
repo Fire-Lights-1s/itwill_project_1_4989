@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>4989 : IT기기 중고거래플랫폼</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/carouselStyle.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/animate.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
@@ -89,18 +92,34 @@
 			<div class="col-12 col-md-6 col-lg-3 mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="${popList.product_img1 }" alt="..." />
+                        <c:if test="${empty popList.product_img1 || popList.product_img1 eq '' }">
+                        <img class="card-img-top img-height-fix" src="https://i.namu.wiki/i/tgJKui-B3sVdzHzJ_P2oLzBdPRihL7X4Jj5W9e7ReG6k9qcBRF-NuCmcM-j37ikoyBu7c_hq3P7juN3AnYlp0jiS3OD8wmaFC3SzSRHXOmTpxNdUrXcTs3ARbONhDcYAMbbMw7niOSM3khaPh7_DGQ.webp" alt="..." />
+                        </c:if>
+                        <c:if test="${!empty popList.product_img1 || popList.product_img1 ne '' }">
+                        <img class="card-img-top img-height-fix" src="${popList.product_img1 }" alt="..." />                        
+                        </c:if>
                         <!-- 페이 뱃지 -->
                     <c:if test="${popList.pay_method eq '페이' }">
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>
+                        <div class="badge text-white position-absolute" style="background-color: #4e229e; top: 0.5rem; right: 0.5rem">PAY</div>
                     </c:if>
+                    	<!-- 찜하기 버튼 -->
+                    	<div class="heart-badge position-absolute" id="zzim-button" data-product_id="${popList.product_id }" data-member_id="${sessionScope.member_id }" style="bottom: 50%; right: 1rem">♥</div>
                         <!-- Product details-->
                         <div class="card-body pt-3">
                             <div class="text-center">
                                 <!-- 상품명 -->
-                                <h5 class="fw-bolder">${popList.product_name }</h5>
+                                <h5 class="fw-bolder">
+                                <c:choose>
+								    <c:when test="${fn:length(popList.product_name) > 25}">
+								        ${fn:substring(popList.product_name, 0, 25)}...
+								    </c:when>
+								    <c:otherwise>
+								        ${popList.product_name}
+								    </c:otherwise>
+								</c:choose>
+                                </h5>
                                 <!-- 가격 -->
-                                <h5>${popList.product_price }</h5>
+                                <h5><fmt:formatNumber value="${popList.product_price }" type="number"/>원</h5>
                                 <!-- 거래방법 (직거래 시 지역명) -->
                                 <small style="margin-top:5px;">${popList.trade_method }
                                 <c:if test="${popList.trade_method eq '직거래'}">(   )</c:if></small>
@@ -111,7 +130,7 @@
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 상세보기</a></div>
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="${pageContext.request.contextPath}/product/detail?product_id=${popList.product_id}">상품 상세보기</a></div>
                         </div>
                     </div>
                 </div>
@@ -128,7 +147,7 @@
                         <div class="card-body pt-3">
                             <div class="text-center">
                                 <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
+                                <h5 class="fw-bolder">~ 카드 샘플 ~</h5>
                                 <!-- 가격 -->
                                 <h5>100,000원</h5>
                                 <!-- 거래방법 (직거래 시 지역명) -->
@@ -145,279 +164,6 @@
                     </div>
                 </div>
                 
-                <div class="col-12 col-md-6 col-lg-3 mb-5">
-
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- 페이 뱃지 -->
-<!--                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>-->
-                        <!-- Product details-->
-                        <div class="card-body pt-3">
-                            <div class="text-center">
-                                <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
-                                <!-- 가격 -->
-                                <h5>100,000원</h5>
-                                <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">택배 / 직거래 (부산)</small>
-                                <br>
-                                <!-- 경과시간 -->
-                                <small style="text-align:right;">1시간 전</small>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 상세보기</a></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-12 col-md-6 col-lg-3 mb-5">
-
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- 페이 뱃지 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>
-                        <!-- Product details-->
-                        <div class="card-body pt-3">
-                            <div class="text-center">
-                                <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
-                                <!-- 가격 -->
-                                <h5>100,000원</h5>
-                                <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">택배 / 직거래 (부산)</small>
-                                <br>
-                                <!-- 경과시간 -->
-                                <small style="text-align:right;">1시간 전</small>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 상세보기</a></div>
-                        </div>
-                    </div>
-                </div>
-           
-                <div class="col-12 col-md-6 col-lg-3 mb-5">
-
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- 페이 뱃지 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>
-                        <!-- Product details-->
-                        <div class="card-body pt-3">
-                            <div class="text-center">
-                                <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
-                                <!-- 가격 -->
-                                <h5>100,000원</h5>
-                                <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">택배 / 직거래 (부산)</small>
-                                <br>
-                                <!-- 경과시간 -->
-                                <small style="text-align:right;">1시간 전</small>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 상세보기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 mb-5">
-
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- 페이 뱃지 -->
-                        <!--                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>-->
-                        <!-- Product details-->
-                        <div class="card-body pt-3">
-                            <div class="text-center">
-                                <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
-                                <!-- 가격 -->
-                                <h5>100,000원</h5>
-                                <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">택배 / 직거래 (부산)</small>
-                                <br>
-                                <!-- 경과시간 -->
-                                <small style="text-align:right;">1시간 전</small>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 상세보기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 mb-5">
-
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- 페이 뱃지 -->
-                        <!--                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>-->
-                        <!-- Product details-->
-                        <div class="card-body pt-3">
-                            <div class="text-center">
-                                <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
-                                <!-- 가격 -->
-                                <h5>100,000원</h5>
-                                <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">택배 / 직거래 (부산)</small>
-                                <br>
-                                <!-- 경과시간 -->
-                                <small style="text-align:right;">1시간 전</small>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 상세보기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 mb-5">
-
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- 페이 뱃지 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>
-                        <!-- Product details-->
-                        <div class="card-body pt-3">
-                            <div class="text-center">
-                                <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
-                                <!-- 가격 -->
-                                <h5>100,000원</h5>
-                                <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">택배 / 직거래 (부산)</small>
-                                <br>
-                                <!-- 경과시간 -->
-                                <small style="text-align:right;">1시간 전</small>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 상세보기</a></div>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="col-12 col-md-6 col-lg-3 mb-5">
-
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- 페이 뱃지 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>
-                        <!-- Product details-->
-                        <div class="card-body pt-3">
-                            <div class="text-center">
-                                <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
-                                <!-- 가격 -->
-                                <h5>100,000원</h5>
-                                <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">택배 / 직거래 (부산)</small>
-                                <br>
-                                <!-- 경과시간 -->
-                                <small style="text-align:right;">1시간 전</small>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 상세보기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 mb-5">
-
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- 페이 뱃지 -->
-                        <!--                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>-->
-                        <!-- Product details-->
-                        <div class="card-body pt-3">
-                            <div class="text-center">
-                                <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
-                                <!-- 가격 -->
-                                <h5>100,000원</h5>
-                                <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">택배 / 직거래 (부산)</small>
-                                <br>
-                                <!-- 경과시간 -->
-                                <small style="text-align:right;">1시간 전</small>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 상세보기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 mb-5">
-
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- 페이 뱃지 -->
-                        <!--                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>-->
-                        <!-- Product details-->
-                        <div class="card-body pt-3">
-                            <div class="text-center">
-                                <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
-                                <!-- 가격 -->
-                                <h5>100,000원</h5>
-                                <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">택배 / 직거래 (부산)</small>
-                                <br>
-                                <!-- 경과시간 -->
-                                <small style="text-align:right;">1시간 전</small>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 상세보기</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 mb-5">
-
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- 페이 뱃지 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">PAY</div>
-                        <!-- Product details-->
-                        <div class="card-body pt-3">
-                            <div class="text-center">
-                                <!-- 상품명 -->
-                                <h5 class="fw-bolder">상품명</h5>
-                                <!-- 가격 -->
-                                <h5>100,000원</h5>
-                                <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">택배 / 직거래 (부산)</small>
-                                <br>
-                                <!-- 경과시간 -->
-                                <small style="text-align:right;">1시간 전</small>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">상품 상세보기</a></div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div style="text-align: center;">
@@ -442,6 +188,36 @@ $(document).ready(function() {
         interval: 3000,
     });
 });
+
+
+// 찜 등록
+document.getElementById('zzim-button').addEventListener('click', function() {
+    const product_id = this.getAttribute('data-product_id');
+    const member_id = this.getAttribute('data-member_id');
+
+    fetch('/zzim/save', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ product_id: product_id, member_id: member_id })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+        	zzim-button.classList.add('active');
+        } else {
+        	alert('오류 발생! 다시 시도해주세요.')
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+// 찜 취소
+
+
 
 </script>
 

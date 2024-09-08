@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,8 +63,9 @@ h1, h3 { text-align:center; }
 
     <div class="form-group">
         <div id="label_title"><label for="grade">등급/매입가</label></div>
+        <fmt:formatNumber value="${expected_price}" type="number" var="formattedExpectedPrice"/>
         <input type="text" class="textform" name="expected_grade" value="${expected_grade }" style="width:60px; text-align:center;"readonly>
-         / <input type="text" class="textform" name="expected_price" value="${expected_price }" style="width:100px; text-align:right;" readonly>원 
+         / <input type="text" class="textform" name="expected_price" value="${formattedExpectedPrice}" style="width:100px; text-align:right;" readonly>원 
         <span class="info_span">※ 등급 및 매입가는 실제 검수 결과에 따라 달라질 수 있습니다.</span>
     </div>
 
