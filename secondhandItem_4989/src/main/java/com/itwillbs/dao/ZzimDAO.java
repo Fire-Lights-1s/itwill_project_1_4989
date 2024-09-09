@@ -17,10 +17,11 @@ public class ZzimDAO {
 	private static final String namespace="com.itwillbs.mapper.ZzimMapper";
 	
 	public boolean checkZzim(Map<String, String> request) {
-		if (sqlSession.selectOne(namespace + ".checkZzim", request) == null) {
-			return true;
+		int returnValue = sqlSession.selectOne(namespace + ".checkZzim", request);
+		if (returnValue == 0) {		// 등록된 게 없으면
+			return false;			// 찜이 안된 거임 (false 반환)
 		}
-		return false;
+		return true;				// 그게 아니면 찜이 이미 존재함. (true 반환)
 	}
 	
 	public void saveZzim(Map<String, String> request) {

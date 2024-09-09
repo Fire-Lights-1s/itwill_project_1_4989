@@ -5,8 +5,8 @@
   
 <mapper namespace="com.itwillbs.mapper.ZzimMapper">
 
-	<select id="checkZzim" parameterType="map">
-		SELECT * FROM Zzim WHERE product_id=#{product_id} and member_id=#{member_id}
+	<select id="checkZzim" parameterType="map" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM Zzim WHERE product_id=#{product_id} and member_id=#{member_id}
 	</select>
 
 	<insert id="saveZzim" parameterType="map">

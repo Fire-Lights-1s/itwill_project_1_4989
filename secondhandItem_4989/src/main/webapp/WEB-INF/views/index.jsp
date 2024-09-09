@@ -88,49 +88,52 @@
         <div class="container px-1 px-lg-1 mt-1" style="margin-top:100px;">
             <div class="row gx-4 gx-lg-5 justify-content-center"> <!-- 수정 -->
                 
-		<c:forEach var="popList" items="${popList}">
+		<c:set var="size" value="${fn:length(popList)}" />
+		<c:forEach var="i" begin="0" end="${size - 1}">
+			<c:set var="product" value="${popList[i]}" />
+			<c:set var="elapsedTime" value="${elapsedTimeList[i]}" />
 			<div class="col-12 col-md-6 col-lg-3 mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <c:if test="${empty popList.product_img1 || popList.product_img1 eq '' }">
+                        <c:if test="${empty product.product_img1 || product.product_img1 eq '' }">
                         <img class="card-img-top img-height-fix" src="https://i.namu.wiki/i/tgJKui-B3sVdzHzJ_P2oLzBdPRihL7X4Jj5W9e7ReG6k9qcBRF-NuCmcM-j37ikoyBu7c_hq3P7juN3AnYlp0jiS3OD8wmaFC3SzSRHXOmTpxNdUrXcTs3ARbONhDcYAMbbMw7niOSM3khaPh7_DGQ.webp" alt="..." />
                         </c:if>
-                        <c:if test="${!empty popList.product_img1 || popList.product_img1 ne '' }">
-                        <img class="card-img-top img-height-fix" src="${popList.product_img1 }" alt="..." />                        
+                        <c:if test="${!empty product.product_img1 && product.product_img1 ne '' }">
+                        <img class="card-img-top img-height-fix" src="${product.product_img1 }" alt="..." />                        
                         </c:if>
                         <!-- 페이 뱃지 -->
-                    <c:if test="${popList.pay_method eq '페이' }">
+                    <c:if test="${product.pay_method eq '페이' }">
                         <div class="badge text-white position-absolute" style="background-color: #4e229e; top: 0.5rem; right: 0.5rem">PAY</div>
                     </c:if>
                     	<!-- 찜하기 버튼 -->
-                    	<div class="heart-badge position-absolute" id="zzim-button" data-product_id="${popList.product_id }" data-member_id="${sessionScope.member_id }" style="bottom: 50%; right: 1rem">♥</div>
+                    	<div class="zzim-button position-absolute" data-product_id="${product.product_id }" data-member_id="${sessionScope.member_id }" style="bottom: 50%; right: 1rem">♥</div>
                         <!-- Product details-->
                         <div class="card-body pt-3">
                             <div class="text-center">
                                 <!-- 상품명 -->
                                 <h5 class="fw-bolder">
                                 <c:choose>
-								    <c:when test="${fn:length(popList.product_name) > 25}">
-								        ${fn:substring(popList.product_name, 0, 25)}...
+								    <c:when test="${fn:length(product.product_name) > 25}">
+								        ${fn:substring(product.product_name, 0, 25)}...
 								    </c:when>
 								    <c:otherwise>
-								        ${popList.product_name}
+								        ${product.product_name}
 								    </c:otherwise>
 								</c:choose>
                                 </h5>
                                 <!-- 가격 -->
-                                <h5><fmt:formatNumber value="${popList.product_price }" type="number"/>원</h5>
+                                <h5><fmt:formatNumber value="${product.product_price }" type="number"/>원</h5>
                                 <!-- 거래방법 (직거래 시 지역명) -->
-                                <small style="margin-top:5px;">${popList.trade_method }
-                                <c:if test="${popList.trade_method eq '직거래'}">(   )</c:if></small>
+                                <small style="margin-top:5px;">${product.trade_method }
+                                <c:if test="${product.trade_method eq '직거래'}">(   )</c:if></small>
                                 <br>
                                 <!-- 경과시간 -->
-                                <small style="text-align:right;">1시간 전</small>
+                                <small style="text-align:right;">${elapsedTime }</small>
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="${pageContext.request.contextPath}/product/detail?product_id=${popList.product_id}">상품 상세보기</a></div>
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="${pageContext.request.contextPath}/product/detail?product_id=${product.product_id}">상품 상세보기</a></div>
                         </div>
                     </div>
                 </div>
@@ -183,50 +186,83 @@
 <jsp:include page="inc/footer.jsp"></jsp:include>
     
 <script>
+
+// 이미지 슬라이드
 $(document).ready(function() {
     $('#myCarousel').carousel({
         interval: 3000,
     });
 });
 
-
 // 찜 등록 및 취소
-document.getElementById('zzim-button').addEventListener('click', function() {
-    const product_id = this.getAttribute('data-product_id');
-    const member_id = this.getAttribute('data-member_id');
-    const contextPath = "${pageContext.request.contextPath}";
-    const zzim_button = document.getElementById('zzim-button');
-    
-    if (member_id === null || member_id === '') {
-    	alert('로그인한 회원만 이용가능한 기능입니다')
-    	window.location.href = contextPath + '/member/login';
-    	
-    } else {    
-    
-    fetch(contextPath + '/zzim/save', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ product_id: product_id, member_id: member_id })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.save) {
-        	zzim_button.classList.add('active');
-        } else {
-        	zzim_button.classList.remove('active');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-    }
-    
+const zzim_buttons = document.querySelectorAll('.zzim-button');
+zzim_buttons.forEach(button => {
+	button.addEventListener('click', function() {
+	    const product_id = this.getAttribute('data-product_id');
+	    const member_id = this.getAttribute('data-member_id');
+	    const contextPath = "${pageContext.request.contextPath}";
+	    
+	    if (member_id === null || member_id === '') {
+	    	alert('로그인한 회원만 이용가능한 기능입니다')
+	    	window.location.href = contextPath + '/member/login';	
+	    } else {
+		    fetch(contextPath + '/zzim/save', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json'
+		        },
+		        body: JSON.stringify({ product_id: product_id, member_id: member_id })
+	    	})
+	    	.then(response => response.json())
+	    	.then(data => {
+	        	if (data.save) {
+	        		button.classList.add('active');
+	        	} else {
+	        		button.classList.remove('active');
+	       		}
+	    	})
+	    .catch(error => {
+	        console.error('Error:', error);
+	    	});
+   		}
+	});
 });
 
 
+//페이지가 로드될 때에 찜 여부 가져와서 표시
+window.onload = function() {
+ const contextPath = "${pageContext.request.contextPath}";
+ const member_id = document.querySelector('.zzim-button').getAttribute('data-member_id');
 
+ if (member_id !== null && member_id !== '') {
+ 	//찜 버튼이 달려있는 (열람된 모든) 상품들의 product_id를 배열로 만들어 저장
+ 	const productIds = Array.from(document.querySelectorAll('.zzim-button')).map(button => button.getAttribute('data-product_id'));
+		
+     fetch(contextPath + '/zzim/status', {
+         method: 'POST',
+         headers: {
+             'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({ member_id: member_id, product_ids: productIds })
+     })
+     .then(response => response.json())
+     .then(data => {
+    	 const allButtons = Array.from(document.querySelectorAll('.zzim-button'));
+         data.zzimList.forEach(product => {
+        	 const matchingButton = allButtons.find(button => button.getAttribute('data-product_id') === product.product_id);
+             console.log(matchingButton);
+             if (matchingButton && product.isZzimSaved) {
+                 matchingButton.classList.add('active');
+             } else if (matchingButton) {
+                 matchingButton.classList.remove('active');
+             }
+         });
+     })
+     .catch(error => {
+         console.error('Error:', error);
+     });
+ }
+};
 
 </script>
 
