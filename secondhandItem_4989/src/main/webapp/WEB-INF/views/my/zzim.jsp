@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,183 +27,69 @@
 		<div class="main-container-side-profile">
 		<main>
 			<h2>찜 목록</h2>
-			<div class="profile-a">
-				<a href="#">가격 순 |</a>
-				<a href="#">날짜 순</a>
+			<div class="profile-a">				
+				<c:if test="${empty param.sort}">				
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+				</c:if>
+				<c:if test="${param.sort eq 'priceDesc'}">
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+				</c:if>
+				<c:if test="${param.sort eq 'priceAsc'}">
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+				</c:if>
+				<c:if test="${param.sort eq 'dateDesc'}">
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+				</c:if>
+				<c:if test="${param.sort eq 'dateAsc'}">
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+				</c:if>
 			</div>
 			<div class="profile-item-list">
+			<c:forEach var="productDTO" items="${productList}">
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
 						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							판매 중
-						</div>
+							<div class="profile-item-image-cover3">
+								찜찜찜
+							</div>
 					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">관심 끄기</a>
+					<div class="profile-item-name" title="${productDTO.product_name}">
+						${productDTO.product_name}<br>
+						${productDTO.product_price}원
 					</div>
 					<div class="profile-item-review">
-						<a href="#">채팅 신청</a>&emsp;&emsp;
-						1개월전
+						<a href="#">구매자 후기</a>&emsp;&emsp;
+						<a href="#">판매 취소</a>
+					</div>
+					<div class="profile-item-review">
+						평점 : 4.7&emsp;&emsp;
+						<fmt:formatDate value="${productDTO.created_datetime}" pattern="yyyy-MM-dd"/>
 					</div>
 				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							판매 중
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">관심 끄기</a>
-					</div>
-					<div class="profile-item-review">
-						<a href="#">채팅 신청</a>&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							판매 중
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">관심 끄기</a>
-					</div>
-					<div class="profile-item-review">
-						<a href="#">채팅 신청</a>&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							판매 중
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">관심 끄기</a>
-					</div>
-					<div class="profile-item-review">
-						<a href="#">채팅 신청</a>&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							판매 중
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">관심 끄기</a>
-					</div>
-					<div class="profile-item-review">
-						<a href="#">채팅 신청</a>&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							판매 중
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">관심 끄기</a>
-					</div>
-					<div class="profile-item-review">
-						<a href="#">채팅 신청</a>&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							판매 중
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">관심 끄기</a>
-					</div>
-					<div class="profile-item-review">
-						<a href="#">채팅 신청</a>&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							판매 중
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">관심 끄기</a>
-					</div>
-					<div class="profile-item-review">
-						<a href="#">채팅 신청</a>&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
+			</c:forEach>
 			</div>
 			<div class="pagination">
-				<a href="#" class="firstpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></a>
+				<a href="${pageContext.request.contextPath}/my/zzim?pageNum=1&sort=${pageDTO.sort}" class="firstpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></a>
 				<c:if test="${pageDTO.currentPage > 1}">
-<!-- 				처음 페이지 아닌 경우 이전 버튼 보이기 -->
-					<a href="#" class="prevpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></a>
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage - 1}&sort=${pageDTO.sort}" class="prevpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></a>
 				</c:if>
 				<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
 					<c:if test="${pageDTO.currentPage eq i}">
-						<a href="#"><span class="pagenum currentpage">${i}</span></a>
+						<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${i}&sort=${pageDTO.sort}"><span class="pagenum currentpage">${i}</span></a>
 					</c:if>
 					<c:if test="${pageDTO.currentPage ne i}">
-						<a href="#"><span class="pagenum">${i}</span></a>
+						<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${i}&sort=${pageDTO.sort}"><span class="pagenum">${i}</span></a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pageDTO.currentPage ne pageDTO.pageCount}">
-<!-- 				마지막 페이지 아닌 경우 다음 페이지 보이기 -->
-					<a href="#" class="nextpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="다음"></a>
+					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage + 1}&sort=${pageDTO.sort}" class="nextpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="다음"></a>
 				</c:if>
-				<a href="#" class="lastpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="마지막"></a>
+				<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.pageCount}&sort=${pageDTO.sort}" class="lastpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="마지막"></a>
 			</div>
 		</main>
 		</div>

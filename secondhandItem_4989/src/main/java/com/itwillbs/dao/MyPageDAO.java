@@ -23,9 +23,9 @@ public class MyPageDAO {
 		return sqlSession.selectList(namespace + ".getProductList", pageDTO);
 	}
 	
-	public int getProductCount(ProductDTO productDTO) {
+	public int getProductCount(PageDTO pageDTO) {
 		System.out.println("MyPageDAO getProductCount()");
-		return sqlSession.selectOne(namespace + ".getProductCount", productDTO);
+		return sqlSession.selectOne(namespace + ".getProductCount", pageDTO);
 	}
 	
 	

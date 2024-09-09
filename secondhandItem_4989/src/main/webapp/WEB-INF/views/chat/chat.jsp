@@ -7,8 +7,12 @@
 <meta charset="UTF-8">
 <title>4989 채팅</title>
 <c:set var="sessionUID" value="${sessionScope.member_id }"></c:set>
+<c:set var="chatRoomDTO" value="${chatRoomDTO }"></c:set>
+
 <script type="text/javascript" th:inline="javascript">
 	let sessionUserId = '<c:out value="${sessionUID}"/>';
+	let chatRoomId = '<c:out value="${chatRoomDTO.chat_room_id}"/>';
+	console.log(chatRoomId);
 </script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css?">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">

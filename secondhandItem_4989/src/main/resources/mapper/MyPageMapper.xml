@@ -34,6 +34,12 @@
 	<select id="getProductCount" resultType="java.lang.Integer">
 		select count(*) from Product
 		where seller_id = #{seller_id}
+		<if test="sale == 'pro'">
+			and trade_status = '거래 가능' 
+		</if>
+		<if test="sale == 'com'">
+			and trade_status = '거래 완료' 
+		</if>
 	</select>
 </mapper>
 
