@@ -10,6 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <title>상품 상세</title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.4.0.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
     
@@ -165,7 +166,7 @@
 
                             <!-- 버튼 그룹 -->
                             <div class="button-group">
-                                <button class="button">채팅하기</button>
+                                <button class="button" id="startChat">채팅하기</button>
                                 <button class="button">찜하기</button>
                                 <button class="button">신고하기</button>
                             </div>
@@ -184,6 +185,12 @@
     </section>
 
     <jsp:include page="../inc/footer.jsp"></jsp:include>
-
+	<script type="text/javascript">
+	let chatRoomBuyerID = '<c:out value="${sessionScope.member_id}"/>';
+	let chatRoomProductID = '<c:out value="${productDTO.product_id}"/>';
+	let chatRoomSellerID = '<c:out value="${productDTO.seller_id}"/>';
+	let chatRoomTitle = '<c:out value="${productDTO.product_name}"/>';
+	</script>
+	<script src="${pageContext.request.contextPath }/resources/js/go_to_chat.js"></script>
 </body>
 </html>
