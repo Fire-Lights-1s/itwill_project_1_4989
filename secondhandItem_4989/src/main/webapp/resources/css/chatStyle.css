@@ -40,7 +40,7 @@ a:hover{
     width: 100%;
 	padding:10px 0;
 }
-.flexBoxRow>.form-control{
+.flexBoxRow > .form-control{
 	position: relative;
     flex: 1 1 auto;
     width: 1%;
@@ -54,15 +54,15 @@ a:hover{
  	width:120px;
 	height: 40px;
 	border-radius: 10px;
-	background-color: #8000ff;
+	background-color: #400080;
 	text-align: center;
 	font-size: 1.2rem;
 	font-weight: 900;
 	color: white;
 }
 .type_select:hover{
-	background-color: #400080;
-	color: black;
+	background-color: #7300e6;
+	color: white;
 }
 .items{
 	position: relative;
@@ -83,13 +83,14 @@ a:hover{
 }
 .items .drop-menu{
 	position: absolute;
-    background: #8000ff;
+    background: #400080;
     border-radius: 10px;
     width: 120px;
     line-height: 45px;
     top: 55px;
     opacity: 0;
     visibility: hidden;
+    overflow:hidden;
     box-shadow: 0 6px 10px rgba(0,0,0,0.15);
 }
 .items:hover .drop-menu{
@@ -99,7 +100,7 @@ a:hover{
     visibility: visible;
 }
 .items .drop-menu li:hover{
-	background-color: #400080;
+	background-color: #7300e6;
 }
 #searchText{
 	padding: 5px 10px;

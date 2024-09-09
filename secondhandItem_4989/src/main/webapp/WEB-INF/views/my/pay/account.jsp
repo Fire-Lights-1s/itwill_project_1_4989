@@ -25,28 +25,15 @@
 			<jsp:include page="../../inc/myPageLefter.jsp"></jsp:include>
 			<div class="main-container-payPoint">
 				<div id="payPoint">
-					<div id="pay_member">
-						<div>
-							<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg">
-						</div>
-						<div>
-							<p>${memberDTO.nickname} 님</p>
-							<p>${memberDTO.member_id}</p>
-						</div>
-					</div>
-					<div id="pay_descript">
-						<div>
+					<div id="pay_account">
+						<div class="logo">
 							<img alt="" src="${pageContext.request.contextPath}/resources/img/Logo_C.png">
-							<a href="${pageContext.request.contextPath}/my/payAccount">
-								내 계좌
-							</a>
+							<p>계좌 추가하기</p>
 						</div>
-						<div>
-							<p>0 원</p>
-						</div>
-						<div>
-							<a href="${pageContext.request.contextPath}/my/payCharge">충전하기</a>
-							<a href="${pageContext.request.contextPath}/my/paySend">송금하기</a>
+						<div class="input_bank">
+							<input type="text" placeholder="계좌 번호를 입력해주세요">
+							<input type="text" placeholder="은행을 선택해 주세요" readonly>
+							
 						</div>
 					</div>
 				</div>

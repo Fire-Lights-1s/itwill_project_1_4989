@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>4989 채팅</title>
 <c:set var="sessionUID" value="${sessionScope.member_id }"></c:set>
 <script type="text/javascript" th:inline="javascript">
 	let sessionUserId = '<c:out value="${sessionUID}"/>';

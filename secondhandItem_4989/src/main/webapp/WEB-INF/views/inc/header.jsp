@@ -53,12 +53,12 @@
                 </li>
                 <li style="width:30px;"></li>
                 
-                 <c:if test="${empty sessionScope.member_id }">
+                 <c:if test="${empty sessionScope.nickname }">
                 <li><a class="login-btn" href="${pageContext.request.contextPath}/member/login">로그인 / 회원가입</a></li>
                 </c:if>
-                <c:if test="${!empty sessionScope.member_id }">
+                <c:if test="${!empty sessionScope.nickname }">
                 <li>
-                <a class="login-btn" href="${pageContext.request.contextPath}/my/profile">${sessionScope.member_id}님 접속 중</a>
+                <a class="login-btn" href="${pageContext.request.contextPath}/my/profile">${sessionScope.nickname}님 접속 중</a>
                 	<ul class="drop-menu">
                 		<c:if test="${sessionScope.member_id eq 'admin' }">
                 		<li><a href="${pageContext.request.contextPath}/admin/">관리자 홈</a></li>
