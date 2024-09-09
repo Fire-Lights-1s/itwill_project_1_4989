@@ -33,7 +33,7 @@ function redirectToMain() {
 <div class="container">
         <h1>회원가입이 완료되었습니다.</h1>
         <p>4989에 오신것을 환영합니다.</p>
-    	<button type="button" class="main-page-button" onclick="redirectToMain()">쇼핑하러 가기</button>
+    	<button type="button" class="main-page-button" onclick="redirectToLogin()">로그인하러 가기</button>
     </div>
 
 

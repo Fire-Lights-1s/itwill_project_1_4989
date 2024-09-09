@@ -122,16 +122,21 @@ public class MemberController {
 	@GetMapping("/callPro")
 	public String callPro(MemberDTO memberDTO,HttpSession session) {
 		
-		MemberDTO memberDTO3 = memberService.SocialCheck(memberDTO);
-		System.out.println(memberDTO3.getEmail());
-		String sessionEmail = (String) session.getAttribute("email");
+		String email = (String) session.getAttribute("email");
 		
-		if(memberDTO3.getEmail().equals(sessionEmail)) {
+		memberDTO = new MemberDTO();
+	    memberDTO.setEmail(email);
+		
+		MemberDTO memberDTO3 = memberService.SocialCheck(memberDTO);
+		
+		
+		
+		if(memberDTO3 != null) {
 			session.setAttribute("member_id", memberDTO3.getMember_id());
 			session.setAttribute("nickname", memberDTO3.getNickname());
 			return "redirect:/";
 		} else {
-			
+			System.out.println("memberDTO3 is null");
 			return "redirect:/member/social";
 		}
 		
