@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>매입 신청하기 : 4989</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/purchaseStyle.css">
@@ -109,9 +110,9 @@ th, td {
 		<tr>
 			<td style="border-right:solid 1px #666;">${items.item_maker }</td>
 			<td style="border-right:solid 1px #666;">${items.pc_item_name }</td>
-			<td class="pricebox"><a href="form?name=${items.pc_item_name }&grade=S&price=${items.price_s }">${items.price_s }원</a></td>
-			<td class="pricebox"><a href="form?name=${items.pc_item_name }&grade=A&price=${items.price_a }">${items.price_a }원</a></td>
-			<td class="pricebox"><a href="form?name=${items.pc_item_name }&grade=B&price=${items.price_s }">${items.price_b }원</a></td>
+			<td class="pricebox"><a href="form?name=${items.pc_item_name }&grade=S&price=${items.price_s }"><fmt:formatNumber value="${items.price_s }" type="number"/>원</a></td>
+			<td class="pricebox"><a href="form?name=${items.pc_item_name }&grade=A&price=${items.price_a }"><fmt:formatNumber value="${items.price_a }" type="number"/>원</a></td>
+			<td class="pricebox"><a href="form?name=${items.pc_item_name }&grade=B&price=${items.price_b }"><fmt:formatNumber value="${items.price_b }" type="number"/>원</a></td>
 		</tr>
 		</c:forEach>
 		</table>

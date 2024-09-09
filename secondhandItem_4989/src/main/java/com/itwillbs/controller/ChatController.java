@@ -1,15 +1,57 @@
 package com.itwillbs.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.itwillbs.domain.ChatMessageDTO;
+import com.itwillbs.service.ChatService;
 
 @Controller
 public class ChatController {
+	@Inject
+	private ChatService chatService;
 	
+	@Autowired
+	private final SimpMessagingTemplate simpMessagingTemplate = null;
 	
 	@GetMapping("/chat")
-	public String chat() {
-		
+	public String chat(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("id") != null) {
+			model.addAttribute("sessionUserId", session.getAttribute("id"));
+		}
 		return "/chat/chat";
 	}
+	@MessageMapping("/{roomId}/reciveList")
+	public List<ChatMessageDTO> chatMessageList(){
+		
+		return null;
+	}
+	
+	@MessageMapping("/{roomId}")
+	@SendTo("/topic/{roomId}")
+    public ChatMessageDTO chat(@DestinationVariable("roomId") String roomId, 
+    		ChatMessageDTO message){
+		System.out.println(message);
+		//클라이언트에서 받아야하는 DTO 변수 chat_room_id, message_type, user_id, message
+		ChatMessageDTO chat = chatService.createChat(roomId ,message);
+		return chat;
+        //simpMessagingTemplate.convertAndSend("/topic/"+roomId,data);
+    }
 }
+
+

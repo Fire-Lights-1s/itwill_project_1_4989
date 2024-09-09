@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>매입 신청하기 : 4989</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/purchaseStyle.css">
 <style>
-h1 { text-align:center;}
 
 .content-container {
 	background-color: white;
@@ -39,6 +39,13 @@ h1 { text-align:center;}
 <!-- 본문영역 시작 -->
 	<div id="main-container-side">
   	  <main>
+  	  
+		<br>
+		<h1 style="text-align:center;">매입 서비스 소개</h1>
+  	 	<br>
+  	  <div style="text-align:right; padding-right:100px;">
+  	  <a href="${pageContext.request.contextPath}/my/purchlist"><button id="submit_form" style="width:200px;">나의 매입 신청내역 확인</button></a>
+  	  </div>
 		<div id="info-img" style="padding:0; margin:30px auto; width:900px;">
 			<img src="${pageContext.request.contextPath }/resources/img/purchase_001.png"
 			alt="4989 매입 서비스는 4989가 직접 고객의 전자제품을 최적의 가격에 매입하는 서비스입니다.">

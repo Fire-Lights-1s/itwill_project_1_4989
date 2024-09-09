@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+a {
+	text-decoration:none;
+}
+
 aside {
 	height:450px;
 }
@@ -41,9 +45,22 @@ main {
     justify-content: center;
 }
 
-.edit-info {
+.profile-edit-a {
 	text-align:right;
 	font-size:19px;
+}
+
+.profile-a {
+	text-align:right;
+	font-size:19px;
+}
+
+.profile-a a {
+	text-decoration:none;
+}
+
+.profile-a button {
+	font-size:1em;
 }
 
 .profile-nickname{
@@ -105,3 +122,64 @@ main {
     box-sizing: border-box;
     font-size: 16px;
 }
+
+.profile-item-list {
+	width:1038px;
+	border:1px solid black;
+	border-radius:20px;
+	padding:20px;
+	height:700px;
+	margin-top:10px;
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:flex-start;
+	align-items:flex-start;	
+}
+
+.profile-item-list-piece {
+	border:1px solid black;
+	border-radius:10px;
+	height:320px;
+	width:245px;
+	margin:1px;
+}
+
+.profile-item-image {
+	border-radius:10px 10px 0 0;
+	height:190px;
+	width:233px;
+	margin:5px 5px 0 5px;
+}
+
+.profile-item-image-div {
+	display:flex;
+	flex-direction:column;	
+}
+
+.profile-item-image-cover {
+	background-color:black;
+	color:white;
+	text-align:center;
+	border-radius:0 0 10px 10px;
+	width:233px;	
+	margin:0 auto;
+}
+
+.profile-item-name {
+	text-align:center;	
+	white-space:nowrap; /* 줄바꿈 방지 */
+    overflow:hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
+}
+
+.profile-item-review {
+	text-align:center;
+}
+
+.pagination {padding:40px 0 0; text-align:center;}
+.pagination a {display:inline-block; }
+.pagination a.pbtn {display:inline-block; padding:7px; text-align:center; vertical-align:middle; font-size:0;}
+.pagination a .pagenum {display:inline-block; width:25px; height:25px; line-height:25px; text-align:center; vertical-align:middle;}
+.pagination a .currentpage {border-radius:3px; background:#384d75; color:#fff;}
+.pagination a:hover .pagenum {border-radius:3px; background:#ddd;}
+

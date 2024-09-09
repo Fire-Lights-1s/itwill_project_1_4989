@@ -25,14 +25,10 @@
 		<div class="main-container-side-profile">
 		<main>
 		<h2>본인 확인</h2>
-		<form action="loginPro" method="post" class="login-container">
-            <div class="input-group">
-                <label for="userId">아이디</label>
-                <input type="text" id="userId" name="userId" placeholder="아이디">
-            </div>
+		<form action="${pageContext.request.contextPath}/my/infoCheckPro" method="post" class="login-container" onsubmit="loginCheck();">
             <div class="input-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" placeholder="비밀번호">
+                <input type="password" id="password" name="pass" placeholder="비밀번호">
             </div>
             <button type="submit" class="login-bttn">확인</button>
         </form>
@@ -41,5 +37,14 @@
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+<script type="text/javascript">
+	function loginCheck() {
+		const pass = document.getElementById('password').value;
+		if(pass === "") {
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		}
+	}
+</script>
 </body>
 </html>

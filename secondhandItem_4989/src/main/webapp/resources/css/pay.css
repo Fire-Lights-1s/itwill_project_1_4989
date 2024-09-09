@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.main-container-payPoint{
+	flex-grow:1;
+    padding: 20px;
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
+}
+#payPoint{
+	display:flex;
+    flex-direction: column;
+    width: 500px;
+}
+#pay_member{
+	flex-grow:1;
+	display:flex;
+    flex-direction: row;
+}
+#pay_member div:nth-child(1){
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+#pay_member div:nth-child(1) img{
+	width: 100px;
+	height: 100px;
+}
+#pay_member div:nth-child(2){
+	margin: 0 20px;
+	display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#pay_member div:nth-child(2){
+	font-size: 1.2rem;
+	font-weight: 900;
+}
+#pay_member p:nth-child(2){
+	margin-top: 10px;
+	color: #c0c0c0;
+}
+#pay_descript{
+	margin-top: 20px;
+	height: 300px;
+	border-radius: 20px;
+	background-color: #c488ff;
+}
+#TXList{
+	flex-grow:1;
+	display:flex;
+    flex-direction: column;
+}
