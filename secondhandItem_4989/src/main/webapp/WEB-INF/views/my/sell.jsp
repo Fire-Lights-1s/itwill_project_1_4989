@@ -28,34 +28,36 @@
 		<main>
 			<h2>판매 내역</h2>
 			<div class="profile-a">				
-				<c:if test="${empty param.sort}">
-<%-- 					<%  --%>
-<!-- // 					    String requestURI = request.getRequestURI(); -->
-<!-- // 					    String baseURI = requestURI.endsWith(".jsp") ? requestURI.substring(0, requestURI.length() - 4) : requestURI; -->
-<%-- 					%> --%>
-<%-- 					<a href="<%= baseURI %>?<%= request.getQueryString() %>&sort=priceDesc">가격 순 |</a> --%>
-					
-					<a href="${pageContext.request.contextPath}/my/sell?sort=priceDesc">가격 순 |</a>
-					<a href="${pageContext.request.contextPath}/my/sell?sort=dateDesc">날짜 순</a>
+				<c:if test="${empty param.sort}">				
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}">날짜 순&nbsp;&nbsp;&nbsp;&nbsp;</a><br>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=pro">판매 중 ㅣ</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=com">판매 완료</a>
 				</c:if>
 				<c:if test="${param.sort eq 'priceDesc'}">
-					<a href="${pageContext.request.contextPath}/my/sell?sort=priceAsc">가격 순 |</a>
-					<a href="${pageContext.request.contextPath}/my/sell?sort=dateDesc">날짜 순</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}">날짜 순&nbsp;&nbsp;&nbsp;&nbsp;</a><br>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=pro">판매 중 ㅣ</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=com">판매 완료</a>
 				</c:if>
 				<c:if test="${param.sort eq 'priceAsc'}">
-					<a href="${pageContext.request.contextPath}/my/sell?sort=priceDesc">가격 순 |</a>
-					<a href="${pageContext.request.contextPath}/my/sell?sort=dateDesc">날짜 순</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}">날짜 순&nbsp;&nbsp;&nbsp;&nbsp;</a><br>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=pro">판매 중 ㅣ</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=com">판매 완료</a>
 				</c:if>
 				<c:if test="${param.sort eq 'dateDesc'}">
-					<a href="${pageContext.request.contextPath}/my/sell?sort=priceDesc">가격 순 |</a>
-					<a href="${pageContext.request.contextPath}/my/sell?sort=dateAsc">날짜 순</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}">날짜 순&nbsp;&nbsp;&nbsp;&nbsp;</a><br>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=pro">판매 중 ㅣ</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=com">판매 완료</a>
 				</c:if>
 				<c:if test="${param.sort eq 'dateAsc'}">
-					<a href="${pageContext.request.contextPath}/my/sell?sort=priceDesc">가격 순 |</a>
-					<a href="${pageContext.request.contextPath}/my/sell?sort=dateDesc">날짜 순</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}">날짜 순&nbsp;&nbsp;&nbsp;&nbsp;</a><br>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=pro">판매 중 ㅣ</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=com">판매 완료</a>
 				</c:if>
-<%-- 				<a href="${pageContext.request.contextPath}/my/sell?sellOn">판매 중 |</a> --%>
-<%-- 				<a href="${pageContext.request.contextPath}/my/sell?date=1">판매 완료</a> --%>
 			</div>
 			<div class="profile-item-list">
 			<c:forEach var="productDTO" items="${productList}">
@@ -89,24 +91,24 @@
 			</c:forEach>
 			</div>
 			<div class="pagination">
-				<a href="${pageContext.request.contextPath}/my/sell?pageNum=1" class="firstpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></a>
+				<a href="${pageContext.request.contextPath}/my/sell?pageNum=1&sort=${pageDTO.sort}&sale=${pageDTO.sale}" class="firstpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></a>
 				<c:if test="${pageDTO.currentPage > 1}">
 <!-- 				처음 페이지 아닌 경우 이전 버튼 보이기 -->
-					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage - 1}" class="prevpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage - 1}&sort=${pageDTO.sort}&sale=${pageDTO.sale}" class="prevpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></a>
 				</c:if>
 				<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
 					<c:if test="${pageDTO.currentPage eq i}">
-						<a href="${pageContext.request.contextPath}/my/sell?pageNum=${i}"><span class="pagenum currentpage">${i}</span></a>
+						<a href="${pageContext.request.contextPath}/my/sell?pageNum=${i}&sort=${pageDTO.sort}&sale=${pageDTO.sale}"><span class="pagenum currentpage">${i}</span></a>
 					</c:if>
 					<c:if test="${pageDTO.currentPage ne i}">
-						<a href="${pageContext.request.contextPath}/my/sell?pageNum=${i}"><span class="pagenum">${i}</span></a>
+						<a href="${pageContext.request.contextPath}/my/sell?pageNum=${i}&sort=${pageDTO.sort}&sale=${pageDTO.sale}"><span class="pagenum">${i}</span></a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pageDTO.currentPage ne pageDTO.pageCount}">
 <!-- 				마지막 페이지 아닌 경우 다음 페이지 보이기 -->
-					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage + 1}" class="nextpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="다음"></a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage + 1}&sort=${pageDTO.sort}&sale=${pageDTO.sale}" class="nextpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="다음"></a>
 				</c:if>
-				<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.pageCount}" class="lastpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="마지막"></a>
+				<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.pageCount}&sort=${pageDTO.sort}&sale=${pageDTO.sale}" class="lastpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="마지막"></a>
 			</div>
 		</main>
 		</div>
