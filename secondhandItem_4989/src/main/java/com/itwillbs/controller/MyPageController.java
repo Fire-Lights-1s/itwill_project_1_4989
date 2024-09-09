@@ -184,4 +184,40 @@ public class MyPageController {
 		
 		return "/my/pay/point";
 	}
+	@GetMapping("/payAccount")
+	public String payAccount(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("member_id");
+		MemberDTO memberDTO = memberService.getMember(id);
+		
+		if(memberDTO == null) {
+			return "redirect:/member/login";
+		}
+		model.addAttribute("memberDTO", memberDTO);
+		
+		return "/my/pay/account";
+	}
+	@GetMapping("/payCharge")
+	public String payCharge(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("member_id");
+		MemberDTO memberDTO = memberService.getMember(id);
+		
+		if(memberDTO == null) {
+			return "redirect:/member/login";
+		}
+		model.addAttribute("memberDTO", memberDTO);
+		
+		return "/my/pay/charge";
+	}
+	@GetMapping("/paySend")
+	public String paySend(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("member_id");
+		MemberDTO memberDTO = memberService.getMember(id);
+		
+		if(memberDTO == null) {
+			return "redirect:/member/login";
+		}
+		model.addAttribute("memberDTO", memberDTO);
+		
+		return "/my/pay/send";
+	}
 }
