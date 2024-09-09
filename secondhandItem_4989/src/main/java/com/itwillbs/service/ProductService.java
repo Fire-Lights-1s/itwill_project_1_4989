@@ -1,5 +1,7 @@
 package com.itwillbs.service;
 
+import java.sql.Timestamp;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -14,12 +16,13 @@ public class ProductService {
 	ProductDAO productDAO = new ProductDAO();
 	
 	public void registerProduct(ProductDTO productDTO) {
-        // 이미지 필드는 null로 설정한 상태로 DB에 저장
+		System.out.println("ProductService registerProduct()");
+        productDTO.setCreated_datetime(new Timestamp(System.currentTimeMillis())); 
         productDAO.insertProduct(productDTO);  // DB에 상품 정보 저장
     }
 
 	public ProductDTO getProductDetail(String product_id) {
-		// TODO Auto-generated method stub
+		
 		
 		return productDAO.getProductDetail(product_id);
 	}

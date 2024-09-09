@@ -26,8 +26,9 @@ public class ProductController {
 	
 	@Inject
 	private ProductService productService;
-//	@Resource(name="uploadPath")
-//	private String uploadPath;
+	//업로드 파일경로 가져오기
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	@GetMapping("/register")
 	public String main() {
@@ -35,16 +36,31 @@ public class ProductController {
 	}
 
 	@PostMapping("/registerPro")
-	public String registerPro(ProductDTO productDTO, HttpSession session) {
+	public String registerPro(ProductDTO productDTO, HttpSession session, Model model, MultipartFile file, HttpServletRequest request) throws Exception {
 	     System.out.println("ProductController registerPro()");
-//	     UUID uuid = UUID.randomUUID();
-//	     String filename = uuid.toString()+"_"+file.getOriginalFilename();
-//			System.out.println("업로드 경로 : " + uploadPath);
-//			System.out.println("랜덤문자_파일이름 : " + filename);
-	     	productDTO.setSeller_id((String)session.getAttribute("member_id"));	        
-	        productService.registerProduct(productDTO);
+//		중복된 파일명 방지	     
+	    UUID uuid = UUID.randomUUID();
+	    String filename = uuid.toString()+"_"+file.getOriginalFilename();
+		System.out.println("업로드 경로 : " + uploadPath);
+		System.out.println("랜덤문자_파일이름 : " + filename);
+	     	
+	     //업로드 파일
+	     FileCopyUtils.copy(file.getBytes(), new File(uploadPath,filename));
+	     
+	     ProductDTO productDTO1 = new ProductDTO();
+	     productDTO1.setCategory_name("category_name");
+	     productDTO1.setSeller_id("seller_id");
+	     productDTO1.setProduct_name("product_name");
+	     productDTO1.setProduct_img1("product_img1");
 
-	        return "redirect:/product/all";
+	     productDTO1.setProduct_desc("product_desc");
+	     productDTO1.setPay_method("pay_method");
+    
+	     productDTO.setSeller_id((String)session.getAttribute("member_id"));
+	     
+	     productService.registerProduct(productDTO);
+
+	     return "redirect:/product/all";
 	    }
 
 
