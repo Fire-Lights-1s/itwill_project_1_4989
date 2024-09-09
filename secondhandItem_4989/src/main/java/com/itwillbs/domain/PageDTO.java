@@ -15,8 +15,15 @@ public class PageDTO {
 	private String search;
 	private String seller_id;
 	private String sort;
+	private String sale;
 	
 	
+	public String getSale() {
+		return sale;
+	}
+	public void setSale(String sale) {
+		this.sale = sale;
+	}
 	public String getSort() {
 		return sort;
 	}

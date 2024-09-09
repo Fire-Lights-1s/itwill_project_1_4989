@@ -93,6 +93,8 @@ public class MyPageController {
 			return "redirect:/member/login";
 		}
 		String pageNum = request.getParameter("pageNum");
+		String sort = request.getParameter("sort");
+		String sale = request.getParameter("sale");
 		System.out.println("1");
 		if(pageNum == null) {
 			pageNum = "1";
@@ -100,7 +102,6 @@ public class MyPageController {
 		System.out.println("2");
 		int currentPage = Integer.parseInt(pageNum);
 		int pageSize = 8;
-		String sort = request.getParameter("sort");
 		System.out.println("3");
 		PageDTO pageDTO = new PageDTO();
 		System.out.println("4");
@@ -109,6 +110,7 @@ public class MyPageController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setSeller_id(id);
 		pageDTO.setSort(sort);
+		pageDTO.setSale(sale);
 		System.out.println("5");
 		List<ProductDTO> productList = myPageService.getProductList(pageDTO);
 		System.out.println("6");
