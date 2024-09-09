@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,20 +27,51 @@
 		<div class="main-container-side-profile">
 		<main>
 			<h2>판매 내역</h2>
-			<div class="profile-a">
-				<button id="priceSortBtn" style="display:inline-block;">가격 순</button>
-				<button id="orderSortBtn" style="display:inline-block;">날짜 순</button>
-<!-- 				<a href="#" id="priceSortBtn">가격 순 |</a> -->
-<!-- 				<a href="#" id="dateSortBtn">날짜 순</a> -->
+			<div class="profile-a">				
+				<c:if test="${empty param.sort}">
+<%-- 					<%  --%>
+<!-- // 					    String requestURI = request.getRequestURI(); -->
+<!-- // 					    String baseURI = requestURI.endsWith(".jsp") ? requestURI.substring(0, requestURI.length() - 4) : requestURI; -->
+<%-- 					%> --%>
+<%-- 					<a href="<%= baseURI %>?<%= request.getQueryString() %>&sort=priceDesc">가격 순 |</a> --%>
+					
+					<a href="${pageContext.request.contextPath}/my/sell?sort=priceDesc">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateDesc">날짜 순</a>
+				</c:if>
+				<c:if test="${param.sort eq 'priceDesc'}">
+					<a href="${pageContext.request.contextPath}/my/sell?sort=priceAsc">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateDesc">날짜 순</a>
+				</c:if>
+				<c:if test="${param.sort eq 'priceAsc'}">
+					<a href="${pageContext.request.contextPath}/my/sell?sort=priceDesc">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateDesc">날짜 순</a>
+				</c:if>
+				<c:if test="${param.sort eq 'dateDesc'}">
+					<a href="${pageContext.request.contextPath}/my/sell?sort=priceDesc">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateAsc">날짜 순</a>
+				</c:if>
+				<c:if test="${param.sort eq 'dateAsc'}">
+					<a href="${pageContext.request.contextPath}/my/sell?sort=priceDesc">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateDesc">날짜 순</a>
+				</c:if>
+<%-- 				<a href="${pageContext.request.contextPath}/my/sell?sellOn">판매 중 |</a> --%>
+<%-- 				<a href="${pageContext.request.contextPath}/my/sell?date=1">판매 완료</a> --%>
 			</div>
 			<div class="profile-item-list">
 			<c:forEach var="productDTO" items="${productList}">
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
 						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							판매 중
-						</div>
+							<c:if test="${productDTO.trade_status eq '거래 가능' }">
+								<div class="profile-item-image-cover1">
+									판매 중
+								</div>
+							</c:if>
+							<c:if test="${productDTO.trade_status eq '거래 완료' }">
+								<div class="profile-item-image-cover2">
+									판매 완료
+								</div>	
+							</c:if>
 					</div>
 					<div class="profile-item-name" title="${productDTO.product_name}">
 						${productDTO.product_name}<br>
@@ -51,7 +83,7 @@
 					</div>
 					<div class="profile-item-review">
 						평점 : 4.7&emsp;&emsp;
-						1개월전
+						<fmt:formatDate value="${productDTO.created_datetime}" pattern="yyyy-MM-dd"/>
 					</div>
 				</div>
 			</c:forEach>
@@ -81,38 +113,5 @@
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
-<script>
-
-	let isPriceAscending = true;
-	let isOrderAscending = true;
-	
-	function sortItems(sortBy) {
-	    const itemsContainer = document.querySelector('.profile-item-list');
-	    const items = Array.from(document.querySelectorAll('.profile-item-list-piece'));
-	
-	    items.sort((a, b) => {
-	        if (sortBy === 'price') {
-	            const priceA = parseInt(a.dataset.price);
-	            const priceB = parseInt(b.dataset.price);
-	            return isPriceAscending ? priceA - priceB : priceB - priceA;
-	        } else if (sortBy === 'order') {
-	            const dateA = new Date(a.dataset.date);
-	            const dateB = new Date(b.dataset.date);
-	            return isOrderAscending ? dateA - dateB : dateB - dateA;
-	        }
-	    });
-	
-	    // 정렬된 항목을 다시 표시
-	    items.forEach(item => itemsContainer.appendChild(item));
-	
-	    // 정렬 순서 토글
-	    if (sortBy === 'price') isPriceAscending = !isPriceAscending;
-	    if (sortBy === 'order') isOrderAscending = !isOrderAscending;
-	}
-	
-	document.getElementById('priceSortBtn').addEventListener('click', () => sortItems('price'));
-	document.getElementById('orderSortBtn').addEventListener('click', () => sortItems('order'));
-
-</script>
 </body>
 </html>

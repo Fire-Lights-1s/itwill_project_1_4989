@@ -6,12 +6,26 @@
 <mapper namespace="com.itwillbs.mapper.MyPageMapper">
 	<select id="getProductList" resultType="com.itwillbs.domain.ProductDTO">
 		select * from Product
-		where seller_id = 'test'
-		order by trade_status, created_datetime desc
+		where seller_id = #{seller_id}
+		<if test="sort == 'priceDesc'">
+			order by trade_status, product_price desc
+		</if>
+		<if test="sort == 'priceAsc'">
+			order by trade_status, product_price
+		</if>
+		<if test="sort == 'dateDesc'">
+			order by trade_status, created_datetime desc
+		</if>
+		<if test="sort == 'dateAsc'">
+			order by trade_status, created_datetime
+		</if>
+		<if test="sort == null">
+			order by trade_status, created_datetime desc
+		</if>
 		limit #{startRow},#{pageSize}
 	</select>
 		
-	<select id="getProductCount" resultType="com.itwillbs.domain.ProductDTO">
+	<select id="getProductCount" resultType="java.lang.Integer">
 		select count(*) from Product
 		where seller_id = #{seller_id}
 	</select>

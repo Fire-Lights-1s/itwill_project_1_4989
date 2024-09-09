@@ -14,8 +14,15 @@ public class PageDTO {
 	private String pageNum;//
 	private String search;
 	private String seller_id;
+	private String sort;
 	
 	
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
 	public String getSeller_id() {
 		return seller_id;
 	}

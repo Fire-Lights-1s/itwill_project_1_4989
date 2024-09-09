@@ -1,6 +1,5 @@
 package com.itwillbs.controller;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -101,23 +100,24 @@ public class MyPageController {
 		System.out.println("2");
 		int currentPage = Integer.parseInt(pageNum);
 		int pageSize = 8;
+		String sort = request.getParameter("sort");
 		System.out.println("3");
 		PageDTO pageDTO = new PageDTO();
 		System.out.println("4");
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		pageDTO.setPageSize(pageSize);
+		pageDTO.setSeller_id(id);
+		pageDTO.setSort(sort);
 		System.out.println("5");
 		List<ProductDTO> productList = myPageService.getProductList(pageDTO);
 		System.out.println("6");
 		ProductDTO productDTO = new ProductDTO();
 		System.out.println("7");
-		productDTO.setSeller_id("test");
-		System.out.println("8");
-		// 검색어 포함
-		int count = 10;
-//		int count = myPageService.getProductCount(productDTO);
-		System.out.println("9");	
+		productDTO.setSeller_id(id);
+		System.out.println(productDTO.getSeller_id());
+		int count = myPageService.getProductCount(productDTO);
+		System.out.println(count);	
 		// 한 화면에 보여줄 페이지 개수
 		int pageBlock = 5;
 		System.out.println("10");
@@ -140,7 +140,6 @@ public class MyPageController {
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
-		pageDTO.setSeller_id(id);
 		System.out.println(pageDTO);
 		System.out.println(productDTO);
 		System.out.println(productList);

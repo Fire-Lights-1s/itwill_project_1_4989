@@ -1,5 +1,7 @@
 package com.itwillbs.domain;
 
+import java.sql.Timestamp;
+
 public class ProductDTO {
 	//거래상품 ID	
     private int product_id;
@@ -23,7 +25,7 @@ public class ProductDTO {
     private String product_img4;
     private String product_img5;
     //상품등록일시
-    private String created_datetime;
+    private Timestamp created_datetime;
     //조회수
     private int view_count;
     //찜수
@@ -182,13 +184,11 @@ public class ProductDTO {
 		this.product_img5 = product_img5;
 	}
 
-
-	public String getCreated_datetime() {
+	public Timestamp getCreated_datetime() {
 		return created_datetime;
 	}
 
-
-	public void setCreated_datetime(String created_datetime) {
+	public void setCreated_datetime(Timestamp created_datetime) {
 		this.created_datetime = created_datetime;
 	}
 
