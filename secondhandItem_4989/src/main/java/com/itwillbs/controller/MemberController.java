@@ -189,4 +189,27 @@ public class MemberController {
 			    }
 	}
 	
+	@GetMapping("/resultpass")
+	public String resultpass() {
+		return "/member/resultpass";
+	}
+	
+	@PostMapping("/findpassPro")
+	public String findpassPro(MemberDTO memberDTO,HttpSession session) {
+		
+		MemberDTO memberDTO2 = memberService.passCheck(memberDTO);
+		System.out.println(memberDTO2);
+	
+		
+		 if (memberDTO2 != null) {
+			        
+			        session.setAttribute("pass", memberDTO2.getPass());
+			        System.out.println(session.getAttribute("pass"));
+			        
+			        return "redirect:/member/resultpass"; // 반드시 반환
+			    } else {
+			        return "redirect:/member/findpass"; // 반드시 반환
+			    }
+	}
+	
 }

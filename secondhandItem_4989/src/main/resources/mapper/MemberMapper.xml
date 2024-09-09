@@ -38,5 +38,10 @@
 		where name = #{name} and email = #{email} and phone = #{phone} 
 	</select>
 	
+	<select id="passCheck" resultType="com.itwillbs.domain.MemberDTO">
+		select * from Mem
+		where member_id = #{member_id} and name = #{name} and email = #{email} and phone = #{phone} 
+	</select>
+	
 	
 </mapper>

@@ -59,4 +59,10 @@ public class MemberDAO {
 		return sqlSession.selectOne(namespace + ".idCheck", memberDTO);
 	}
 	
+	public MemberDTO passCheck(MemberDTO memberDTO) {
+		System.out.println("MemberDAO passCheck()");
+		
+		return sqlSession.selectOne(namespace + ".passCheck", memberDTO);
+	}
+	
 }

@@ -68,4 +68,10 @@ public class MemberService {
 		return memberDAO.idCheck(memberDTO);
 	}
 	
+	public MemberDTO passCheck(MemberDTO memberDTO) {
+		System.out.println("MemberService passCheck()");
+		
+		return memberDAO.passCheck(memberDTO);
+	}
+	
 }

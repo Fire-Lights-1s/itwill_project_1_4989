@@ -36,7 +36,7 @@
         </div>
         <div class="buttons">
             <button onclick="location.href='findpass'">비밀번호 찾기</button>
-            <button onclick="location.href='login'">로그인 하기</button>
+            <button onclick="location.href='login'">로그인하러 가기</button>
         </div>
     </div>
 
