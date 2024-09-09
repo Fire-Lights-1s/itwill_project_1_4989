@@ -296,27 +296,27 @@ div#chatContent::-webkit-scrollbar-track {
 	overflow-wrap: anywhere; 
 	margin-bottom: 10px;
 }
-#input{
+#inputMessage{
 	padding: 10px;
 	height: 80px;
 	justify-content: center;
 }
-#input *{
+#inputMessage *{
 	background-color: white;
 	border: 0px;
 }
-#input button:first-child{
+#inputMessage button:first-child{
 	border-radius: 20px 0 0 20px;	
 }
-#input button:last-child{
+#inputMessage button:last-child{
 	border-radius: 0 20px 20px 0;	
 }
-#input button{
+#inputMessage button{
 	padding: 10px;
 	width: 60px;
 	height: 60px;
 }
-#input textarea{
+#inputMessage textarea{
 	resize: none;
 	flex-grow: 1;
 }

@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SocketTextHandler extends TextWebSocketHandler {
 
     private final Set<WebSocketSession> sessions = ConcurrentHashMap.newKeySet();
-
+//    private Set<WebSocketSession> sessions= Collections.synchronizedSet(new HashSet<>());
     /**
      * websocket 연결 성공 시
      */
@@ -26,11 +26,15 @@ public class SocketTextHandler extends TextWebSocketHandler {
      */
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        String payload = message.getPayload();
-        JSONObject jsonObject = new JSONObject(payload);
-        for (WebSocketSession s : sessions) {
-            s.sendMessage(new TextMessage("Hi " + jsonObject.getString("user") + "!"));
-        }
+        
+        // Payload : 통신 시 탑재된 데이터(메세지)
+ 		System.out.println("전달받은내용:"+message.getPayload());
+ 		
+ 		// /websocket/echo.do으로 연결된 객체를 만든 클라이언트들(sessions)
+ 		// 전달 받은 내용을 보냄
+ 		for(WebSocketSession s : sessions) {
+ 			s.sendMessage(message);
+ 		}
     }
 
     /**

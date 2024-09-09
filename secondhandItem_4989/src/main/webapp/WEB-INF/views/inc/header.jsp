@@ -43,12 +43,12 @@
                     <a href="${pageContext.request.contextPath}/my/profile" class="desktop-item">마이페이지</a>
                     <ul class="drop-menu">
                         <li><a href="${pageContext.request.contextPath}/my/profile">내 프로필</a></li>
-                        <li><a href="${pageContext.request.contextPath}/my/pay/point">4989 페이</a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/payPoint">4989 페이</a></li>
                         <li><a href="${pageContext.request.contextPath}/my/zzim">찜 목록</a></li>
                         <li><a href="${pageContext.request.contextPath}/my/sell">판매내역</a></li>
                         <li><a href="${pageContext.request.contextPath}/my/buy">구매내역</a></li>
-                        <li><a href="${pageContext.request.contextPath}/my/purch/list">매입신청내역</a></li>
-                        <li><a href="${pageContext.request.contextPath}/my/infoUpdate">정보 수정</a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/purchlist">매입신청내역</a></li>
+                        <li><a href="${pageContext.request.contextPath}/my/infoCheck">정보 수정</a></li>
                     </ul>
                 </li>
                 <li style="width:30px;"></li>
@@ -61,7 +61,7 @@
                 <a class="login-btn" href="${pageContext.request.contextPath}/my/profile">${sessionScope.member_id}님 접속 중</a>
                 	<ul class="drop-menu">
                 		<c:if test="${sessionScope.member_id eq 'admin' }">
-                		<li><a href="${pageContext.request.contextPath}/admin">관리자 홈</a></li>
+                		<li><a href="${pageContext.request.contextPath}/admin/">관리자 홈</a></li>
                 		</c:if>
                         <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
                     </ul>
