@@ -27,9 +27,9 @@ public class MyPageService {
 		return myPageDAO.getProductList(pageDTO);
 	}
 	
-	public int getProductCount(ProductDTO productDTO) {
+	public int getProductCount(PageDTO pageDTO) {
 		System.out.println("MyPageService getProductCount()");
-		return myPageDAO.getProductCount(productDTO);
+		return myPageDAO.getProductCount(pageDTO);
 	}
 
 }

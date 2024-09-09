@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>판매 내역</title>
+<title>@@@님의 판매 내역</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
@@ -18,12 +18,18 @@
 	<header>
 		<div id="menu-name">
    			<a href="${pageContext.request.contextPath}">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/my/profile">마이 페이지 </a> >
-   			<a href="${pageContext.request.contextPath}/my/sell">판매 내역</a>
+   			<a href="${pageContext.request.contextPath}/your/seller">dfagfadqweqdasd님의 페이지 </a> >
+   			<a href="${pageContext.request.contextPath}/your/sellerHistory">dfagfadqweqdasd님의 판매 내역</a>
 		</div>
 	</header>
 	<div class="content-container">
-	<jsp:include page="../inc/myPageLefter.jsp"></jsp:include>
+<aside class="side-nav">
+	<h1>dfagfadqweqdasd님의 페이지</h1>
+	<br>
+	<ul>
+		<li><a href="${pageContext.request.contextPath}/your/sellerHistory">판매 내역</a></li>
+	</ul>
+</aside>	
 		<div class="main-container-side-profile">
 		<main>
 			<h2>판매 내역</h2>

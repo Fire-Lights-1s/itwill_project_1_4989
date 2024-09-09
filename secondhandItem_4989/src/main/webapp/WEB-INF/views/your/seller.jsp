@@ -16,8 +16,8 @@
 	<header>
 		<div id="menu-name">
    			<a href="${pageContext.request.contextPath}">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/product/seller">dfagfadqweqdasd님의 페이지 </a> >
-   			<a href="${pageContext.request.contextPath}/product/seller">dfagfadqweqdasd님의 프로필</a>
+   			<a href="${pageContext.request.contextPath}/your/seller">dfagfadqweqdasd님의 페이지 </a> >
+   			<a href="${pageContext.request.contextPath}/your/seller">dfagfadqweqdasd님의 프로필</a>
 		</div>
 	</header>
 	<div class="content-container">
@@ -25,7 +25,7 @@
 	<h1>dfagfadqweqdasd님의 페이지</h1>
 	<br>
 	<ul>
-		<li><a href="${pageContext.request.contextPath}/product/sellerHistory">판매 내역</a></li>
+		<li><a href="${pageContext.request.contextPath}/your/sellerHistory">판매 내역</a></li>
 	</ul>
 </aside>
 		<div class="main-container-side-profile">
