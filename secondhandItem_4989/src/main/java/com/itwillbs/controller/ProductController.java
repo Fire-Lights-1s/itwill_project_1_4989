@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.service.ProductService;
 
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 
 @Controller
 @RequestMapping("/product/*")
