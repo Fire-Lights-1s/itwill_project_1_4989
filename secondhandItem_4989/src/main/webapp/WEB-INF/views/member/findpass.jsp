@@ -27,18 +27,18 @@
 <div class="container">
         <h1>비밀번호 찾기</h1>
         <p>회원가입시 입력한 정보를 입력해주세요.</p>
-        <form action="findPassword.jsp" method="post">
+        <form action="findpassPro" method="post">
             <div class="form-group">
                 <label for="userId">아이디</label>
-                <input type="text" id="userId" name="userId" placeholder="아이디" required>
+                <input type="text" id="userId" name="member_id" placeholder="아이디" required>
             </div>
             <div class="form-group">
                 <label for="name">이름</label>
                 <input type="text" id="name" name="name" placeholder="이름" required>
             </div>
             <div class="form-group">
-                <label for="idNumber">주민등록번호</label>
-                <input type="text" id="idNumber" name="idNumber" placeholder="주민등록번호 13자리" required>
+                 <label for="email">이메일</label>
+                <input type="email" id="email" name="email" placeholder="abcd@efgh.com" required>
             </div>
             <div class="form-group">
                 <label for="phone">휴대폰 번호</label>

@@ -190,12 +190,20 @@ $(document).ready(function() {
 });
 
 
-// 찜 등록
+// 찜 등록 및 취소
 document.getElementById('zzim-button').addEventListener('click', function() {
     const product_id = this.getAttribute('data-product_id');
     const member_id = this.getAttribute('data-member_id');
-
-    fetch('/zzim/save', {
+    const contextPath = "${pageContext.request.contextPath}";
+    const zzim_button = document.getElementById('zzim-button');
+    
+    if (member_id === null || member_id === '') {
+    	alert('로그인한 회원만 이용가능한 기능입니다')
+    	window.location.href = contextPath + '/member/login';
+    	
+    } else {    
+    
+    fetch(contextPath + '/zzim/save', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -204,18 +212,19 @@ document.getElementById('zzim-button').addEventListener('click', function() {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-        	zzim-button.classList.add('active');
+        if (data.save) {
+        	zzim_button.classList.add('active');
         } else {
-        	alert('오류 발생! 다시 시도해주세요.')
+        	zzim_button.classList.remove('active');
         }
     })
     .catch(error => {
         console.error('Error:', error);
     });
+    }
+    
 });
 
-// 찜 취소
 
 
 

@@ -122,12 +122,21 @@ public class MemberController {
 	@GetMapping("/callPro")
 	public String callPro(MemberDTO memberDTO,HttpSession session) {
 		
+		String email = (String) session.getAttribute("email");
+		
+		memberDTO = new MemberDTO();
+	    memberDTO.setEmail(email);
+		
 		MemberDTO memberDTO3 = memberService.SocialCheck(memberDTO);
-		if(memberDTO3 == session.getAttribute("email")) {
+		
+		
+		
+		if(memberDTO3 != null) {
 			session.setAttribute("member_id", memberDTO3.getMember_id());
+			session.setAttribute("nickname", memberDTO3.getNickname());
 			return "redirect:/";
 		} else {
-			
+			System.out.println("memberDTO3 is null");
 			return "redirect:/member/social";
 		}
 		
@@ -157,7 +166,7 @@ public class MemberController {
 		return "redirect:/member/welcome";
 	}
 	
-	@PostMapping("/resultid")
+	@GetMapping("/resultid")
 	public String resultid() {
 		return "/member/resultid";
 	}
@@ -169,15 +178,38 @@ public class MemberController {
 		System.out.println(memberDTO2);
 	
 		
-		if(memberDTO2 != null && memberDTO2.getName().equals(session.getAttribute("name")) && memberDTO2.getEmail().equals(session.getAttribute("email")) && memberDTO2.getPhone().equals(session.getAttribute("phone")) ) {
-			
-			session.setAttribute("member_id", memberDTO2.getMember_id());
-			System.out.println(session.getAttribute("member_id"));
-			return "redirect:/member/resultid";
-		}else {
-			
-			return "redirect:/member/findid";
-		}
+		 if (memberDTO2 != null) {
+			        
+			        session.setAttribute("member_id", memberDTO2.getMember_id());
+			        System.out.println(session.getAttribute("member_id"));
+			        
+			        return "redirect:/member/resultid"; // 반드시 반환
+			    } else {
+			        return "redirect:/member/findid"; // 반드시 반환
+			    }
+	}
+	
+	@GetMapping("/resultpass")
+	public String resultpass() {
+		return "/member/resultpass";
+	}
+	
+	@PostMapping("/findpassPro")
+	public String findpassPro(MemberDTO memberDTO,HttpSession session) {
+		
+		MemberDTO memberDTO2 = memberService.passCheck(memberDTO);
+		System.out.println(memberDTO2);
+	
+		
+		 if (memberDTO2 != null) {
+			        
+			        session.setAttribute("pass", memberDTO2.getPass());
+			        System.out.println(session.getAttribute("pass"));
+			        
+			        return "redirect:/member/resultpass"; // 반드시 반환
+			    } else {
+			        return "redirect:/member/findpass"; // 반드시 반환
+			    }
 	}
 	
 }

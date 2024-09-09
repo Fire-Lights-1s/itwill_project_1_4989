@@ -58,6 +58,7 @@ public class HomeController {
 		return "index";
 	}
 	
+	
 	@RequestMapping("/sample1")
 	public String sample1() {
 		return "sample_content";
