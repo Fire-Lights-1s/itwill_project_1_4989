@@ -1,5 +1,5 @@
     let stompClient = null;
-    let roomIdJs = null;
+    let roomIdJS = null;
     let chatList = null;
 	let userId = sessionUserId;
 	
