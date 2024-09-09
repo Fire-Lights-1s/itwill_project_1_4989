@@ -52,8 +52,9 @@ h1, h3 { text-align:center; }
 	<form action="registerPurchase" method="post">
 	<div id="center-input">
     <div class="form-group">
-        <div id="label_title"><label for="productName">신청인 아이디</label></div>
-        <input type="text" class="textform" name="member_id" value="${sessionScope.member_id}" readonly>
+	    <input type="hidden" class="textform" name="member_id" value="${sessionScope.member_id}" readonly>
+        <div id="label_title"><label for="productName">신청인 이름</label></div>
+		<input type="text" id="member_name" name="member_name" value="${member_name }" readonly>
     </div>
     
     <div class="form-group">
@@ -63,9 +64,8 @@ h1, h3 { text-align:center; }
 
     <div class="form-group">
         <div id="label_title"><label for="grade">등급/매입가</label></div>
-        <fmt:formatNumber value="${expected_price}" type="number" var="formattedExpectedPrice"/>
         <input type="text" class="textform" name="expected_grade" value="${expected_grade }" style="width:60px; text-align:center;"readonly>
-         / <input type="text" class="textform" name="expected_price" value="${formattedExpectedPrice}" style="width:100px; text-align:right;" readonly>원 
+         / <input type="text" class="textform" name="expected_price" value="${expected_price}" style="width:100px; text-align:right;" readonly>원 
         <span class="info_span">※ 등급 및 매입가는 실제 검수 결과에 따라 달라질 수 있습니다.</span>
     </div>
 
@@ -96,7 +96,6 @@ h1, h3 { text-align:center; }
                 </c:forEach>
             </select>
             <input type="text" id="bank_account" class="textform" name="transfer_account" placeholder="계좌번호(숫자만 입력)">
-            <input type="hidden" id="member_name" name="member_name" value="${member_name }">
             <button id="account_confirm" type="button">확인</button></div>
         </div>
         <div id="label_title"> </div>
@@ -140,6 +139,10 @@ h1, h3 { text-align:center; }
 	const bank_account = document.getElementById('bank_account').value;
 	const member_name = document.getElementById('member_name').value;
 	
+	if(member_name == null || member_name == '') {
+		alert('인증 실패 / 올바르게 입력했는지 확인해주세요.');
+		document.getElementById('submit_form').disabled = true;
+	} else {	
 	// 서버에 데이터 보내고 응답
 	fetch('validate-account', {
 		method: 'POST',
@@ -163,6 +166,7 @@ h1, h3 { text-align:center; }
 			}
 		})
 		.catch(error => console.error('Error:', error));
+	}
 	});
 
 </script>

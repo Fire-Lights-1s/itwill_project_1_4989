@@ -41,6 +41,7 @@ nav .wrapper{
 .nav-links li{
     list-style: none;
     padding: 10px 0px 0px 0px;
+    white-space: nowrap;
 }
 .nav-links li a{
 	font-family: "Noto Sans KR", sans-serif;
@@ -167,7 +168,7 @@ nav .wrapper{
     color: black !important;
 }
  
-.heart-badge {
+#zzim-button {
     width: 30px; /* 원의 지름 */
     height: 30px; /* 원의 지름 */
     background-color: #d8c9f3; /* 배경색 */
@@ -180,11 +181,11 @@ nav .wrapper{
     cursor: pointer;
 }
 
-.heart-badge:hover {
+#zzim-button:hover {
     color: #4e229e; /* 호버 시 하트색 변경 */
 }
 
-.heart-badge .active {
+#zzim-button:active {
     color: #4e229e; /* 클릭 시 하트색 변경 */
 }
  
