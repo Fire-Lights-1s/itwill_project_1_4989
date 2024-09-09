@@ -27,7 +27,7 @@
  <div class="container">
         <h1>아이디 찾기</h1>
         <p>회원가입 시 입력한 정보를 입력해주세요.</p>
-        <form action="resultid" method="post">
+        <form action="findidPro" method="post">
             <div class="form-group">
                 <label for="name">이름</label>
                 <input type="text" id="name" name="name" placeholder="이름" required>
