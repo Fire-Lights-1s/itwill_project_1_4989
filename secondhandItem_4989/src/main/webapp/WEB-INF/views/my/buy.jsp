@@ -27,41 +27,57 @@
 		<div class="main-container-side-profile">
 		<main>
 			<h2>구매 내역</h2>
-			<div class="profile-a">
-				<a href="#">가격 순 |</a>
-				<a href="#">날짜 순</a>
+			<div class="profile-a">				
+				<c:if test="${empty param.sort}">				
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=pro">구매 진행 중 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=com">구매 완료</a>
+				</c:if>
+				<c:if test="${param.sort eq 'priceDesc'}">
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateAsc&sale=pro">구매 진행 중 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateAsc&sale=com">구매 완료</a>
+				</c:if>
+				<c:if test="${param.sort eq 'priceAsc'}">
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateAsc&sale=pro">구매 진행 중 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateAsc&sale=com">구매 완료</a>
+				</c:if>
+				<c:if test="${param.sort eq 'dateDesc'}">
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateAsc&sale=pro">구매 진행 중 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateAsc&sale=com">구매 완료</a>
+				</c:if>
+				<c:if test="${param.sort eq 'dateAsc'}">
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}">가격 순 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateAsc&sale=pro">구매 진행 중 |</a>
+					<a href="${pageContext.request.contextPath}/my/sell?sort=dateAsc&sale=com">구매 완료</a>
+				</c:if>
 			</div>
 			<div class="profile-item-list">
+			<c:forEach var="productDTO" items="${productList}">
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
 						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							구매 중
-						</div>
+							<c:if test="${productDTO.trade_status eq '거래 가능' }">
+								<div class="profile-item-image-cover1">
+									구매 진행 중
+								</div>
+							</c:if>
+							<c:if test="${productDTO.trade_status eq '거래 완료' }">
+								<div class="profile-item-image-cover2">
+									구매 완료
+								</div>	
+							</c:if>
 					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">구매 확정</a>&emsp;&emsp;
-						<a href="#">판매자와 채팅</a>
-					</div>
-					<div class="profile-item-review">
-						평점 : &emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							구매 완료
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
+					<div class="profile-item-name" title="${productDTO.product_name}">
+						${productDTO.product_name}<br>
+						${productDTO.product_price}원
 					</div>
 					<div class="profile-item-review">
 						<a href="#">후기 작성</a>&emsp;&emsp;
@@ -69,149 +85,28 @@
 					</div>
 					<div class="profile-item-review">
 						평점 : 4.7&emsp;&emsp;
-						1개월전
+						<fmt:formatDate value="${productDTO.created_datetime}" pattern="yyyy-MM-dd"/>
 					</div>
 				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							구매 완료
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">후기 작성</a>&emsp;&emsp;
-						<a href="#">판매자와 채팅</a>
-					</div>
-					<div class="profile-item-review">
-						평점 : 4.7&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							구매 완료
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">후기 작성</a>&emsp;&emsp;
-						<a href="#">판매자와 채팅</a>
-					</div>
-					<div class="profile-item-review">
-						평점 : 4.7&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							구매 완료
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">후기 작성</a>&emsp;&emsp;
-						<a href="#">판매자와 채팅</a>
-					</div>
-					<div class="profile-item-review">
-						평점 : 4.7&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							구매 완료
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">후기 작성</a>&emsp;&emsp;
-						<a href="#">판매자와 채팅</a>
-					</div>
-					<div class="profile-item-review">
-						평점 : 4.7&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							구매 완료
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">후기 작성</a>&emsp;&emsp;
-						<a href="#">판매자와 채팅</a>
-					</div>
-					<div class="profile-item-review">
-						평점 : 4.7&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
-				<div class="profile-item-list-piece">
-					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
-						<div class="profile-item-image-cover">
-							구매 완료
-						</div>
-					</div>
-					<div class="profile-item-name">
-						Galaxy Note3<br>
-						800,000원
-					</div>
-					<div class="profile-item-review">
-						<a href="#">후기 작성</a>&emsp;&emsp;
-						<a href="#">판매자와 채팅</a>
-					</div>
-					<div class="profile-item-review">
-						평점 : 4.7&emsp;&emsp;
-						1개월전
-					</div>
-				</div>
+			</c:forEach>
 			</div>
 			<div class="pagination">
-				<a href="#" class="firstpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></a>
+				<a href="${pageContext.request.contextPath}/my/sell?pageNum=1&sort=${pageDTO.sort}&sale=${pageDTO.sale}" class="firstpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></a>
 				<c:if test="${pageDTO.currentPage > 1}">
-<!-- 				처음 페이지 아닌 경우 이전 버튼 보이기 -->
-					<a href="#" class="prevpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage - 1}&sort=${pageDTO.sort}&sale=${pageDTO.sale}" class="prevpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></a>
 				</c:if>
 				<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
 					<c:if test="${pageDTO.currentPage eq i}">
-						<a href="#"><span class="pagenum currentpage">${i}</span></a>
+						<a href="${pageContext.request.contextPath}/my/sell?pageNum=${i}&sort=${pageDTO.sort}&sale=${pageDTO.sale}"><span class="pagenum currentpage">${i}</span></a>
 					</c:if>
 					<c:if test="${pageDTO.currentPage ne i}">
-						<a href="#"><span class="pagenum">${i}</span></a>
+						<a href="${pageContext.request.contextPath}/my/sell?pageNum=${i}&sort=${pageDTO.sort}&sale=${pageDTO.sale}"><span class="pagenum">${i}</span></a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${pageDTO.currentPage ne pageDTO.pageCount}">
-<!-- 				마지막 페이지 아닌 경우 다음 페이지 보이기 -->
-					<a href="#" class="nextpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="다음"></a>
+					<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage + 1}&sort=${pageDTO.sort}&sale=${pageDTO.sale}" class="nextpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="다음"></a>
 				</c:if>
-				<a href="#" class="lastpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="마지막"></a>
+				<a href="${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.pageCount}&sort=${pageDTO.sort}&sale=${pageDTO.sale}" class="lastpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="마지막"></a>
 			</div>
 		</main>
 		</div>

@@ -39,10 +39,24 @@ main {
     margin-bottom:10px;
 }
 
+.profile-circle-edit {
+    position: absolute;
+    top:0;
+    right:20px;
+    cursor: pointer;
+}
+
+.profile-circle-cancel {
+    position: absolute;
+    top:0;
+    right:-20px;
+}
+
 .profile-circle-div {
 	display:flex;
 	align-items: center;
     justify-content: center;
+    position:relative;
 }
 
 .profile-edit-a {
