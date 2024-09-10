@@ -21,7 +21,6 @@ public class MyPageService {
 		System.out.println("MyPageService getProductList()");
 		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
 		int endRow = startRow + pageDTO.getPageSize() - 1;
-//		               limit 시작하는 행번호 - 1, 글개수
 		pageDTO.setStartRow(startRow - 1);
 		pageDTO.setEndRow(endRow);
 		return myPageDAO.getProductList(pageDTO);
@@ -32,4 +31,17 @@ public class MyPageService {
 		return myPageDAO.getProductCount(pageDTO);
 	}
 
+	public List<ProductDTO> getZzimList(PageDTO pageDTO) {
+		System.out.println("MyPageService getZzimList()");
+		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
+		int endRow = startRow + pageDTO.getPageSize() - 1;
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
+		return myPageDAO.getZzimList(pageDTO);
+	}
+	
+	public int getZzimCount(PageDTO pageDTO) {
+		System.out.println("MyPageService getZzimCount()");
+		return myPageDAO.getZzimCount(pageDTO);
+	}
 }
