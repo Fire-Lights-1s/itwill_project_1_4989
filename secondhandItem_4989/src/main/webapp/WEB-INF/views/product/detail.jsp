@@ -133,7 +133,7 @@
                     <!-- 이미지 영역 -->
                     <div class="image-box">
                         <div class="card">
-                            <img src="${productDTO.product_img1}" alt="Product Image">
+                            <img src="${pageContext.request.contextPath }/resources/upload/${productDTO.product_img1}" alt="Product Image">
                         </div>
                     </div>
 
