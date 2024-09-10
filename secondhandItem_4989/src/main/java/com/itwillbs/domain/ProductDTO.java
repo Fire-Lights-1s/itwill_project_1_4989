@@ -37,27 +37,48 @@ public class ProductDTO {
     //거래 지역
     private String trade_area;
     //거래상태
-//    private String trade_status;
+    private String trade_status;
  
-
+    
 	@Override
 	public String toString() {
 		return "ProductDTO [product_id=" + product_id + ", category_name=" + category_name + ", seller_id=" + seller_id
 				+ ", product_name=" + product_name + ", product_price=" + product_price + ", year_purchase="
 				+ year_purchase + ", product_desc=" + product_desc + ", product_img1=" + product_img1
-				+ ", created_datetime=" + created_datetime + ", trade_method=" + trade_method + ", pay_method="
-				+ pay_method + ", trade_area=" + trade_area + "]";
+				+ ", created_datetime=" + created_datetime + ", view_count=" + view_count + ", like_count=" + like_count
+				+ ", trade_method=" + trade_method + ", pay_method=" + pay_method + ", trade_area=" + trade_area
+				+ ", trade_status=" + trade_status + "]";
 	}
-    
 
-//	public String getTrade_status() {
-//		return trade_status;
-//	}
-//
-//
-//	public void setTrade_status(String trade_status) {
-//		this.trade_status = trade_status;
-//	}
+
+	public int getView_count() {
+		return view_count;
+	}
+
+
+	public void setView_count(int view_count) {
+		this.view_count = view_count;
+	}
+
+
+	public int getLike_count() {
+		return like_count;
+	}
+
+
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
+	}
+
+
+	public String getTrade_status() {
+		return trade_status;
+	}
+
+
+	public void setTrade_status(String trade_status) {
+		this.trade_status = trade_status;
+	}
 
 
 	public int getProduct_id() {
@@ -189,27 +210,6 @@ public class ProductDTO {
 		this.created_datetime = created_datetime;
 	}
 
-
-//	public int getView_count() {
-//		return view_count;
-//	}
-//
-//
-//	public void setView_count(int view_count) {
-//		this.view_count = view_count;
-//	}
-//
-//
-//	public int getLike_count() {
-//		return like_count;
-//	}
-//
-//
-//	public void setLike_count(int like_count) {
-//		this.like_count = like_count;
-//	}
-
-
 	public String getTrade_method() {
 		return trade_method;
 	}
@@ -242,29 +242,6 @@ public class ProductDTO {
 	public void setTrade_area(String trade_area) {
 		this.trade_area = trade_area;
 	}
-    
-//	@Override
-//	public String toString() {
-//	    return "ProductDTO{" +
-////	            "product_id=" + product_id +
-////	            ", category_id=" + category_id +
-//	            ", seller_id=" + seller_id +
-//	            ", product_name='" + product_name + '\'' +
-//	            ", product_price=" + product_price +
-//	            ", year_purchase=" + year_purchase +
-//	            ", product_desc='" + product_desc + '\'' +
-//	            ", product_img1='" + product_img1 + '\'' +
-//	            ", product_img2='" + product_img2 + '\'' +
-//	            ", product_img3='" + product_img3 + '\'' +
-//	            ", product_img4='" + product_img4 + '\'' +
-//	            ", product_img5='" + product_img5 + '\'' +
-//	            ", created_datetime='" + created_datetime + '\'' +
-//	            ", view_count=" + view_count +
-//	            ", like_count=" + like_count +
-//	            ", trade_method='" + trade_method + '\'' +
-//	            ", pay_method='" + pay_method + '\'' +
-//	            ", trade_area='" + trade_area + '\'' +
-//	            '}';
-//	}
+
 
 }
