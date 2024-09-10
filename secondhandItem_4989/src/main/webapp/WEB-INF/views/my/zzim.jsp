@@ -50,13 +50,14 @@
 				</c:if>
 			</div>
 			<div class="profile-item-list">
-			<c:forEach var="productDTO" items="${productList}">
+<%-- 			<c:forEach var="productDTO" items="${productList}"> --%>
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
+						<a href="#"><img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image"></a>
 							<div class="profile-item-image-cover3">
 								찜찜찜
 							</div>
+						<a href="#"><img src="${pageContext.request.contextPath}/resources/img/btn_zzim.png" class="profile-item-image-zzim"></a>
 					</div>
 					<div class="profile-item-name" title="${productDTO.product_name}">
 						${productDTO.product_name}<br>
@@ -71,7 +72,7 @@
 						<fmt:formatDate value="${productDTO.created_datetime}" pattern="yyyy-MM-dd"/>
 					</div>
 				</div>
-			</c:forEach>
+<%-- 			</c:forEach> --%>
 			</div>
 			<div class="pagination">
 				<a href="${pageContext.request.contextPath}/my/zzim?pageNum=1&sort=${pageDTO.sort}" class="firstpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></a>

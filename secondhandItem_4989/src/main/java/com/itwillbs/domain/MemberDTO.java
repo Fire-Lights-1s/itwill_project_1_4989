@@ -10,6 +10,7 @@ public class MemberDTO {
     private String name;
     private String phone;
     private String email;
+    private String profile_img;
     private Timestamp created_at;
 
     // 기본 생성자
@@ -30,11 +31,20 @@ public class MemberDTO {
 //    }
 
     // getter와 setter 메서드
+    
     public String getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(String member_id) {
+	public String getProfile_img() {
+		return profile_img;
+	}
+
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
+
+	public void setMember_id(String member_id) {
         this.member_id = member_id;
     }
 

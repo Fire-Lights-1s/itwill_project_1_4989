@@ -15,6 +15,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
@@ -85,17 +86,17 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/infoUpdatePro")
-	public String infoUpdatePro(MemberDTO memberDTO) {
+	public String infoUpdatePro(MemberDTO memberDTO, MultipartFile file)throws Exception {
 		System.out.println("MyPageController infoUpdatePro()");
 //		파일 이름 : file.getOriginalFilename();
 //		원본 파일 : file.getBytes();
 		UUID uuid = UUID.randomUUID();
-//		String filename = uuid.toString() + "_" + file.getOriginalFilename();
+		String filename = uuid.toString() + "_" + file.getOriginalFilename();
 		System.out.println("업로드 경로 : " + uploadPath);
-//		System.out.println("랜덤문자_파일이름 : " + filename);
-//		FileCopyUtils.copy(file.getBytes(), new File(uploadPath, filename));
+		System.out.println("랜덤문자_파일이름 : " + filename);
+		FileCopyUtils.copy(file.getBytes(), new File(uploadPath, filename));
 		memberService.updateMember(memberDTO);
-		return "redirect:/";
+		return "redirect:/my/profile";
 	}
 	
 	@GetMapping("/sell")
@@ -154,14 +155,44 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/zzim")
-	public String zzim(HttpSession session, Model model) {
+	public String zzim(HttpSession session, Model model, HttpServletRequest request) {
 		System.out.println("MyPageController zzim()");
 		String id = (String)session.getAttribute("member_id");
 		MemberDTO memberDTO = memberService.getMember(id);
 		if(memberDTO == null) {
 			return "redirect:/member/login";
 		}
-//		List<ProductDTO> zzimList = myPageService.getProductList();
+		String pageNum = request.getParameter("pageNum");
+		String sort = request.getParameter("sort");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		int pageSize = 8;
+		PageDTO pageDTO = new PageDTO();
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setSeller_id(id);
+		pageDTO.setSort(sort);
+		List<ProductDTO> productList = myPageService.getZzimList(pageDTO);
+		ProductDTO productDTO = new ProductDTO();
+		productDTO.setSeller_id(id);
+		int count = myPageService.getZzimCount(pageDTO);
+		int pageBlock = 5;
+		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
+		int endPage = startPage + pageBlock - 1;
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("productList", productList);
 		return "my/zzim";
 	}
 	
