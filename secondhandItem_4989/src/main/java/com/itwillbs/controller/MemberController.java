@@ -25,7 +25,7 @@ public class MemberController {
 //	@GetMapping("/login")
 //	public String login() {
 //		return "/member/login";
-//	}
+//	} 
 	
 	@GetMapping("/login")
     public String loginPage(HttpServletRequest request, HttpSession session, MemberDTO memberDTO) {
