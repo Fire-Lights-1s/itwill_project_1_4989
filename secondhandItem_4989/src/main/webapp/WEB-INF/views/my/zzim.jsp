@@ -55,7 +55,7 @@
 					<div class="profile-item-image-div">
 						<a href=""><img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image"></a>
 							<div class="profile-item-image-cover3">
-								찜찜찜
+								관심 물품
 							</div>
 						<img src="${pageContext.request.contextPath}/resources/img/btn_zzim.png" class="profile-item-image-zzim">
 					</div>
@@ -63,12 +63,14 @@
 						${productDTO.product_name}<br>
 						${productDTO.product_price}원
 					</div>
-					<div class="profile-item-review">
+					<div class="profile-item-review1">
 						<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=${pageDTO.sort}&nozzim=${productDTO.product_id}">관심 끄기</a>
 					</div>
-					<div class="profile-item-review">
+					<div class="profile-item-review" data-date="${productDTO.created_datetime}">
 						평점 : 4.7&emsp;&emsp;
-						<fmt:formatDate value="${productDTO.created_datetime}" pattern="yyyy-MM-dd"/>
+						<div class="zzim-time" style="display: inline;">
+							
+						</div>
 					</div>
 				</div>
 			</c:forEach>
@@ -95,6 +97,50 @@
 		</div>
 	</div>
 </section>
+<!-- querySelector('.profile-item-review') -->
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function formatTimeAgo(date) {
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - date) / 1000);
+        const diffInMinutes = Math.floor(diffInSeconds / 60);
+        const diffInHours = Math.floor(diffInMinutes / 60);
+        const diffInDays = Math.floor(diffInHours / 24);
+        const diffInMonths = Math.floor(diffInDays / 30);
+        const diffInYears = Math.floor(diffInDays / 365);
+
+        if (diffInDays < 30) {
+        	if(diffInHours < 24) {
+        		return `${diffInHours}시간 전`;
+        	}
+            return `${diffInDays}일 전`;
+        } else if (diffInDays >= 30 && diffInDays < 365) {
+            return `${diffInMonths}달 전`;
+        } else {
+            return `${diffInYears}년 전`;
+        }
+    }
+
+    const reviewElements = document.querySelectorAll('.profile-item-review');
+    reviewElements.forEach(function(element) {
+        const dateStr = element.getAttribute('data-date');
+        const date = new Date(dateStr); // data-date를 Date 객체로 변환
+        if (!isNaN(date.getTime())) { // 유효한 날짜인지 확인
+            const timeAgo = formatTimeAgo(date);
+            console.log(timeAgo);
+            const timeElement = element.querySelector('.zzim-time');
+            if (timeElement) {
+            	console.log(timeAgo);
+                timeElement.textContent = timeAgo; // div 태그 안에 값 설정
+            }
+        }
+    });
+});
+</script>
+
+
+
 </body>
 </html>

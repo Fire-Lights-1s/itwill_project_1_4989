@@ -1,8 +1,10 @@
 package com.itwillbs.controller;
 
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
+import java.time.temporal.ChronoUnit;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -171,6 +173,7 @@ public class MyPageController {
 		if(product_id != null) {
 			 zzimDTO.setProduct_id(Integer.parseInt(product_id));
 			 zzimDTO.setMember_id(id);
+			 myPageService.deleteZzim(zzimDTO);
 		}
 		int currentPage = Integer.parseInt(pageNum);
 		int pageSize = 8;

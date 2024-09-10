@@ -10,6 +10,7 @@ import com.itwillbs.dao.MyPageDAO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.ZzimDTO;
 
 @Service
 public class MyPageService {
@@ -43,5 +44,10 @@ public class MyPageService {
 	public int getZzimCount(PageDTO pageDTO) {
 		System.out.println("MyPageService getZzimCount()");
 		return myPageDAO.getZzimCount(pageDTO);
+	}
+
+	public void deleteZzim(ZzimDTO zzimDTO) {
+		System.out.println("MyPageService deleteZzim()");
+		myPageDAO.deleteZzim(zzimDTO);
 	}
 }
