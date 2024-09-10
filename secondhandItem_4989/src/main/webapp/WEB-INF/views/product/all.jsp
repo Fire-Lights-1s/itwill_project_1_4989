@@ -37,9 +37,10 @@
 	<div class="content-container">
 	<!-- 사이드 메뉴 시작 -->
       <aside class="side-nav">
-        <h5>판매상품 골라보기</h5>
+      	<div id="selector-container">
+        <div id="selector-title">판매상품 골라보기</div>
         <hr>
-        <ul>
+        <ul id="category" class="selector-list">
         	<li class="group-title">카테고리</li>
             <li class="selector"><a href="#">전체</a></li>
             <li class="selector"><a href="#">휴대폰</a></li>
@@ -51,11 +52,34 @@
             <li class="selector"><a href="#">기타</a></li>
         </ul>
         <hr>
-        <ul>
-            <li><a href="#">메뉴 2</a></li>
-            <li><a href="#">메뉴 3</a></li>
-            <li><a href="#">메뉴 4</a></li>
-        </ul>
+        <ul id="status" class="selector-list">
+        	<li class="group-title">거래상태</li>
+            <li class="selector"><a href="#">판매중</a></li>
+            <li class="selector"><a href="#">예약 중 / 판매완료</a></li>
+		</ul>
+		<hr>
+		<ul id="method" class="selector-list">
+			<li class="group-title">거래방법</li>
+            <li class="selector"><a href="#">직거래</a></li>
+            <li class="selector"><a href="#">택배</a></li>
+		</ul>
+		<hr>
+		<ul id="payment" class="selector-list">
+			<li class="group-title">결제수단</li>
+            <li class="selector"><a href="#">페이</a></li>
+            <li class="selector"><a href="#">현금</a></li>
+		</ul>
+		<hr>
+		<ul id="price" class="selector-list">
+			<li class="group-title">가격</li>
+            <li class="selector"><a href="#">전체</a></li>
+            <li class="selector"><a href="#">0원(나눔)</a></li>
+            <li class="selector"><a href="#">10만원 이하</a></li>
+            <li class="selector"><a href="#">10만원 초과 30만원 이하</a></li>
+            <li class="selector"><a href="#">30만원 초과 50만원 이하</a></li>
+            <li class="selector"><a href="#">직접 입력</a></li>
+		</ul>
+		</div>
       </aside>
 
 <!-- 사이드 메뉴 끝 -->
