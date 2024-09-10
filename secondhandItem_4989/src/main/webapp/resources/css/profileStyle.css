@@ -39,10 +39,24 @@ main {
     margin-bottom:10px;
 }
 
+.profile-circle-edit {
+    position: absolute;
+    top:0;
+    right:20px;
+    cursor: pointer;
+}
+
+.profile-circle-cancel {
+    position: absolute;
+    top:0;
+    right:-20px;
+}
+
 .profile-circle-div {
 	display:flex;
 	align-items: center;
     justify-content: center;
+    position:relative;
 }
 
 .profile-edit-a {
@@ -151,9 +165,16 @@ main {
 	margin:5px 5px 0 5px;
 }
 
+.profile-item-image-zzim {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+}
+
 .profile-item-image-div {
 	display:flex;
 	flex-direction:column;	
+	position: relative;
 }
 
 .profile-item-image-cover1 {
@@ -175,7 +196,7 @@ main {
 }
 
 .profile-item-image-cover3 {
-	background-color:pink;
+	background-color:orange;
 	color:white;
 	text-align:center;
 	border-radius:0 0 10px 10px;

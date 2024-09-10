@@ -16,8 +16,7 @@ public class PageDTO {
 	private String seller_id;
 	private String sort;
 	private String sale;
-	
-	
+
 	public String getSale() {
 		return sale;
 	}

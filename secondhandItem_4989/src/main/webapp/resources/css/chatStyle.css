@@ -28,8 +28,10 @@ a:hover{
 }
 
 #chatList{
+	display: flex;
+	flex-direction: column;
 	width: 500px;
-	height: 800px;
+	height: 900px;
 	background-color: #fff;
 }
 
@@ -130,6 +132,7 @@ a:hover{
 }
 
 #chatTotalRoom{
+	flex: 1;
 	display: flex;
 	flex-direction: column;
 	height:740px;
@@ -209,7 +212,7 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 	justify-content:space-between;
 	background-color: #ddbbff;
 	width: 600px;
-	height: 800px;
+	height: 900px;
 }
 #productInfo{
 	padding: 10px;
@@ -220,8 +223,15 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 #productInfo div:nth-child(1){
 	margin-right: 10px;
 	width: 140px;
+	height: 140px;
 	background-color: #eee;
+	overflow: hidden;
 }
+#productInfo div:nth-child(1){
+	width: 140px;
+	height: 140px;
+}
+
 #productInfo div:nth-child(2){
 	flex-grow: 1;
 	display: flex;

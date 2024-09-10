@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.dao.ChatDAO;
 import com.itwillbs.domain.ChatMessageDTO;
 import com.itwillbs.domain.ChatRoomDTO;
+import com.itwillbs.domain.ProductDTO;
 
 @Service
 public class ChatService {
@@ -28,9 +29,15 @@ public class ChatService {
 	}
 	public void createChatRoom(ChatRoomDTO chatRoomDTO) {
 		chatRoomDTO.setChat_room_id(chatRoomDTO.getProduct_id() + chatRoomDTO.getBuyer_id());
+		System.out.println(checkChatRoomId(chatRoomDTO));
 		if(checkChatRoomId(chatRoomDTO) < 1) {
 			chatDAO.createChatRoom(chatRoomDTO);
 		}
+	}
+	public ProductDTO getProductInfo(ChatRoomDTO chatRoomDTO) {
+		ProductDTO productDTO = null;
+		productDTO = chatDAO.getProductInfo(chatRoomDTO);
+		return productDTO;
 	}
 
 
