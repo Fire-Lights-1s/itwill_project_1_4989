@@ -9,99 +9,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<!-- CSS 파일 링크 -->
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/listStyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script>
 
 </head>
 	<style>	
-	body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-}
 
-.container {
-    width: 90%;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.filter-row {
-    display: flex;
-    gap: 10px;
-}
-
-.filter-row button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.filter-row button:hover {
-    background-color: #007bff;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns */
-    gap: 20px;
-}
-
-.card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.card img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    margin-bottom: 15px;
-}
-
-.card h3 {
-    font-size: 18px;
-    margin: 10px 0;
-}
-
-.card p {
-    font-size: 14px;
-    color: #555;
-}
-
-.card button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.card button:hover {
-    background-color: #218838;
-}
 	
 	</style>
 
@@ -120,11 +37,21 @@
 	<div class="content-container">
 	<!-- 사이드 메뉴 시작 -->
       <aside class="side-nav">
-        <h5>사이드메뉴영역</h5>
-        <br>
-        <br>
+        <h5>판매상품 골라보기</h5>
+        <hr>
         <ul>
-            <li><a href="#">메뉴 1</a></li>
+        	<li class="group-title">카테고리</li>
+            <li class="selector"><a href="#">전체</a></li>
+            <li class="selector"><a href="#">휴대폰</a></li>
+            <li class="selector"><a href="#">태블릿</a></li>
+            <li class="selector"><a href="#">스마트워치</a></li>
+            <li class="selector"><a href="#">PC / 노트북</a></li>
+            <li class="selector"><a href="#">PC주변기기</a></li>
+            <li class="selector"><a href="#">게임기기</a></li>
+            <li class="selector"><a href="#">기타</a></li>
+        </ul>
+        <hr>
+        <ul>
             <li><a href="#">메뉴 2</a></li>
             <li><a href="#">메뉴 3</a></li>
             <li><a href="#">메뉴 4</a></li>
@@ -157,17 +84,15 @@
 
     <div class="container">
         <!-- Sorting Filters -->
-        <div class="header-row">
-            <h2>상품 목록</h2>
-            <div class="filter-row">
+        <h2 class="page-title">상품 목록</h2>
+            <div class="filter-row" style="align-items:right;">
                 <button onclick="sortNewest()">최신순</button>
                 <button onclick="sortPriceHighToLow()">높은가격순</button>
                 <button onclick="sortPriceLowToHigh()">낮은가격순</button>
             </div>
-        </div>
 
 <!-- 상품 목록 시작: 부트스트랩 적용 -->
-        <div style="width:80%; margin:0 auto;" class="py-5 bg-light">
+        <div style="width:100%; margin:0 auto;" class="py-5 bg-light">
         <div class="container px-1 px-lg-1 mt-1" style="margin-top:100px;">
             <div class="row gx-4 gx-lg-5 justify-content-center"> <!-- 수정 -->
                 

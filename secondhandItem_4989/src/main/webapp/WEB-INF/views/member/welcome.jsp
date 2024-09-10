@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/welcome.css">
 <script>
-function redirectToMain() {
+function redirectToLogin() {
     window.location.href = '${pageContext.request.contextPath}/member/login';
 }
 </script>

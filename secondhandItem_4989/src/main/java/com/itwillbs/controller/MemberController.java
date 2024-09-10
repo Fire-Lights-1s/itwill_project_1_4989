@@ -162,8 +162,12 @@ public class MemberController {
 		
 		memberService.insertSocial(memberDTO);
 		System.out.println(memberDTO);
+		
+		session.setAttribute("member_id", memberDTO.getMember_id());
+		session.setAttribute("nickname", memberDTO.getNickname());
+		
 		// 로그인 주소변경 이동
-		return "redirect:/member/welcome";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/resultid")

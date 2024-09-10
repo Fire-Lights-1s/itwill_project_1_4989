@@ -29,8 +29,8 @@
 	</select>
 	
 	<insert id="insertSocial">
-		insert into Mem(member_id, pass, nickname, name, phone, email, created_at) 
-		values(#{nickname}, #{nickname}, #{nickname}, #{name}, #{phone}, #{email}, #{created_at})
+		insert into Mem(member_id, pass, nickname, name, phone, email, created_at, social_loginfo) 
+		values(#{email}, #{member_id}, #{nickname}, #{name}, #{phone}, #{email}, #{created_at}, "네이버")
 	</insert>
 	
 	<select id="idCheck" resultType="com.itwillbs.domain.MemberDTO">
