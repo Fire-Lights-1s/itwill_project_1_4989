@@ -5,13 +5,21 @@
   
 <mapper namespace="com.itwillbs.mapper.MemberMapper">
 	<insert id="insertMember">
-		insert into Mem(member_id, pass, nickname, name, phone, email, created_at) 
-		values(#{member_id}, #{pass}, #{nickname}, #{name}, #{phone}, #{email}, #{created_at})
+		insert into Mem(member_id, pass, nickname, name, phone, email, created_at, social_loginfo) 
+		values(#{member_id}, #{pass}, #{nickname}, #{name}, #{phone}, #{email}, #{created_at}, "일반")
 	</insert>
 	<select id="userCheck" resultType="com.itwillbs.domain.MemberDTO">
 		select * from Mem
 		where member_id = #{member_id} and pass = #{pass} 
 	</select>
+	
+<!-- 	자동 로그인 쿠키값 비교용 -->
+	<select id="userCheck1" resultType="com.itwillbs.domain.MemberDTO">
+		select * from Mem
+		where member_id = #{member_id} 
+	</select>
+<!-- 	자동 로그인 쿠키값 비교용 -->
+	
 	<select id="getMember" resultType="com.itwillbs.domain.MemberDTO">
 		select * from Mem
 		where member_id = #{member_id}

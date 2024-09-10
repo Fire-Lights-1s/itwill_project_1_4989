@@ -24,6 +24,12 @@ public class MemberDAO {
 		return sqlSession.selectOne(namespace + ".userCheck", memberDTO);
 	}
 	
+	public MemberDTO userCheck1(MemberDTO memberDTO) {
+		System.out.println("MemberDAO userCheck1()");
+		
+		return sqlSession.selectOne(namespace + ".userCheck1", memberDTO);
+	}
+	
 	public void insertMember(MemberDTO memberDTO) {
 		System.out.println("MemberDAO insertMember()");
 		

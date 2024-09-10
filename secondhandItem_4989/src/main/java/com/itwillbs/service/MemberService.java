@@ -26,6 +26,12 @@ public class MemberService {
 		return memberDAO.userCheck(memberDTO);
 	}
 	
+	public MemberDTO userCheck1(MemberDTO memberDTO) {
+		System.out.println("MemberService userCheck1()");
+		
+		return memberDAO.userCheck1(memberDTO);
+	}
+	
 	public void insertMember(MemberDTO memberDTO) {
 		System.out.println("MemberService insertMember()");
 		

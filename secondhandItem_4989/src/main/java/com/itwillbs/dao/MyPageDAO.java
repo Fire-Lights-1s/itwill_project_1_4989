@@ -28,6 +28,16 @@ public class MyPageDAO {
 		return sqlSession.selectOne(namespace + ".getProductCount", pageDTO);
 	}
 	
+	public List<ProductDTO> getZzimList(PageDTO pageDTO) {
+		System.out.println("MyPageDAO getZzimList()");
+		return sqlSession.selectList(namespace + ".getZzimList", pageDTO);
+	}
+	
+	public int getZzimCount(PageDTO pageDTO) {
+		System.out.println("MyPageDAO getZzimCount()");
+		return sqlSession.selectOne(namespace + ".getZzimCount", pageDTO);
+	}
+	
 	
 	
 	

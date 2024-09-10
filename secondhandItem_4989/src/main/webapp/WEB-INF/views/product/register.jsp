@@ -16,7 +16,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<!-- CSS -->
 <style>
 body {
 	font-family: Arial, sans-serif;
@@ -276,7 +276,7 @@ textarea {
                     <option value="" disabled selected>선택</option>
                     <option value="택배">택배</option>
                     <option value="직거래">직거래</option>
-                    <option value="모두 가능">모두 가능</option>
+                    <option value="모두 가능">택배/직거래</option>
                 </select>
             </div>
 
@@ -286,7 +286,7 @@ textarea {
                     <option value="" disabled selected>선택</option>
                     <option value="현금">현금</option>
                     <option value="페이">4989페이</option>
-                    <option value="모두가능">모두 가능</option>
+                    <option value="모두 가능">현금/4989페이</option>
                 </select>
             </div>
 
