@@ -31,12 +31,16 @@ public class ChatController {
 	public String chat(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("member_id") != null) {
+			List<ChatRoomDTO> chatRoomDTOList = null;
+			chatRoomDTOList = chatService.getChatRoomList((String)session.getAttribute("member_id"));
+			System.out.println(chatRoomDTOList);
+			model.addAttribute("chatRoomDTOList", chatRoomDTOList);
 			return "/chat/chat";
 		}
 		return "/chat/chat";
 	}
 	
-	@PostMapping("/chat/createRoom")
+	@PostMapping(value = "/chat/createRoom", produces = "application/text; charset=UTF-8")
 	public String createRoom(ChatRoomDTO chatRoomDTO, HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		
@@ -49,6 +53,7 @@ public class ChatController {
 			} catch (JsonProcessingException e) {
 				e.printStackTrace();
 			}
+			System.out.println(chatRoomDTOList);
 			model.addAttribute("chatRoomDTOList", chatRoomDTOList);
 			return "/chat/chat";
 		}

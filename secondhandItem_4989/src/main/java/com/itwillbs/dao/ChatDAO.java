@@ -1,5 +1,7 @@
 package com.itwillbs.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,6 +30,10 @@ public class ChatDAO {
 	public ProductDTO getProductInfo(ChatRoomDTO chatRoomDTO) {
 		ProductDTO productDTO = sqlSession.selectOne(namespace+".getProductInfo", chatRoomDTO);
 		return productDTO;
+	}
+	public List<ChatRoomDTO> getChatRoomList(String member_id) {
+		List<ChatRoomDTO> chatRoomList = sqlSession.selectList(namespace+".getChatRoomList",member_id);
+		return chatRoomList;
 	}
 
 
