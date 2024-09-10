@@ -27,12 +27,17 @@
 		<main>
 			<h2>회원 정보 수정</h2>
 			<div class="profile-a">
-					<a href="${pageContext.request.contextPath}/my/infoUpdate">회원 탈퇴</a>
+				<a href="${pageContext.request.contextPath}/my/infoUpdate">회원 탈퇴</a>
 			</div>
+		<form action="${pageContext.request.contextPath}/my/infoUpdatePro" method="post" class="profile-update-form" name="fr" enctype="multipart/form-data">
 			<div class="profile-circle-div">
 				<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-circle">
+				<label for="fileInput" class="custom-file-upload">
+				    <img src="${pageContext.request.contextPath}/resources/img/btn_edit.png" class="profile-circle-edit">
+				</label>
+				<input id="fileInput" type="file" style="display:none;">
+				<a href="#"><img src="${pageContext.request.contextPath}/resources/img/btn_cancel.png" class="profile-circle-cancel"></a>
 			</div>
-		<form action="${pageContext.request.contextPath}/my/infoUpdatePro" method="post" class="profile-update-form">
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="userId" name="member_id" value="${memberDTO.member_id}" readonly>
@@ -49,20 +54,20 @@
             </div>
             <div class="form-group">
                 <label for="nickname">닉네임</label>
-                <input type="text" id="nickname" name="nickname" value="${memberDTO.nickname}" required>
+                <input type="text" id="nickname" name="nickname" value="${memberDTO.nickname}" required readonly>
                 <button type="button">중복 확인</button>
             </div>
             <div class="form-group">
                 <label for="name">이름</label>
-                <input type="text" id="name" name="name" value="${memberDTO.name}" required>
+                <input type="text" id="name" name="name" value="${memberDTO.name}" required readonly>
             </div>
             <div class="form-group">
                 <label for="phoneNumber">휴대폰 번호</label>
-                <input type="tel" id="phoneNumber" name="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="${memberDTO.phone}" required>
+                <input type="tel" id="phoneNumber" name="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="${memberDTO.phone}" required readonly>
             </div>
             <div class="form-group">
                 <label for="email">이메일</label>
-                <input type="email" id="email" name="email" value="${memberDTO.email}" required>
+                <input type="email" id="email" name="email" value="${memberDTO.email}" required readonly>
             </div>
             <button type="submit" class="submit-button" onclick="updateCheck();">수정 완료</button>
         </form>
@@ -82,9 +87,7 @@
 	function removeReadonly() {
         pass1.removeAttribute('readonly');
         pass2.removeAttribute('readonly');
-		pass1.value = "";
-		pass2.value = "";
-		pass1.focus();
+		pass1.select();
 	}
 	function updateCheck() {
 		if(pass1.value === "" || pass2.value === "") {

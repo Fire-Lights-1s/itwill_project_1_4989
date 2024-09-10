@@ -1,13 +1,17 @@
 package com.itwillbs.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +31,9 @@ public class MyPageController {
 	
 	@Inject
 	private MemberService memberService;
+	
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	@GetMapping("/profile")
 	public String profile(HttpSession session, Model model) {
@@ -80,6 +87,13 @@ public class MyPageController {
 	@PostMapping("/infoUpdatePro")
 	public String infoUpdatePro(MemberDTO memberDTO) {
 		System.out.println("MyPageController infoUpdatePro()");
+//		파일 이름 : file.getOriginalFilename();
+//		원본 파일 : file.getBytes();
+		UUID uuid = UUID.randomUUID();
+//		String filename = uuid.toString() + "_" + file.getOriginalFilename();
+		System.out.println("업로드 경로 : " + uploadPath);
+//		System.out.println("랜덤문자_파일이름 : " + filename);
+//		FileCopyUtils.copy(file.getBytes(), new File(uploadPath, filename));
 		memberService.updateMember(memberDTO);
 		return "redirect:/";
 	}
