@@ -142,8 +142,8 @@
 <!--      네이버 로그인       -->
            
               <!-- 네이버 로그인 버튼 -->
-  			<a href="<%= apiURL %>"><img width="200" height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-
+  			<a href="<%= apiURL %>"><img width="170" height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+		
         </form>
     </div>
 
