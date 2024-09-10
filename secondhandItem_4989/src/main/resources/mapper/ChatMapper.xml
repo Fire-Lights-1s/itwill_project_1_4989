@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.itwillbs.mapper.ChatMapper">
-	<select id="checkRoomId" resultType="com.itwillbs.domain.ChatRoomDTO"> 
+	<select id="checkRoomId" resultType="java.lang.Integer"> 
 		select count(*)
 		from ChatRoom
 		where chat_room_id = '${chat_room_id}'
@@ -13,4 +13,10 @@
 		insert into ChatRoom(chat_room_id, product_id, buyer_id, seller_id, title)
 		values('${chat_room_id}', ${product_id}, '${buyer_id}', '${seller_id}', '${title}')
 	</insert>
+	
+	<select id="getProductInfo" resultType="com.itwillbs.domain.ProductDTO">
+		select * 
+		from Product
+		where product_id = ${product_id}
+	</select>
 </mapper>

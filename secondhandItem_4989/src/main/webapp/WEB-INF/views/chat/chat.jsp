@@ -11,8 +11,8 @@
 
 <script type="text/javascript" th:inline="javascript">
 	let sessionUserId = '<c:out value="${sessionUID}"/>';
-	let chatRoomId = '<c:out value="${chatRoomDTO.chat_room_id}"/>';
-	console.log(chatRoomId);
+	let objChatRoomDTO = '<c:out value="${chatRoomDTO}"/>'.replaceAll("&#034;", "\"");
+	let chatRoomJSON = JSON.parse(objChatRoomDTO);
 </script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css?">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
