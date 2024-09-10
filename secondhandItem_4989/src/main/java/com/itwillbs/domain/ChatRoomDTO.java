@@ -11,13 +11,13 @@ public class ChatRoomDTO {
 
 	@Override
 	public String toString() {
-		return "ChatRoomDTO [ "+
+		return "{ "+
 				"chat_room_id : " + chat_room_id +
 				", product_id : " + product_id +
 				", buyer_id : " + buyer_id +
 				", seller_id : " + seller_id +
 				", title : " + title +
-				"]";
+				"}";
 	}
 
 	public String getChat_room_id() {
