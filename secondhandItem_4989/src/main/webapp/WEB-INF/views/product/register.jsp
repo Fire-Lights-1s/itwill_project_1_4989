@@ -139,50 +139,65 @@ textarea {
 			yearInput.value = yearInput.value.slice(0, 4);
 		}
 	}
+	// 이미지 클릭 시 파일 선택 창 열기
+	document.getElementById('imagePreview').addEventListener('click',
+			function() {
+				document.getElementById('imageInput').click();
+			});
 
-	// 이미지 미리보기를 생성하는 함수
-	function setThumbnail(event) {
-		const files = event.target.files;
-		const previewContainer = document
-				.getElementById('imagePreviewContainer');
-		previewContainer.innerHTML = ''; // 기존 미리보기 초기화
-
-		if (files.length > 5) {
-			alert("최대 5개의 이미지만 업로드할 수 있습니다.");
-			return;
+	// 파일 선택 후 미리보기 이미지 업데이트
+	function previewImage(event) {
+		const reader = new FileReader();
+		reader.onload = function() {
+			const output = document.getElementById('imagePreview');
+			output.src = reader.result;
 		}
-
-		for (let i = 0; i < files.length; i++) {
-			const file = files[i];
-			const reader = new FileReader();
-
-			reader.onload = function(e) {
-				const imageItem = document.createElement('div');
-				imageItem.classList.add('imageItem');
-
-				const img = document.createElement('img');
-				img.src = e.target.result;
-				img.classList.add('imageSize');
-				img.style.width = "200px"; // 이미지 크기 조절
-				img.style.height = "200px"; // 이미지 크기 조절
-				img.style.objectFit = "cover"; // 이미지 비율 유지
-
-				const removeButton = document.createElement('button');
-				removeButton.type = 'button';
-				removeButton.classList.add('imageClose');
-				removeButton.innerText = 'X';
-				removeButton.onclick = function() {
-					removeImage(imageItem);
-				};
-
-				imageItem.appendChild(img);
-				imageItem.appendChild(removeButton);
-				previewContainer.appendChild(imageItem);
-			};
-
-			reader.readAsDataURL(file);
-		}
+		reader.readAsDataURL(event.target.files[0]);
 	}
+
+	// 	// 이미지 미리보기를 생성하는 함수
+	// 	function setThumbnail(event) {
+	// 		const files = event.target.files;
+	// 		const previewContainer = document
+	// 				.getElementById('imagePreviewContainer');
+	// 		previewContainer.innerHTML = ''; // 기존 미리보기 초기화
+
+	// 		if (files.length > 5) {
+	// 			alert("최대 5개의 이미지만 업로드할 수 있습니다.");
+	// 			return;
+	// 		}
+
+	// 		for (let i = 0; i < files.length; i++) {
+	// 			const file = files[i];
+	// 			const reader = new FileReader();
+
+	// 			reader.onload = function(e) {
+	// 				const imageItem = document.createElement('div');
+	// 				imageItem.classList.add('imageItem');
+
+	// 				const img = document.createElement('img');
+	// 				img.src = e.target.result;
+	// 				img.classList.add('imageSize');
+	// 				img.style.width = "200px"; // 이미지 크기 조절
+	// 				img.style.height = "200px"; // 이미지 크기 조절
+	// 				img.style.objectFit = "cover"; // 이미지 비율 유지
+
+	// 				const removeButton = document.createElement('button');
+	// 				removeButton.type = 'button';
+	// 				removeButton.classList.add('imageClose');
+	// 				removeButton.innerText = 'X';
+	// 				removeButton.onclick = function() {
+	// 					removeImage(imageItem);
+	// 				};
+
+	// 				imageItem.appendChild(img);
+	// 				imageItem.appendChild(removeButton);
+	// 				previewContainer.appendChild(imageItem);
+	// 			};
+
+	// 			reader.readAsDataURL(file);
+	// 		}//for
+	// 	}//setThumbnail(event)
 
 	// 미리보기에서 이미지를 제거하는 함수
 	function removeImage(imageElement) {
@@ -204,106 +219,89 @@ textarea {
 			<main>
 				<!-- 본문 영역 -->
 				<div class="addBox">
-					<form
-						action="${pageContext.request.contextPath}/product/registerPro"
-						id="addForm" name="addForm" class="add-form" method="post"
-						enctype="multipart/form-data">
-						<hr style="border: 0; height: 3px; color: black;">
-						<div class="container">
-							<!-- 이미지 업로드 및 미리보기 영역 -->
-							<div class="form-group image-upload">
-								<label for="imageInput">사진 선택</label> <input type="file"
-									id="product_img1" name="product_img1">
-								<!--                             <input type="file" id="product_img2" name="product_img2" accept="image/*" multiple onchange="setThumbnail(event)"> -->
-							</div>
+    <form action="${pageContext.request.contextPath}/product/registerPro" class="appform" method="post" name="addForm" enctype="multipart/form-data">
+        <hr style="border: 0; height: 3px; color: black;">
+        <div class="container">
+            <!-- 이미지 업로드 및 미리보기 영역 -->
+            <div class="form-group image-upload">
+                <label for="product_img1">사진 선택</label>
+                <input type="file" id="product_img1" name="product_img1">
+            </div>
 
-							<div id="imagePreviewContainer" class="image-preview-container"></div>
+            <!-- 카테고리 등 다른 폼 요소 -->
+            <div class="form-group inline-group">
+                <label for="category_name">카테고리</label>
+                <select id="category_name" name="category_name">
+                    <option value="" disabled selected>선택</option>
+                    <option value="phone">휴대폰</option>
+                    <option value="tablet">태블릿</option>
+                    <option value="watch">스마트워치</option>
+                    <option value="computer">PC / 노트북</option>
+                    <option value="acc">PC주변기기</option>
+                    <option value="game">게임기기</option>
+                    <option value="etc">기타</option>
+                </select>
+            </div>
 
-							<!-- 카테고리 등 다른 폼 요소 -->
-							<div class="form-group inline-group">
-								<label for="category">카테고리</label> <select id="category"
-									name="category_name">
-									<option value="" disabled selected>선택</option>
-									<option value="phone">휴대폰</option>
-									<option value="tablet">태블릿</option>
-									<option value="watch">스마트워치</option>
-									<option value="computer">PC / 노트북</option>
-									<option value="acc">PC주변기기</option>
-									<option value="game">게임기기</option>
-									<option value="etc">기타</option>
-								</select>
-							</div>
+            <div class="form-group inline-group">
+                <label for="product_name">제품명</label>
+                <input type="text" id="product_name" name="product_name" placeholder="브랜드명, 모델명 함께 입력해주세요.">
+            </div>
 
-							<div class="form-group inline-group">
-								<label for="productName">제품명</label> <input type="text"
-									id="productName" name="product_name"
-									placeholder="브랜드명, 모델명 함께 입력해주세요.">
-							</div>
+            <div class="form-group inline-group">
+                <label for="year_purchase">구입연도</label>
+                <input type="number" id="year_purchase" name="year_purchase" placeholder="구입연도를 입력해주세요" min="1900" max="2024" style="flex: 1;" maxlength="4" oninput="limitYearLength()">
 
-							<div class="form-group inline-group">
-								<label for="year">구입연도</label>
+                <label style="margin-left: 10px;">
+                    <input type="checkbox" id="unknownCheckbox" onclick="handleYearCheckbox()"> 알 수 없음
+                </label>
+            </div>
 
-								<!-- 직접 입력 필드 -->
-								<!-- 직접 입력 필드 -->
-								<input type="number" id="yearInput" name="year_purchase"
-									placeholder="구입연도를 입력해주세요" min="1900" max="2024"
-									style="flex: 1;" maxlength="4" oninput="limitYearLength()">
+            <div class="form-group inline-group">
+                <label for="product_price">판매 가격</label>
+                <input type="number" id="product_price" name="product_price" placeholder="원" oninput="addPriceSuffix()">
+            </div>
 
-								<!-- 알 수 없음 체크박스 -->
-								<label style="margin-left: 10px;"> <input
-									type="checkbox" id="unknownCheckbox"
-									onclick="handleYearCheckbox()"> 알 수 없음
-								</label>
-							</div>
+            <div class="form-group inline-group">
+                <label for="trade_area">거래 지역</label>
+                <select id="trade_area" name="trade_area">
+                    <option value="1">서울특별시</option>
+                    <option value="2">부산광역시</option>
+                </select>
+            </div>
 
-							<div class="form-group inline-group">
-								<label for="price">판매 가격</label> <input type="number" id="price"
-									name="product_price" placeholder="원" oninput="addPriceSuffix()">
+            <div class="form-group inline-group">
+                <label for="trade_method">거래 방식</label>
+                <select id="trade_method" name="trade_method">
+                    <option value="" disabled selected>선택</option>
+                    <option value="택배">택배</option>
+                    <option value="직거래">직거래</option>
+                    <option value="모두 가능">모두 가능</option>
+                </select>
+            </div>
 
+            <div class="form-group inline-group">
+                <label for="pay_method">결제 방식</label>
+                <select id="pay_method" name="pay_method">
+                    <option value="" disabled selected>선택</option>
+                    <option value="현금">현금</option>
+                    <option value="페이">4989페이</option>
+                    <option value="모두가능">모두 가능</option>
+                </select>
+            </div>
 
-							</div>
+            <div class="form-group inline-group">
+                <label for="product_desc">물품 상태</label>
+                <textarea id="product_desc" name="product_desc" placeholder="물품 상태(미개봉/신품/중고), 하자 등 상세내용을 적어주세요."></textarea>
+            </div>
 
-							<div class="form-group inline-group">
-								<label for="region">거래 지역</label> <select id="region"
-									name="trade_area">
-									<option value="1">서울특별시</option>
-									<option value="2">부산광역시</option>
+            <div class="form-group">
+                <button type="submit" class="submit-btn" value="save">등록하기</button>
+            </div>
+        </div>
+    </form>
+</div>
 
-								</select>
-
-								<div class="form-group inline-group">
-									<label for="dealMethod">거래 방식</label> <select id="dealMethod"
-										name="trade_method">
-										<option value="" disabled selected>선택</option>
-										<option value="택배">택배</option>
-										<option value="직거래">직거래</option>
-										<option value="모두 가능">모두 가능</option>
-									</select>
-								</div>
-
-								<div class="form-group inline-group">
-									<label for="payMethod">결제 방식</label> <select id="payMethod"
-										name="pay_method">
-										<option value="" disabled selected>선택</option>
-										<option value="현금">현금</option>
-										<option value="페이">4989페이</option>
-										<option value="모두가능">모두 가능</option>
-									</select>
-								</div>
-
-								<div class="form-group inline-group">
-									<label for="productDesc">물품 상태</label>
-									<textarea id="productDesc" name="product_desc"
-										placeholder="물품 상태(미개봉/신품/중고), 하자 등 상세내용을 적어주세요."></textarea>
-								</div>
-
-								<div class="form-group">
-									<button type="submit" class="submit-btn" value="save">등록하기</button>
-								</div>
-
-							</div>
-					</form>
-				</div>
 
 			</main>
 		</div>
