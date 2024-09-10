@@ -100,7 +100,7 @@
                         <img class="card-img-top img-height-fix" src="https://i.namu.wiki/i/tgJKui-B3sVdzHzJ_P2oLzBdPRihL7X4Jj5W9e7ReG6k9qcBRF-NuCmcM-j37ikoyBu7c_hq3P7juN3AnYlp0jiS3OD8wmaFC3SzSRHXOmTpxNdUrXcTs3ARbONhDcYAMbbMw7niOSM3khaPh7_DGQ.webp" alt="..." />
                         </c:if>
                         <c:if test="${!empty product.product_img1 && product.product_img1 ne '' }">
-                        <img class="card-img-top img-height-fix" src="${product.product_img1 }" alt="..." />                        
+                        <img class="card-img-top img-height-fix" src="${pageContext.request.contextPath }/resources/upload/${product.product_img1 }" alt="..." />                        
                         </c:if>
                         <!-- 페이 뱃지 -->
                     <c:if test="${product.pay_method eq '페이' }">
