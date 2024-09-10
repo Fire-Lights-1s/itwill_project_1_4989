@@ -155,6 +155,11 @@ a:hover{
 	margin:10px;
 	width:80px;
 	height: 80px;
+	overflow: hidden;
+}
+.profile img{
+	width:80px;
+	height: 80px;
 }
 #chatTotalRoom > div > .chatDescript{
 	margin:10px;

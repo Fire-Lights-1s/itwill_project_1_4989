@@ -10,7 +10,10 @@ let title = chatRoomTitle;
 $(document).ready(function(){
 
 	$("#startChat").click(function(){
-	
+		if(Object.is(buyerID, sellerID)){
+			alert('구매자와 판매자가 같습니다.');
+			return false;
+		}
 		var form = document.createElement('form');
 	
 		var objs;
