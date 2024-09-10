@@ -1,7 +1,5 @@
 package com.itwillbs.domain;
 
-import java.sql.Timestamp;
-
 public class PageDTO {
 
 	private int pageSize;//
@@ -18,15 +16,7 @@ public class PageDTO {
 	private String seller_id;
 	private String sort;
 	private String sale;
-	private Timestamp created_datetime;
-	
-	
-	public Timestamp getCreated_datetime() {
-		return created_datetime;
-	}
-	public void setCreated_datetime(Timestamp created_datetime) {
-		this.created_datetime = created_datetime;
-	}
+
 	public String getSale() {
 		return sale;
 	}

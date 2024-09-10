@@ -63,7 +63,7 @@
 			<c:forEach var="productDTO" items="${productList}">
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image">
+						<a href="#"><img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image"></a>
 							<c:if test="${productDTO.trade_status eq '거래 가능' }">
 								<div class="profile-item-image-cover1">
 									판매 중

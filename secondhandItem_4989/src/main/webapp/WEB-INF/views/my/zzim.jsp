@@ -50,29 +50,28 @@
 				</c:if>
 			</div>
 			<div class="profile-item-list">
-<%-- 			<c:forEach var="productDTO" items="${productList}"> --%>
+			<c:forEach var="productDTO" items="${productList}">
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
-						<a href="#"><img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image"></a>
+						<a href=""><img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image"></a>
 							<div class="profile-item-image-cover3">
 								찜찜찜
 							</div>
-						<a href="#"><img src="${pageContext.request.contextPath}/resources/img/btn_zzim.png" class="profile-item-image-zzim"></a>
+						<img src="${pageContext.request.contextPath}/resources/img/btn_zzim.png" class="profile-item-image-zzim">
 					</div>
 					<div class="profile-item-name" title="${productDTO.product_name}">
 						${productDTO.product_name}<br>
 						${productDTO.product_price}원
 					</div>
 					<div class="profile-item-review">
-						<a href="#">구매자 후기</a>&emsp;&emsp;
-						<a href="#">판매 취소</a>
+						<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=${pageDTO.sort}&nozzim=${productDTO.product_id}">관심 끄기</a>
 					</div>
 					<div class="profile-item-review">
 						평점 : 4.7&emsp;&emsp;
 						<fmt:formatDate value="${productDTO.created_datetime}" pattern="yyyy-MM-dd"/>
 					</div>
 				</div>
-<%-- 			</c:forEach> --%>
+			</c:forEach>
 			</div>
 			<div class="pagination">
 				<a href="${pageContext.request.contextPath}/my/zzim?pageNum=1&sort=${pageDTO.sort}" class="firstpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></a>

@@ -43,22 +43,24 @@
 	</select>
 	
 	<select id="getZzimList" resultType="com.itwillbs.domain.ProductDTO">
-		select * from Zzim
-		where member_id = #{seller_id}
+		select * from 
+		Zzim z right join Product p
+		on z.product_id = p.product_id
+		where z.member_id = #{seller_id}
 		<if test="sort == 'priceDesc'">
-			order by product_price desc
+			order by p.product_price desc
 		</if>
 		<if test="sort == 'priceAsc'">
-			order by product_price
+			order by p.product_price
 		</if>
 		<if test="sort == 'dateDesc'">
-			order by created_datetime desc
+			order by p.created_datetime desc
 		</if>
 		<if test="sort == 'dateAsc'">
-			order by created_datetime
+			order by p.created_datetime
 		</if>
 		<if test="sort == null or sort == ''">
-			order by created_datetime desc
+			order by p.created_datetime desc
 		</if>
 		limit #{startRow},#{pageSize}
 	</select>
@@ -67,5 +69,11 @@
 		select count(*) from Zzim
 		where member_id = #{seller_id}
 	</select>
+	
+	<delete id="deleteZzim">
+		delete from Zzim
+		where member_id = #{member_id}
+		and product_id = #{product_id}
+	</delete>
 </mapper>
 

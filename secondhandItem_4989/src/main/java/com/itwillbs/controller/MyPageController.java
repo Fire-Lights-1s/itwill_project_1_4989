@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.ZzimDTO;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.MyPageService;
 
@@ -123,8 +124,6 @@ public class MyPageController {
 		pageDTO.setSort(sort);
 		pageDTO.setSale(sale);
 		List<ProductDTO> productList = myPageService.getProductList(pageDTO);
-		ProductDTO productDTO = new ProductDTO();
-		productDTO.setSeller_id(id);
 		int count = myPageService.getProductCount(pageDTO);
 		int pageBlock = 5;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
@@ -164,8 +163,14 @@ public class MyPageController {
 		}
 		String pageNum = request.getParameter("pageNum");
 		String sort = request.getParameter("sort");
+		String product_id = request.getParameter("nozzim");
+		ZzimDTO zzimDTO = new ZzimDTO();
 		if(pageNum == null) {
 			pageNum = "1";
+		}
+		if(product_id != null) {
+			 zzimDTO.setProduct_id(Integer.parseInt(product_id));
+			 zzimDTO.setMember_id(id);
 		}
 		int currentPage = Integer.parseInt(pageNum);
 		int pageSize = 8;
@@ -176,8 +181,6 @@ public class MyPageController {
 		pageDTO.setSeller_id(id);
 		pageDTO.setSort(sort);
 		List<ProductDTO> productList = myPageService.getZzimList(pageDTO);
-		ProductDTO productDTO = new ProductDTO();
-		productDTO.setSeller_id(id);
 		int count = myPageService.getZzimCount(pageDTO);
 		int pageBlock = 5;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
