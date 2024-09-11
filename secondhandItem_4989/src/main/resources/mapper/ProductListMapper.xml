@@ -13,5 +13,45 @@
 		SELECT * FROM Product WHERE category_name=#{category_name} ORDER BY created_datetime DESC
 	</select>
 
+	<select id="getFilteredProducts" parameterType="map" resultType="com.itwillbs.domain.ProductDTO">
+		SELECT * FROM Product WHERE 1=1
+    	<if test="category_name != null">
+ 		AND category_name = #{category_name}
+    	</if>
+    	<if test="trade_method != '직거래/택배'">
+	    AND trade_method = #{trade_method}
+	    </if>
+	    AND pay_method = #{pay_method}
+	    <if test="trade_status != null">
+	    	<if test="trade_status == '거래 불가'">
+	 		AND trade_status = '예약 중' OR '거래 완료'
+	    	</if>
+	        AND trade_status = #{trade_status}
+	    </if>
+	    <if test="startPrice != null and endPrice != null">
+	        AND product_price BETWEEN #{startPrice} AND #{endPrice}
+	    </if>
+	    <if test="startPrice != null and (endPrice == null)">
+	    <![CDATA[
+	        AND product_price > #{startPrice}
+	        ]]>
+	    </if>
+	    <if test="startPrice == null and (endPrice != null)">
+	    <![CDATA[
+	        AND product_price <= #{endPrice}
+	        ]]>
+	    </if>
+		ORDER BY created_datetime DESC
+	</select>
+	
+	<select id="getItemsBySearch" parameterType="java.lang.String" resultType="com.itwillbs.domain.ProductDTO">
+		SELECT * FROM Product WHERE 1=1
+   		<if test="value != null">
+        AND (product_name LIKE #{value} OR product_desc LIKE #{value})
+    	</if>
+	</select>
+	
+	
+	
 </mapper>
 

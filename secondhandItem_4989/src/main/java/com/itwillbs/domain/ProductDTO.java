@@ -38,6 +38,8 @@ public class ProductDTO {
     private String trade_area;
     //거래상태
     private String trade_status;
+    //구매자 아이디 for chat
+    private String buyer_id;
  
     
 	@Override
@@ -243,5 +245,15 @@ public class ProductDTO {
 		this.trade_area = trade_area;
 	}
 
+
+	public String getBuyer_id() {
+		return buyer_id;
+	}
+
+
+	public void setBuyer_id(String buyer_id) {
+		this.buyer_id = buyer_id;
+	}
+	
 
 }

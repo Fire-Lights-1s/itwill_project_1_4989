@@ -11,6 +11,7 @@ import com.itwillbs.dao.ChatDAO;
 import com.itwillbs.domain.ChatMessageDTO;
 import com.itwillbs.domain.ChatRoomDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.TXDTO;
 
 @Service
 public class ChatService {
@@ -35,15 +36,48 @@ public class ChatService {
 			chatDAO.createChatRoom(chatRoomDTO);
 		}
 	}
-	public ProductDTO getProductInfo(ChatRoomDTO chatRoomDTO) {
+	public ProductDTO getProductInfo(int product_id) {
 		ProductDTO productDTO = null;
-		productDTO = chatDAO.getProductInfo(chatRoomDTO);
+		productDTO = chatDAO.getProductInfo(product_id);
 		return productDTO;
 	}
 	public List<ChatRoomDTO> getChatRoomList(String member_id) {
 		List<ChatRoomDTO> chatRoomList = null;
 		chatRoomList = chatDAO.getChatRoomList(member_id);
 		return chatRoomList;
+	}
+	public ProductDTO updateProductTradeStatus(ProductDTO productDTO) {
+		TXDTO txDTO = new TXDTO();
+		txDTO.setProduct_id(productDTO.getProduct_id());
+		txDTO.setBuyer_id(productDTO.getBuyer_id());
+		
+		if(chatDAO.checkProductTX(productDTO) < 1) {
+			productDTO.setTrade_status("예약 중");
+			chatDAO.updateProductTradeStatus(productDTO);
+			txDTO.setReservation_date(new Timestamp(System.currentTimeMillis()));
+			chatDAO.createTX(txDTO);
+		}else {
+//			if(productDTO.getTrade_status().equals("판매 예약")) {
+//				productDTO.setTrade_status("예약 중");
+//				chatDAO.updateProductTradeStatus(productDTO);
+//				chatDAO.updateTX(txDTO);
+//			}
+			if(productDTO.getTrade_status().equals("판매 예약 취소")) {
+				// 기본 생성자로 생성되는 boolean 값은 false
+				txDTO.setIs_reserved(true);
+				chatDAO.updateTX(txDTO);
+				productDTO.setTrade_status("거래 가능");
+				chatDAO.updateProductTradeStatus(productDTO);
+			}
+			if(productDTO.getTrade_status().equals("구매 확정")) {
+				txDTO.setTransaction_end_date(new Timestamp(System.currentTimeMillis()));
+				txDTO.setTransaction_method("현금");
+				chatDAO.updateTX(txDTO);
+				productDTO.setTrade_status("거래 완료");
+				chatDAO.updateProductTradeStatus(productDTO);
+			}
+		}
+		return productDTO;
 	}
 
 

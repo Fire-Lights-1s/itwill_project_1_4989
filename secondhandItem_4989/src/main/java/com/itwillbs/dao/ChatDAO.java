@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.ChatRoomDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.TXDTO;
 
 @Repository
 public class ChatDAO {
@@ -27,14 +28,28 @@ public class ChatDAO {
 	public void createChatRoom(ChatRoomDTO chatRoomDTO) {
 		sqlSession.insert(namespace+".createRoom", chatRoomDTO);
 	}
-	public ProductDTO getProductInfo(ChatRoomDTO chatRoomDTO) {
-		ProductDTO productDTO = sqlSession.selectOne(namespace+".getProductInfo", chatRoomDTO);
+	public ProductDTO getProductInfo(int product_id) {
+		ProductDTO productDTO = sqlSession.selectOne(namespace+".getProductInfo", product_id);
 		return productDTO;
 	}
 	public List<ChatRoomDTO> getChatRoomList(String member_id) {
 		List<ChatRoomDTO> chatRoomList = sqlSession.selectList(namespace+".getChatRoomList",member_id);
 		return chatRoomList;
 	}
-
+	public ProductDTO updateProductTradeStatus(ProductDTO productDTO) {
+		sqlSession.update(namespace+".updateProductTradeStatus", productDTO);
+		return productDTO;
+	}
+	public int checkProductTX(ProductDTO productDTO) {
+		int check = sqlSession.selectOne(namespace+".checkProductTX", productDTO);
+		return check;
+	}
+	public void createTX(TXDTO txDTO) {
+		sqlSession.insert(namespace+".createTX", txDTO);
+	}
+	public void updateTX(TXDTO txDTO) {
+		sqlSession.update(namespace+".updateTX", txDTO);
+	}
+	
 
 }

@@ -1,6 +1,7 @@
 package com.itwillbs.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -22,6 +23,13 @@ public class ProductListDAO {
 	}
 	public List<ProductDTO> getProductListByC(String category_name) {
 		return sqlSession.selectList(namespace + ".getProductListByC", category_name);
+	}
+	public List<ProductDTO> getFilteredProducts(Map<String, Object> paramMap) {
+		return sqlSession.selectList(namespace + ".getFilteredProducts", paramMap);
+	}
+	public List<ProductDTO> getItemsBySearch(String query) {
+		String value = "%" + query + "%";		
+	    return sqlSession.selectList(namespace + ".getItemsBySearch", value);
 	}
 	
 }

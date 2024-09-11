@@ -1,15 +1,16 @@
-<!-- 0909 백업 파일. 1.DB 등록 2.이미지 업로드 3.지역검색-->
-
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 로그인한 사람만 상품 등록 -->
 
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
+<!-- postcode.v2.js 우편번호 서비스 기능을 가진 외부 자바스크립트 연결 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <title>물품등록</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -155,54 +156,7 @@ textarea {
 		reader.readAsDataURL(event.target.files[0]);
 	}
 
-	// 	// 이미지 미리보기를 생성하는 함수
-	// 	function setThumbnail(event) {
-	// 		const files = event.target.files;
-	// 		const previewContainer = document
-	// 				.getElementById('imagePreviewContainer');
-	// 		previewContainer.innerHTML = ''; // 기존 미리보기 초기화
-
-	// 		if (files.length > 5) {
-	// 			alert("최대 5개의 이미지만 업로드할 수 있습니다.");
-	// 			return;
-	// 		}
-
-	// 		for (let i = 0; i < files.length; i++) {
-	// 			const file = files[i];
-	// 			const reader = new FileReader();
-
-	// 			reader.onload = function(e) {
-	// 				const imageItem = document.createElement('div');
-	// 				imageItem.classList.add('imageItem');
-
-	// 				const img = document.createElement('img');
-	// 				img.src = e.target.result;
-	// 				img.classList.add('imageSize');
-	// 				img.style.width = "200px"; // 이미지 크기 조절
-	// 				img.style.height = "200px"; // 이미지 크기 조절
-	// 				img.style.objectFit = "cover"; // 이미지 비율 유지
-
-	// 				const removeButton = document.createElement('button');
-	// 				removeButton.type = 'button';
-	// 				removeButton.classList.add('imageClose');
-	// 				removeButton.innerText = 'X';
-	// 				removeButton.onclick = function() {
-	// 					removeImage(imageItem);
-	// 				};
-
-	// 				imageItem.appendChild(img);
-	// 				imageItem.appendChild(removeButton);
-	// 				previewContainer.appendChild(imageItem);
-	// 			};
-
-	// 			reader.readAsDataURL(file);
-	// 		}//for
-	// 	}//setThumbnail(event)
-
-	// 미리보기에서 이미지를 제거하는 함수
-	function removeImage(imageElement) {
-		imageElement.remove();
-	}
+	
 </script>
 
 </head>
@@ -218,92 +172,150 @@ textarea {
 		<div id="main-container">
 			<main>
 				<!-- 본문 영역 -->
-				<div class="addBox">
-    <form action="${pageContext.request.contextPath}/product/registerPro" class="appform" method="post" name="addForm" enctype="multipart/form-data">
-        <hr style="border: 0; height: 3px; color: black;">
-        <div class="container">
-            <!-- 이미지 업로드 및 미리보기 영역 -->
-            <div class="form-group image-upload">
-                <label for="product_img1">사진 선택</label>
-                <input type="file" id="product_img1" name="product_img1">
-            </div>
+	<div class="addBox">
+		<form action="${pageContext.request.contextPath}/product/registerPro" 
+						class="appform" method="post" name="fr"
+						enctype="multipart/form-data">
+						<hr style="border: 0; height: 3px; color: black;">
+						<div class="container">
+							<!-- 이미지 업로드 및 미리보기 영역 -->
+							<div class="form-group image-upload">
+								<label for="product_img1">사진 선택</label> 
+								<input type="file" id="product_img1" name="product_img1" class="login-bttn">
+							</div>
 
-            <!-- 카테고리 등 다른 폼 요소 -->
-            <div class="form-group inline-group">
-                <label for="category_name">카테고리</label>
-                <select id="category_name" name="category_name">
-                    <option value="" disabled selected>선택</option>
-                    <option value="phone">휴대폰</option>
-                    <option value="tablet">태블릿</option>
-                    <option value="watch">스마트워치</option>
-                    <option value="computer">PC / 노트북</option>
-                    <option value="acc">PC주변기기</option>
-                    <option value="game">게임기기</option>
-                    <option value="etc">기타</option>
-                </select>
-            </div>
 
-            <div class="form-group inline-group">
-                <label for="product_name">제품명</label>
-                <input type="text" id="product_name" name="product_name" placeholder="브랜드명, 모델명 함께 입력해주세요.">
-            </div>
+							<!-- 카테고리 등 다른 폼 요소 -->
+							<div class="form-group inline-group">
+								<label for="category_name">카테고리</label> <select
+									id="category_name" name="category_name">
+									<option value="" disabled selected>선택</option>
+									<option value="phone">휴대폰</option>
+									<option value="tablet">태블릿</option>
+									<option value="watch">스마트워치</option>
+									<option value="computer">PC / 노트북</option>
+									<option value="acc">PC주변기기</option>
+									<option value="game">게임기기</option>
+									<option value="etc">기타</option>
+								</select>
+							</div>
 
-            <div class="form-group inline-group">
-                <label for="year_purchase">구입연도</label>
-                <input type="number" id="year_purchase" name="year_purchase" placeholder="구입연도를 입력해주세요" min="1900" max="2024" style="flex: 1;" maxlength="4" oninput="limitYearLength()">
+							<div class="form-group inline-group">
+								<label for="product_name">제품명</label> <input type="text"
+									id="product_name" name="product_name"
+									placeholder="브랜드명, 모델명 함께 입력해주세요.">
+							</div>
 
-                <label style="margin-left: 10px;">
-                    <input type="checkbox" id="unknownCheckbox" onclick="handleYearCheckbox()"> 알 수 없음
-                </label>
-            </div>
+							<div class="form-group inline-group">
+								<label for="year_purchase">구입연도</label> <input type="number"
+									id="year_purchase" name="year_purchase"
+									placeholder="구입연도를 입력해주세요" min="1900" max="2024"
+									style="flex: 1;" maxlength="4" oninput="limitYearLength()">
 
-            <div class="form-group inline-group">
-                <label for="product_price">판매 가격</label>
-                <input type="number" id="product_price" name="product_price" placeholder="원" oninput="addPriceSuffix()">
-            </div>
+								<label style="margin-left: 10px;"> <input
+									type="checkbox" id="unknownCheckbox"
+									onclick="handleYearCheckbox()"> 알 수 없음
+								</label>
+							</div>
 
-            <div class="form-group inline-group">
-                <label for="trade_area">거래 지역</label>
-                <select id="trade_area" name="trade_area">
-                    <option value="1">서울특별시</option>
-                    <option value="2">부산광역시</option>
-                </select>
-            </div>
+							<div class="form-group inline-group">
+								<label for="product_price">판매 가격</label> <input type="number"
+									id="product_price" name="product_price" placeholder="원"
+									oninput="addPriceSuffix()">
+							</div>
 
-            <div class="form-group inline-group">
-                <label for="trade_method">거래 방식</label>
-                <select id="trade_method" name="trade_method">
-                    <option value="" disabled selected>선택</option>
-                    <option value="택배">택배</option>
-                    <option value="직거래">직거래</option>
-                    <option value="모두 가능">택배/직거래</option>
-                </select>
-            </div>
-
-            <div class="form-group inline-group">
-                <label for="pay_method">결제 방식</label>
-                <select id="pay_method" name="pay_method">
-                    <option value="" disabled selected>선택</option>
-                    <option value="현금">현금</option>
-                    <option value="페이">4989페이</option>
-                    <option value="모두 가능">현금/4989페이</option>
-                </select>
-            </div>
-
-            <div class="form-group inline-group">
-                <label for="product_desc">물품 상태</label>
-                <textarea id="product_desc" name="product_desc" placeholder="물품 상태(미개봉/신품/중고), 하자 등 상세내용을 적어주세요."></textarea>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="submit-btn" value="save">등록하기</button>
-            </div>
+<div class="form-group inline-group">
+    <label for="post1">거래 지역</label>
+    <div style="display: flex; gap: 10px;">
+        <!-- 주소 검색 버튼을 왼쪽으로 이동 -->
+        <input type="button" value="주소 검색" onclick="daum_address();" class="login-bttn">
+        <input type="text" name="post1" id="post1" placeholder="지역검색">
+        <input type="text" name="addr1" id="addr1" placeholder="기본주소">
+    </div>
+</div>
+    
+    <br>
+<div class="form-group inline-group">
+	<div class="form-group inline-group">
+    <!-- 거래 방식과 결제 방식을 한 줄에 배치 -->
+    <div style="display: flex; gap: 20px; width: 100%;">
+        <div style="flex: 1;">
+            <label for="trade_method">거래 방식</label> 
+            <select id="trade_method" name="trade_method">
+                <option value="" disabled selected>선택</option>
+                <option value="택배">택배</option>
+                <option value="직거래">직거래</option>
+                <option value="택배/직거래">택배/직거래</option>
+            </select>
         </div>
-    </form>
+
+        <div style="flex: 1;">
+            <label for="pay_method">결제 방식</label> 
+            <select id="pay_method" name="pay_method">
+                <option value="" disabled selected>선택</option>
+                <option value="현금">현금</option>
+                <option value="페이">4989페이</option>
+                <option value="현금/4989페이">현금/4989페이</option>
+            </select>
+        </div>
+    </div>
 </div>
 
 
-			</main>
+						<div class="form-group inline-group">
+							<label for="product_desc">물품 상태</label>
+							<textarea id="product_desc" name="product_desc"
+								placeholder="물품 상태(미개봉/신품/중고), 하자 등 상세내용을 적어주세요."></textarea>
+						</div>
+
+						<div class="form-group">
+							<button type="submit" class="submit-btn" value="save">등록하기</button>
+						</div>
+				</div>
+
+    
+</div>
+
+
+
+				
+
+						
+				
+				
+				</form>
+		</div>
+
+<script>
+
+function daum_address() {
+
+	let themeObj = {
+	   searchBgColor: "#0B65C8",
+	   queryTextColor: "#FFFFFF"
+	};
+	
+	new daum.Postcode({
+	    oncomplete: function(data) {
+	    console.log(data);	
+	    
+	    document.fr.post1.value = data.zonecode;
+	    document.fr.post1.value = data.sido;
+		document.fr.addr1.value = data.sigungu;
+		document.fr.addr1.value = data.bname;
+		
+		document.fr.addr2.focus();	    	
+	    },
+				
+		theme :	themeObj
+	}).open();
+
+}
+
+</script>
+		
+
+		</main>
 		</div>
 	</section>
 
@@ -311,4 +323,3 @@ textarea {
 
 </body>
 </html>
-
