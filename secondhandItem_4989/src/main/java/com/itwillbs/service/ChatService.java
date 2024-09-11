@@ -1,6 +1,7 @@
 package com.itwillbs.service;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -38,6 +39,11 @@ public class ChatService {
 		ProductDTO productDTO = null;
 		productDTO = chatDAO.getProductInfo(chatRoomDTO);
 		return productDTO;
+	}
+	public List<ChatRoomDTO> getChatRoomList(String member_id) {
+		List<ChatRoomDTO> chatRoomList = null;
+		chatRoomList = chatDAO.getChatRoomList(member_id);
+		return chatRoomList;
 	}
 
 

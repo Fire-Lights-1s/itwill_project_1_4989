@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.ZzimDTO;
 
 @Repository
 public class MyPageDAO {
@@ -37,7 +38,13 @@ public class MyPageDAO {
 		System.out.println("MyPageDAO getZzimCount()");
 		return sqlSession.selectOne(namespace + ".getZzimCount", pageDTO);
 	}
+
+	public void deleteZzim(ZzimDTO zzimDTO) {
+		System.out.println("MyPageDAO deleteZzim()");
+		sqlSession.delete(namespace + ".deleteZzim", zzimDTO);
+	}
 	
+		
 	
 	
 	

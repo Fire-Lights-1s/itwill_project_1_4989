@@ -7,16 +7,31 @@
 	<select id="checkRoomId" resultType="java.lang.Integer"> 
 		select count(*)
 		from ChatRoom
-		where chat_room_id = '${chat_room_id}'
+		where chat_room_id = #{chat_room_id}
 	</select>
 	<insert id="createRoom">
 		insert into ChatRoom(chat_room_id, product_id, buyer_id, seller_id, title)
-		values('${chat_room_id}', ${product_id}, '${buyer_id}', '${seller_id}', '${title}')
+		values(#{chat_room_id}, #{product_id}, #{buyer_id}, #{seller_id}, #{title})
 	</insert>
 	
 	<select id="getProductInfo" resultType="com.itwillbs.domain.ProductDTO">
 		select * 
 		from Product
-		where product_id = ${product_id}
+		where product_id = #{product_id}
+	</select>
+	
+	<select id="getChatRoomList" resultType="com.itwillbs.domain.ChatRoomDTO">
+		SELECT room.chat_room_id, room.product_id, room.seller_id, room.buyer_id, room.title,
+			Product.product_img1, message.message, message.send_time
+		FROM ChatRoom room inner join Product
+		on room.product_id = Product.product_id
+		LEFT OUTER join ChatMessage message
+        on room.chat_room_id = message.chat_room_id 
+        and message.chat_id = (select chat_id from ChatMessage
+									order by ChatMessage.send_time desc
+                                    limit 1
+									)
+									
+		where room.buyer_id = #{member_id} or room.seller_id = #{member_id}
 	</select>
 </mapper>

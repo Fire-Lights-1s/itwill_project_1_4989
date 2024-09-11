@@ -218,6 +218,13 @@ main {
     text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
 }
 
+.profile-item-review1 {
+	text-align:center;
+	white-space:nowrap; /* 줄바꿈 방지 */
+    overflow:hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
+}
+
 .pagination {padding:40px 0 0; text-align:center;}
 .pagination a {display:inline-block; }
 .pagination a.pbtn {display:inline-block; padding:7px; text-align:center; vertical-align:middle; font-size:0;}

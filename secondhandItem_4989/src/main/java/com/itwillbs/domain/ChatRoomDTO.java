@@ -1,5 +1,6 @@
 package com.itwillbs.domain;
 
+import java.sql.Timestamp;
 
 public class ChatRoomDTO {
     private String chat_room_id;
@@ -8,15 +9,22 @@ public class ChatRoomDTO {
     private String seller_id;
     private String title;
     
+    private String product_img1;
+    private String message;
+    private Timestamp send_time;
+    
 
 	@Override
 	public String toString() {
 		return "{ "+
-				"chat_room_id : " + chat_room_id +
-				", product_id : " + product_id +
-				", buyer_id : " + buyer_id +
-				", seller_id : " + seller_id +
-				", title : " + title +
+				"\"chat_room_id\" : \"" + chat_room_id +
+				"\", \"product_id\" : " + product_id +
+				", \"buyer_id\" : \"" + buyer_id +
+				"\", \"seller_id\" : \"" + seller_id +
+				"\", \"title\" : \"" + title +
+				"\", \"product_img1\" : \"" + product_img1 +
+				"\", \"product_img1\" : \"" + message +
+				"\", \"product_img1\" : " + send_time +
 				"}";
 	}
 
@@ -58,6 +66,30 @@ public class ChatRoomDTO {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getProduct_img1() {
+		return product_img1;
+	}
+
+	public void setProduct_img1(String product_img1) {
+		this.product_img1 = product_img1;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Timestamp getSend_time() {
+		return send_time;
+	}
+
+	public void setSend_time(Timestamp send_time) {
+		this.send_time = send_time;
 	}
     
 }
