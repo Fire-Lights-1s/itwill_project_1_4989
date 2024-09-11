@@ -43,6 +43,16 @@ public class MyPageDAO {
 		System.out.println("MyPageDAO deleteZzim()");
 		sqlSession.delete(namespace + ".deleteZzim", zzimDTO);
 	}
+
+	public List<ProductDTO> getBuyList(PageDTO pageDTO) {
+		System.out.println("MyPageDAO getBuyList()");
+		return sqlSession.selectList(namespace + ".getBuyList", pageDTO);
+	}
+
+	public int getBuyCount(PageDTO pageDTO) {
+		System.out.println("MyPageDAO getBuyCount()");
+		return sqlSession.selectOne(namespace + ".getBuyCount", pageDTO);
+	}
 	
 		
 	

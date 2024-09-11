@@ -50,4 +50,18 @@ public class MyPageService {
 		System.out.println("MyPageService deleteZzim()");
 		myPageDAO.deleteZzim(zzimDTO);
 	}
+
+	public List<ProductDTO> getBuyList(PageDTO pageDTO) {
+		System.out.println("MyPageService getBuyList()");
+		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
+		int endRow = startRow + pageDTO.getPageSize() - 1;
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
+		return myPageDAO.getBuyList(pageDTO);
+	}
+
+	public int getBuyCount(PageDTO pageDTO) {
+		System.out.println("MyPageService getBuyList()");
+		return myPageDAO.getBuyCount(pageDTO);
+	}
 }
