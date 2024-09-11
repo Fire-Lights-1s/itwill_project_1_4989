@@ -431,4 +431,11 @@ aside {
     display: block;
 }
 
+.img-height-fix { /* 상품이미지 고정 */
+    height: 260px !important; 
+    object-fit: cover !important;  
+    display: block !important;
+}
+
+
 /* 상품 목록 처리 끝 */

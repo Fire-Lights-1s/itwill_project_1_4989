@@ -36,10 +36,10 @@
 <section>
 	<div class="content-container">
 	<!-- 사이드 메뉴 시작 -->
-      <aside class="side-nav">
+      <aside>
       	<div id="selector-container">
         <div id="selector-title">판매상품 골라보기</div>
-        <hr>
+        <div id="selector-content">
         <ul id="category" class="selector-list">
         	<li class="group-title">카테고리</li>
             <li class="selector"><a href="#">전체</a></li>
@@ -54,20 +54,20 @@
         <hr>
         <ul id="status" class="selector-list">
         	<li class="group-title">거래상태</li>
-            <li class="selector"><a href="#">판매중</a></li>
-            <li class="selector"><a href="#">예약 중 / 판매완료</a></li>
+            <li class="selector"><input type="checkbox" name="trade" value="able">거래 가능 &nbsp;&nbsp;
+            <input type="checkbox" name="trade" value="disable">거래 불가</li> <!-- = 예약중, 거래완료 -->
 		</ul>
 		<hr>
 		<ul id="method" class="selector-list">
 			<li class="group-title">거래방법</li>
-            <li class="selector"><a href="#">직거래</a></li>
-            <li class="selector"><a href="#">택배</a></li>
+            <li class="selector"><input type="checkbox" name="method" value="직거래">직거래 &nbsp;&nbsp;
+            <input type="checkbox" name="method" value="택배">택배</li>
 		</ul>
 		<hr>
 		<ul id="payment" class="selector-list">
 			<li class="group-title">결제수단</li>
-            <li class="selector"><a href="#">페이</a></li>
-            <li class="selector"><a href="#">현금</a></li>
+            <li class="selector"><input type="checkbox" name="pay" value="페이">페이 &nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="pay" value="현금">현금</li>
 		</ul>
 		<hr>
 		<ul id="price" class="selector-list">
@@ -77,8 +77,11 @@
             <li class="selector"><a href="#">10만원 이하</a></li>
             <li class="selector"><a href="#">10만원 초과 30만원 이하</a></li>
             <li class="selector"><a href="#">30만원 초과 50만원 이하</a></li>
-            <li class="selector"><a href="#">직접 입력</a></li>
+            <li class="selector">직접 입력</li>
+            <li><input id="price_min" type="number" name="price_min"> ~ <input id="price_max" type="number" name="price_max">
+            <button id="price_selector">적용</button></li>
 		</ul>
+		</div>
 		</div>
       </aside>
 
@@ -87,24 +90,6 @@
 <!-- 본문영역 시작 -->
 	<div id="main-container-side">
 	  <main>
-    <script>
-        function sortNewest() {
-            // 최신순 정렬 기능
-            console.log('Sorting by newest...');
-        }
-
-        function sortPriceHighToLow() {
-            // 가격 높은 순 정렬 기능
-            console.log('Sorting by price (high to low)...');
-        }
-
-        function sortPriceLowToHigh() {
-            // 가격 낮은 순 정렬 기능
-            console.log('Sorting by price (low to high)...');
-        }
-    </script>
-</head>
-<body>
 
     <div class="container">
         <!-- Sorting Filters -->
@@ -118,7 +103,7 @@
 <!-- 상품 목록 시작: 부트스트랩 적용 -->
         <div style="width:100%; margin:0 auto;" class="py-5 bg-light">
         <div class="container px-1 px-lg-1 mt-1" style="margin-top:100px;">
-            <div class="row gx-4 gx-lg-5 justify-content-center"> <!-- 수정 -->
+            <div class="row gx-4 gx-lg-5 justify-content-center">
                 
 		<c:set var="size" value="${fn:length(productList)}" />
 		<c:forEach var="i" begin="0" end="${size - 1}">
@@ -170,7 +155,10 @@
                     </div>
                 </div>
        </c:forEach>
-	
+	</div>
+	</div>
+	</div>
+	</div>
 
 	  </main>
 	</div>
