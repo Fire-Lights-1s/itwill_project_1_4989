@@ -145,13 +145,44 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/buy")
-	public String buy(HttpSession session) {
+	public String buy(HttpSession session, Model model, HttpServletRequest request) {
 		System.out.println("MyPageController buy()");
 		String id = (String)session.getAttribute("member_id");
 		MemberDTO memberDTO = memberService.getMember(id);
 		if(memberDTO == null) {
 			return "redirect:/member/login";
 		}
+		String pageNum = request.getParameter("pageNum");
+		String sort = request.getParameter("sort");
+		String sale = request.getParameter("sale");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		int pageSize = 8;
+		PageDTO pageDTO = new PageDTO();
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setSeller_id(id);
+		pageDTO.setSort(sort);
+		pageDTO.setSale(sale);
+		List<ProductDTO> productList = myPageService.getBuyList(pageDTO);
+		int count = myPageService.getBuyCount(pageDTO);
+		int pageBlock = 5;
+		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
+		int endPage = startPage + pageBlock - 1;
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("productList", productList);
 		return "my/buy";
 	}
 	

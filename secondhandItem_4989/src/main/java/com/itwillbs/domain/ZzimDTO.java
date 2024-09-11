@@ -7,6 +7,10 @@ public class ZzimDTO {
 	private String member_id;
 
 	
+	@Override
+	public String toString() {
+		return "ZzimDTO [zzim_id=" + zzim_id + ", product_id=" + product_id + ", member_id=" + member_id + "]";
+	}
 	public int getZzim_id() {
 		return zzim_id;
 	}

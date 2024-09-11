@@ -48,6 +48,7 @@
 					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc">가격 순 |</a>
 					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
 				</c:if>
+				<br>
 			</div>
 			<div class="profile-item-list">
 			<c:forEach var="productDTO" items="${productList}">
@@ -67,9 +68,8 @@
 						<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=${pageDTO.sort}&nozzim=${productDTO.product_id}">관심 끄기</a>
 					</div>
 					<div class="profile-item-review" data-date="${productDTO.created_datetime}">
-						평점 : 4.7&emsp;&emsp;
+<!-- 						평점 : 4.7&emsp;&emsp; -->
 						<div class="zzim-time" style="display: inline;">
-							
 						</div>
 					</div>
 				</div>
@@ -99,8 +99,8 @@
 </section>
 <!-- querySelector('.profile-item-review') -->
 <jsp:include page="../inc/footer.jsp"></jsp:include>
-
 <script>
+
 document.addEventListener('DOMContentLoaded', function() {
     function formatTimeAgo(date) {
         const now = new Date();
@@ -110,37 +110,35 @@ document.addEventListener('DOMContentLoaded', function() {
         const diffInDays = Math.floor(diffInHours / 24);
         const diffInMonths = Math.floor(diffInDays / 30);
         const diffInYears = Math.floor(diffInDays / 365);
-
         if (diffInDays < 30) {
         	if(diffInHours < 24) {
-        		return `${diffInHours}시간 전`;
+        		if(diffInMinutes < 60) {
+        			return diffInMinutes.toString() + "분 전";
+        		}
+        		return diffInHours.toString() + "시간 전";
         	}
-            return `${diffInDays}일 전`;
+        	return diffInDays.toString() + "일 전";
         } else if (diffInDays >= 30 && diffInDays < 365) {
-            return `${diffInMonths}달 전`;
+            return diffInMonths.toString() + "달 전";
         } else {
-            return `${diffInYears}년 전`;
+            return diffInYears.toString() + "년 전";
         }
     }
 
     const reviewElements = document.querySelectorAll('.profile-item-review');
     reviewElements.forEach(function(element) {
         const dateStr = element.getAttribute('data-date');
-        const date = new Date(dateStr); // data-date를 Date 객체로 변환
-        if (!isNaN(date.getTime())) { // 유효한 날짜인지 확인
+        const date = new Date(dateStr);
+        if (!isNaN(date.getTime())) {
             const timeAgo = formatTimeAgo(date);
-            console.log(timeAgo);
             const timeElement = element.querySelector('.zzim-time');
             if (timeElement) {
-            	console.log(timeAgo);
-                timeElement.textContent = timeAgo; // div 태그 안에 값 설정
+                timeElement.textContent = timeAgo;
             }
         }
     });
 });
+
 </script>
-
-
-
 </body>
 </html>

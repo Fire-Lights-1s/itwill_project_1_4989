@@ -16,7 +16,14 @@ public class PageDTO {
 	private String seller_id;
 	private String sort;
 	private String sale;
+	private boolean is_reserved;
 
+	public boolean isIs_reserved() {
+		return is_reserved;
+	}
+	public void setIs_reserved(boolean is_reserved) {
+		this.is_reserved = is_reserved;
+	}
 	public String getSale() {
 		return sale;
 	}

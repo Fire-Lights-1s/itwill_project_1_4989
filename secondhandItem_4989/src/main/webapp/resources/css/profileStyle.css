@@ -204,6 +204,15 @@ main {
 	margin:0 auto;
 }
 
+.profile-item-image-cover4 {
+	background-color:blue;
+	color:white;
+	text-align:center;
+	border-radius:0 0 10px 10px;
+	width:233px;	
+	margin:0 auto;
+}
+
 .profile-item-name {
 	text-align:center;	
 	white-space:nowrap; /* 줄바꿈 방지 */
