@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itwillbs.domain.ChatMessageDTO;
 import com.itwillbs.domain.ChatRoomDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.TXDTO;
 import com.itwillbs.service.ChatService;
 
 @Controller
@@ -38,7 +39,9 @@ public class ChatController {
 			chatRoomDTOList = chatService.getChatRoomList((String)session.getAttribute("member_id"));
 			
 			model.addAttribute("chatRoomDTOList", chatRoomDTOList);
+			TXDTO tx = new TXDTO();
 			
+			System.out.println(tx);
 			return "/chat/chat";
 		}
 		return "/chat/chat";

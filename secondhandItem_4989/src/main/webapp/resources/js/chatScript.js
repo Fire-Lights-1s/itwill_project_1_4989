@@ -124,6 +124,9 @@ function loadProduct(chatRoom_json){
 				  case '거래 완료':
 				  	$(TXButton).text('후기 작성');
 				  	$(TXButton).css('visibility', 'visible');
+				  	$(TXButton).off('click');
+				  	$(TXButton).on('click', function(){
+				  	});
 				    break;
 				  default:
 				    $(TXButton).text('');
@@ -205,18 +208,19 @@ function promiseTrade(){
 	let TXButtonFunc = $(TXButton).text();
 	let tradeState = null;
 	let tradeFinish = false;
+	
 	if(!Object.is(productJSON, undefined) && !Object.is(productJSON, null) && !Object.is(productJSON, '')){
 		switch(TXButtonFunc) {
 			case '판매 예약':
-				tradeState = '예약 중';
+				tradeState = '판매 예약';
 				tradeFinish = false;
 				break;
 			case '판매 예약 취소':
-				tradeState = '거래 가능';	
+				tradeState = '판매 예약 취소';	
 				tradeFinish = false;
 				break;
 			case '구매 확정':
-				tradeState = '구매 완료';	
+				tradeState = '구매 확정';	
 				tradeFinish = false;
 				break;
 			case '후기 작성':

@@ -50,7 +50,7 @@ public class TXDTO {
 	public void setTransaction_method(String transaction_method) {
 		this.transaction_method = transaction_method;
 	}
-	public boolean isIs_reserved() {
+	public boolean getIs_reserved() {
 		return is_reserved;
 	}
 	public void setIs_reserved(boolean is_reserved) {

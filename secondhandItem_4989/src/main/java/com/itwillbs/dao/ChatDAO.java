@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.ChatRoomDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.TXDTO;
 
 @Repository
 public class ChatDAO {
@@ -43,13 +44,11 @@ public class ChatDAO {
 		int check = sqlSession.selectOne(namespace+".checkProductTX", productDTO);
 		return check;
 	}
-	public ProductDTO createTX(ProductDTO productDTO) {
-		// TODO Auto-generated method stub
-		return null;
+	public void createTX(TXDTO txDTO) {
+		sqlSession.insert(namespace+".createTX", txDTO);
 	}
-	public void updateTX(ProductDTO productDTO) {
-		// TODO Auto-generated method stub
-		
+	public void updateTX(TXDTO txDTO) {
+		sqlSession.update(namespace+".updateTX", txDTO);
 	}
 	
 
