@@ -31,7 +31,21 @@
 									order by ChatMessage.send_time desc
                                     limit 1
 									)
-									
 		where room.buyer_id = #{member_id} or room.seller_id = #{member_id}
 	</select>
+	
+	<update id="updateProductTradeStatus">
+		update set trade_status = #{trade_status} 
+		where product_id = #{product_id}
+	</update>
+	
+	<select id="checkProductTX" resultType="java.lang.Integer">
+		select count(*)
+		from TX
+		where product_id = #{product_id}
+	</select>
+	<insert id="">
+	</insert>
+	<update id="">
+	</update>
 </mapper>

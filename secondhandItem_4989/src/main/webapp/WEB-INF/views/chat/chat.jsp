@@ -17,10 +17,6 @@
 <script type="text/javascript" th:inline="javascript">
 	let sessionUserId = '<c:out value="${sessionUID}"/>';
 	let objChatRoomDTO = '<c:out value="${chatRoomDTO}"/>'.replaceAll("&#034;", "\"");
-	let chatRoomJSON = null;
-	if(!Object.is(objChatRoomDTO, null) && !Object.is(objChatRoomDTO, undefined) && !Object.is(objChatRoomDTO, '')){
-		chatRoomJSON = JSON.parse(objChatRoomDTO);
-	}
 </script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css?">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
@@ -73,36 +69,6 @@
 						</div>
 					</div>
 					</c:forEach>
-					<div id="testRoom1" onclick="connect($(this).attr('id'));">
-						<div class="profile">
-							<img alt="" src="">
-						</div>
-						<div class="chatDescript">
-							<div class="chatContnet">
-								<p>채팅방 제목</p>
-								<p>채팅방 내용</p>
-							</div>
-							<div>
-								<p>오후 2:40</p>
-								<p class="alamIcon">1</p>
-							</div>
-						</div>
-					</div>
-					<div id="testRoom2" onclick="connect($(this).attr('id'));">
-						<div class="profile">
-							<img alt="" src="">
-						</div>
-						<div class="chatDescript">
-							<div class="chatContnet">
-								<p>채팅방 제목</p>
-								<p>채팅방 내용</p>
-							</div>
-							<div>
-								<p>오후 2:40</p>
-								<p></p>
-							</div>
-						</div>
-					</div>
 				</div>	
 			</div>
 			<div id="chatRoom">
@@ -111,38 +77,17 @@
 						<img alt="product" src="">
 					</div>
 					<div>
-						<h3>거래 상품명</h3>
-						<p>거래 상품명</p>
-						<p>거래 상품명</p>
-						<p>거래 상품명</p>
+						<h3></h3>
+						<p></p>
+						<p></p>
+						<p></p>
 					</div>
 					<div>
-						<p>거래 주소</p>
-						<button>구매하기</button>
+						<p></p>
+						<button></button>
 					</div>
 				</div>
 				<div id="chatContent">
-					<div class="reciveMessage">
-						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasda</p>
-						<p>오후 2:40</p>
-					</div>
-					<div class="sendMessage">
-						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasdasd</p>
-						<p>오후 2:40</p>
-					</div>
-					<div class="sendMessage">
-						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasdasd</p>
-						<p>오후 2:40</p>
-					</div>
-					<div class="reciveMessage">
-						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasda</p>
-						<p>오후 2:40</p>
-					</div>
-					<div class="reciveMessage">
-						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasda</p>
-						<p>오후 2:40</p>
-					</div>
-				
 				</div>
 				<div id="inputMessage" class="flexBoxRow">
 					<button>

@@ -20,7 +20,6 @@ $(document).ready(function(){
 	
 		objs = document.createElement('input');
 		objs.setAttribute('type', 'hidden');
-		objs.setAttribute('type', 'hidden');
 		objs.setAttribute('name', 'product_id');
 		objs.setAttribute('value', productID);
 		form.appendChild(objs);

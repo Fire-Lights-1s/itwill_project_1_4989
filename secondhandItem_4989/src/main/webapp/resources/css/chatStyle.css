@@ -224,6 +224,7 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 	height: 160px;
 	background-color: #fff;
 	box-shadow: 0 6px 5px rgba(0,0,0,0.15);
+	visibility: hidden;
 }
 #productInfo div:nth-child(1){
 	margin-right: 10px;
@@ -231,6 +232,10 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 	height: 140px;
 	background-color: #eee;
 	overflow: hidden;
+}
+#productInfo div:nth-child(1) img{
+	width: 140px;
+	height: 140px;
 }
 #productInfo div:nth-child(1){
 	width: 140px;
@@ -313,9 +318,12 @@ div#chatContent::-webkit-scrollbar-track {
 	margin-bottom: 10px;
 }
 #inputMessage{
+	display:flex;
+	flex-direction: row;
 	padding: 10px;
 	height: 80px;
 	justify-content: center;
+	visibility: hidden;
 }
 #inputMessage *{
 	background-color: white;
@@ -333,6 +341,10 @@ div#chatContent::-webkit-scrollbar-track {
 	height: 60px;
 }
 #inputMessage textarea{
+	padding: 10px 0; 
 	resize: none;
 	flex-grow: 1;
+}
+#inputMessage textarea:focus{
+	outline: 0;
 }

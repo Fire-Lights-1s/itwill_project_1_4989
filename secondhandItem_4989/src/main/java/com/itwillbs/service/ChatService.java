@@ -35,15 +35,24 @@ public class ChatService {
 			chatDAO.createChatRoom(chatRoomDTO);
 		}
 	}
-	public ProductDTO getProductInfo(ChatRoomDTO chatRoomDTO) {
+	public ProductDTO getProductInfo(int product_id) {
 		ProductDTO productDTO = null;
-		productDTO = chatDAO.getProductInfo(chatRoomDTO);
+		productDTO = chatDAO.getProductInfo(product_id);
 		return productDTO;
 	}
 	public List<ChatRoomDTO> getChatRoomList(String member_id) {
 		List<ChatRoomDTO> chatRoomList = null;
 		chatRoomList = chatDAO.getChatRoomList(member_id);
 		return chatRoomList;
+	}
+	public ProductDTO updateProductTradeStatus(ProductDTO productDTO) {
+		chatDAO.updateProductTradeStatus(productDTO);
+		if(chatDAO.checkProductTX(productDTO) < 1) {
+			chatDAO.createTX(productDTO);
+		}else {
+			chatDAO.updateTX(productDTO);
+		}
+		return productDTO;
 	}
 
 

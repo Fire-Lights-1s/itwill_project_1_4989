@@ -27,14 +27,30 @@ public class ChatDAO {
 	public void createChatRoom(ChatRoomDTO chatRoomDTO) {
 		sqlSession.insert(namespace+".createRoom", chatRoomDTO);
 	}
-	public ProductDTO getProductInfo(ChatRoomDTO chatRoomDTO) {
-		ProductDTO productDTO = sqlSession.selectOne(namespace+".getProductInfo", chatRoomDTO);
+	public ProductDTO getProductInfo(int product_id) {
+		ProductDTO productDTO = sqlSession.selectOne(namespace+".getProductInfo", product_id);
 		return productDTO;
 	}
 	public List<ChatRoomDTO> getChatRoomList(String member_id) {
 		List<ChatRoomDTO> chatRoomList = sqlSession.selectList(namespace+".getChatRoomList",member_id);
 		return chatRoomList;
 	}
-
+	public ProductDTO updateProductTradeStatus(ProductDTO productDTO) {
+		sqlSession.update(namespace+".updateProductTradeStatus", productDTO);
+		return productDTO;
+	}
+	public int checkProductTX(ProductDTO productDTO) {
+		int check = sqlSession.selectOne(namespace+".checkProductTX", productDTO);
+		return check;
+	}
+	public ProductDTO createTX(ProductDTO productDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void updateTX(ProductDTO productDTO) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 }
