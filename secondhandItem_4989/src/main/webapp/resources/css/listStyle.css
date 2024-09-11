@@ -356,7 +356,7 @@ header {
 .content-container {
 	margin: 130px auto 0 auto; /* 페이지 중앙에 컨테이너 위치 */
     padding: 20px;
-    max-width: 1500px; /* 원하는 최대 너비 설정 */
+    max-width: 1400px; /* 원하는 최대 너비 설정 */
     background-color: #f8f8f8;
     display: flex; /* 사이드 내비게이션과 본문을 나란히 배치 */
 }
@@ -441,22 +441,18 @@ aside {
 /* 상품리스트 고유 정의 */
 
 
-.page-title {
-	display: inline-block;
-	margin-top: 20px;
-	}
-
 .filter-row {
 	margin-top: 30px;
     display: flex;
     gap: 10px;
-    flex-direction: row-reverse;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .filter-row button {
-    background-color: #4e229e;
-    color: white;
-    border: none;
+    background-color: white;
+    color: #4e229e;
+    border: 1px solid #4e229e;
     padding: 10px 20px;
     font-size: 14px;
     border-radius: 5px;
@@ -464,12 +460,18 @@ aside {
 }
 
 .filter-row button:hover {
-    background-color: #007bff;
+    background-color: #4e229e;
+    color: white;
+}
+
+.filter-row button.selected {
+	background-color: #4e229e;
+    color: white;
 }
 
 #selector-container {
 	margin-top: 30px;
-    width: 200px;
+    width: 230px;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -490,7 +492,7 @@ aside {
 hr {
     border: none;
     border-top: 1px solid #ddd;
-    margin: 10px 0;
+    margin: 20px 0;
 }
 
 #selector-content {
@@ -498,14 +500,46 @@ hr {
 }
 
 .selector-list {
-    list-style-type: none;
-    padding-left: 0;
-    margin-bottom: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 200px;
+}
+
+.selector-list li {
+    padding: 5px 0px 5px 10px;
+}
+
+
+.selector {
+    cursor: pointer;
+}
+
+.selector.selected {
+    color: #4e229e;
+    font-weight: bold;
+}
+
+.selector:hover {
+    color: #4e229e;
+    font-weight: bold;
+}
+
+.selector-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 200px;	
+}
+
+.selector-checklist li {
+    padding: 5px;
+    margin-bottom: 10px;
 }
 
 .group-title {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 18px;
     margin-bottom: 8px;
     color: #333;
 }
@@ -514,7 +548,14 @@ hr {
     display: block;
     padding: 8px 0;
     color: #333;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+.check_selector {
+	display: block;
+    padding: 8px 0;
+    color: #333;
+    font-size: 16px;	
 }
 
 .selector a {
@@ -523,7 +564,7 @@ hr {
 }
 
 .selector a:hover {
-    color: #0046d5;
+    color: #4e229e;
     font-weight: bold;
 }
 
@@ -540,12 +581,13 @@ hr {
 
 #price button {
     padding: 5px 10px;
-    background-color: #0046d5;
+    background-color: #4e229e;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 #price button:hover {
-    background-color: #0034a1;
+    background-color: #4e229e;
 }
+

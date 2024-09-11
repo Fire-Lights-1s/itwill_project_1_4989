@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/listStyle.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script>
+	<script src="${pageContext.request.contextPath }/resources/js/listScript.js" defer></script>
 
 </head>
 	<style>	
@@ -28,7 +29,7 @@
 
     <header>
     	<div id="menu-name">
-			카테고리 전체
+			상품 목록
 		</div>
    </header>
 
@@ -40,47 +41,49 @@
       	<div id="selector-container">
         <div id="selector-title">판매상품 골라보기</div>
         <div id="selector-content">
-        <ul id="category" class="selector-list">
+        <ul id="category-list" class="selector-list">
         	<li class="group-title">카테고리</li>
-            <li class="selector"><a href="#">전체</a></li>
-            <li class="selector"><a href="#">휴대폰</a></li>
-            <li class="selector"><a href="#">태블릿</a></li>
-            <li class="selector"><a href="#">스마트워치</a></li>
-            <li class="selector"><a href="#">PC / 노트북</a></li>
-            <li class="selector"><a href="#">PC주변기기</a></li>
-            <li class="selector"><a href="#">게임기기</a></li>
-            <li class="selector"><a href="#">기타</a></li>
+            <li class="selector selected" data-value="all">전체</li>
+            <li class="selector" data-value="phone">휴대폰</li>
+            <li class="selector" data-value="tablet">태블릿</li>
+            <li class="selector" data-value="watch">스마트워치</li>
+            <li class="selector" data-value="computer">PC / 노트북</li>
+            <li class="selector" data-value="acc">PC주변기기</li>
+            <li class="selector" data-value="game">게임기기</li>
+            <li class="selector" data-value="etc">기타</li>
         </ul>
+        <input type="hidden" id="category" value="all">
         <hr>
-        <ul id="status" class="selector-list">
+        <ul id="status" class="selector-checklist">
         	<li class="group-title">거래상태</li>
-            <li class="selector"><input type="checkbox" name="trade" value="able">거래 가능 &nbsp;&nbsp;
-            <input type="checkbox" name="trade" value="disable">거래 불가</li> <!-- = 예약중, 거래완료 -->
+            <li class="check_selector"><input id="able" type="checkbox" name="trade" value="able" checked><label for="able">&nbsp;거래 가능</label> &nbsp;
+            <input id="disable" type="checkbox" name="trade" value="disable"><label for="disable">&nbsp;거래 불가</label></li> <!-- = 예약중, 거래완료 -->
 		</ul>
 		<hr>
-		<ul id="method" class="selector-list">
+		<ul id="method" class="selector-checklist">
 			<li class="group-title">거래방법</li>
-            <li class="selector"><input type="checkbox" name="method" value="직거래">직거래 &nbsp;&nbsp;
-            <input type="checkbox" name="method" value="택배">택배</li>
+            <li class="check_selector"><input id="direct" type="checkbox" name="method" value="직거래" checked><label for="direct">&nbsp;직거래</label> &nbsp;&nbsp;
+            <input id="delivery" type="checkbox" name="method" value="택배" checked><label for="delivery">&nbsp;택배</label></li>
 		</ul>
 		<hr>
-		<ul id="payment" class="selector-list">
+		<ul id="payment" class="selector-checklist">
 			<li class="group-title">결제수단</li>
-            <li class="selector"><input type="checkbox" name="pay" value="페이">페이 &nbsp;&nbsp;&nbsp;
-            <input type="checkbox" name="pay" value="현금">현금</li>
+            <li class="check_selector"><input id="pay" type="checkbox" name="pay" value="페이" checked><label for="pay">&nbsp;페이</label> &nbsp;&nbsp;&nbsp;
+            <input id="cash" type="checkbox" name="pay" value="현금" checked><label for="cash">&nbsp;현금</label></li>
 		</ul>
 		<hr>
-		<ul id="price" class="selector-list">
+		<ul id="price-list" class="selector-list">
 			<li class="group-title">가격</li>
-            <li class="selector"><a href="#">전체</a></li>
-            <li class="selector"><a href="#">0원(나눔)</a></li>
-            <li class="selector"><a href="#">10만원 이하</a></li>
-            <li class="selector"><a href="#">10만원 초과 30만원 이하</a></li>
-            <li class="selector"><a href="#">30만원 초과 50만원 이하</a></li>
-            <li class="selector">직접 입력</li>
+            <li class="selector selected" data-value="all">전체</li>
+            <li class="selector" data-value="free">0원(나눔)</li>
+            <li class="selector" data-value="under_10">10만원 이하</li>
+            <li class="selector" data-value="under_30">10만원 초과 30만원 이하</li>
+            <li class="selector" data-value="under_50">30만원 초과 50만원 이하</li>
+            <li class="check_selector">직접 입력</li>
             <li><input id="price_min" type="number" name="price_min"> ~ <input id="price_max" type="number" name="price_max">
             <button id="price_selector">적용</button></li>
 		</ul>
+		<input type="hidden" id="price" value="all">
 		</div>
 		</div>
       </aside>
@@ -93,15 +96,15 @@
 
     <div class="container">
         <!-- Sorting Filters -->
-        <h2 class="page-title">상품 목록</h2>
-            <div class="filter-row" style="align-items:right;">
-                <button onclick="sortNewest()">최신순</button>
-                <button onclick="sortPriceHighToLow()">높은가격순</button>
-                <button onclick="sortPriceLowToHigh()">낮은가격순</button>
-            </div>
+        <div class="filter-row" style="align-items:right;">
+          <button class="selected" onclick="sortNewest()">최신순</button>
+          <button onclick="sortPriceHighToLow()">높은가격순</button>
+          <button onclick="sortPriceLowToHigh()">낮은가격순</button>
+		</div>
+		<input type="hidden" id="order" value="all">
 
 <!-- 상품 목록 시작: 부트스트랩 적용 -->
-        <div style="width:100%; margin:0 auto;" class="py-5 bg-light">
+        <div id="product-list" style="width:100%; margin:0 auto;" class="py-5 bg-light">
         <div class="container px-1 px-lg-1 mt-1" style="margin-top:100px;">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 
@@ -168,7 +171,6 @@
 <!-- 본문영역 끝 -->
 
 <jsp:include page="../inc/footer.jsp"></jsp:include>
-
 
 </body>
 </html>
