@@ -32,7 +32,7 @@
 
   <div class="container">
         <h2>회원정보를 입력해주세요</h2>
-        <form action="socialPro" method="post">
+        <form action="socialPro" method="post" name="fr">
             <div class="nickname-group">
                 <label for="nickname">닉네임</label>
                 <div class="input-group">
@@ -41,10 +41,14 @@
                 </div>
             </div>
 
-
+			
             <label for="phone">휴대폰 번호</label>
             <input type="tel" id="phone" name="phone" placeholder="01012345678" required>
-
+			<div id = "checkedPhoneResult" name = "checkedPhoneResult"></div>
+			
+			<br>
+			
+			
             <div class="checkbox-group">
                 <label><input type="checkbox" name="terms" required> 4989 이용약관(필수)</label><br>
                 <label><input type="checkbox" name="privacy" required> 개인정보 수집 이용 동의(필수)</label><br>
@@ -62,6 +66,34 @@
 	  </main>
 	</div>
   </section>
+  
+<script>
+let checkedPhoneResult = false;
+
+document.fr.phone.onblur = function() {
+	
+	let phone = document.fr.phone.value;
+	let hasNumber = /\d/; // 숫자가 포함되어 있는지 확인하는 정규식
+	
+	if(phone.length ==11 && hasNumber.test(phone)){
+		document.querySelector('#checkedPhoneResult').innerText = "";
+		document.querySelector('#checkedPhoneResult').style.color = "red";
+		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
+		
+	} else if(document.fr.phone.value == "") {
+		document.querySelector('#checkedPhoneResult').innerText = "휴대폰 번호를 입력해주세요.";
+		document.querySelector('#checkedPhoneResult').style.color = "red";
+		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
+		
+	} else {
+		document.querySelector('#checkedPhoneResult').innerText = "휴대폰 번호를 다시 확인해주세요.(11자리)";
+		document.querySelector('#checkedPhoneResult').style.color = "red";
+		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
+
+	}
+}
+
+</script>
   
   <jsp:include page="../inc/footer.jsp"></jsp:include>
   

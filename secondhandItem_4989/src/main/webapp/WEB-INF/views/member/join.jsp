@@ -200,6 +200,7 @@ document.fr.name.onblur = function() {
 
 </script>
 
+<!-- 휴대폰번호 조건 -->
 <script>
 let checkedPhoneResult = false;
 
@@ -230,6 +231,7 @@ document.fr.phone.onblur = function() {
 
 </script>
 
+<!-- 이메일 조건 -->
 <script>
 let checkedEmailResult = false;
 

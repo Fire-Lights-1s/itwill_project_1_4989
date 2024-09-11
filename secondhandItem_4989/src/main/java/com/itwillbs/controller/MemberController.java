@@ -22,6 +22,9 @@ public class MemberController {
 	@Inject
 	private MemberService memberService;
 	
+//	@Autowired
+//	private MemberService memberService;
+	
 //	@GetMapping("/login")
 //	public String login() {
 //		return "/member/login";
