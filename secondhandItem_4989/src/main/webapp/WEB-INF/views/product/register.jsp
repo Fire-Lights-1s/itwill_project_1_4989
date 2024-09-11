@@ -181,7 +181,7 @@ textarea {
 							<!-- 이미지 업로드 및 미리보기 영역 -->
 							<div class="form-group image-upload">
 								<label for="product_img1">사진 선택</label> 
-								<input type="file" id="product_img1" name="product_img1">
+								<input type="file" id="product_img1" name="product_img1" class="login-bttn">
 							</div>
 
 
@@ -224,35 +224,43 @@ textarea {
 									oninput="addPriceSuffix()">
 							</div>
 
-														<div class="form-group inline-group">
+<div class="form-group inline-group">
     <label for="post1">거래 지역</label>
-    <input type="text" name="post1" id="post1" placeholder="우편번호">
-    <input type="button" value="주소 검색" onclick="daum_address();" class="button_2">
+    <div style="display: flex; gap: 10px;">
+        <!-- 주소 검색 버튼을 왼쪽으로 이동 -->
+        <input type="button" value="주소 검색" onclick="daum_address();" class="login-bttn">
+        <input type="text" name="post1" id="post1" placeholder="지역검색">
+        <input type="text" name="addr1" id="addr1" placeholder="기본주소">
+    </div>
+</div>
+    
+    <br>
+<div class="form-group inline-group">
+	<div class="form-group inline-group">
+    <!-- 거래 방식과 결제 방식을 한 줄에 배치 -->
+    <div style="display: flex; gap: 20px; width: 100%;">
+        <div style="flex: 1;">
+            <label for="trade_method">거래 방식</label> 
+            <select id="trade_method" name="trade_method">
+                <option value="" disabled selected>선택</option>
+                <option value="택배">택배</option>
+                <option value="직거래">직거래</option>
+                <option value="택배/직거래">택배/직거래</option>
+            </select>
+        </div>
+
+        <div style="flex: 1;">
+            <label for="pay_method">결제 방식</label> 
+            <select id="pay_method" name="pay_method">
+                <option value="" disabled selected>선택</option>
+                <option value="현금">현금</option>
+                <option value="페이">4989페이</option>
+                <option value="현금/4989페이">현금/4989페이</option>
+            </select>
+        </div>
+    </div>
 </div>
 
-<div class="form-group inline-group">
-    <label for="addr1">기본주소</label>
-    <input type="text" name="addr1" id="addr1" placeholder="기본주소">
-    
-<div class="form-group inline-group">
-							<label for="trade_method">거래 방식</label> <select id="trade_method"
-								name="trade_method">
-								<option value="" disabled selected>선택</option>
-								<option value="택배">택배</option>
-								<option value="직거래">직거래</option>
-								<option value="택배/직거래">택배/직거래</option>
-							</select>
-						</div>
-
-						<div class="form-group inline-group">
-							<label for="pay_method">결제 방식</label> <select id="pay_method"
-								name="pay_method">
-								<option value="" disabled selected>선택</option>
-								<option value="현금">현금</option>
-								<option value="페이">4989페이</option>
-								<option value="현금/4989페이">현금/4989페이</option>
-							</select>
-						</div>
 
 						<div class="form-group inline-group">
 							<label for="product_desc">물품 상태</label>
@@ -315,4 +323,3 @@ function daum_address() {
 
 </body>
 </html>
-
