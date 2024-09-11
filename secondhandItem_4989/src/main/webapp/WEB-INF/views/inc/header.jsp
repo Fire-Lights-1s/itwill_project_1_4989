@@ -8,7 +8,7 @@
             <img src="${pageContext.request.contextPath }/resources/img/Logo_BW2.png" style="height:25px;"></a></div>
             <ul class="nav-links">
                 <li>
-                    <a href="${pageContext.request.contextPath}/product/a" class="category_btn desktop-item" style="margin-right:20px;">三</a>
+                    <a href="${pageContext.request.contextPath}/product" class="category_btn desktop-item" style="margin-right:20px;">三</a>
                     <ul class="drop-menu">
                         <li><a href="${pageContext.request.contextPath}/product/a">전체</a></li>
                         <li><a href="${pageContext.request.contextPath}/product/phone">휴대폰</a></li>
@@ -23,7 +23,7 @@
                 <li>
                     <div style="display: inline-block;">
                     <form action="${pageContext.request.contextPath}/product/search" method="get">
-                        <input type="text" name="search" class="search" placeholder="원하는 상품을 검색해보세요">
+                        <input type="text" name="query" class="search" placeholder="원하는 상품을 검색해보세요">
                     </form>
                     </div>
                 </li>

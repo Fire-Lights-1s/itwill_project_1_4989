@@ -510,6 +510,21 @@ hr {
     padding: 5px 0px 5px 10px;
 }
 
+ul#category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 200px;
+}
+
+ul#category-list li {
+    padding: 5px 0px 5px 10px;
+}
+
+ul#category-list li.selected {
+    color: #4e229e;
+    font-weight: bold;
+}
 
 .selector {
     cursor: pointer;
@@ -556,16 +571,6 @@ hr {
     padding: 8px 0;
     color: #333;
     font-size: 16px;	
-}
-
-.selector a {
-    color: #333;
-    text-decoration: none;
-}
-
-.selector a:hover {
-    color: #4e229e;
-    font-weight: bold;
 }
 
 .selector input {
