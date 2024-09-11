@@ -99,7 +99,7 @@
         </tr>
         <tr>
             <th>은행</th>
-            <td>${detail.transfer_bank}</td>
+            <td>${detail.bank_name}</td>
             <th>계좌번호</th>
             <td>${detail.transfer_account}</td>
         </tr>

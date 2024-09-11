@@ -15,6 +15,7 @@ public class PurchaseRequestDTO {
 	private String transfer_account;
 	private Timestamp request_date;
 	
+	private String bank_name;
 	
 	public int getPurchase_id() {
 		return purchase_id;
@@ -75,6 +76,12 @@ public class PurchaseRequestDTO {
 	}
 	public void setRequest_date(Timestamp request_date) {
 		this.request_date = request_date;
+	}	
+	public String getBank_name() {
+		return bank_name;
+	}
+	public void setBank_name(String bank_name) {
+		this.bank_name = bank_name;
 	}
 	
 	@Override

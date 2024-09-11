@@ -53,19 +53,14 @@ public class AccountApiService {
 		
 	// 예금주 조회
 		public String getAccountHolder(String bank_code, String bank_num) {
-			System.out.println("getAccountHolder까지 왔다!!!!!!!!!!!!!");
 			String apiKey = "2632446146310815";
 			String apiSecret = "ZspV4eZ5izjb1uWRc3oE2oq09H6cwFVXrHPqarlUwbqEyswTU6JOUBCuaYVIT2amp6YQ3Q7zF47Vt0eZ";
 			String token = getAccessToken(apiKey, apiSecret);
-			
-			System.out.println("토큰확인 " + token);
 			
 			String url = UriComponentsBuilder.fromHttpUrl("https://api.iamport.kr/vbanks/holder")
 				    .queryParam("bank_code", bank_code)
 				    .queryParam("bank_num", bank_num)
 				    .toUriString();
-			
-			System.out.println("이쪽으로 요청을 보냄 " + url);
 			
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);		// http 헤더에 콘텐츠 설정
@@ -80,15 +75,14 @@ public class AccountApiService {
 		        
 		        if (response.getStatusCode().is2xxSuccessful()) {  // 정상 처리(code: 200) 되면
 		            JSONObject responseBody = new JSONObject(response.getBody());  // JSON 객체에 응답 받기
-		            System.out.println("응답확인 " + responseBody);
 		            JSONObject responseObject = responseBody.getJSONObject("response");  // "response" 객체
 		            return responseObject.getString("bank_holder");  // 예금주 정보 반환
 		        }
-		        return "";
+		        return "-";
 		        
 		    } catch (HttpClientErrorException e) {
 		        // 404 Not Found일 때 처리
-		        return "";
+		        return "-";
 		    }
 		
 		}
