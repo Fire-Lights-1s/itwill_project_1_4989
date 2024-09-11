@@ -31,11 +31,11 @@
 			</div>
 		<form action="${pageContext.request.contextPath}/my/infoUpdatePro" method="post" class="profile-update-form" name="fr" enctype="multipart/form-data">
 			<div class="profile-circle-div">
-				<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-circle">
+				<img src="${memberDTO.profile_img}" class="profile-circle" id="profileImage">
 				<label for="fileInput" class="custom-file-upload">
-				    <img src="${pageContext.request.contextPath}/resources/img/btn_edit.png" class="profile-circle-edit">
+				    <img src="${pageContext.request.contextPath}/resources/img/btn_edit.png" class="profile-circle-edit" id="editIcon">
 				</label>
-				<input id="fileInput" type="file" style="display:none;">
+				<input id="fileInput" type="file" accept="image/*" style="display:none;" name="file">
 				<a href="#"><img src="${pageContext.request.contextPath}/resources/img/btn_cancel.png" class="profile-circle-cancel"></a>
 			</div>
             <div class="form-group">
@@ -76,6 +76,7 @@
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
 <script type="text/javascript">
 	const pass1 = document.getElementById('password');
 	const pass2 = document.getElementById('confirmPassword');
@@ -112,6 +113,18 @@
 		}
 		
 	}
+
+	document.getElementById('fileInput').addEventListener('change', function(event) {
+	    const file = event.target.files[0];
+	    if (file) {
+	        const reader = new FileReader();
+	        reader.onload = function(e) {
+	            document.getElementById('profileImage').src = e.target.result;
+	        };
+	        reader.readAsDataURL(file);
+	    }
+	});
 </script>
+
 </body>
 </html>

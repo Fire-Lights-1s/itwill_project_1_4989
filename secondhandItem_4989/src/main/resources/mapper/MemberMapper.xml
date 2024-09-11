@@ -26,7 +26,7 @@
 	</select>
 	<update id="updateMember">
 		update Mem
-		set pass = #{pass}, nickname = #{nickname}, name = #{name}, phone = #{phone}, email = #{email}
+		set pass = #{pass}, nickname = #{nickname}, name = #{name}, phone = #{phone}, email = #{email}, profile_img = #{profile_img}
 		where member_id = #{member_id}
 	</update>
 	
