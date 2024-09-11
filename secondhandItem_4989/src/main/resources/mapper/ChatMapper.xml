@@ -44,8 +44,8 @@
 		from TX
 		where product_id = #{product_id}
 	</select>
-	<insert id="">
+	<insert id="createTX">
 	</insert>
-	<update id="">
+	<update id="updateTX">
 	</update>
 </mapper>
