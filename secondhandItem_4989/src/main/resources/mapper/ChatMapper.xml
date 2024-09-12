@@ -65,6 +65,15 @@
 			set is_reserved = false, transaction_end_date = #{transaction_end_date}, transaction_method = #{transaction_method}
 		</if>
 		where product_id = #{product_id} and is_reserved = true;
-		
 	</update>
+	<insert id="createChatMessage">
+		insert into ChatMessage(chat_room_id, message_type, alarm, user_id, message, send_time)
+		values(#{chat_room_id},#{message_type},#{alarm},#{user_id},#{message},#{send_time})
+	</insert>
+	<select id="getChatMessageList" resultType="com.itwillbs.domain.ChatMessageDTO">
+		select * 
+		from ChatMessage
+		where chat_room_id = #{chat_room_id}
+		order by send_time desc;
+	</select>
 </mapper>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/join.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 
@@ -29,7 +30,7 @@
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="member_id" name="member_id" placeholder="아이디" required>
-                <button type="button" class="check-btn">중복 확인</button>
+                <button type="button" id="check-btn1" class="check-btn">중복 확인</button>
                 <div id = "checkedIdResult" name = "checkedIdResult"></div>
             </div>
             <div class="form-group">
@@ -45,7 +46,8 @@
             <div class="form-group">
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nickname" name="nickname" placeholder="닉네임" required>
-                <button type="button" class="check-btn">중복 확인</button>
+                <button type="button" name="check-btn2" class="check-btn">중복 확인</button>
+            	<div id = "checkedNickResult" name = "checkedNickResult"></div>
             </div>
             <div class="form-group">
                 <label for="name">이름</label>
@@ -255,6 +257,39 @@ document.fr.email.onblur = function() {
 </script>
 
 
+<!-- <div class="form-group"> -->
+<!--                 <label for="userId">아이디</label> -->
+<!--                 <input type="text" id="member_id" name="member_id" placeholder="아이디" required> -->
+<!--                 <button type="button" id="check-btn1" class="check-btn">중복 확인</button> -->
+<!--                 <div id = "checkedIdResult" name = "checkedIdResult"></div> -->
+<!--             </div> -->
+
+<script type="text/javascript">
+$(function(){
+	$('#check-btn1').click(function() {
+// 		alert("asd")
+		$.ajax({
+			url:'${pageContext.request.contextPath}/member/idCheck',
+			data:{'id':$('#member_id').val()},
+			success:function(result){
+				
+				if (result == 'iddup'){
+					result = "이미 존재하는 아이디입니다.";
+					$('#checkedIdResult').html(result).css('color','red');
+				} else {
+					result = "사용가능한 아이디입니다.";
+					$('#checkedIdResult').html(result).css('color','green');
+				}
+				
+			}
+			
+		});
+		
+	});
+});
+
+
+</script>
 
   
   

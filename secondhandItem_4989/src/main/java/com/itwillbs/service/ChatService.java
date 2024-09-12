@@ -19,12 +19,6 @@ public class ChatService {
 	@Inject
 	ChatDAO chatDAO;
 
-	public ChatMessageDTO createChat(String roomId, ChatMessageDTO message) {
-			message.setChat_room_id(roomId);
-			message.setAlarm(true);
-			message.setSend_time(new Timestamp(System.currentTimeMillis()));
-		return message;
-	}
 	public int checkChatRoomId(ChatRoomDTO chatRoomDTO){
 		int check = chatDAO.checkChatRoomId(chatRoomDTO);
 		return check;
@@ -75,5 +69,17 @@ public class ChatService {
 		return productDTO;
 	}//updateProductTradeStatus
 
+	public ChatMessageDTO createChatMessage(String roomId, ChatMessageDTO message) {
+		message.setChat_room_id(roomId);
+		message.setAlarm(true);
+		message.setSend_time(new Timestamp(System.currentTimeMillis()));
+		chatDAO.createChatMessage(message);
+		return message;
+	}
 
+	public List<ChatMessageDTO> getChatMessageList(String chat_room_id) {
+		List<ChatMessageDTO> chatList = null;
+		chatList = chatDAO.getChatMessageList(chat_room_id);
+		return chatList;
+	}
 }

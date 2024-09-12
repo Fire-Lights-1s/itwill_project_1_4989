@@ -82,8 +82,10 @@ public class ChatController {
 	
 	// 이 주소로 요청이 오면 그 채팅방의 메세지 리스트를 돌려준다
 	@PostMapping(value = "chat/reciveChatList/{roomId}")
+	@ResponseBody
 	public List<ChatMessageDTO> chatMessageList(ChatRoomDTO chatRoomDTO, HttpServletRequest request, Model model){
-		
+		List<ChatMessageDTO> chatList = null;
+		chatList = chatService.getChatMessageList(chatRoomDTO.getChat_room_id());
 		return null;
 	}
 	
@@ -101,7 +103,7 @@ public class ChatController {
     		ChatMessageDTO message){
 		System.out.println(message);
 		//클라이언트에서 받아야하는 DTO 변수 chat_room_id, message_type, user_id, message
-		ChatMessageDTO chat = chatService.createChat(roomId ,message);
+		ChatMessageDTO chat = chatService.createChatMessage(roomId ,message);
 		return chat;
         //simpMessagingTemplate.convertAndSend("/topic/"+roomId,data);
     }

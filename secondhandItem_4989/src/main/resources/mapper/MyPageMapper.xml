@@ -63,7 +63,7 @@
 			order by p.created_datetime
 		</if>
 		<if test="sort == null or sort == ''">
-			order by p.created_datetime desc
+			order by z.zzim_id desc
 		</if>
 		limit #{startRow},#{pageSize}
 	</select>
