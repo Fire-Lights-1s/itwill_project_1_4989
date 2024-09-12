@@ -9,14 +9,18 @@
 <meta charset="UTF-8">
 
 <title>판매상품 등록</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productRegister.css">
-    
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/style.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/productRegister.css">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- postcode.v2.js 우편번호 서비스 기능을 가진 외부 자바스크립트 연결 -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <!-- JavaScript -->
 <script>
@@ -74,8 +78,6 @@
 		}
 		reader.readAsDataURL(event.target.files[0]);
 	}
-
-	
 </script>
 
 </head>
@@ -91,16 +93,17 @@
 		<div id="main-container">
 			<main>
 				<!-- 본문 영역 -->
-	<div class="addBox">
-		<form action="${pageContext.request.contextPath}/product/registerPro" 
+				<div class="addBox">
+					<form
+						action="${pageContext.request.contextPath}/product/registerPro"
 						class="appform" method="post" name="fr"
 						enctype="multipart/form-data">
 						<hr style="border: 0; height: 3px; color: black;">
 						<div class="container">
 							<!-- 이미지 업로드 및 미리보기 영역 -->
 							<div class="form-group image-upload">
-								<label for="product_img1">사진 선택</label> 
-								<input type="file" id="product_img1" name="product_img1" class="login-bttn">
+								<label for="product_img1">사진 선택</label> <input type="file"
+									id="product_img1" name="product_img1" class="login-bttn">
 							</div>
 
 
@@ -143,98 +146,90 @@
 									oninput="addPriceSuffix()">
 							</div>
 
-<div class="form-group inline-group">
-    <label for="post1">거래 지역</label>
-    <div style="display: flex; gap: 10px;">
-        <!-- 주소 검색 버튼을 왼쪽으로 이동 -->
-        <input type="button" value="주소 검색" onclick="daum_address();" class="login-bttn">
-        <input type="text" name="post1" id="post1" placeholder="지역검색">
-        <input type="text" name="addr1" id="addr1" placeholder="기본주소">
-    </div>
-</div>
-    
-    <br>
-<div class="form-group inline-group">
-	<div class="form-group inline-group">
-    <!-- 거래 방식과 결제 방식을 한 줄에 배치 -->
-    <div style="display: flex; gap: 20px; width: 100%;">
-        <div style="flex: 1;">
-            <label for="trade_method">거래 방식</label> 
-            <select id="trade_method" name="trade_method">
-                <option value="" disabled selected>선택</option>
-                <option value="택배">택배</option>
-                <option value="직거래">직거래</option>
-                <option value="택배/직거래">택배/직거래</option>
-            </select>
-        </div>
+							<div class="form-group inline-group">
+								<label for="post1">거래 지역</label>
+								<div style="display: flex; gap: 10px;">
+		<!-- 주소 검색 버튼을 왼쪽으로 이동 -->
+		<input type="button" value="주소 검색" onclick="daum_address();" class="login-bttn"> 
+		<input type="text" id="trade_area" name="trade_area" placeholder="시군구 코드">
+		<input type="text" id="sido" name="sido" placeholder="도/시 이름">
+		<input type="text" id="sigungu" name="sigungu" placeholder="시/군/구 이름">
+	</div>
+							</div>
 
-        <div style="flex: 1;">
-            <label for="pay_method">결제 방식</label> 
-            <select id="pay_method" name="pay_method">
-                <option value="" disabled selected>선택</option>
-                <option value="현금">현금</option>
-                <option value="페이">페이</option>
-                <option value="현금/페이">현금/페이</option>
-            </select>
-        </div>
-    </div>
-</div>
+							<br>
+							<div class="form-group inline-group">
+								<div class="form-group inline-group">
+									<!-- 거래 방식과 결제 방식을 한 줄에 배치 -->
+									<div style="display: flex; gap: 20px; width: 100%;">
+										<div style="flex: 1;">
+											<label for="trade_method">거래 방식</label> <select
+												id="trade_method" name="trade_method">
+												<option value="" disabled selected>선택</option>
+												<option value="택배">택배</option>
+												<option value="직거래">직거래</option>
+												<option value="택배/직거래">택배/직거래</option>
+											</select>
+										</div>
+
+										<div style="flex: 1;">
+											<label for="pay_method">결제 방식</label> <select id="pay_method"
+												name="pay_method">
+												<option value="" disabled selected>선택</option>
+												<option value="현금">현금</option>
+												<option value="페이">페이</option>
+												<option value="현금/페이">현금/페이</option>
+											</select>
+										</div>
+									</div>
+								</div>
 
 
-						<div class="form-group inline-group">
-							<label for="product_desc">물품 상태</label>
-							<textarea id="product_desc" name="product_desc"
-								placeholder="물품 상태(미개봉/신품/중고), 하자 등 상세내용을 적어주세요."></textarea>
+								<div class="form-group inline-group">
+									<label for="product_desc">물품 상태</label>
+									<textarea id="product_desc" name="product_desc"
+										placeholder="물품 상태(미개봉/신품/중고), 하자 등 상세내용을 적어주세요."></textarea>
+								</div>
+
+								<div class="form-group">
+									<button type="submit" class="submit-btn" value="save">등록하기</button>
+								</div>
+							</div>
+
+
 						</div>
 
-						<div class="form-group">
-							<button type="submit" class="submit-btn" value="save">등록하기</button>
-						</div>
+					</form>
 				</div>
 
-    
-</div>
+				<script>
+					function daum_address() {
+
+						let themeObj = {
+							searchBgColor : "#0B65C8",
+							queryTextColor : "#FFFFFF"
+						};
+
+						new daum.Postcode({
+							oncomplete : function(data) {
+								console.log(data);
+
+								// 폼 필드를 정확히 참조
+			document.getElementById('trade_area').value = data.sigunguCode;
+			document.getElementById('sido').value = data.sido;
+			document.getElementById('sigungu').value = data.sigungu;
+
+			document.getElementById('addr2').focus();  // addr2 필드가 있을 경우
+							},
+
+							theme : themeObj
+						}).open();
+
+					}
+				</script>
 
 
-
-				
-
-						
-				
-				
-				</form>
-		</div>
-
-<script>
-
-function daum_address() {
-
-	let themeObj = {
-	   searchBgColor: "#0B65C8",
-	   queryTextColor: "#FFFFFF"
-	};
-	
-	new daum.Postcode({
-	    oncomplete: function(data) {
-	    console.log(data);	
-	    
-	    document.fr.post1.value = data.zonecode;
-	    document.fr.post1.value = data.sido;
-		document.fr.addr1.value = data.sigungu;
-		document.fr.addr1.value = data.bname;
-		
-		document.fr.addr2.focus();	    	
-	    },
-				
-		theme :	themeObj
-	}).open();
-
-}
-
-</script>
-		
-
-		</main>
+			</main>
 		</div>
 	</section>
 

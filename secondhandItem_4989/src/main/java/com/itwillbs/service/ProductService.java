@@ -30,8 +30,9 @@ public class ProductService {
 	        product.setElapsedTime(elapsedTime);
 	        return product;
 			
-		}//getProductDetail
+		}
 		
+		//상품 등록 경과 시간
 		 private String getElapsedTime(Timestamp createdTime) {
 		        LocalDateTime now = LocalDateTime.now();
 		        LocalDateTime createdDateTime = createdTime.toLocalDateTime();
@@ -48,7 +49,13 @@ public class ProductService {
 		            long minutes = duration.toMinutes() % 60;
 		            return minutes + "분 전";
 		        }
-		    }	
+		    }
+		 
+		 //찜 개수 증가
+		 public void increaseLikeCount(int product_id) {
+			 productDAO.increaseCount(product_id);
+	
+		 }
 
 	
 	

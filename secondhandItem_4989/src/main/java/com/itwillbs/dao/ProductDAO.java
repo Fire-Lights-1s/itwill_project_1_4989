@@ -15,29 +15,32 @@ public class ProductDAO {
 	
 	private static final String namespace="com.itwillbs.mapper.ProductMapper";
 	
-//글 조회수
-//	public int getMaxNum() {
-//		System.out.println("BoardDAO getMaxNum()");
-//		return sqlSession.selectOne(namespace + ".getMaxNum");
-//	}
 
+	//상품 등록
 	public void insertProduct(ProductDTO productDTO) {
 		System.out.println("ProductDAO insertProduct()");
 		sqlSession.insert(namespace + ".insertProduct", productDTO);
 		
 	}
-
+	//상품 상세 정보
 	public ProductDTO getProductDetail(String product_id) {
 		System.out.println("ProductDAO productDetail()");
 		return sqlSession.selectOne(namespace + ".getProductDetail", product_id);
 		
 	}
+	//찜 수 like_count 증가
+	public void increaseCount(int product_id) {
+		System.out.println("ProductDAO increaseLikeCount");
+		sqlSession.update(namespace + ".increseLikeCount", product_id);
+		
+		
+	}
 	
-//	public List<ProductDTO> getProductList (ProductDTO productDTO){
-//		System.out.println("ProductDAO getProductList()");
-//		return sqlSession.selectList(namespace, ".getProductList", productDTO);
+//	글 조회수 view_count 증가
+//	public int getMaxNum() {
+//	System.out.println("ProductDAO getMaxNum()");
+//	sqlSession.selectOne(namespace + ".getMaxNum");
 //	}
-	
 	
 
 

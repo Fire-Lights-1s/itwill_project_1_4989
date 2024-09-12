@@ -19,11 +19,12 @@ public class ProductDTO {
     private int year_purchase;
     //상품설명
     private String product_desc;
+    //상품 사진
     private String product_img1;
-//    private String product_img2;
-//    private String product_img3;
-//    private String product_img4;
-//    private String product_img5;
+    private String product_img2;
+    private String product_img3;
+    private String product_img4;
+    private String product_img5;
     //상품등록일시
     private Timestamp created_datetime;
     //등록 경과시간
@@ -43,10 +44,7 @@ public class ProductDTO {
     //구매자 아이디 for chat
     private String buyer_id;
     
-    
-    
- 
-    
+
 	@Override
 	public String toString() {
 		return "ProductDTO [product_id=" + product_id + ", category_name=" + category_name + ", seller_id=" + seller_id
@@ -185,44 +183,44 @@ public class ProductDTO {
 	}
 
 
-//	public String getProduct_img2() {
-//		return product_img2;
-//	}
-//
-//
-//	public void setProduct_img2(String product_img2) {
-//		this.product_img2 = product_img2;
-//	}
-//
-//
-//	public String getProduct_img3() {
-//		return product_img3;
-//	}
-//
-//
-//	public void setProduct_img3(String product_img3) {
-//		this.product_img3 = product_img3;
-//	}
-//
-//
-//	public String getProduct_img4() {
-//		return product_img4;
-//	}
-//
-//
-//	public void setProduct_img4(String product_img4) {
-//		this.product_img4 = product_img4;
-//	}
-//
-//
-//	public String getProduct_img5() {
-//		return product_img5;
-//	}
-//
-//
-//	public void setProduct_img5(String product_img5) {
-//		this.product_img5 = product_img5;
-//	}
+	public String getProduct_img2() {
+		return product_img2;
+	}
+
+
+	public void setProduct_img2(String product_img2) {
+		this.product_img2 = product_img2;
+	}
+
+
+	public String getProduct_img3() {
+		return product_img3;
+	}
+
+
+	public void setProduct_img3(String product_img3) {
+		this.product_img3 = product_img3;
+	}
+
+
+	public String getProduct_img4() {
+		return product_img4;
+	}
+
+
+	public void setProduct_img4(String product_img4) {
+		this.product_img4 = product_img4;
+	}
+
+
+	public String getProduct_img5() {
+		return product_img5;
+	}
+
+
+	public void setProduct_img5(String product_img5) {
+		this.product_img5 = product_img5;
+	}
 
 	public Timestamp getCreated_datetime() {
 		return created_datetime;
