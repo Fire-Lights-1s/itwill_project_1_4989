@@ -73,6 +73,7 @@ public class ChatController {
 		String json = null;
 		try {
 			json = new ObjectMapper().writeValueAsString(productDTO);
+			System.out.println("json productDTO"+json);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}

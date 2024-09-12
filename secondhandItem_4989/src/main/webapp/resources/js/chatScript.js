@@ -29,6 +29,7 @@ function connect(chatRoom_json){
     
 		loadProduct(chatRoomGlobal);
 		productLoadingEnd();
+		
         // roomID를 구독 /send/roomID로 보내진 메세지를 받음
         stompClient.subscribe('/topic/' + chatRoomGlobal.chat_room_id, function (chatMessage){
         	console.log('chatMessage: ', chatMessage);
@@ -104,11 +105,22 @@ function loadProduct(chatRoom_json){
 				  	});
 				    break;
 				  case '예약 중':
-				  	$(TXButton).text('판매 예약 취소');
-		        	$(TXButton).css('visibility', 'visible');
-		        	$(TXButton).on('click', function(){
-		        		promiseTrade();
-				  	});
+				  	console.log(productGlobal.buyer_id)
+				  	console.log(chatRoom_json.buyer_id)
+				  	console.log(productGlobal.buyer_id == chatRoom_json.buyer_id)
+				  	
+				  	if(productGlobal.buyer_id == chatRoom_json.buyer_id){
+				  	console.log('case 안 if 조건 false');
+					  	$(TXButton).text('판매 예약 취소');
+			        	$(TXButton).css('visibility', 'visible');
+			        	
+			        	$(TXButton).on('click', function(){
+			        		promiseTrade();
+					  	});
+				  	}else{
+					  	$(TXButton).text('');
+					    $(TXButton).css('visibility', 'hidden');
+				  	}
 				    break;
 				  case '거래 완료':
 				  	$(TXButton).text('거래 완료');
@@ -125,11 +137,16 @@ function loadProduct(chatRoom_json){
 				  	$(TXButton).css('visibility', 'hidden');
 				    break;
 				  case '예약 중':
-				  	$(TXButton).text('구매 확정');
-				  	$(TXButton).css('visibility', 'visible');
-				  	$(TXButton).on('click', function(){
-				  		promiseTrade();
-				  	});
+				  	if(productGlobal.buyer_id == chatRoom_json.buyer_id){
+					  	$(TXButton).text('구매 확정');
+					  	$(TXButton).css('visibility', 'visible');
+					  	$(TXButton).on('click', function(){
+					  		promiseTrade();
+					  	});
+				  	}else{
+					  	$(TXButton).text('');
+					    $(TXButton).css('visibility', 'hidden');
+				  	}
 				    break;
 				  case '거래 완료':
 				  	$(TXButton).text('후기 작성');
@@ -275,11 +292,16 @@ function changeProductState(product){
 				  	});
 				    break;
 				  case '예약 중':
-				  	$(TXButton).text('판매 예약 취소');
-		        	$(TXButton).css('visibility', 'visible');
-		        	$(TXButton).on('click', function(){
-		        		promiseTrade();
-				  	});
+				  	if(productGlobal.buyer_id == chatRoomGlobal.buyer_id){
+					  	$(TXButton).text('판매 예약 취소');
+			        	$(TXButton).css('visibility', 'visible');
+			        	$(TXButton).on('click', function(){
+			        		promiseTrade();
+					  	});
+				  	}else{
+					  	$(TXButton).text('');
+					    $(TXButton).css('visibility', 'hidden');
+				  	}
 				    break;
 				  case '거래 완료':
 				  	$(TXButton).text('거래 완료');
@@ -296,11 +318,16 @@ function changeProductState(product){
 				  	$(TXButton).css('visibility', 'hidden');
 				    break;
 				  case '예약 중':
-				  	$(TXButton).text('구매 확정');
-				  	$(TXButton).css('visibility', 'visible');
-				  	$(TXButton).on('click', function(){
-				  		promiseTrade();
-				  	});
+				  	if(productGlobal.buyer_id == chatRoomGlobal.buyer_id){
+					  	$(TXButton).text('구매 확정');
+					  	$(TXButton).css('visibility', 'visible');
+					  	$(TXButton).on('click', function(){
+					  		promiseTrade();
+					  	});
+				  	}else{
+					  	$(TXButton).text('');
+					    $(TXButton).css('visibility', 'hidden');
+				  	}
 				    break;
 				  case '거래 완료':
 				  	$(TXButton).text('후기 작성');
