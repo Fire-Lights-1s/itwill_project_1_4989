@@ -20,6 +20,7 @@ public class ProductListService {
 	@Inject
 	private ProductListDAO productListDAO;
 
+	
 	public List<ProductDTO> getProductListAll() {
 		return productListDAO.getProductListAll();
 	}
@@ -28,46 +29,60 @@ public class ProductListService {
 		return productListDAO.getProductListByC(category_name);
 	}
 
+	
 	public List<ProductDTO> getFilteredProducts(String category, List<String> method, List<String> pay, String price,
 			List<String> status, Integer minPrice, Integer maxPrice) {
 		
+		// 사실상 조건 없이 전체를 가져와야 하는 경우, null로 두고 매퍼에서 동적쿼리를 짤 때 활용
+		
+		System.out.println("service start=" + category + method + pay + price + status + minPrice + maxPrice);
+		
+		
 		String category_name = category;
 		if (category.equals("all")) {
-			category_name = null; // 매퍼에서 동적쿼리로 처리
+			category_name = null;
 		}
 		
-		String trade_method = method.get(0);		
-		if (method.size() == 2) {
-			trade_method = "직거래/택배";
+		String trade_method = null;
+		if (method != null && method.size() == 1) {
+		    trade_method = method.get(0);
+		}
+
+		String pay_method = null;
+		if (pay != null && pay.size() == 1) {
+		    pay_method = pay.get(0);
+		}
+
+		String trade_status = null;
+		if (status != null && status.size() == 1) {
+		    trade_status = status.get(0);
 		}
 		
-		String pay_method = pay.get(0);
-		if (pay.size() == 2) {
-			pay_method = "현금/페이";
-		}
+		Integer startPrice = 0;
+		Integer endPrice = 0;
 		
-		String trade_status = status.get(0);
-		if (method.size() == 2) {
-			trade_status = null; // 매퍼에서 동적쿼리로 처리
-		}
-		
-		Integer startPrice = minPrice;
-		Integer endPrice = maxPrice;
-		if (price.equals("all")) {
-			startPrice = null;
-			endPrice = null;
-		} else if (price.equals("free")) {
-			startPrice = 0;
-			endPrice = 0;
-		} else if (price.equals("under10")) {
-			startPrice = 1;
-			endPrice = 100000;
-		} else if (price.equals("under30")) {
-			startPrice = 100001;
-			endPrice = 300000;
-		} else if (price.equals("under50")) {
-			startPrice = 300001;
-			endPrice = 500000;
+		if (minPrice == null && maxPrice == null) {			// 직접 지정값이 하나도 없을 때
+	
+			if (price.equals("all")) {
+				startPrice = null;
+				endPrice = null;
+			} else if (price.equals("free")) {
+				startPrice = 0;
+				endPrice = 0;
+			} else if (price.equals("under_10")) {
+				startPrice = 1;
+				endPrice = 100000;
+			} else if (price.equals("under_30")) {
+				startPrice = 100001;
+				endPrice = 300000;
+			} else if (price.equals("under_50")) {
+				startPrice = 300001;
+				endPrice = 500000;
+			}
+			
+		} else {											// 직접 지정값이 하나라도 있을 때
+			startPrice = minPrice;
+			endPrice = maxPrice;
 		}
 		
 		// 카테고리 - 그냥 들어가면 됨. all인 경우에만 동적쿼리로 처리
@@ -87,11 +102,12 @@ public class ProductListService {
 		paramMap.put("endPrice", endPrice);
 		
 		
-		System.out.println(paramMap);
+		System.out.println("service end=" + paramMap);
 		
 		return productListDAO.getFilteredProducts(paramMap);
 	}
 
+	
 	// 등록 후 경과시간 계산해서 넘겨주기
 	public List<String> getElapsedTimeList(List<ProductDTO> productList) {
 	    	LocalDateTime now = LocalDateTime.now();

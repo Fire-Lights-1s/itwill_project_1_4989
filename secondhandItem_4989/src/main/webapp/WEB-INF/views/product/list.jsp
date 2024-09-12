@@ -80,7 +80,7 @@
             <li class="selector" data-value="under_50">30만원 초과 50만원 이하</li>
             <li class="check_selector">직접 입력</li>
             <li><input id="price_min" type="number" name="price_min"> ~ <input id="price_max" type="number" name="price_max">
-            <button id="price_selector">적용</button></li>
+            <button type="button" id="price_selector">적용</button></li>
 		</ul>
 		<input type="hidden" id="price" value="all">
 		</div>
@@ -226,17 +226,31 @@ window.addEventListener('load', function() {
 
     // 맞춤 가격 필터 적용 버튼
     document.getElementById('price_selector').addEventListener('click', function() {
+    	// 위의 가격대 선택 해제
+    	document.querySelectorAll('#price-list li.selector').forEach(function(li) {
+            li.classList.remove('selected');
+        });
         applyFilters();
     });
+    
     
     // 필터 적용 함수
     function applyFilters() {
         let selectedFilters = {}; // 필터 데이터를 담을 객체
 
+        let tradeMethodSelected = false;
+        let paymentMethodSelected = false;
+		let tradeStatusSelected = false;
+        
         // 체크박스 선택 항목 수집
         document.querySelectorAll('#selector-content input[type="checkbox"]:checked').forEach(function(cb) {
             selectedFilters[cb.name] = selectedFilters[cb.name] || [];
             selectedFilters[cb.name].push(cb.value);
+            
+            // 거래상태 필터 그룹 확인
+            if (cb.name === "trade") {
+                tradeStatusSelected = true;
+            }
             
             // 거래방법 필터 그룹 확인
             if (cb.name === "method") {
@@ -249,11 +263,10 @@ window.addEventListener('load', function() {
             }
         });
 
-        if (!tradeMethodSelected || !paymentMethodSelected) {
-            updateProductList(''); // 각 그룹에서 아무것도 선택되지 않으면 결과 비우기
+        if (!tradeMethodSelected || !paymentMethodSelected || !tradeStatusSelected) {
+        	document.getElementById('product-list').innerHTML = '<p style="text-align:center;">결과가 없습니다.</p>'; // 각 그룹에서 아무것도 선택되지 않으면 결과 비우기
             return; // 함수 종료
         }
-  
         
         // 카테고리 선택 수집
         selectedFilters['category'] = document.getElementById('category').value;
@@ -262,11 +275,14 @@ window.addEventListener('load', function() {
         selectedFilters['price'] = document.getElementById('price').value;
 
         // 맞춤 가격대 수집
+        
         let minPrice = document.getElementById('price_min').value;
-        let maxPrice = document.getElementById('price_max').value;
-        if (minPrice) selectedFilters['minPrice'] = minPrice;
-        if (maxPrice) selectedFilters['maxPrice'] = maxPrice;
+		let maxPrice = document.getElementById('price_max').value;
 
+		// 빈 문자열일 경우 0으로 처리
+		selectedFilters['minPrice'] = (minPrice !== "") ? minPrice : null;
+		selectedFilters['maxPrice'] = (maxPrice !== "") ? maxPrice : null;
+        
         console.log(selectedFilters); // 최종 필터 데이터 확인 (비동기 요청 전에)
         
         const contextPath = "/secondhand4989";
