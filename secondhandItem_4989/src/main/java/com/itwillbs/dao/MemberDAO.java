@@ -71,4 +71,9 @@ public class MemberDAO {
 		return sqlSession.selectOne(namespace + ".passCheck", memberDTO);
 	}
 	
+	public MemberDTO nickCheck(String nickname) {
+		System.out.println("MemberDAO nickCheck()");
+		return sqlSession.selectOne(namespace + ".nickCheck", nickname);
+	}
+	
 }

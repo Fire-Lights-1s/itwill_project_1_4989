@@ -80,4 +80,9 @@ public class MemberService {
 		return memberDAO.passCheck(memberDTO);
 	}
 	
+	public MemberDTO nickCheck(String nickname) {
+		System.out.println("MemberService nickCheck()");
+		return memberDAO.nickCheck(nickname);
+	}
+	
 }
