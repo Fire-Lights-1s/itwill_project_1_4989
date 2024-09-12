@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.service.MemberService;
@@ -302,6 +303,28 @@ public class MemberController {
 			    } else {
 			        return "redirect:/member/findpass"; // 반드시 반환
 			    }
+	}
+	
+	@GetMapping("/idCheck")
+	@ResponseBody
+	public String idCheck(HttpServletRequest request) {
+		System.out.println("AjaxController idCheck()");
+		String member_id = request.getParameter("id");
+		
+		MemberDTO memberDTO = memberService.getMember(member_id);
+		
+		String result = "";
+		if(memberDTO != null) {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 중복";
+			result = "iddup";
+		} else {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 사용가능";
+			result = "idok";
+		}
+		//결과값(html, xml, json) 리턴
+		return result;
 	}
 	
 }
