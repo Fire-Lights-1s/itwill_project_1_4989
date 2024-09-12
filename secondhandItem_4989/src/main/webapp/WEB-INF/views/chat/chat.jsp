@@ -86,6 +86,9 @@
 						<p></p>
 						<button></button>
 					</div>
+					<div id="productLoading" class="box">
+						<div class="loader10"></div>
+					</div>
 				</div>
 				<div id="chatContent">
 				</div>

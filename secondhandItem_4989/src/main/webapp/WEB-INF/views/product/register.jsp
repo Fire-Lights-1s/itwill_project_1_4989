@@ -8,96 +8,15 @@
 <head>
 <meta charset="UTF-8">
 
+<title>판매상품 등록</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productRegister.css">
+    
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <!-- postcode.v2.js 우편번호 서비스 기능을 가진 외부 자바스크립트 연결 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-<title>물품등록</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- CSS -->
-<style>
-body {
-	font-family: Arial, sans-serif;
-}
-
-.container {
-	width: 60%;
-	margin: 0 auto;
-	padding: 20px;
-	border: 1px solid #ddd;
-	background-color: #f8f8f8;
-	border-radius: 5px;
-	margin-top: 50px;
-}
-
-.form-group {
-	margin-bottom: 20px;
-}
-
-label {
-	display: block;
-	font-weight: bold;
-	margin-bottom: 8px;
-}
-
-input[type="text"], input[type="number"], select, textarea {
-	width: 100%;
-	padding: 10px;
-	font-size: 14px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-}
-
-textarea {
-	height: 100px;
-}
-
-.submit-btn {
-	width: 100%;
-	background-color: #007bff;
-	color: white;
-	border: none;
-	padding: 15px;
-	font-size: 16px;
-	border-radius: 5px;
-	cursor: pointer;
-}
-
-.submit-btn:hover {
-	background-color: #0056b3;
-}
-
-.image-upload {
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-.image-upload img {
-	width: 150px;
-	height: 150px;
-	border: 1px solid #ddd;
-	background-color: #f8f8f8;
-	padding: 20px;
-	cursor: pointer;
-}
-
-.image-preview-container {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-}
-
-.image-preview-container img {
-	width: 200px;
-	height: 200px;
-	object-fit: cover;
-	border: 1px solid #ddd;
-	border-radius: 5px;
-}
-</style>
 
 <!-- JavaScript -->
 <script>

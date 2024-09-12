@@ -39,9 +39,7 @@ public class ChatController {
 			chatRoomDTOList = chatService.getChatRoomList((String)session.getAttribute("member_id"));
 			
 			model.addAttribute("chatRoomDTOList", chatRoomDTOList);
-			TXDTO tx = new TXDTO();
 			
-			System.out.println(tx);
 			return "/chat/chat";
 		}
 		return "/chat/chat";
@@ -52,9 +50,7 @@ public class ChatController {
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("member_id") != null) {
-//			List<ChatRoomDTO> chatRoomDTOList = null;
 			chatService.createChatRoom(chatRoomDTO);
-//			chatRoomDTOList = chatService.getChatRoomList((String)session.getAttribute("member_id"));
 			
 			try {
 				String json = new ObjectMapper().writeValueAsString(chatRoomDTO);
@@ -62,7 +58,6 @@ public class ChatController {
 			} catch (JsonProcessingException e) {
 				e.printStackTrace();
 			}
-//			rttr.addAttribute("chatRoomDTOList", chatRoomDTOList);
 			
 			return "redirect:/chat";
 		}
