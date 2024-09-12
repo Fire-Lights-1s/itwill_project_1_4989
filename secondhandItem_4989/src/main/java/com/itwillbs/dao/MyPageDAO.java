@@ -53,6 +53,16 @@ public class MyPageDAO {
 		System.out.println("MyPageDAO getBuyCount()");
 		return sqlSession.selectOne(namespace + ".getBuyCount", pageDTO);
 	}
+
+	public void deleteMem(String member_id) {
+		System.out.println("MyPageDAO deleteMem()");
+		sqlSession.update(namespace + ".deleteMem", member_id);
+	}
+
+	public int allTX(String id) {
+		System.out.println("MyPageDAO allTX()");
+		return sqlSession.selectOne(namespace + ".allTX", id);
+	}
 	
 		
 	

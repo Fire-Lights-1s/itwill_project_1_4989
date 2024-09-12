@@ -64,6 +64,11 @@ main {
 	font-size:19px;
 }
 
+.profile-a-update {
+	display:flex;
+	justify-content:flex-end;
+	font-size: 2em;
+}
 .profile-a {
 	text-align:right;
 	font-size:19px;

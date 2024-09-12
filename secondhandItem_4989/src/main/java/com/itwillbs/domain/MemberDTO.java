@@ -12,6 +12,7 @@ public class MemberDTO {
     private String email;
     private String profile_img;
     private Timestamp created_at;
+    private int allTX;
 
     // 기본 생성자
     public MemberDTO() {
@@ -35,6 +36,18 @@ public class MemberDTO {
     public String getMember_id() {
         return member_id;
     }
+    
+    public void setMember_id(String member_id) {
+        this.member_id = member_id;
+    }
+    
+	public int getAllTX() {
+		return allTX;
+	}
+
+	public void setAllTX(int allTX) {
+		this.allTX = allTX;
+	}
 
 	public String getProfile_img() {
 		return profile_img;
@@ -43,10 +56,6 @@ public class MemberDTO {
 	public void setProfile_img(String profile_img) {
 		this.profile_img = profile_img;
 	}
-
-	public void setMember_id(String member_id) {
-        this.member_id = member_id;
-    }
 
     public String getPass() {
         return pass;

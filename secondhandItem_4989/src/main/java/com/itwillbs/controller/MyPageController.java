@@ -47,6 +47,7 @@ public class MyPageController {
 		if(memberDTO == null) {
 			return "redirect:/member/login";
 		}
+		memberDTO.setAllTX(myPageService.allTX(id)); 
 		model.addAttribute("memberDTO", memberDTO);
 		return "my/profile";
 	}
@@ -250,6 +251,14 @@ public class MyPageController {
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("productList", productList);
 		return "my/zzim";
+	}
+	
+	@PostMapping("/deleteMem")
+	public String deleteMem(HttpSession session) {
+		System.out.println("MyPageController deleteMem()");
+		String member_id = (String)session.getAttribute("member_id");
+		myPageService.deleteMem(member_id);
+		return "redirect:/";
 	}
 	
 	@GetMapping("/payPoint")

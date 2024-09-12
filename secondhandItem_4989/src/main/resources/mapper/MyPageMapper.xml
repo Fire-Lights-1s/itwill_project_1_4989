@@ -124,5 +124,24 @@
 			and transaction_end_date is not null
 		</if>
 	</select>
+	
+	<update id="deleteMem">
+		update Mem
+		set is_withdrawn = true, withdrawn_at = now()
+		where member_id = #{member_id}
+	</update>
+	
+	<select id="allTX" resultType="java.lang.Integer">
+		SELECT 
+			(SELECT COUNT(*) 
+			FROM Product 
+			WHERE seller_id = #{id} 
+			AND trade_status = '거래 완료') 
+			+
+			(SELECT COUNT(*) 
+			FROM TX 
+			WHERE buyer_id = #{id} 
+			AND transaction_end_date IS NOT NULL);
+	</select>
 </mapper>
 

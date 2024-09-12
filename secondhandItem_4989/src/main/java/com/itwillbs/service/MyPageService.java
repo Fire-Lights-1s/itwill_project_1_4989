@@ -64,4 +64,14 @@ public class MyPageService {
 		System.out.println("MyPageService getBuyList()");
 		return myPageDAO.getBuyCount(pageDTO);
 	}
+
+	public void deleteMem(String member_id) {
+		System.out.println("MyPageService deleteMem()");
+		myPageDAO.deleteMem(member_id);
+	}
+
+	public int allTX(String id) {
+		System.out.println("MyPageService allTX()");
+		return myPageDAO.allTX(id);
+	}
 }

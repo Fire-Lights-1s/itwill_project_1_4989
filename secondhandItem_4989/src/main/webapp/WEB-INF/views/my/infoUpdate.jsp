@@ -26,8 +26,10 @@
 		<div class="main-container-side-profile">
 		<main>
 			<h2>회원 정보 수정</h2>
-			<div class="profile-a">
-				<a href="${pageContext.request.contextPath}/my/infoUpdate">회원 탈퇴</a>
+			<div class="profile-a-update">
+				<form action="${pageContext.request.contextPath}/my/deleteMem" method="post">
+					<button type="submit" id="deleteButton">회원 탈퇴</button>
+				</form>
 			</div>
 		<form action="${pageContext.request.contextPath}/my/infoUpdatePro" method="post" class="profile-update-form" name="fr" enctype="multipart/form-data">
 			<div class="profile-circle-div">
@@ -124,6 +126,20 @@
 	        reader.readAsDataURL(file);
 	    }
 	});
+	
+	document.querySelector('.profile-circle-cancel').addEventListener('click', function(event) {
+	    event.preventDefault();
+	    const profileImage = document.getElementById('profileImage');
+	    profileImage.src = '';
+	});
+	
+	document.getElementById('deleteButton').addEventListener('click', function(event) {
+	    const isConfirmed = confirm("정말로 회원 탈퇴를 하시겠습니까?");
+	    if (!isConfirmed) {
+	        event.preventDefault();
+	    }
+	});
+
 </script>
 
 </body>

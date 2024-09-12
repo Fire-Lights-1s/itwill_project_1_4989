@@ -27,11 +27,10 @@
 			<h2>내 프로필</h2>
 			<div class="profile-circle-div">
 				<img src="${pageContext.request.contextPath}/resources/upload/${memberDTO.profile_img}" class="profile-circle">
-				<p>${pageContext.request.contextPath}/resources/upload/${memberDTO.profile_img}</p>
 			</div>
 			<p class="profile-nickname">${memberDTO.nickname}</p>
 			<p class="profile-nickname">누적 거래 횟수</p>
-			<p class="profile-nickname">7</p>
+			<p class="profile-nickname">${memberDTO.allTX}</p>
 		</main>
 		</div>
 	</div>
