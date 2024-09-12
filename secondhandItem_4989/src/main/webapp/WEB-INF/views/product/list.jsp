@@ -1,6 +1,3 @@
-<!-- 사이드 영역과 본문페이지를 작성할 때, 
-	<aside></aside> 사이에 사이드 영역을<main></main> 사이에 본문을 입력하여 사용해주세요.  -->
-	
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -40,6 +37,7 @@
       	<div id="selector-container">
         <div id="selector-title">판매상품 골라보기</div>
         <div id="selector-content">
+        <div id="default"><a href="${pageContext.request.contextPath}/product">필터 초기화</a></div>
         <ul id="category-list" class="selector-list">
         	<li class="group-title">카테고리</li>
             <li class="selector selected" data-value="all">전체</li>

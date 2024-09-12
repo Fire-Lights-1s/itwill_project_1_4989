@@ -1,5 +1,6 @@
 package com.itwillbs.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -94,4 +95,21 @@ public class ProductListController {
 
 		return "product/list";
 	}
+	
+	@GetMapping("/morepage")
+	@ResponseBody
+	public Map<String, Object> getMoreProducts(int page, int size){
+		List<ProductDTO> moreList = productListService.getMoreProducts(page, size);
+		int remaining = productListService.countRemaing(page * size);
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("moreList", moreList);
+		response.put("remaing", remaining);
+		
+		return response;
+	}
+	
+	
+	
+	
 }
