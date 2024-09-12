@@ -54,7 +54,7 @@
 			set is_reserved = false
 		</if>
 		<if test="transaction_end_date != null and transaction_method != null">
-			set set is_reserved = false = #{transaction_end_date}, transaction_method = #{transaction_method}
+			set is_reserved = false, transaction_end_date = #{transaction_end_date}, transaction_method = #{transaction_method}
 		</if>
 		where product_id = #{product_id} and is_reserved = true;
 		

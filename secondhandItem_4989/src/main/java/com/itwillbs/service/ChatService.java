@@ -57,11 +57,6 @@ public class ChatService {
 			txDTO.setReservation_date(new Timestamp(System.currentTimeMillis()));
 			chatDAO.createTX(txDTO);
 		}else {
-//			if(productDTO.getTrade_status().equals("판매 예약")) {
-//				productDTO.setTrade_status("예약 중");
-//				chatDAO.updateProductTradeStatus(productDTO);
-//				chatDAO.updateTX(txDTO);
-//			}
 			if(productDTO.getTrade_status().equals("판매 예약 취소")) {
 				// 기본 생성자로 생성되는 boolean 값은 false
 				txDTO.setIs_reserved(true);
