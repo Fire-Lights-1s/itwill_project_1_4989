@@ -254,8 +254,8 @@ textarea {
             <select id="pay_method" name="pay_method">
                 <option value="" disabled selected>선택</option>
                 <option value="현금">현금</option>
-                <option value="페이">4989페이</option>
-                <option value="현금/4989페이">현금/4989페이</option>
+                <option value="페이">페이</option>
+                <option value="현금/페이">현금/페이</option>
             </select>
         </div>
     </div>
