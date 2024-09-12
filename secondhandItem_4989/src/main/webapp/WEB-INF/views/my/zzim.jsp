@@ -8,9 +8,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>찜 목록</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileStyle.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileStyle.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/carouselStyle.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/animate.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"></jsp:include>
@@ -55,21 +62,20 @@
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
 						<img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" class="profile-item-image">
-							<div class="profile-item-image-cover3">
-								관심 물품
-							</div>
 						<img src="${pageContext.request.contextPath}/resources/img/btn_zzim.png" class="profile-item-image-zzim">
 					</div>
-					<div class="profile-item-name" title="${productDTO.product_name}">
-						${productDTO.product_name}<br>
-						${productDTO.product_price}원
-					</div>
-					<div class="profile-item-review1">
-						<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=${pageDTO.sort}&nozzim=${productDTO.product_id}">찜 취소</a>
-					</div>
-					<div class="profile-item-review" data-date="${productDTO.created_datetime}">
-<!-- 						평점 : 4.7&emsp;&emsp; -->
-						<div class="zzim-time" style="display: inline;">
+					<div class="profile-item-image-div">
+						<div class="profile-item-name" title="${productDTO.product_name}">
+							<h5>${productDTO.product_name}</h5>
+							 <h5><fmt:formatNumber value="${productDTO.product_price}" type="number" pattern="#,###"/>원</h5>
+						</div>
+						<div class="profile-item-review" data-date="${productDTO.created_datetime}">
+	<!-- 						평점 : 4.7&emsp;&emsp; -->
+							<div class="zzim-time" style="display: inline;">
+							</div>
+						</div>
+						<div class="profile-item-review1">
+							<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=${pageDTO.sort}&nozzim=${productDTO.product_id}">찜 취소</a>
 						</div>
 					</div>
 				</div>
@@ -138,6 +144,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+	const priceElement = document.querySelectAll("#price");
+	const priceText = priceElement.textContent;
+	
+	// 숫자만 추출
+	const price = parseInt(priceText.replace(/\D/g, ''));
+	
+	// 천 단위로 콤마 추가하고 다시 텍스트로 설정
+	priceElement.textContent = price.toLocaleString() + "원";
 
 </script>
 </body>

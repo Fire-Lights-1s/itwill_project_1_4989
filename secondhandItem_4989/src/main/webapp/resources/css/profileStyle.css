@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+* {
+	font-family: "Noto Sans KR", sans-serif;
+}
+
 a {
 	text-decoration:none;
 }
@@ -143,11 +147,6 @@ main {
 }
 
 .profile-item-list {
-	width:1038px;
-	border:1px solid black;
-	border-radius:20px;
-	padding:20px;
-	height:700px;
 	margin-top:10px;
 	display:flex;
 	flex-wrap:wrap;
@@ -155,19 +154,26 @@ main {
 	align-items:flex-start;	
 }
 
+.profile-item-list a {
+	color: black;
+}
+
 .profile-item-list-piece {
-	border:1px solid black;
-	border-radius:10px;
-	height:320px;
-	width:245px;
-	margin:1px;
+	border:#212529;
+	background-color: #fff;
+	object-fit: cover !important;
+	height:500px;
+	width:242px;
+	margin:10px;
+	border: 1px solid rgba(0, 0, 0, .125);
+	
 }
 
 .profile-item-image {
-	border-radius:10px 10px 0 0;
-	height:190px;
-	width:233px;
-	margin:5px 5px 0 5px;
+	height:260px;
+	background-color: #fff;
+    background-clip: border-box;
+    border-radius: .25rem .25rem 0 0;
 }
 
 .profile-item-image-zzim {
@@ -187,7 +193,7 @@ main {
 	color:white;
 	text-align:center;
 	border-radius:0 0 10px 10px;
-	width:233px;	
+	width:240px;	
 	margin:0 auto;
 }
 
@@ -196,16 +202,7 @@ main {
 	color:white;
 	text-align:center;
 	border-radius:0 0 10px 10px;
-	width:233px;	
-	margin:0 auto;
-}
-
-.profile-item-image-cover3 {
-	background-color:orange;
-	color:white;
-	text-align:center;
-	border-radius:0 0 10px 10px;
-	width:233px;	
+	width:240px;	
 	margin:0 auto;
 }
 
@@ -214,13 +211,16 @@ main {
 	color:white;
 	text-align:center;
 	border-radius:0 0 10px 10px;
-	width:233px;	
+	width:240px;	
 	margin:0 auto;
 }
 
 .profile-item-name {
 	text-align:center;	
-	white-space:nowrap; /* 줄바꿈 방지 */
+	margin: 20px 20px 0;
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow:hidden; /* 넘치는 텍스트 숨김 */
     text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
 }
@@ -234,14 +234,16 @@ main {
 
 .profile-item-review1 {
 	text-align:center;
-	white-space:nowrap; /* 줄바꿈 방지 */
-    overflow:hidden; /* 넘치는 텍스트 숨김 */
-    text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
+	font-size: 1.2em;
+	
+	margin:0 70px;
+	border :1px solid black;
+	border-radius: 5px;
 }
 
-.pagination {padding:40px 0 0; text-align:center;}
+.pagination {padding:40px 0 0; text-align:center; margin:0 0 0 450px;}
 .pagination a {display:inline-block; }
-.pagination a.pbtn {display:inline-block; padding:7px; text-align:center; vertical-align:middle; font-size:0;}
+.pagination a .pbtn {display:inline-block; padding:7px; text-align:center; vertical-align:middle; font-size:0;}
 .pagination a .pagenum {display:inline-block; width:25px; height:25px; line-height:25px; text-align:center; vertical-align:middle;}
 .pagination a .currentpage {border-radius:3px; background:#384d75; color:#fff;}
 .pagination a:hover .pagenum {border-radius:3px; background:#ddd;}
