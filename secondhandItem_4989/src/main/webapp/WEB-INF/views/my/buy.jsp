@@ -55,7 +55,7 @@
 			<c:forEach var="productDTO" items="${productList}">
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
-						<a href="#"><img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image"></a>						
+						<img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" class="profile-item-image">						
 							<c:if test="${productDTO.trade_status eq '예약 중'}">
 								<div class="profile-item-image-cover1">
 									구매 진행 중

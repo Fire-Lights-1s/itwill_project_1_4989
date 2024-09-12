@@ -54,7 +54,7 @@
 			<c:forEach var="productDTO" items="${productList}">
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
-						<a href=""><img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-item-image"></a>
+						<img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" class="profile-item-image">
 							<div class="profile-item-image-cover3">
 								관심 물품
 							</div>
@@ -65,7 +65,7 @@
 						${productDTO.product_price}원
 					</div>
 					<div class="profile-item-review1">
-						<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=${pageDTO.sort}&nozzim=${productDTO.product_id}">관심 끄기</a>
+						<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=${pageDTO.sort}&nozzim=${productDTO.product_id}">찜 취소</a>
 					</div>
 					<div class="profile-item-review" data-date="${productDTO.created_datetime}">
 <!-- 						평점 : 4.7&emsp;&emsp; -->
