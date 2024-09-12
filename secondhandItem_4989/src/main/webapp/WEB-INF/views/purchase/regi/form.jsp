@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/purchaseStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modalStyle.css">
 <style>
 
 h1, h3 { text-align:center; }
@@ -109,12 +110,32 @@ h1, h3 { text-align:center; }
     	</div>
         <br>
     	<div class="buttons">
-        	<button id="reset" type="button" onclick="window.history.back();">다시 선택하기</button>
+        	<button id="reset" type="button">다시 선택하기</button>
       	  	<button id="submit_form" type="submit">매입 신청</button>
    		 </div>
      </form>
     </div>
 	<br><br><br>
+
+
+<!-- 모달 창 -->
+		<div id="cancel-modal" class="modal">
+		    <div class="modal-content">
+		        <p>정말 취소하시겠습니까?<br>지금까지 입력하신 내용이 모두 지워집니다.</p>
+		        <button class="confirm" id="cancelConfirm">예 (취소)</button>
+		        <button class="cancel" id="cancelCancel">아니오</button>
+		    </div>
+		</div>
+		
+		<div id="submit-modal" class="modal">
+		    <div class="modal-content">
+		        <p>위 내용대로 신청하시겠습니까?<br>매입신청 특성 상 수정이 불가능합니다.</p>
+		        <button class="confirm" id="submitConfirm">예 (제출)</button>
+		        <button class="cancel" id="submitCancel">아니오</button>
+		    </div>
+		</div>
+		
+
 
   </main>
 
@@ -131,6 +152,32 @@ h1, h3 { text-align:center; }
   
   
 <script>
+
+// 다시 선택하기 누르면 나오는 모달창 컨트롤
+const cancelModal = document.getElementById('cancel-modal');
+const reset = document.getElementById('reset');
+const cancelConfirm = document.getElementById('cancelConfirm');
+const cancelCancel = document.getElementById('cancelCancel');  
+
+	reset.addEventListener('click', function() {
+		cancelModal.style.display = "block";
+	})
+	
+	cancelConfirm.addEventListener('click', function() {
+		window.history.back();
+	})
+	cancelCancel.addEventListener('click', function() {
+		cancelModal.style.display = "none";
+    });    
+
+// 모달 창 밖을 클릭하면 모달 창 닫기
+window.addEventListener('click', function(event) {
+    if (event.target == cancelModal) {
+        cancelModal.style.display = "none";
+    }
+});
+
+const submitForm = document.getElementById('submit-form')
 
 	// 기본: 제출 조건 미충족으로 설정
 	let do_not_submit = true;
@@ -186,21 +233,41 @@ h1, h3 { text-align:center; }
 		} else if (bank_account == null || bank_account == '') {
 			alert('매입대금을 받을 계좌를 입력하고 인증해주세요.');
 		} else if(do_not_submit) {
-			alert('계좌가 인증되지 않았습니다.')
+			alert('계좌가 인증되지 않았습니다.');
 		} else if(document.fr.confirm.checked == false) {
-			alert('유의사항과 판매조건을 확인하셔야 합니다')
+			alert('유의사항과 판매조건을 확인하셔야 합니다');
 			document.fr.confirm.focus();
 		} else if(document.fr.agree.checked == false) {
-			alert('개인정보 수집 및 이용에 동의하셔야 합니다')
+			alert('개인정보 수집 및 이용에 동의하셔야 합니다');
 			document.fr.agree.focus();
 		} else {
-			document.fr.submit();
+			
+			const submitModal = document.getElementById('submit-modal');
+			const submitConfirm = document.getElementById('submitConfirm');
+			const submitCancel = document.getElementById('submitCancel');
+			
+			submitModal.style.display = "block";	
+			
+			submitConfirm.addEventListener('click', function() {
+			    document.fr.submit();
+			});
+			
+			submitCancel.addEventListener('click', function() {
+			    submitModal.style.display = "none";
+			});
+
+			window.addEventListener('click', function(event) {
+			    if (event.target == submitModal) {
+			        submitModal.style.display = "none";
+			    }
+			});
 		}
 	});
 	
-	
 </script>
-  
+
+
+
   
 </body>
 </html>

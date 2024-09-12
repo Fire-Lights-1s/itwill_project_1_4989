@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/purchaseStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modalStyle.css">
 </head>
 <body>
 <jsp:include page="../../inc/header.jsp"></jsp:include>
@@ -24,53 +25,11 @@
    			<a href="${pageContext.request.contextPath}/my/purchlist">매입 신청내역</a>
 		</div>
 		
-		<style>
-		
-		/* 모달 창 스타일 */
-        .modal {
-            display: none; /* 처음에는 숨김 */
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 500px;
-            text-align: center;
-        }
-
-        .close, .confirm, .cancel {
-            margin: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        .confirm {
-            background-color: #4e229e;
-            color: white;
-        }
-
-        .cancel {
-            background-color: #4e229e;
-            color: white;
-        }
-		
-		</style>
 	</header>
 	<div class="content-container">
 		<jsp:include page="../../inc/myPageLefter.jsp"></jsp:include>
 		<div class="main-container-side-profile">
 		<main>
-			
-			
 			
 		<br>
 		<h1 style="text-align:center;">매입 신청내역</h1>
