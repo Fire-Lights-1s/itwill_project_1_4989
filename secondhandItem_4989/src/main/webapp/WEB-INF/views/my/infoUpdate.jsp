@@ -31,7 +31,7 @@
 			</div>
 		<form action="${pageContext.request.contextPath}/my/infoUpdatePro" method="post" class="profile-update-form" name="fr" enctype="multipart/form-data">
 			<div class="profile-circle-div">
-				<img src="${memberDTO.profile_img}" class="profile-circle" id="profileImage">
+				<img src="${pageContext.request.contextPath}/resources/upload/${memberDTO.profile_img}" class="profile-circle" id="profileImage">
 				<label for="fileInput" class="custom-file-upload">
 				    <img src="${pageContext.request.contextPath}/resources/img/btn_edit.png" class="profile-circle-edit" id="editIcon">
 				</label>

@@ -26,6 +26,8 @@ public class ProductDTO {
 //    private String product_img5;
     //상품등록일시
     private Timestamp created_datetime;
+    //등록 경과시간
+    private String elapsedTime;
     //조회수
     private int view_count;
     //찜수
@@ -40,6 +42,9 @@ public class ProductDTO {
     private String trade_status;
     //구매자 아이디 for chat
     private String buyer_id;
+    
+    
+    
  
     
 	@Override
@@ -51,6 +56,21 @@ public class ProductDTO {
 				+ ", trade_method=" + trade_method + ", pay_method=" + pay_method + ", trade_area=" + trade_area
 				+ ", trade_status=" + trade_status + "]";
 	}
+	
+	
+	
+
+
+	public String getElapsedTime() {
+		return elapsedTime;
+	}
+
+
+
+	public void setElapsedTime(String elapsedTime) {
+		this.elapsedTime = elapsedTime;
+	}
+
 
 
 	public int getView_count() {

@@ -103,12 +103,14 @@ public class MyPageController {
 		System.out.println("업로드 경로 : " + uploadPath);
 		System.out.println("랜덤문자_파일이름 : " + filename);
 		FileCopyUtils.copy(file.getBytes(), new File(uploadPath, filename));
+		String member_id = request.getParameter("member_id");
 		String name = request.getParameter("name");
 		String pass = request.getParameter("pass");
 		String nickname = request.getParameter("nickname");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setMember_id(member_id);
 		memberDTO.setName(name);
 		memberDTO.setPass(pass);
 		memberDTO.setNickname(nickname);
