@@ -29,6 +29,7 @@ function connect(chatRoom_json){
     
 		loadProduct(chatRoomGlobal);
 		productLoadingEnd();
+		
         // roomID를 구독 /send/roomID로 보내진 메세지를 받음
         stompClient.subscribe('/topic/' + chatRoomGlobal.chat_room_id, function (chatMessage){
         	console.log('chatMessage: ', chatMessage);
@@ -50,8 +51,8 @@ function disconnect() {
     setConnected();
     console.log("Disconnected");
 }
-//채팅방 채팅 불러오기
-function loadChatRoomList(chatRoom_json){
+//채팅방 저장된 채팅 불러오기
+function loadChatList(chatRoom_json){
 	$.ajax({
 	    type: "POST",
 	    url : "../secondhand4989/chat/reciveChatList/"+chatRoom_json.chat_room_id,
@@ -62,13 +63,11 @@ function loadChatRoomList(chatRoom_json){
 	    contentType : "application/x-www-form-urlencoded; charset=utf-8",
 	    dataType : "json",
 	    success : function(data){
-	        //Ajax 성공시
 	        console.log(data);
 	        
 	        
 	    },error : function(){
-	        //Ajax 실패시
-	        console.log('거래 물품 불러오기 실패');
+	        console.log('저장된 채팅 불러오기 실패');
 	    }
 	});
 }
@@ -104,11 +103,22 @@ function loadProduct(chatRoom_json){
 				  	});
 				    break;
 				  case '예약 중':
-				  	$(TXButton).text('판매 예약 취소');
-		        	$(TXButton).css('visibility', 'visible');
-		        	$(TXButton).on('click', function(){
-		        		promiseTrade();
-				  	});
+				  	console.log(productGlobal.buyer_id)
+				  	console.log(chatRoom_json.buyer_id)
+				  	console.log(productGlobal.buyer_id == chatRoom_json.buyer_id)
+				  	
+				  	if(productGlobal.buyer_id == chatRoom_json.buyer_id){
+				  	console.log('case 안 if 조건 false');
+					  	$(TXButton).text('판매 예약 취소');
+			        	$(TXButton).css('visibility', 'visible');
+			        	
+			        	$(TXButton).on('click', function(){
+			        		promiseTrade();
+					  	});
+				  	}else{
+					  	$(TXButton).text('');
+					    $(TXButton).css('visibility', 'hidden');
+				  	}
 				    break;
 				  case '거래 완료':
 				  	$(TXButton).text('거래 완료');
@@ -125,11 +135,16 @@ function loadProduct(chatRoom_json){
 				  	$(TXButton).css('visibility', 'hidden');
 				    break;
 				  case '예약 중':
-				  	$(TXButton).text('구매 확정');
-				  	$(TXButton).css('visibility', 'visible');
-				  	$(TXButton).on('click', function(){
-				  		promiseTrade();
-				  	});
+				  	if(productGlobal.buyer_id == chatRoom_json.buyer_id){
+					  	$(TXButton).text('구매 확정');
+					  	$(TXButton).css('visibility', 'visible');
+					  	$(TXButton).on('click', function(){
+					  		promiseTrade();
+					  	});
+				  	}else{
+					  	$(TXButton).text('');
+					    $(TXButton).css('visibility', 'hidden');
+				  	}
 				    break;
 				  case '거래 완료':
 				  	$(TXButton).text('후기 작성');
@@ -157,13 +172,9 @@ function loadProduct(chatRoom_json){
 function sendChat() {
     if ($("#message").val() != "") {
     	let data = {
-    	"chat_id":null,
-    	"chat_room_id":null,
     	"message_type":"MESSAGE",
-    	"alarm":null,
     	"user_id": userId,
     	"message":$('#message').val(),
-    	"send_time":null
     	}
     	
         stompClient.send("/send/"+chatRoomGlobal.chat_room_id, {},
@@ -178,6 +189,20 @@ function showChat(chatMessage) {
     let howOld = nowTime - chatMessage.send_time;
     let sendTime = null;
     let messageDiv = null;
+    //보낸 사람인지 확인
+    let message = $('<p>', {
+        text : chatMessage.message
+    });
+    if(chatMessage.user_id == userId){
+        messageDiv = $('<div>', {
+            class : 'sendMessage'
+        });
+    }else{
+        messageDiv = $('<div>', {
+            class : 'reciveMessage'
+        });
+    }
+    // 보낸 기간이 1일을 넘었는지 확인
     if(howOld / (1000 * 60 * 60 * 24) < 1){
         let hour = messageTime.getHours(); 
         let minute = messageTime.getMinutes();
@@ -194,18 +219,7 @@ function showChat(chatMessage) {
         });
         
     }
-    let message = $('<p>', {
-        text : chatMessage.message
-    });
-    if(chatMessage.user_id == userId){
-        messageDiv = $('<div>', {
-            class : 'sendMessage'
-        });
-    }else{
-        messageDiv = $('<div>', {
-            class : 'reciveMessage'
-        });
-    }
+    //documenet 요소 생성
     messageDiv.append(message);
     messageDiv.append(sendTime);
     $("#chatContent").append(messageDiv);
@@ -275,11 +289,16 @@ function changeProductState(product){
 				  	});
 				    break;
 				  case '예약 중':
-				  	$(TXButton).text('판매 예약 취소');
-		        	$(TXButton).css('visibility', 'visible');
-		        	$(TXButton).on('click', function(){
-		        		promiseTrade();
-				  	});
+				  	if(productGlobal.buyer_id == chatRoomGlobal.buyer_id){
+					  	$(TXButton).text('판매 예약 취소');
+			        	$(TXButton).css('visibility', 'visible');
+			        	$(TXButton).on('click', function(){
+			        		promiseTrade();
+					  	});
+				  	}else{
+					  	$(TXButton).text('');
+					    $(TXButton).css('visibility', 'hidden');
+				  	}
 				    break;
 				  case '거래 완료':
 				  	$(TXButton).text('거래 완료');
@@ -296,11 +315,16 @@ function changeProductState(product){
 				  	$(TXButton).css('visibility', 'hidden');
 				    break;
 				  case '예약 중':
-				  	$(TXButton).text('구매 확정');
-				  	$(TXButton).css('visibility', 'visible');
-				  	$(TXButton).on('click', function(){
-				  		promiseTrade();
-				  	});
+				  	if(productGlobal.buyer_id == chatRoomGlobal.buyer_id){
+					  	$(TXButton).text('구매 확정');
+					  	$(TXButton).css('visibility', 'visible');
+					  	$(TXButton).on('click', function(){
+					  		promiseTrade();
+					  	});
+				  	}else{
+					  	$(TXButton).text('');
+					    $(TXButton).css('visibility', 'hidden');
+				  	}
 				    break;
 				  case '거래 완료':
 				  	$(TXButton).text('후기 작성');
@@ -317,22 +341,5 @@ function changeProductState(product){
 	        	$(TXButton).text('');
 				$(TXButton).css('visibility', 'hidden');
 	        }
-}
-//저장된 채팅 불러오기
-function loadChat(chatList){
-    if(chatList != null) {
-        for(let chat in chatList) {
-            if (chatList[chat].senderEmail == senderEmail) {
-                $("#chatting").append(
-                    "<div class = 'chatting_own'><tr><td>" + chatList[chat].message + "</td></tr></div>"
-                );
-            } else {
-                $("#chatting").append(
-                    "<div class = 'chatting'><tr><td>" + "[" + chatList[chat].sender + "] " + chatList[chat].message + "</td></tr></div>"
-                );
-            }
-        }
-    }
-    $('.col-md-12').scrollTop($('.col-md-12')[0].scrollHeight); // 채팅이 많아질시에 자동 스크롤
 }
 

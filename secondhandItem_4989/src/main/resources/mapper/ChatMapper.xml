@@ -15,9 +15,12 @@
 	</insert>
 	
 	<select id="getProductInfo" resultType="com.itwillbs.domain.ProductDTO">
-		select * 
-		from Product
-		where product_id = #{product_id}
+		select p.product_id, p.product_img1, p.seller_id, p.product_name, p.product_price, p.year_purchase, p.trade_status, TX.buyer_id
+		from Product p LEFT OUTER join TX
+		on p.product_id = TX.product_id
+		and p.product_id = #{product_id}       
+        and TX.is_reserved = true
+        where p.product_id = #{product_id}
 	</select>
 	
 	<select id="getChatRoomList" resultType="com.itwillbs.domain.ChatRoomDTO">
@@ -44,6 +47,11 @@
 		from TX
 		where product_id = #{product_id} and is_reserved = true;
 	</select>
+	<select id="getProductTX">
+		select count(*)
+		from TX
+		where product_id = #{product_id} and is_reserved = true;
+	</select>
 	<insert id="createTX">
 		insert into TX(product_id,buyer_id, reservation_date)
 		values(#{product_id}, #{buyer_id}, #{reservation_date})
@@ -57,6 +65,15 @@
 			set is_reserved = false, transaction_end_date = #{transaction_end_date}, transaction_method = #{transaction_method}
 		</if>
 		where product_id = #{product_id} and is_reserved = true;
-		
 	</update>
+	<insert id="createChatMessage">
+		insert into ChatMessage(chat_room_id, message_type, alarm, user_id, message, send_time)
+		values(#{chat_room_id},#{message_type},#{alarm},#{user_id},#{message},#{send_time})
+	</insert>
+	<select id="getChatMessageList" resultType="com.itwillbs.domain.ChatMessageDTO">
+		select * 
+		from ChatMessage
+		where chat_room_id = #{chat_room_id}
+		order by send_time desc;
+	</select>
 </mapper>
