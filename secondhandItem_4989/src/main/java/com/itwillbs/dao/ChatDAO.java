@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.ChatMessageDTO;
 import com.itwillbs.domain.ChatRoomDTO;
 import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.domain.TXDTO;
@@ -49,6 +50,14 @@ public class ChatDAO {
 	}
 	public void updateTX(TXDTO txDTO) {
 		sqlSession.update(namespace+".updateTX", txDTO);
+	}
+	public void createChatMessage(ChatMessageDTO message) {
+		sqlSession.insert(namespace+".createChatMessage",message);
+		
+	}
+	public List<ChatMessageDTO> getChatMessageList(String chat_room_id) {
+		List<ChatMessageDTO> chatList = sqlSession.selectList(namespace+".getChatMessageList",chat_room_id);
+		return chatList;
 	}
 	
 

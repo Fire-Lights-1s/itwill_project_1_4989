@@ -23,9 +23,9 @@ public class ChatRoomDTO {
 				"\", \"seller_id\" : \"" + seller_id +
 				"\", \"title\" : \"" + title +
 				"\", \"product_img1\" : \"" + product_img1 +
-				"\", \"product_img1\" : \"" + message +
-				"\", \"product_img1\" : " + send_time +
-				"}";
+				"\", \"message\" : \"" + message +
+				"\", \"send_time\" : \"" + send_time +
+				"\"}";
 	}
 
 	public String getChat_room_id() {

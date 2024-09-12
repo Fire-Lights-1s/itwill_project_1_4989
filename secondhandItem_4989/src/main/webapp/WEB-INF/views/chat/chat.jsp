@@ -59,10 +59,10 @@
 								<p>${chatRoom.message }</p>
 							</div>
 							<div>
-								<c:if test="${(current.time - chatRoom.send_time) / (1000 * 60 * 60 * 24) < 1 }">
+								<c:if test="${(current.time - chatRoom.send_time.time) / (1000 * 60 * 60 * 24) < 1 }">
 									<p><fmt:formatDate pattern="hh:mm" value="${chatRoom.send_time}"/></p>
 								</c:if>
-								<c:if test="${(current.time - chatRoom.send_time) / (1000 * 60 * 60 * 24) >= 1 }">
+								<c:if test="${(current.time - chatRoom.send_time.time) / (1000 * 60 * 60 * 24) >= 1 }">
 									<p><fmt:formatDate pattern="MM-dd hh:mm" value="${chatRoom.send_time}"/></p>
 								</c:if>
 <!-- 								<p class="alamIcon">1</p> -->
