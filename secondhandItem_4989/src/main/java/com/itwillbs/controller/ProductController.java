@@ -78,7 +78,7 @@ public class ProductController {
         if (yearPurchase != null && !yearPurchase.isEmpty()) {
             productDTO.setYear_purchase(Integer.parseInt(yearPurchase));
         }
-
+        System.out.println("ProductController 값확인" + productDTO);
         productService.registerProduct(productDTO);
 
         return "redirect:/product/register";
