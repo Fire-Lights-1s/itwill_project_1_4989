@@ -25,10 +25,11 @@ public class ProductListDAO {
 		return sqlSession.selectList(namespace + ".getProductListByC", category_name);
 	}
 	public List<ProductDTO> getFilteredProducts(Map<String, Object> paramMap) {
+		System.out.println(paramMap);
 		return sqlSession.selectList(namespace + ".getFilteredProducts", paramMap);
 	}
 	public List<ProductDTO> getItemsBySearch(String query) {
-		String value = "%" + query + "%";		
+		String value = "%" + query + "%";
 	    return sqlSession.selectList(namespace + ".getItemsBySearch", value);
 	}
 	

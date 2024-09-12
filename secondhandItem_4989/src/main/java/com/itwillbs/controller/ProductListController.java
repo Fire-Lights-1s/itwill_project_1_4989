@@ -72,6 +72,7 @@ public class ProductListController {
 	    
 	    // 카테고리, 가격대, 체크박스 필터 조건에 맞는 상품을 가져옴
 	    List<ProductDTO> productList = productListService.getFilteredProducts(category, method, pay, price, status, minPrice, maxPrice);
+	    System.out.println(productList);
 	    model.addAttribute("productList", productList);
 	    
 	    // 경과시간 넘겨주기
