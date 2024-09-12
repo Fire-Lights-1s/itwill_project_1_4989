@@ -9,124 +9,17 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>상품 상세</title>
+    <title>판매상품 상세</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-3.4.0.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productDetail.css">
+
 <!--     index의 찜 등록/취소 -->
 	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- CSS -->
-    <style>
-    
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: stretch; /* 높이 맞추기 */
-        }
-        .image-box {
-        flex: 1; /* .details-box와 동일한 높이 */
-        padding-right: 20px;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .image-box img {
-        height: 100%; /* .image-box의 높이에 맞춤 */
-        width: auto; /* 비율을 유지하면서 넓이를 자동으로 조정 */
-        max-width: 100%; /* 부모의 넓이를 넘지 않도록 설정 */
-        object-fit: contain; /* 이미지를 비율에 맞춰 조정 */
-        border-radius: 8px;
-    }
-
-        .details-box {
-            width: 60%;
-        }
-        .card {
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .product-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .product-price {
-            font-size: 28px;
-            font-weight: bold;
-            color: #000;
-            margin-bottom: 20px;
-        }
-        .product-meta {
-            font-size: 14px;
-            color: #888;
-            margin-bottom: 10px;
-        }
-        .meta-item {
-            margin-right: 10px;
-        }
-        .product-info {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        .tag {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #eee;
-            border-radius: 5px;
-            margin-right: 5px;
-            font-size: 14px;
-        }
-        .button-group {
-            display: flex;
-            margin-top: 20px;
-        }
-        .button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-        .product-description {
-            margin-top: 20px;
-        }
-        .divider {
-            margin: 20px 0;
-            border-bottom: 1px solid #ccc;
-        }
-        .info-button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-right: 10px;
-            border: 1px solid #007bff;
-            background-color: white;
-            color: #007bff;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .info-button:hover {
-            background-color: #007bff;
-            color: white;
-        }
-    </style>
-
+ 
 </head>
 <body>
 
@@ -160,9 +53,9 @@
               <!-- 상품 가격 (1000원 단위로 , 추가) -->
               <div class="product-price" id="product-price"></div>
               <div class="product-meta">
-                <span class="meta-item">1시간 전</span>
-                <span class="meta-item">조회수 20</span>
-                <span class="meta-item">찜 5</span>
+                <span class="meta-item">${productDTO.elapsedTime}</span>
+    	<span class="meta-item">조회수 ${productDTO.view_count}</span>
+    	<span class="meta-item">찜 ${productDTO.like_count}</span>
               </div>
               <br>
               <hr>
