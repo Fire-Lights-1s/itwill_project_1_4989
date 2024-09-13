@@ -83,7 +83,24 @@ main {
 }
 
 .profile-a button {
-	font-size:1em;
+	background-color: white;
+    color: #4e229e;
+    border: 1px solid #4e229e;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.profile-item-list button {
+	background-color: #4e229e;
+    color: white;
+    border: 1px solid #4e229e;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .profile-nickname{
@@ -161,7 +178,6 @@ main {
 .profile-item-list-piece {
 	border:#212529;
 	background-color: #fff;
-	object-fit: cover !important;
 	height:500px;
 	width:242px;
 	margin:10px;
@@ -174,9 +190,18 @@ main {
 	background-color: #fff;
     background-clip: border-box;
     border-radius: .25rem .25rem 0 0;
+    object-fit: cover !important;
 }
 
-.profile-item-image-zzim {
+.profile-item-imagesell {
+	height:236px;
+	background-color: #fff;
+    background-clip: border-box;
+    border-radius: .25rem .25rem 0 0;
+    object-fit: cover !important;
+}
+
+.profile-item-image-zzim1 {
 	position: absolute;
 	top: 15px;
 	right: 15px;
@@ -192,7 +217,6 @@ main {
 	background-color:gray;
 	color:white;
 	text-align:center;
-	border-radius:0 0 10px 10px;
 	width:240px;	
 	margin:0 auto;
 }
@@ -201,16 +225,14 @@ main {
 	background-color:black;
 	color:white;
 	text-align:center;
-	border-radius:0 0 10px 10px;
 	width:240px;	
 	margin:0 auto;
 }
 
-.profile-item-image-cover4 {
+.profile-item-image-cover3 {
 	background-color:blue;
 	color:white;
 	text-align:center;
-	border-radius:0 0 10px 10px;
 	width:240px;	
 	margin:0 auto;
 }
@@ -225,26 +247,83 @@ main {
     text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
 }
 
+.profile-item-name1 {
+	text-align:center;	
+	margin: 0 20px 0;
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow:hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
+}
+
 .profile-item-review {
 	text-align:center;
 	white-space:nowrap; /* 줄바꿈 방지 */
     overflow:hidden; /* 넘치는 텍스트 숨김 */
     text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
+    position: absolute;
+	top: 110px;
+	right: 98px;
 }
 
 .profile-item-review1 {
 	text-align:center;
 	font-size: 1.2em;
-	
-	margin:0 70px;
-	border :1px solid black;
+	position: absolute;
+	top: 150px;
+	right: 12px;
+	margin:0 65px;
+	border :1px solid #343a40;
 	border-radius: 5px;
+	padding: 1px 10px;
 }
 
-.pagination {padding:40px 0 0; text-align:center; margin:0 0 0 450px;}
-.pagination a {display:inline-block; }
-.pagination a .pbtn {display:inline-block; padding:7px; text-align:center; vertical-align:middle; font-size:0;}
-.pagination a .pagenum {display:inline-block; width:25px; height:25px; line-height:25px; text-align:center; vertical-align:middle;}
-.pagination a .currentpage {border-radius:3px; background:#384d75; color:#fff;}
-.pagination a:hover .pagenum {border-radius:3px; background:#ddd;}
+.profile-item-review2 {
+	text-align:center;
+	white-space:nowrap; /* 줄바꿈 방지 */
+    overflow:hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
+    position: absolute;
+	top: 134px;
+	right: 98px;
+}
+
+.profile-item-review3 {
+	text-align:center;
+	white-space:nowrap; /* 줄바꿈 방지 */
+    position: absolute;
+	top: 165px;
+	right: 19px;
+}
+
+.asdf {
+	text-align:center;
+	white-space:nowrap; /* 줄바꿈 방지 */
+    overflow:hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
+    position: absolute;
+	top: 110px;
+	right: 98px;
+}
+
+.profile-item-detail {
+	width:150px;
+	text-align:center;
+	font-size: 1.2em;
+	position: absolute;
+	top: 200px;
+	right: -20px;
+	margin:0 65px;
+	border :1px solid #343a40;
+	border-radius: 5px;
+	padding: 0px 10px;
+}
+
+.pagination1 {padding:40px 0 0; text-align:center;}
+.pagination1 a {display:inline-block; }
+.pagination1 a .pbtn {display:inline-block; padding:7px; text-align:center; vertical-align:middle; font-size:0;}
+.pagination1 a .pagenum {display:inline-block; width:25px; height:25px; line-height:25px; text-align:center; vertical-align:middle;}
+.pagination1 a .currentpage {border-radius:3px; background:#384d75; color:#fff;}
+.pagination1 a:hover .pagenum {border-radius:3px; background:#ddd;}
 
