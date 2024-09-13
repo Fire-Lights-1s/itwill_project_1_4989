@@ -102,8 +102,12 @@
 						<div class="container">
 							<!-- 이미지 업로드 및 미리보기 영역 -->
 							<div class="form-group image-upload">
-								<label for="product_img1">사진 선택</label> <input type="file"
-									id="product_img1" name="product_img1" class="login-bttn">
+								<label for="product_img">사진 선택</label> 
+								<input type="file" id="product_img1" name="product_img" class="login-bttn">
+								<input type="file" id="product_img2" name="product_img" class="login-bttn">
+								<input type="file" id="product_img3" name="product_img" class="login-bttn">
+								<input type="file" id="product_img4" name="product_img" class="login-bttn">
+								<input type="file" id="product_img5" name="product_img" class="login-bttn">
 							</div>
 
 

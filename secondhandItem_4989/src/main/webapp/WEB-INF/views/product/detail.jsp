@@ -52,16 +52,18 @@
               <div class="product-price" id="product-price"></div>
               <div class="product-meta">
                 <span class="meta-item">${productDTO.elapsedTime}</span>
-		<!--  조회수, 찜 개수  -->
-    	<span class="meta-item">찜 ${productDTO.like_count}</span>
-    	<span class="meta-item">조회수 ${productDTO.view_count}</span>
+			<!--  찜, 조회수 개수  -->
+    		<span class="meta-item">찜 ${productDTO.like_count}</span>
+    		<span class="meta-item">조회수 ${productDTO.view_count}</span>
               </div>
               <br>
               <hr>
      <br>
-<!-- 거래 지역 가져오기  -->
+<!-- 거래 지역, 거래 방식, 결제방식  -->
   <button class="button" type="button">${productDTO.trade_area}</button>
-
+   <button class="button" type="button">${productDTO.trade_method}</button>
+   <button class="button" type="button">${productDTO.pay_method}</button>
+  <br>
 <!-- 판매자 정보 및 결제 방식 -->
 <div class="product-info">
     <strong>판매자 </strong> 
@@ -69,11 +71,7 @@
         ${productDTO.seller_id}
     </a><br> <br>
 
-     <strong>거래 방식 </strong> 
-    <button class="button" type="button">${productDTO.trade_method}</button><br>
-    <br>
-    <strong>결제 방식 </strong> 
-    <button class="button" type="button">${productDTO.pay_method}</button>
+   
 </div>
 
               <!-- 버튼 그룹 -->

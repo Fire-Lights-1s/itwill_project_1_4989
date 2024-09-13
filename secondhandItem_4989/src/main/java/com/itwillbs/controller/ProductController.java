@@ -50,15 +50,14 @@ public class ProductController {
     	
      }
 
-
     @PostMapping("/registerPro")
-    public String registerPro(HttpServletRequest request, MultipartFile product_img1, HttpSession session) throws Exception {
+    public String registerPro(HttpServletRequest request, MultipartFile[] product_img, HttpSession session) throws Exception {
         System.out.println("ProductController registerPro()");
 
-        if (product_img1 == null || product_img1.isEmpty()) {
-            System.out.println("파일이 선택되지 않았습니다.");
-            return "redirect:/product/register";
-        }
+		/*
+		 * if (product_img1 == null || product_img1.isEmpty()) {
+		 * System.out.println("파일이 선택되지 않았습니다."); return "redirect:/product/register"; }
+		 */
 
         System.out.println("uploadPath: " + uploadPath);
         if (uploadPath == null) {
@@ -67,11 +66,20 @@ public class ProductController {
         }
 
         UUID uuid = UUID.randomUUID();
-        String filename = uuid.toString() + "_" + product_img1.getOriginalFilename();
-        System.out.println("업로드 경로 : " + uploadPath);
-        System.out.println("랜덤문자_파일이름 : " + filename);
+        String filename1 = uuid.toString() + "_" + product_img[0].getOriginalFilename();
+        String filename2 = uuid.toString() + "_" + product_img[1].getOriginalFilename();
+        String filename3 = uuid.toString() + "_" + product_img[2].getOriginalFilename();
+        String filename4 = uuid.toString() + "_" + product_img[3].getOriginalFilename();
+        String filename5 = uuid.toString() + "_" + product_img[4].getOriginalFilename();
+        //System.out.println("업로드 경로 : " + uploadPath);
+        //System.out.println("랜덤문자_파일이름 : " + filename1);
+      
 
-        FileCopyUtils.copy(product_img1.getBytes(), new File(uploadPath, filename));
+        FileCopyUtils.copy(product_img[0].getBytes(), new File(uploadPath, filename1));
+        FileCopyUtils.copy(product_img[1].getBytes(), new File(uploadPath, filename2));
+        FileCopyUtils.copy(product_img[2].getBytes(), new File(uploadPath, filename3));
+        FileCopyUtils.copy(product_img[3].getBytes(), new File(uploadPath, filename4));
+        FileCopyUtils.copy(product_img[4].getBytes(), new File(uploadPath, filename5));
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProduct_name(request.getParameter("product_name"));
@@ -81,7 +89,11 @@ public class ProductController {
         productDTO.setTrade_method(request.getParameter("trade_method"));
         productDTO.setPay_method(request.getParameter("pay_method"));
         productDTO.setProduct_desc(request.getParameter("product_desc"));
-        productDTO.setProduct_img1(filename);
+        productDTO.setProduct_img1(filename1);
+        productDTO.setProduct_img2(filename2);
+        productDTO.setProduct_img3(filename3);
+        productDTO.setProduct_img4(filename4);
+        productDTO.setProduct_img5(filename5);
         //로그인한 사용자
         productDTO.setSeller_id((String) session.getAttribute("member_id"));
 
