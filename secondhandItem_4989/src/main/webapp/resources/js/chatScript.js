@@ -32,7 +32,7 @@ function connect(chatRoom_json){
 		loadChatList(chatRoomGlobal);
         // roomID를 구독 /send/roomID로 보내진 메세지를 받음
         stompClient.subscribe('/topic/' + chatRoomGlobal.chat_room_id, function (chatMessage){
-        	console.log('chatMessage: ', chatMessage);
+        	//console.log('chatMessage: ', chatMessage);
             showChat(JSON.parse(chatMessage.body));
         });
         stompClient.subscribe('/topic/product/' + chatRoomGlobal.product_id, function (product){
@@ -63,8 +63,7 @@ function loadChatList(chatRoom_json){
 	    contentType : "application/x-www-form-urlencoded; charset=utf-8",
 	    dataType : "json",
 	    success : function(data){
-	        console.log(data);
-	        console.log(data.length);
+	        //console.log(data);
 	        for(let i = 0; i < data.length; i++){
 	        	showChat(JSON.parse(JSON.stringify(data[i])));
 	        }
@@ -87,7 +86,7 @@ function loadProduct(chatRoom_json){
 	    dataType : "json",
 	    success : function(data){
 	        //Ajax 성공시
-	        console.log(data);
+	        //console.log(data);
 	        productGlobal = data;
 	        let TXButton = '#productInfo div:nth-child(3) button';
 	        $('#productInfo div:nth-child(1) img').attr( "src", productGlobal.product_img1 );
@@ -106,12 +105,7 @@ function loadProduct(chatRoom_json){
 				  	});
 				    break;
 				  case '예약 중':
-				  	console.log(productGlobal.buyer_id)
-				  	console.log(chatRoom_json.buyer_id)
-				  	console.log(productGlobal.buyer_id == chatRoom_json.buyer_id)
-				  	
 				  	if(productGlobal.buyer_id == chatRoom_json.buyer_id){
-				  	console.log('case 안 if 조건 false');
 					  	$(TXButton).text('판매 예약 취소');
 			        	$(TXButton).css('visibility', 'visible');
 			        	
@@ -227,8 +221,8 @@ function showChat(chatMessage) {
     messageDiv.append(message);
     messageDiv.append(sendTime);
     $("#chatContent").append(messageDiv);
-        console.log(chatMessage);
-        console.log(message);
+    //console.log(chatMessage);
+    //console.log(message);
 }//showChat()
 
 //상품 예약 및 구매
@@ -282,7 +276,7 @@ function productLoadingEnd(){
 
 //상품 상태 변경하기
 function changeProductState(product){
-	console.log('changeProductState : '+product);
+	//console.log('changeProductState : ' + product);
 	productGlobal = JSON.parse(product);
 	$('#productInfo div:nth-child(2) p:nth-child(4)').text("거래 상태 : "+ productGlobal.trade_status);
 	let TXButton = '#productInfo div:nth-child(3) button';
