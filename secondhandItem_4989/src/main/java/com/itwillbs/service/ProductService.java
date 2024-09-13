@@ -23,11 +23,21 @@ public class ProductService {
     }
 	//상품 상세 조회
 		public ProductDTO getProductDetail(String product_id) {
+			System.out.println(product_id);
 			ProductDTO product = productDAO.getProductDetail(product_id);
-			// 경과 시간 계산
-	        String elapsedTime = getElapsedTime(product.getCreated_datetime());
-	        // 경과 시간 추가
-	        product.setElapsedTime(elapsedTime);
+			System.out.println(product);
+			if (product != null) {
+		        // 경과 시간 계산
+		        String elapsedTime = getElapsedTime(product.getCreated_datetime());
+		        product.setElapsedTime(elapsedTime);
+
+		        // 찜 개수 조회 및 설정
+		        int like_count = getLikeCount(Integer.parseInt(product_id));
+		        product.setLike_count(like_count);
+		    } else {
+		        System.out.println("No product found with ID: " + product_id);
+		    }
+	        
 	        return product;
 			
 		}
@@ -53,10 +63,14 @@ public class ProductService {
 		 
 		 //찜 개수 증가
 		 public void increaseLikeCount(int product_id) {
-			 productDAO.increaseCount(product_id);
+			 productDAO.increaseLikeCount(product_id);
 	
 		 }
+		 //찜 개수 조회
+		public int getLikeCount(int product_id) {
+			
+			return productDAO.getLikeCount(product_id);
+		}
 
-	
 	
 }//ProductService

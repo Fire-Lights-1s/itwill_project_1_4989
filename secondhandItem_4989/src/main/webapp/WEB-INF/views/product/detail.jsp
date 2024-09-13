@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -54,9 +52,9 @@
               <div class="product-price" id="product-price"></div>
               <div class="product-meta">
                 <span class="meta-item">${productDTO.elapsedTime}</span>
-		<!--  조회수, 찜 계산식 추가  -->
-    	<span class="meta-item">조회수 ${productDTO.view_count}</span>
+		<!--  조회수, 찜 개수  -->
     	<span class="meta-item">찜 ${productDTO.like_count}</span>
+    	<span class="meta-item">조회수 ${productDTO.view_count}</span>
               </div>
               <br>
               <hr>
@@ -66,7 +64,7 @@
 <!-- 판매자 정보 및 결제 방식 -->
 <div class="product-info">
     <strong>판매자 </strong> 
-    <a href="${pageContext.request.contextPath}/your/seller/${productDTO.seller_id}" class="button">
+    <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}" class="button">
         ${productDTO.seller_id}
     </a><br> <br>
     <!-- 거래 지역 표시     			 -->

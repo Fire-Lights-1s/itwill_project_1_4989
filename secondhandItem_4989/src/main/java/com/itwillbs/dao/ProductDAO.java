@@ -25,23 +25,34 @@ public class ProductDAO {
 	//상품 상세 정보
 	public ProductDTO getProductDetail(String product_id) {
 		System.out.println("ProductDAO productDetail()");
+		ProductDTO productDTO = sqlSession.selectOne(namespace + ".getProductDetail", product_id);
+		/*
+		 * if (productDTO == null) { System.out.println("No product found with ID: " +
+		 * product_id); } return productDTO;
+		 */
 		return sqlSession.selectOne(namespace + ".getProductDetail", product_id);
 		
 	}
-	//찜 수 like_count 증가
-	public void increaseCount(int product_id) {
+	//찜 개수 like_count 증가
+	public void increaseLikeCount(int product_id) {
 		System.out.println("ProductDAO increaseLikeCount");
 		sqlSession.update(namespace + ".increseLikeCount", product_id);
-		
-		
+	}	
+
+	 //찜 개수 조회
+	 public int getLikeCount(int product_id) {
+		 return sqlSession.selectOne(namespace + ".getLikeCount", product_id);
+	 }
+	 
+	 //조회수 view_count 증가
+	 public int getMaxNum(int product_id) { 
+	 System.out.println("ProductDAO getMaxNum()"); 
+	 sqlSession.selectOne(namespace + ".getMaxNum", product_id);
+	return sqlSession.selectOne(namespace + ".getMaxNum", product_id);
+
 	}
 	
-//	글 조회수 view_count 증가
-//	public int getMaxNum() {
-//	System.out.println("ProductDAO getMaxNum()");
-//	sqlSession.selectOne(namespace + ".getMaxNum");
-//	}
+		
 	
-
-
+	
 }
