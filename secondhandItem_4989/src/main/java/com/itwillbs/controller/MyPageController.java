@@ -92,17 +92,8 @@ public class MyPageController {
 	@PostMapping("/infoUpdatePro")
 	public String infoUpdatePro(HttpServletRequest request, MultipartFile file)throws Exception {
 		System.out.println("MyPageController infoUpdatePro()");
-//		파일 이름 : file.getOriginalFilename();
-//		원본 파일 : file.getBytes();
-		System.out.println(file.getOriginalFilename());
-		System.out.println("1");
 		UUID uuid = UUID.randomUUID();
-		System.out.println("2");
-		System.out.println(file.getOriginalFilename());
-		System.out.println("3");
 		String filename = uuid.toString() + "_" + file.getOriginalFilename();
-		System.out.println("업로드 경로 : " + uploadPath);
-		System.out.println("랜덤문자_파일이름 : " + filename);
 		FileCopyUtils.copy(file.getBytes(), new File(uploadPath, filename));
 		String member_id = request.getParameter("member_id");
 		String name = request.getParameter("name");

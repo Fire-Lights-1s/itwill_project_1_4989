@@ -1,5 +1,6 @@
 package com.itwillbs.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,10 @@ public class ProductListDAO {
 	
 	private static final String namespace="com.itwillbs.mapper.ProductListMapper";
 	
+	public List<ProductDTO> getPopList() {
+		return sqlSession.selectList(namespace + ".getPopList");
+	}
+	
 	public List<ProductDTO> getProductListAll() {
 		return sqlSession.selectList(namespace + ".getProductListAll");
 	}
@@ -31,6 +36,12 @@ public class ProductListDAO {
 	public List<ProductDTO> getItemsBySearch(String query) {
 		String value = "%" + query + "%";
 	    return sqlSession.selectList(namespace + ".getItemsBySearch", value);
+	}
+	public List<ProductDTO> loadMorePopList(int offset, int itemsPerPage) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("offset", offset);
+		paramMap.put("itemsPerPage", itemsPerPage);
+		return sqlSession.selectList(namespace + ".loadMorePopList", paramMap);
 	}
 	
 }

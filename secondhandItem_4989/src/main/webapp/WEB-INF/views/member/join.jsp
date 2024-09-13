@@ -26,7 +26,7 @@
 
 <div class="container">
         <h1>회원정보를 입력해주세요</h1>
-        <form action="joinPro" method="post" name="fr">
+        <form action="${pageContext.request.contextPath}/member/sendPro" method="post" name="fr">
             <div class="form-group">
                 <label for="userId">아이디</label>
                 <input type="text" id="member_id" name="member_id" placeholder="아이디" required>

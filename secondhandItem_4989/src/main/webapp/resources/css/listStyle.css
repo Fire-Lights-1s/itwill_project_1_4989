@@ -441,15 +441,16 @@ aside {
 /* 상품리스트 고유 정의 */
 
 
-.filter-row {
+.sorting {
 	margin-top: 30px;
     display: flex;
     gap: 10px;
     flex-direction: row;
     justify-content: flex-end;
+    align-items:right;
 }
 
-.filter-row button {
+.sorting button {
     background-color: white;
     color: #4e229e;
     border: 1px solid #4e229e;
@@ -459,12 +460,12 @@ aside {
     cursor: pointer;
 }
 
-.filter-row button:hover {
+.sorting button:hover {
     background-color: #4e229e;
     color: white;
 }
 
-.filter-row button.selected {
+.sorting button.selected {
 	background-color: #4e229e;
     color: white;
 }

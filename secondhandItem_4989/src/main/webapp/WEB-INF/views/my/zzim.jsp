@@ -35,25 +35,25 @@
 		<main>
 			<h2>찜 목록</h2>
 			<div class="profile-a">				
-				<c:if test="${empty param.sort}">				
-					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc">가격 순 |</a>
-					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+				<c:if test="${empty param.sort}">		
+					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc'">가격 순</button>
+					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceDesc'}">
-					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc">가격 순 |</a>
-					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc'">가격 순</button>
+					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceAsc'}">
-					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc">가격 순 |</a>
-					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
+					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateDesc'}">
-					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc">가격 순 |</a>
-					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
+					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateAsc'}">
-					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc">가격 순 |</a>
-					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc">날짜 순&nbsp;&nbsp;&nbsp;</a><br>
+					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
+					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'">날짜 순</button>
 				</c:if>
 				<br>
 			</div>
@@ -62,12 +62,14 @@
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
 						<img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" class="profile-item-image">
-						<img src="${pageContext.request.contextPath}/resources/img/btn_zzim.png" class="profile-item-image-zzim">
+						<div class="zzim-button position-absolute" data-product_id="${product.product_id }" data-member_id="${sessionScope.member_id }" style="bottom: 10%; right: 1rem">♥</div>
 					</div>
 					<div class="profile-item-image-div">
 						<div class="profile-item-name" title="${productDTO.product_name}">
 							<h5>${productDTO.product_name}</h5>
-							 <h5><fmt:formatNumber value="${productDTO.product_price}" type="number" pattern="#,###"/>원</h5>
+						</div>
+						<div class="profile-item-name1" title="${productDTO.product_price}">
+							<h5><fmt:formatNumber value="${productDTO.product_price}" type="number" pattern="#,###"/>원</h5>
 						</div>
 						<div class="profile-item-review" data-date="${productDTO.created_datetime}">
 	<!-- 						평점 : 4.7&emsp;&emsp; -->
@@ -77,11 +79,14 @@
 						<div class="profile-item-review1">
 							<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=${pageDTO.sort}&nozzim=${productDTO.product_id}">찜 취소</a>
 						</div>
+						<div class="profile-item-detail">
+							<a href="${pageContext.request.contextPath}/product/detail?product_id=${productDTO.product_id}">상품 상세 보기</a>
+						</div>
 					</div>
 				</div>
 			</c:forEach>
 			</div>
-			<div class="pagination">
+			<div class="pagination1">
 				<a href="${pageContext.request.contextPath}/my/zzim?pageNum=1&sort=${pageDTO.sort}" class="firstpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></a>
 				<c:if test="${pageDTO.currentPage > 1}">
 					<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage - 1}&sort=${pageDTO.sort}" class="prevpage  pbtn"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></a>
@@ -144,15 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-	const priceElement = document.querySelectAll("#price");
-	const priceText = priceElement.textContent;
-	
-	// 숫자만 추출
-	const price = parseInt(priceText.replace(/\D/g, ''));
-	
-	// 천 단위로 콤마 추가하고 다시 텍스트로 설정
-	priceElement.textContent = price.toLocaleString() + "원";
 
 </script>
 </body>
