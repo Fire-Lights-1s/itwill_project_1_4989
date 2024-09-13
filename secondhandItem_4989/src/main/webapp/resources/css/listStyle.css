@@ -441,7 +441,7 @@ aside {
 /* 상품리스트 고유 정의 */
 
 
-.sorting {
+#sorting {
 	margin-top: 30px;
     display: flex;
     gap: 10px;
@@ -450,7 +450,7 @@ aside {
     align-items:right;
 }
 
-.sorting button {
+#sorting button {
     background-color: white;
     color: #4e229e;
     border: 1px solid #4e229e;
@@ -460,12 +460,12 @@ aside {
     cursor: pointer;
 }
 
-.sorting button:hover {
+#sorting button:hover {
     background-color: #4e229e;
     color: white;
 }
 
-.sorting button.selected {
+#sorting button.selected {
 	background-color: #4e229e;
     color: white;
 }
