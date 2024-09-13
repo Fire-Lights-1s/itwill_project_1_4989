@@ -77,7 +77,7 @@ public class ProductController {
         productDTO.setProduct_name(request.getParameter("product_name"));
         productDTO.setCategory_name(request.getParameter("category_name"));
         productDTO.setProduct_price(Integer.parseInt(request.getParameter("product_price")));
-        productDTO.setTrade_area(request.getParameter("trade_area"));
+       productDTO.setTrade_area(request.getParameter("trade_area"));
         productDTO.setTrade_method(request.getParameter("trade_method"));
         productDTO.setPay_method(request.getParameter("pay_method"));
         productDTO.setProduct_desc(request.getParameter("product_desc"));
@@ -92,9 +92,11 @@ public class ProductController {
         System.out.println("ProductController" + productDTO);
         productService.registerProduct(productDTO);
 
-        return "redirect:/product/register/all";
+        return "redirect:/product/all";
     }
- 
+	/*
+	 * @GetMapping("/all") public String all() { return "/product/all"; }
+	 */
 
     @GetMapping("/detail")
     public String detail(HttpServletRequest request, Model model, HttpSession session) throws NumberFormatException {

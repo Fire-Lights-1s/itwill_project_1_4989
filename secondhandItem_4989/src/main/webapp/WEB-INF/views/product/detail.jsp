@@ -58,8 +58,9 @@
               </div>
               <br>
               <hr>
-              
      <br>
+<!-- 거래 지역 가져오기  -->
+  <button class="button" type="button">${productDTO.trade_area}</button>
 
 <!-- 판매자 정보 및 결제 방식 -->
 <div class="product-info">
@@ -67,7 +68,7 @@
     <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}" class="button">
         ${productDTO.seller_id}
     </a><br> <br>
-    <!-- 거래 지역 표시     			 -->
+
      <strong>거래 방식 </strong> 
     <button class="button" type="button">${productDTO.trade_method}</button><br>
     <br>
@@ -94,8 +95,6 @@
       </main>
     </div>
   </section>
-
-  <jsp:include page="../inc/footer.jsp"></jsp:include>
 
   <!-- 자바스크립트 함수 추가 -->
   <script type="text/javascript">

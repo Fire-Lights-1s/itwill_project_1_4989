@@ -149,12 +149,15 @@
 							<div class="form-group inline-group">
 								<label for="post1">거래 지역</label>
 								<div style="display: flex; gap: 10px;">
-		<!-- 주소 검색 버튼을 왼쪽으로 이동 -->
-		<input type="button" value="주소 검색" onclick="daum_address();" class="login-bttn"> 
-<!-- 		<input type="text" id="trade_area" name="trade_area" placeholder="시군구 코드"> -->
-		<input type="text" id="sido" name="sido" placeholder="도/시 이름">
-		<input type="text" id="sigungu" name="sigungu" placeholder="시/군/구 이름">
-	</div>
+									<!-- 주소 검색 버튼을 왼쪽으로 이동 -->
+									<input type="button" value="주소 검색" onclick="daum_address();"
+										class="login-bttn">
+									<!-- 		<input type="text" id="trade_area" name="trade_area" placeholder="시군구 코드"> -->
+									<input type="text" id="sido" name="sido" placeholder="도/시 이름">
+									<input type="text" id="sigungu" name="sigungu" placeholder="시/군/구 이름">
+									<!-- 시와 구 합친 거래지역 값 저장 -->
+									<input type="hidden" id="trade_area" name="trade_area">
+								</div>
 							</div>
 
 							<br>
@@ -203,6 +206,7 @@
 				</div>
 
 				<script>
+					//다음 주소 api
 					function daum_address() {
 
 						let themeObj = {
@@ -210,21 +214,28 @@
 							queryTextColor : "#FFFFFF"
 						};
 
-						new daum.Postcode({
-							oncomplete : function(data) {
-								console.log(data);
+						new daum.Postcode(
+								{
+									oncomplete : function(data) {
+										console.log(data);
 
-								// 폼 필드를 정확히 참조
-// 			document.getElementById('trade_area').value = data.sigunguCode;
-			document.getElementById('sido').value = data.sido;
-			document.getElementById('sigungu').value = data.sigungu;
-			document.getElementById('addr2').focus();  // addr2 필드가 있을 경우
-							},
+										// 시/도 및 구/군 값을 입력 필드에 설정
+										document.getElementById('sido').value = data.sido;
+										document.getElementById('sigungu').value = data.sigungu;
+										/* document.getElementById('addr2')
+												.focus(); // addr2 필드가 있을 경우 */
+										//trade_area에 시/도 + 구/군 값을 합쳐서 설정		
+										document.getElementById('trade_area').value = data.sido + " " + data.sigungu;
+										// 창을 자동으로 닫음
+							            document.getElementById("close").click();
+												
+									},
 
-							theme : themeObj
-						}).open();
+									theme : themeObj
+								}).open();
 
 					}
+				
 				</script>
 
 
