@@ -30,9 +30,9 @@ public class ProductDTO {
     //등록 경과시간
     private String elapsedTime;
     //조회수
-    private int view_count;
+    private int view_count = 0;
     //찜수
-    private int like_count;
+    private int like_count = 0;
     //거래방법
     private String trade_method;
     //결제수단

@@ -151,7 +151,7 @@
 								<div style="display: flex; gap: 10px;">
 		<!-- 주소 검색 버튼을 왼쪽으로 이동 -->
 		<input type="button" value="주소 검색" onclick="daum_address();" class="login-bttn"> 
-		<input type="text" id="trade_area" name="trade_area" placeholder="시군구 코드">
+<!-- 		<input type="text" id="trade_area" name="trade_area" placeholder="시군구 코드"> -->
 		<input type="text" id="sido" name="sido" placeholder="도/시 이름">
 		<input type="text" id="sigungu" name="sigungu" placeholder="시/군/구 이름">
 	</div>
@@ -215,10 +215,9 @@
 								console.log(data);
 
 								// 폼 필드를 정확히 참조
-			document.getElementById('trade_area').value = data.sigunguCode;
+// 			document.getElementById('trade_area').value = data.sigunguCode;
 			document.getElementById('sido').value = data.sido;
 			document.getElementById('sigungu').value = data.sigungu;
-
 			document.getElementById('addr2').focus();  // addr2 필드가 있을 경우
 							},
 
