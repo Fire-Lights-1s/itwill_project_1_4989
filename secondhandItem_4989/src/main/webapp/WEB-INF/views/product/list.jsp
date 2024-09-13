@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/listStyle.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script>
+	<script src="${pageContext.request.contextPath }/resources/js/listScript.js" defer></script>
 
 </head>
 	<style>	
@@ -93,12 +94,12 @@
 
     <div class="container">
         <!-- Sorting Filters -->
-        <div class="sorting">
-          <button value="latest" class="sort_btn selected">최신순</button>
-          <button value="price_high_to" class="sort_btn">높은가격순</button>
-          <button value="price_low_to" class="sort_btn">낮은가격순</button>
+        <div id="sorting">
+          <button class="sort_btn selected" data-value="latest">최신순</button>
+          <button class="sort_btn" data-value="price_high_to">높은가격순</button>
+          <button class="sort_btn" data-value="price_low_to">낮은가격순</button>
+          <input type="hidden" id="sorted" value="latest">
 		</div>
-		<input type="hidden" id="order" value="all">
 
 <!-- 상품 목록 시작: 부트스트랩 적용 -->
         <div id="product-list" style="width:100%; margin:0 auto;" class="py-5 bg-light">
@@ -120,7 +121,7 @@
                         <img class="card-img-top img-height-fix" src="${pageContext.request.contextPath }/resources/upload/${product.product_img1 }" alt="..." />                        
                         </c:if>
                         <!-- 페이 뱃지 -->
-                    <c:if test="${product.pay_method eq '페이' }">
+                    <c:if test="${product.pay_method eq '페이' || product.pay_method eq '현금/페이'}">
                         <div class="badge text-white position-absolute" style="background-color: #4e229e; top: 0.5rem; right: 0.5rem">PAY</div>
                     </c:if>
                     	<!-- 찜하기 버튼 -->
@@ -143,7 +144,7 @@
                                 <h5><fmt:formatNumber value="${product.product_price }" type="number"/>원</h5>
                                 <!-- 거래방법 (직거래 시 지역명) -->
                                 <small style="margin-top:5px;">${product.trade_method }
-                                <c:if test="${product.trade_method eq '직거래'}">(   )</c:if></small>
+                                <c:if test="${product.trade_method eq '직거래'}">(${product.trade_area })</c:if></small>
                                 <br>
                                 <!-- 경과시간 -->
                                 <small style="text-align:right;">${elapsedTime }</small>
@@ -162,7 +163,9 @@
         </c:if>
 	</div>
 	</div>
-	</div>
+		<div style="text-align: center;">
+           <button id="load_more" class="btn btn-outline-dark">더 보기</button>
+    	</div>
 	</div>
 
 	  </main>
@@ -173,148 +176,86 @@
 <!-- 본문영역 끝 -->
 
 
-<script>
-
-// 카테고리 선택
-window.addEventListener('load', function() {
-	
-	document.querySelectorAll('#category-list li.selector').forEach(function(item) {
-	       item.addEventListener('click', function() {
-	           // 모든 항목에서 'selected' 클래스 제거
-	           document.querySelectorAll('#category-list li.selector').forEach(function(li) {
-	               li.classList.remove('selected');
-	           });
-	           
-	           // 클릭한 항목에 'selected' 클래스 추가
-	           this.classList.add('selected');
-	           
-	           // hidden input 값 설정
-	           document.getElementById('category').value = this.getAttribute('data-value');
-	           
-	           // 필터 적용 (비동기 요청)
-	           applyFilters();
-	       });
-	   });
-
- // 가격대 선택
- document.querySelectorAll('#price-list li.selector').forEach(function(item) {
-     item.addEventListener('click', function() {
-         // 모든 항목에서 'selected' 클래스 제거
-         document.querySelectorAll('#price-list li.selector').forEach(function(li) {
-             li.classList.remove('selected');
-         });
-         
-         // 클릭한 항목에 'selected' 클래스 추가
-         this.classList.add('selected');
-         
-         // hidden input 값 설정
-         document.getElementById('price').value = this.getAttribute('data-value');
-         
-         // 필터 적용 (비동기 요청)
-         applyFilters();
-     });
- });
-
-    // 체크박스 필터링
-    document.querySelectorAll('#selector-content input[type="checkbox"]').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            applyFilters();
-        });
-    });
-
-    // 맞춤 가격 필터 적용 버튼
-    document.getElementById('price_selector').addEventListener('click', function() {
-    	// 위의 가격대 선택 해제
-    	document.querySelectorAll('#price-list li.selector').forEach(function(li) {
-            li.classList.remove('selected');
-        });
-        applyFilters();
-    });
-    
-    
-    // 필터 적용 함수
-    function applyFilters() {
-        let selectedFilters = {}; // 필터 데이터를 담을 객체
-
-        let tradeMethodSelected = false;
-        let paymentMethodSelected = false;
-		let tradeStatusSelected = false;
-        
-        // 체크박스 선택 항목 수집
-        document.querySelectorAll('#selector-content input[type="checkbox"]:checked').forEach(function(cb) {
-            selectedFilters[cb.name] = selectedFilters[cb.name] || [];
-            selectedFilters[cb.name].push(cb.value);
-            
-            // 거래상태 필터 그룹 확인
-            if (cb.name === "trade") {
-                tradeStatusSelected = true;
-            }
-            
-            // 거래방법 필터 그룹 확인
-            if (cb.name === "method") {
-                tradeMethodSelected = true;
-            }
-            
-            // 결제수단 필터 그룹 확인
-            if (cb.name === "pay") {
-                paymentMethodSelected = true;
-            }
-        });
-
-        if (!tradeMethodSelected || !paymentMethodSelected || !tradeStatusSelected) {
-        	document.getElementById('product-list').innerHTML = '<p style="text-align:center;">결과가 없습니다.</p>'; // 각 그룹에서 아무것도 선택되지 않으면 결과 비우기
-            return; // 함수 종료
-        }
-        
-        // 카테고리 선택 수집
-        selectedFilters['category'] = document.getElementById('category').value;
-
-        // 가격대 선택 수집
-        selectedFilters['price'] = document.getElementById('price').value;
-
-        // 맞춤 가격대 수집
-        
-        let minPrice = document.getElementById('price_min').value;
-		let maxPrice = document.getElementById('price_max').value;
-
-		// 빈 문자열일 경우 0으로 처리
-		selectedFilters['minPrice'] = (minPrice !== "") ? minPrice : null;
-		selectedFilters['maxPrice'] = (maxPrice !== "") ? maxPrice : null;
-        
-		// 정렬 정보 수집
-		
-		
-		
-		
-        console.log(selectedFilters); // 최종 필터 데이터 확인 (비동기 요청 전에)
-        
-        const contextPath = "/secondhand4989";
-        
-        fetch(contextPath + '/product/filter', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(selectedFilters)
-        })
-        .then(response => response.text())
-        .then(html => {
-            updateProductList(html);
-        });
-    }
-        
-    // 상품 목록 업데이트 함수 (서버에서 받은 HTML을 DOM에 추가하는 방식)
-    function updateProductList(productsHtml) {
-    document.getElementById('product-list').innerHTML = productsHtml || '<p>결과가 없습니다.</p>';
-	}
-});
-
-    
-
-</script>
-
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
+
+<script>
+
+//더보기 기능
+const contextPath = '${pageContext.request.contextPath}';
+
+let currentPage = 1;
+
+$('#load_more').click(function() {
+	
+	currentPage++;
+	
+	$.ajax({
+		url: contextPath + '/product/morelist',
+		type: 'GET',
+		data: { page: currentPage, listName: 'all' },
+		success: function(response) {
+			if (response.products.length > 0) {
+				for (let i = 0; i < response.products.length; i++) {
+	                let product = response.products[i];
+	                let elapsedTime = response.elapsedTimeList[i];
+             	
+	                //el과의 충돌 때문에 자바스크립트 변수 앞에 역슬래시 붙여야 함
+             	let productHtml = `
+             		 <div class="col-12 col-md-6 col-lg-3 mb-5">
+                      <div class="card h-100">
+                         <!-- Product image -->
+                         \${product.product_img1 ? 
+                             `<img class="card-img-top img-height-fix" src="${pageContext.request.contextPath }/resources/upload/\${product.product_img1}" alt="Product Image" />` :
+                             `<img class="card-img-top img-height-fix" src="https://i.namu.wiki/i/tgJKui-B3sVdzHzJ_P2oLzBdPRihL7X4Jj5W9e7ReG6k9qcBRF-NuCmcM-j37ikoyBu7c_hq3P7juN3AnYlp0jiS3OD8wmaFC3SzSRHXOmTpxNdUrXcTs3ARbONhDcYAMbbMw7niOSM3khaPh7_DGQ.webp" alt="Default Image" />`}
+                         
+                         <!-- PAY Badge -->
+                         \${product.pay_method === '페이' || product.pay_method === '현금/페이' ? 
+                             `<div class="badge text-white position-absolute" style="background-color: #4e229e; top: 0.5rem; right: 0.5rem">PAY</div>` : ''}
+
+                         <!-- 찜하기 버튼 -->
+                         <div class="zzim-button position-absolute" data-product_id="\${product.product_id}" data-member_id="${sessionScope.member_id }" style="bottom: 50%; right: 1rem">♥</div>
+                         
+                         <!-- Product details -->
+                         <div class="card-body pt-3">
+                             <div class="text-center">
+                                 <!-- 상품명 -->
+                                 <h5 class="fw-bolder">
+                                     \${product.product_name.length > 25 ? product.product_name.substring(0, 25) + '...' : product.product_name}
+                                 </h5>
+                                 <!-- 가격 -->
+                                 <h5>\${new Intl.NumberFormat().format(product.product_price)}원</h5>
+                                 <!-- 거래방법 (직거래 시 지역명) -->
+                                 <small>\${product.trade_method}\${product.trade_method === '직거래' ? ' (   )' : ''}</small>
+                                 <br>
+                                 <!-- 경과시간 -->
+                                 <small style="text-align:right;">\${elapsedTime}</small>
+                             </div>
+                         </div>
+                         
+                         <!-- Product actions -->
+                         <div class="card-footer pt-0 border-top-0 bg-transparent">
+                             <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="${pageContext.request.contextPath }/product/detail?product_id=\${product.product_id}">상품 상세보기</a></div>
+                         </div>
+                     </div>
+                 </div>`;
+                 
+                 $('#product-container').append(productHtml);
+				}
+
+             if (response.isLastPage) {
+                 $('#load_more').hide();
+             }
+         } else {
+             $('#load_more').hide();            
+         }
+     }
+ });
+	
+	// 추가로드 될 때 찜 저장내역, 찜 기능 붙여야 함. 함수화 예정.
+});
+
+</script>
 
 
 </body>

@@ -58,12 +58,13 @@ public class ProductListController {
 	@PostMapping("/filter")
 	public String filterProducts(@RequestBody Map<String, Object> filters, Model model) {
 	
-		// 카테고리, 거래수단, 결제수단, 가격(버튼형), 거래상태 필터링 준비
+		// 카테고리, 거래수단, 결제수단, 가격(버튼형), 거래상태, 정렬 필터링 준비
 	    String category = (String) filters.get("category");
 	    List<String> method = (List<String>) filters.get("method");
 	    List<String> pay = (List<String>) filters.get("pay");
 	    String price = (String) filters.get("price");
 	    List<String> status = (List<String>) filters.get("trade");
+	    String sorting = (String) filters.get("sorting");
 	    
 	    // 맞춤 가격대 필터링 준비
 	    Integer minPrice = filters.get("minPrice") != null ? Integer.parseInt((String) filters.get("minPrice")) : null;
@@ -71,7 +72,7 @@ public class ProductListController {
 	    
 	    
 	    // 카테고리, 가격대, 체크박스 필터 조건에 맞는 상품을 가져옴
-	    List<ProductDTO> productList = productListService.getFilteredProducts(category, method, pay, price, status, minPrice, maxPrice);
+	    List<ProductDTO> productList = productListService.getFilteredProducts(category, method, pay, price, status, sorting, minPrice, maxPrice);
 	    System.out.println(productList);
 	    model.addAttribute("productList", productList);
 	    
@@ -95,14 +96,13 @@ public class ProductListController {
 		return "product/list";
 	}
 	
-
-	@GetMapping("/morepoplist")
+	@GetMapping("/morelist")
 	@ResponseBody
-	public Map<String, Object> loadMorePopList(@RequestParam int page){
+	public Map<String, Object> loadMoreList(@RequestParam int page, @RequestParam String listName) {
 		int itemsPerPage = 12;
 		int offset = (page - 1) * itemsPerPage;
 		
-		List<ProductDTO> products = productListService.loadMorePopList(offset, itemsPerPage);
+		List<ProductDTO> products = productListService.loadMoreList(offset, itemsPerPage, listName);
 		boolean isLastPage = products.size() < itemsPerPage;
 		
 		List<String> elapsedTimeList = productListService.getElapsedTimeList(products);
@@ -114,7 +114,5 @@ public class ProductListController {
 		
 		return response;
 	}
-	
-	
 	
 }

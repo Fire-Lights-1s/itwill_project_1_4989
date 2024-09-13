@@ -34,7 +34,7 @@ public class ProductListService {
 
 	
 	public List<ProductDTO> getFilteredProducts(String category, List<String> method, List<String> pay, String price,
-			List<String> status, Integer minPrice, Integer maxPrice) {
+			List<String> status, String sorting, Integer minPrice, Integer maxPrice) {
 		
 		// 사실상 조건 없이 전체를 가져와야 하는 경우, null로 두고 매퍼에서 동적쿼리를 짤 때 활용
 		
@@ -59,6 +59,13 @@ public class ProductListService {
 		String trade_status = null;
 		if (status != null && status.size() == 1) {
 		    trade_status = status.get(0);
+		}
+		
+		String sort = "created_datetime DESC";
+		if (sorting.equals("price_high_to")) {
+			sort = "product_price DESC";
+		} else if (sorting.equals("price_low_to")) {
+			sort = "product_price";
 		}
 		
 		Integer startPrice = 0;
@@ -101,6 +108,7 @@ public class ProductListService {
 		paramMap.put("trade_method", trade_method);
 		paramMap.put("pay_method", pay_method);
 		paramMap.put("trade_status", trade_status);
+		paramMap.put("sort", sort);
 		paramMap.put("startPrice", startPrice);
 		paramMap.put("endPrice", endPrice);
 		
@@ -141,8 +149,8 @@ public class ProductListService {
 		return productListDAO.getItemsBySearch(query);
 	}
 
-	public List<ProductDTO> loadMorePopList(int offset, int itemsPerPage) {
-		return productListDAO.loadMorePopList(offset, itemsPerPage);
+	public List<ProductDTO> loadMoreList(int offset, int itemsPerPage, String listName) {
+		return productListDAO.loadMoreList(offset, itemsPerPage, listName);
 	}
 	
 }
