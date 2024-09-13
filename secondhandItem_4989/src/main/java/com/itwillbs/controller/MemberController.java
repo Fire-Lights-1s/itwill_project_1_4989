@@ -349,4 +349,28 @@ public class MemberController {
 		return result;
 	}
 	
+	@GetMapping("/send")
+	public String send() {
+		return "/member/send";
+	}
+	
+	@PostMapping("/verify")
+	public String verify(MemberDTO memberDTO, HttpSession session, HttpServletRequest request) {
+		System.out.println("MemberController verify");
+		System.out.println(memberDTO);
+		
+		String token = (String) session.getAttribute("token");
+		String token1 = request.getParameter("token1");
+//		memberService.insertMember(memberDTO);
+		System.out.println(session.getAttribute("token1"));
+		System.out.println(session.getAttribute("token"));
+		
+		if(token.equals(token1) ) {
+			return "redirect:/member/welcome";
+		} else {
+			return "redirect:/member/send";
+		}
+		
+	}
+	
 }

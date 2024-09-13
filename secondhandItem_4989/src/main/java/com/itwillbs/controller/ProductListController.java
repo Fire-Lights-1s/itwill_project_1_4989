@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.ProductDTO;
-import com.itwillbs.domain.PurchaseItemsDTO;
 import com.itwillbs.service.ProductListService;
 
 @Controller
@@ -96,19 +95,25 @@ public class ProductListController {
 		return "product/list";
 	}
 	
-	@GetMapping("/morepage")
+
+	@GetMapping("/morepoplist")
 	@ResponseBody
-	public Map<String, Object> getMoreProducts(int page, int size){
-		List<ProductDTO> moreList = productListService.getMoreProducts(page, size);
-		int remaining = productListService.countRemaing(page * size);
+	public Map<String, Object> loadMorePopList(@RequestParam int page){
+		int itemsPerPage = 12;
+		int offset = (page - 1) * itemsPerPage;
+		
+		List<ProductDTO> products = productListService.loadMorePopList(offset, itemsPerPage);
+		boolean isLastPage = products.size() < itemsPerPage;
+		
+		List<String> elapsedTimeList = productListService.getElapsedTimeList(products);
 		
 		Map<String, Object> response = new HashMap<>();
-		response.put("moreList", moreList);
-		response.put("remaing", remaining);
+		response.put("products", products);
+		response.put("isLastPage", isLastPage);
+		response.put("elapsedTimeList", elapsedTimeList);
 		
 		return response;
 	}
-	
 	
 	
 	

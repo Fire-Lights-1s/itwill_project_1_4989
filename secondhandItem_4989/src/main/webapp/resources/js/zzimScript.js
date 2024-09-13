@@ -34,7 +34,6 @@ zzim_buttons.forEach(button => {
 });
 
 
-
 //페이지가 로드될 때에 찜 여부 가져와서 표시
 
 window.onload = function() {
@@ -69,3 +68,4 @@ window.onload = function() {
      });
  }
 };
+

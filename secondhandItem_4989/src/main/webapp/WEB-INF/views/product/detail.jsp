@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -54,30 +52,34 @@
               <div class="product-price" id="product-price"></div>
               <div class="product-meta">
                 <span class="meta-item">${productDTO.elapsedTime}</span>
-    	<span class="meta-item">조회수 ${productDTO.view_count}</span>
+		<!--  조회수, 찜 개수  -->
     	<span class="meta-item">찜 ${productDTO.like_count}</span>
+    	<span class="meta-item">조회수 ${productDTO.view_count}</span>
               </div>
               <br>
               <hr>
               
-     <br>			
+     <br>
+
 <!-- 판매자 정보 및 결제 방식 -->
 <div class="product-info">
-    <strong>거래 방식 </strong> 
-    <button class="button" type="button">${productDTO.trade_method}</button><br>
-    <br>
     <strong>판매자 </strong> 
-    <a href="${pageContext.request.contextPath}/your/seller/${productDTO.seller_id}" class="button">
+    <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}" class="button">
         ${productDTO.seller_id}
     </a><br> <br>
+    <!-- 거래 지역 표시     			 -->
+     <strong>거래 방식 </strong> 
+    <button class="button" type="button">${productDTO.trade_method}</button><br>
+    <br>
     <strong>결제 방식 </strong> 
     <button class="button" type="button">${productDTO.pay_method}</button>
 </div>
 
               <!-- 버튼 그룹 -->
               <div class="button-group">
-                <button class="button" id="startChat">채팅하기</button>
-                <button class="button" id="">찜하기</button>
+              <!-- 찜하기 버튼 -->
+            <div class="zzim-button position-absolute" data-product_id="${product.product_id }" data-member_id="${sessionScope.member_id }" style="bottom: 50%; right: 1rem">♥</div>
+                <button class="button" id="startChat">톡하기</button>
                 <button class="button" id="">신고하기</button>
               </div>
             </div>

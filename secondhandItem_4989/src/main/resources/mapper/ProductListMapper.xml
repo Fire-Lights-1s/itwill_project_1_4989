@@ -5,6 +5,20 @@
   
 <mapper namespace="com.itwillbs.mapper.ProductListMapper">
 
+	<select id="getPopList" resultType="com.itwillbs.domain.ProductDTO">
+		SELECT p.*, COUNT(z.zzim_id) AS zzim_count
+		FROM Product p LEFT JOIN Zzim z ON p.product_id = z.product_id
+		GROUP BY p.product_id ORDER BY zzim_count DESC, p.view_count DESC
+		LIMIT 12
+	</select>
+	
+	<select id="loadMorePopList" parameterType="map" resultType="com.itwillbs.domain.ProductDTO">
+		SELECT p.*, COUNT(z.zzim_id) AS zzim_count
+		FROM Product p LEFT JOIN Zzim z ON p.product_id = z.product_id
+		GROUP BY p.product_id ORDER BY zzim_count DESC, p.view_count DESC
+		LIMIT #{offset}, #{itemsPerPage}
+	</select>
+
 	<select id="getProductListAll" resultType="com.itwillbs.domain.ProductDTO">
 		SELECT * FROM Product ORDER BY created_datetime DESC LIMIT 20
 	</select>
@@ -56,7 +70,7 @@
     	LIMIT 20
 	</select>
 	
-	
+
 	
 </mapper>
 

@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.table-earning thead th{
+	background-color: #4b0082;
+}
+.up-triangle{
+	float:right;
+	vertical-align: middle;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0px 10px 10px 10px;
+	border-color: transparent transparent #ebe8ff transparent;
+}
+.down-triangle{
+	float:right;
+	vertical-align: middle;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 10px 10px 0px 10px;
+	border-color: transparent transparent #ebe8ff transparent;
+}
+.edit_row input{
+	padding: 5px;
+	min-width: 10px;
+	width: 100%;
+}
+#edit_row{
+	background-color: #e2e2e2;
+}
+#edit_button{
+	background-color: #e2e2e2;
+}
+#edit_button span{
+	padding: 10px 20px;
+	border-radius: 10px;
+	background-color: #4b0082;
+	color: white;
+	vertical-align: middle;
+}
+.page-link{
+	min-width: 35px;
+	text-align: center;
+}
+.page-item.active .page-link{
+	background-color: #4b0082;
+	border-color: #4b0082;
+}
+.page-link{
+	color: #4b0082;	
+}
