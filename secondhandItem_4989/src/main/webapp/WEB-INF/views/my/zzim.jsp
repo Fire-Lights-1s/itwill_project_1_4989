@@ -37,7 +37,7 @@
 			<div class="profile-a">				
 				<c:if test="${empty param.sort}">		
 					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc'">날짜 순</button>
+					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc'" style="margin-bottom: 41px;">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceDesc'}">
 					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc'">가격 순</button>
@@ -77,7 +77,7 @@
 							</div>
 						</div>
 						<div class="profile-item-review1">
-							<a href="${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=${pageDTO.sort}&nozzim=${productDTO.product_id}">찜 취소</a>
+							<button onclick="window.location.href='${pageContext.request.contextPath}/product/detail?product_id=${productDTO.product_id}'">찜 취소</button>
 						</div>
 						<div class="profile-item-detail">
 							<a href="${pageContext.request.contextPath}/product/detail?product_id=${productDTO.product_id}">상품 상세 보기</a>
