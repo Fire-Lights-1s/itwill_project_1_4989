@@ -4,9 +4,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
@@ -50,6 +53,21 @@
 	<context:component-scan base-package="com.itwillbs.websocket"/>
 	<context:component-scan base-package="com.itwillbs.config"/>
 	
-	
+	 <!-- 메일 전송 설정 -->
+    <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <beans:property name="host" value="smtp.gmail.com" />
+        <beans:property name="port" value="587" />
+        <beans:property name="username" value="ssrtomoya@gmail.com" />
+        <beans:property name="password" value="fpir jgie sttw hopd" />
+        
+        <beans:property name="javaMailProperties">
+            <beans:props>
+                <beans:prop key="mail.transport.protocol">smtp</beans:prop>
+                <beans:prop key="mail.smtp.auth">true</beans:prop>
+                <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+                <beans:prop key="mail.debug">true</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
 	
 </beans:beans>
