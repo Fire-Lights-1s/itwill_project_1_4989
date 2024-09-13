@@ -3,5 +3,6 @@
 $(document).ready(function(){
     $("tr").click(function(){
         $("#csModal").modal();
+		// 행을 클릭 했을 때 그 행에서 text 정보들을 가져오면 된다고 생각합니다
     });
 });

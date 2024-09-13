@@ -36,7 +36,7 @@
 				<div class="col-lg-auto">
 	                <h2 class="title-1 m-b-25">테이블 제목 </h2>
 	                <div class="input-group mb-3 flex-right-50pct">
-					  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+					  <input type="text" class="form-control" placeholder="검색어 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
 					  <button class="btn btn-outline-secondary" type="button" id="button-addon2">
 					  	<img alt="검색" src="${pageContext.request.contextPath }/resources/img/icon/search.png">
 					  </button>
@@ -121,6 +121,8 @@
 	                        </tbody>
 	                    </table>
 	                </div>
+	                <!-- pageDTO 활용해서 페이지 다루는 부분 추가 필요 -->
+	                <!-- 페이지 전환 버튼 부분 -->
 	                <div class="position-relative ">
 			            <ul class="pagination justify-content-end">
 							<li class="page-item">
@@ -148,6 +150,7 @@
 							</li>
 						</ul>
 					</div>
+					<!-- 페이지 전환 버튼 부분 -->
 	            </div>
             </div>
             <!-- 이 사이에 넣어주세요.-->
@@ -161,7 +164,16 @@
 			        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
-			        ...
+			      <!-- 모달 창 메인 body -->
+			      	모달 창 메인 body input 태그 넣어서 나머지 필요한 부분 구현 하시면 될 것 같습니다
+			      	<div class="form-floating mb-3">
+					  <label for="floatingInput">Email address</label>
+					  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+					</div>
+					<div class="form-floating">
+					  <label for="floatingPassword">Password</label>
+					  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+					</div>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
