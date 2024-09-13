@@ -93,10 +93,10 @@
 
     <div class="container">
         <!-- Sorting Filters -->
-        <div class="filter-row" style="align-items:right;">
-          <button class="selected" onclick="sortNewest()">최신순</button>
-          <button onclick="sortPriceHighToLow()">높은가격순</button>
-          <button onclick="sortPriceLowToHigh()">낮은가격순</button>
+        <div class="sorting">
+          <button value="latest" class="sort_btn selected">최신순</button>
+          <button value="price_high_to" class="sort_btn">높은가격순</button>
+          <button value="price_low_to" class="sort_btn">낮은가격순</button>
 		</div>
 		<input type="hidden" id="order" value="all">
 
@@ -281,6 +281,11 @@ window.addEventListener('load', function() {
 		selectedFilters['minPrice'] = (minPrice !== "") ? minPrice : null;
 		selectedFilters['maxPrice'] = (maxPrice !== "") ? maxPrice : null;
         
+		// 정렬 정보 수집
+		
+		
+		
+		
         console.log(selectedFilters); // 최종 필터 데이터 확인 (비동기 요청 전에)
         
         const contextPath = "/secondhand4989";
