@@ -6,11 +6,11 @@
 <mapper namespace="com.itwillbs.mapper.ProductListMapper">
 
 	<select id="getProductListAll" resultType="com.itwillbs.domain.ProductDTO">
-		SELECT * FROM Product ORDER BY created_datetime DESC
+		SELECT * FROM Product ORDER BY created_datetime DESC LIMIT 20
 	</select>
 
 	<select id="getProductListByC" parameterType="java.lang.String" resultType="com.itwillbs.domain.ProductDTO">
-		SELECT * FROM Product WHERE category_name=#{category_name} ORDER BY created_datetime DESC
+		SELECT * FROM Product WHERE category_name=#{category_name} ORDER BY created_datetime DESC LIMIT 20
 	</select>
 
 	<select id="getFilteredProducts" parameterType="map" resultType="com.itwillbs.domain.ProductDTO">
@@ -45,7 +45,7 @@
 	        AND product_price <= #{endPrice}
 	        ]]>
 	    </if>
-		ORDER BY created_datetime DESC
+		ORDER BY created_datetime DESC LIMIT 20
 	</select>
 	
 	<select id="getItemsBySearch" parameterType="java.lang.String" resultType="com.itwillbs.domain.ProductDTO">
@@ -53,6 +53,7 @@
    		<if test="value != null">
         AND (product_name LIKE #{value} OR product_desc LIKE #{value})
     	</if>
+    	LIMIT 20
 	</select>
 	
 	

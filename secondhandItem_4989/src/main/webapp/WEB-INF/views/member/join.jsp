@@ -46,7 +46,7 @@
             <div class="form-group">
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nickname" name="nickname" placeholder="닉네임" required>
-                <button type="button" name="check-btn2" class="check-btn">중복 확인</button>
+                <button type="button" id="check-btn2" class="check-btn">중복 확인</button>
             	<div id = "checkedNickResult" name = "checkedNickResult"></div>
             </div>
             <div class="form-group">
@@ -264,6 +264,7 @@ document.fr.email.onblur = function() {
 <!--                 <div id = "checkedIdResult" name = "checkedIdResult"></div> -->
 <!--             </div> -->
 
+<!-- 아이디 중복확인 -->
 <script type="text/javascript">
 $(function(){
 	$('#check-btn1').click(function() {
@@ -291,8 +292,38 @@ $(function(){
 
 </script>
 
-  
-  
+<!--  <div class="form-group"> -->
+<!--                 <label for="nickname">닉네임</label> -->
+<!--                 <input type="text" id="nickname" name="nickname" placeholder="닉네임" required> -->
+<!--                 <button type="button" id="check-btn2" class="check-btn">중복 확인</button> -->
+<!--             	<div id = "checkedNickResult" name = "checkedNickResult"></div> -->
+<!--             </div> -->
+            
+<!-- 닉네임 중복확인   -->
+<script type="text/javascript">
+$(function(){
+	$('#check-btn2').click(function() {
+//  		alert("asd")
+		$.ajax({
+			url:'${pageContext.request.contextPath}/member/nickCheck',
+			data:{'nickname':$('#nickname').val()},
+			success:function(result){
+				
+				if (result == 'nickdup'){
+					result = "이미 존재하는 닉네임입니다.";
+					$('#checkedNickResult').html(result).css('color','red');
+				} else {
+					result = "사용가능한 닉네임입니다.";
+					$('#checkedNickResult').html(result).css('color','green');
+				}
+				
+			}
+			
+		});
+		
+	});
+});
+</script>
   
   <jsp:include page="../inc/footer.jsp"></jsp:include>
   

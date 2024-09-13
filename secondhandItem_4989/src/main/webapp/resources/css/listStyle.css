@@ -370,7 +370,7 @@ aside {
     margin-right: 20px;
     margin-top: 20px;
     width: 200px;
-    height: 1150px;
+    height: 1200px;
     border: solid 1px black;
     padding-top: 20px;
     color:black;
@@ -471,10 +471,21 @@ aside {
 
 #selector-container {
 	margin-top: 30px;
+	height: 1200px;
     width: 230px;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
+}
+
+#default {
+	text-align: right;
+	margin: 5px 0;
+}
+
+#default a {
+	color: #4e229e;
+	font-size: 15px;
 }
 
 #selector-title {
@@ -484,7 +495,6 @@ aside {
     background-color: #4e229e;
     padding: 0;
     text-align: center;
-    margin: 0 0 15px 0;
     line-height: 100px;
     border-radius: 5px 5px 0 0;
 }
@@ -496,7 +506,7 @@ hr {
 }
 
 #selector-content {
-	padding: 10px 10px 5px 20px;
+	padding: 10px 10px 5px 15px;
 }
 
 .selector-list {
@@ -594,5 +604,28 @@ ul#category-list li.selected {
 
 #price button:hover {
     background-color: #4e229e;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  width: 62px;
+  font-size: 12px;
+  text-align: center;
+}
+
+#price_selector{
+	padding: 4px 10px;
+    font-size: 11px;
+    background-color: #4e229e;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 

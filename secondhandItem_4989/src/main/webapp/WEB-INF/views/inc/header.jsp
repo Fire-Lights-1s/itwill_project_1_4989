@@ -10,7 +10,7 @@
                 <li>
                     <a href="${pageContext.request.contextPath}/product" class="category_btn desktop-item" style="margin-right:20px;">三</a>
                     <ul class="drop-menu">
-                        <li><a href="${pageContext.request.contextPath}/product/a">전체</a></li>
+                        <li><a href="${pageContext.request.contextPath}/product">전체</a></li>
                         <li><a href="${pageContext.request.contextPath}/product/phone">휴대폰</a></li>
                         <li><a href="${pageContext.request.contextPath}/product/tablet">태블릿</a></li>
                         <li><a href="${pageContext.request.contextPath}/product/watch">스마트워치</a></li>

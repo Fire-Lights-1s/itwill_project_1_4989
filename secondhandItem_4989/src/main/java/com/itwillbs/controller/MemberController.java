@@ -327,4 +327,26 @@ public class MemberController {
 		return result;
 	}
 	
+	@GetMapping("/nickCheck")
+	@ResponseBody
+	public String nickCheck(HttpServletRequest request) {
+		System.out.println("AjaxController nickCheck()");
+		String nickname = request.getParameter("nickname");
+		
+		MemberDTO memberDTO = memberService.nickCheck(nickname);
+		
+		String result = "";
+		if(memberDTO != null) {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 중복";
+			result = "nickdup";
+		} else {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 사용가능";
+			result = "nickok";
+		}
+		//결과값(html, xml, json) 리턴
+		return result;
+	}
+	
 }

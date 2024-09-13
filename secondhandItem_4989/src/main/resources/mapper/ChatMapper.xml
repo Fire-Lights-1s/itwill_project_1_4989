@@ -74,6 +74,6 @@
 		select * 
 		from ChatMessage
 		where chat_room_id = #{chat_room_id}
-		order by send_time desc;
+		order by send_time asc;
 	</select>
 </mapper>

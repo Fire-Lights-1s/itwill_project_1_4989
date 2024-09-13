@@ -86,7 +86,7 @@ public class ChatController {
 	public List<ChatMessageDTO> chatMessageList(ChatRoomDTO chatRoomDTO, HttpServletRequest request, Model model){
 		List<ChatMessageDTO> chatList = null;
 		chatList = chatService.getChatMessageList(chatRoomDTO.getChat_room_id());
-		return null;
+		return chatList;
 	}
 	
 	@MessageMapping("/product/{productId}")
