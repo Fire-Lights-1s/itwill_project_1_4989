@@ -30,7 +30,7 @@ public class ProductDTO {
     //등록 경과시간
     private String elapsedTime;
     //조회수
-    private int view_count = 0;
+    private int view_count;
     //찜수
     private int like_count = 0;
     //거래방법
@@ -272,6 +272,8 @@ public class ProductDTO {
 	public void setBuyer_id(String buyer_id) {
 		this.buyer_id = buyer_id;
 	}
+
+
 	
 
 }

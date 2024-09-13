@@ -118,9 +118,13 @@ public class ProductController {
     	  if (product_id == null || product_id.isEmpty()) {
     	        throw new IllegalArgumentException("Invalid product_id");
     	    }
-    	  System.out.println("Product ID: " + product_id);
     	  
+    	  System.out.println("Product ID: " + product_id);
           String member_id = (String) session.getAttribute("member_id");
+          
+          //조회수 증가 처리
+          productService.increseViewCount(Integer.parseInt(product_id));
+         
           
         //상품 상세 정보
         ProductDTO productDTO = productService.getProductDetail(product_id);

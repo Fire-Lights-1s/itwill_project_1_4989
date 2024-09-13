@@ -5,27 +5,23 @@
 
 <mapper namespace="com.itwillbs.mapper.ProductMapper">
 
-	<!-- 판매 상품 1개 등록 -->
-	<!-- <insert id="insertProduct"> insert into Product (seller_id, category_name, 
-		product_name, product_price, year_purchase, product_desc, product_img1, trade_method, 
-		pay_method, trade_area, view_count, like_count, trade_status) values (#{seller_id}, 
-		#{category_name}, #{product_name}, #{product_price}, #{year_purchase}, #{product_desc}, 
-		#{product_img1}, #{trade_method}, #{pay_method}, #{trade_area}, 0, 0, '거래 
-		가능') </insert> -->
-
 	<!-- 판매 상품 5개 등록 -->
 	<insert id="insertProduct">
 		INSERT INTO Product (
-		seller_id, category_name, product_name, product_price,
-		year_purchase, product_desc, product_img1, product_img2, product_img3,
-		product_img4, product_img5, trade_method, pay_method, trade_area,
+		seller_id, category_name,
+		product_name, product_price,
+		year_purchase, product_desc, product_img1,
+		product_img2, product_img3,
+		product_img4, product_img5, trade_method,
+		pay_method, trade_area,
 		view_count, like_count, trade_status
 		)
 		VALUES (
 		#{seller_id}, #{category_name}, #{product_name}, #{product_price},
 		#{year_purchase}, #{product_desc}, #{product_img1}, #{product_img2},
 		#{product_img3},
-		#{product_img4}, #{product_img5}, #{trade_method}, #{pay_method}, #{trade_area},
+		#{product_img4}, #{product_img5}, #{trade_method},
+		#{pay_method}, #{trade_area},
 		0, 0, '거래 가능'
 		);
 	</insert>
@@ -49,13 +45,16 @@
 		product_img4,
 		product_img5,
 		created_datetime,
-		COALESCE(view_count, 0) as view_count,
+		COALESCE(view_count, 0) as
+		view_count,
 		COALESCE(like_count, 0) as like_count,
-		COALESCE(trade_area, '') as trade_area,
+		COALESCE(trade_area,
+		'') as trade_area,
 		trade_method,
 		pay_method
 		from Product
-		where product_id = #{product_id}
+		where product_id
+		= #{product_id}
 	</select>
 
 	<!-- 찜할 때마다 해당 상품 like_count 필드를 증가 -->
@@ -66,7 +65,14 @@
 		product_id = #{product_id}
 	</update>
 
-	<!-- 특정 상품에 대한 전체 찜 개수 조회 (like_count 필드 사용) -->
+	<!-- 조회수 증가 -->
+	<update id="increaseViewCount">
+		UPDATE Product
+		SET view_count = view_count + 1
+		WHERE product_id = #{product_id}
+	</update>
+
+	<!-- 특정 상품에 대한 전체 찜 개수 조회 -->
 	<select id="getLikeCount" parameterType="int" resultType="int">
 		select
 		like_count from Product where product_id = #{product_id}

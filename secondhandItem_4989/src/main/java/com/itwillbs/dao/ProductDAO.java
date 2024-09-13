@@ -44,11 +44,12 @@ public class ProductDAO {
 		 return sqlSession.selectOne(namespace + ".getLikeCount", product_id);
 	 }
 	 
-	 //조회수 view_count 증가
-	 public int getMaxNum(int product_id) { 
-	 System.out.println("ProductDAO getMaxNum()"); 
-	 sqlSession.selectOne(namespace + ".getMaxNum", product_id);
-	return sqlSession.selectOne(namespace + ".getMaxNum", product_id);
+	//조회수 view_count 증가
+		 public void increaseViewCount(int product_id) { 
+		 System.out.println("ProductDAO increaseViewCount()"); 
+		 sqlSession.selectOne(namespace + ".increaseViewCount", product_id);
+	 
+	 
 
 	}
 	

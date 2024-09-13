@@ -18,9 +18,13 @@ public class ProductService {
 	//상품 등록
 	public void registerProduct(ProductDTO productDTO) {
 		System.out.println("ProductService registerProduct()");
+		//등록 시간
         productDTO.setCreated_datetime(new Timestamp(System.currentTimeMillis())); 
+        //조회수 0 설정
+        productDTO.setView_count(0);
         productDAO.insertProduct(productDTO);  // DB에 상품 정보 저장
     }
+	
 	//상품 상세 조회
 		public ProductDTO getProductDetail(String product_id) {
 			System.out.println(product_id);
@@ -34,6 +38,8 @@ public class ProductService {
 		        // 찜 개수 조회 및 설정
 		        int like_count = getLikeCount(Integer.parseInt(product_id));
 		        product.setLike_count(like_count);
+		        
+		      
 		    } else {
 		        System.out.println("No product found with ID: " + product_id);
 		    }
@@ -71,6 +77,11 @@ public class ProductService {
 			
 			return productDAO.getLikeCount(product_id);
 		}
+		//조회수 증가 
+		public void increseViewCount(int product_id) {
+			productDAO.increaseViewCount(product_id);
+		}
 
+	
 	
 }//ProductService
