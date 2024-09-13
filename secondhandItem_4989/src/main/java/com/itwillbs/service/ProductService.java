@@ -46,7 +46,8 @@ public class ProductService {
 	        
 	        return product;
 			
-		}
+		}//getProductDetail
+		
 		
 		//상품 등록 경과 시간
 		 private String getElapsedTime(Timestamp createdTime) {
