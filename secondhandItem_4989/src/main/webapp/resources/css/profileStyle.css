@@ -6,6 +6,7 @@
 
 a {
 	text-decoration:none;
+	color: black;
 }
 
 aside {
@@ -214,7 +215,7 @@ main {
 }
 
 .profile-item-image-cover1 {
-	background-color:gray;
+	background-color: #78E150;
 	color:white;
 	text-align:center;
 	width:240px;	
@@ -222,7 +223,7 @@ main {
 }
 
 .profile-item-image-cover2 {
-	background-color:black;
+	background-color:gray;
 	color:white;
 	text-align:center;
 	width:240px;	
@@ -230,7 +231,7 @@ main {
 }
 
 .profile-item-image-cover3 {
-	background-color:blue;
+	background-color: #5ACCFF;
 	color:white;
 	text-align:center;
 	width:240px;	
@@ -274,8 +275,6 @@ main {
 	top: 150px;
 	right: 12px;
 	margin:0 65px;
-	border :1px solid #343a40;
-	border-radius: 5px;
 	padding: 1px 10px;
 }
 
@@ -313,6 +312,19 @@ main {
 	font-size: 1.2em;
 	position: absolute;
 	top: 200px;
+	right: -20px;
+	margin:0 65px;
+	border :1px solid #343a40;
+	border-radius: 5px;
+	padding: 0px 10px;
+}
+
+.profile-item-detail1 {
+	width:150px;
+	text-align:center;
+	font-size: 1.2em;
+	position: absolute;
+	top: 224px;
 	right: -20px;
 	margin:0 65px;
 	border :1px solid #343a40;
