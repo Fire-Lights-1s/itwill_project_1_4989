@@ -20,6 +20,9 @@ public class ProductListService {
 	@Inject
 	private ProductListDAO productListDAO;
 
+	public List<ProductDTO> getPopList() {
+		return productListDAO.getPopList();
+	}
 	
 	public List<ProductDTO> getProductListAll() {
 		return productListDAO.getProductListAll();
@@ -136,6 +139,10 @@ public class ProductListService {
 
 	public List<ProductDTO> getItemsBySearch(String query) {
 		return productListDAO.getItemsBySearch(query);
+	}
+
+	public List<ProductDTO> loadMorePopList(int offset, int itemsPerPage) {
+		return productListDAO.loadMorePopList(offset, itemsPerPage);
 	}
 	
 }

@@ -52,10 +52,10 @@ public class AdminController {
 //		return "/admin/pay/list";
 //	}
 //	
-//	@GetMapping("/cs")
-//	public String cs() {
-//		return "/admin/cs/report";
-//	}
+	@GetMapping("/cs")
+	public String cs() {
+		return "/admin/cs";
+	}
 //	
 //	@GetMapping("/notice")
 //	public String main() {
