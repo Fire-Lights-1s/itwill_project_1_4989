@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/social.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 
