@@ -22,8 +22,22 @@
 	border-color: transparent transparent #ebe8ff transparent;
 }
 .edit_row input{
+	padding: 5px;
 	min-width: 10px;
-	max-width: 100%;
+	width: 100%;
+}
+#edit_row{
+	background-color: #e2e2e2;
+}
+#edit_button{
+	background-color: #e2e2e2;
+}
+#edit_button span{
+	padding: 10px 20px;
+	border-radius: 10px;
+	background-color: #4b0082;
+	color: white;
+	vertical-align: middle;
 }
 .page-link{
 	min-width: 35px;

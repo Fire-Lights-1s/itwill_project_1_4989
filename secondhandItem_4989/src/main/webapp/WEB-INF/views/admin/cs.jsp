@@ -39,12 +39,12 @@
 	                    <table class="table table-borderless table-striped table-earning">
 	                        <thead>
 	                            <tr>
-	                                <th>date<div class="up-triangle"></div></th>
-	                                <th>order ID</th>
-	                                <th>name</th>
-	                                <th class="text-right">price</th>
-	                                <th class="text-right">quantity</th>
-	                                <th class="text-right">total</th>
+	                                <th id="date">date<div class="up-triangle"></div></th>
+	                                <th id="order_ID">order ID</th>
+	                                <th id="name">name</th>
+	                                <th id="price" class="text-right">price</th>
+	                                <th id="quantity" class="text-right">quantity</th>
+	                                <th id="total" class="text-right">total</th>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
@@ -56,13 +56,17 @@
 	                                <td class="text-right">1</td>
 	                                <td class="text-right">$999.00</td>
 	                            </tr>
-	                            <tr class="edit_row">
-	                                <td><input type="text" value="2018-09-29 05:57"  ></td>
-	                                <td><input type="text" value="100398" readonly></td>
-	                                <td><input type="text" value="iPhone X 64Gb Grey" ></td>
-	                                <td class="text-right"><input type="text" value="$999.00" ></td>
-	                                <td class="text-right"><input type="text" value="1" ></td>
-	                                <td class="text-right"><input type="text" value="$999.00" ></td>
+	                            <!-- ajax로  -->
+	                            <tr id="edit_row" class="edit_row">
+	                                <td><input type="text" id="date" value="2018-09-29 05:57"  ></td>
+	                                <td><input type="text" id="order_ID" value="100398" readonly></td>
+	                                <td><input type="text" id="name" value="iPhone X 64Gb Grey" ></td>
+	                                <td class="text-right"><input type="text" id="price" value="$999.00" class="text-right"></td>
+	                                <td class="text-right"><input type="text" id="quantity" value="1" class="text-right"></td>
+	                                <td class="text-right"><input type="text" id="total" value="$999.00" class="text-right"></td>
+	                            </tr>
+	                            <tr id="edit_button">
+	                            	<td colspan="6"><span>수정하기 </span></td>
 	                            </tr>
 	                            <tr>
 	                                <td>2018-09-28 01:22</td>
