@@ -77,7 +77,7 @@
 							</div>
 						</div>
 						<div class="profile-item-review1">
-							<button onclick="window.location.href='${pageContext.request.contextPath}/product/detail?product_id=${productDTO.product_id}'">찜 취소</button>
+							<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?nozzim=${productDTO.product_id}'">찜 취소</button>
 						</div>
 						<div class="profile-item-detail">
 							<a href="${pageContext.request.contextPath}/product/detail?product_id=${productDTO.product_id}">상품 상세 보기</a>

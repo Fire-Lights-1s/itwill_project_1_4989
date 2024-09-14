@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/carouselStyle.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/animate.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
-	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script>
+<%-- 	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script> --%>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
@@ -95,7 +95,7 @@
 					</div>
 					<div class="profile-item-review3">
 						<button>구매자 후기</button>&emsp;&emsp;
-						<button>판매 취소</button>
+						<button id="nosell" data-id="${productDTO.product_id}">판매 취소</button>
 					</div>
 					<div class="profile-item-detail1">
 							<a href="${pageContext.request.contextPath}/product/detail?product_id=${productDTO.product_id}">상품 상세 보기</a>
@@ -125,47 +125,60 @@
 		</main>
 		</div>
 	</div>
+	<a re></a>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 <script>
 
-document.addEventListener('DOMContentLoaded', function() {
-    function formatTimeAgo(date) {
-        const now = new Date();
-        const diffInSeconds = Math.floor((now - date) / 1000);
-        const diffInMinutes = Math.floor(diffInSeconds / 60);
-        const diffInHours = Math.floor(diffInMinutes / 60);
-        const diffInDays = Math.floor(diffInHours / 24);
-        const diffInMonths = Math.floor(diffInDays / 30);
-        const diffInYears = Math.floor(diffInDays / 365);
-        if (diffInDays < 30) {
-        	if(diffInHours < 24) {
-        		if(diffInMinutes < 60) {
-        			return diffInMinutes.toString() + "분 전";
-        		}
-        		return diffInHours.toString() + "시간 전";
-        	}
-        	return diffInDays.toString() + "일 전";
-        } else if (diffInDays >= 30 && diffInDays < 365) {
-            return diffInMonths.toString() + "달 전";
-        } else {
-            return diffInYears.toString() + "년 전";
-        }
-    }
-
-    const reviewElements = document.querySelectorAll('.profile-item-review2');
-    reviewElements.forEach(function(element) {
-        const dateStr = element.getAttribute('data-date');
-        const date = new Date(dateStr);
-        if (!isNaN(date.getTime())) {
-            const timeAgo = formatTimeAgo(date);
-            const timeElement = element.querySelector('.zzim-time');
-            if (timeElement) {
-                timeElement.textContent = timeAgo;
-            }
-        }
-    });
-});
+	document.addEventListener('DOMContentLoaded', function() {
+	    function formatTimeAgo(date) {
+	        const now = new Date();
+	        const diffInSeconds = Math.floor((now - date) / 1000);
+	        const diffInMinutes = Math.floor(diffInSeconds / 60);
+	        const diffInHours = Math.floor(diffInMinutes / 60);
+	        const diffInDays = Math.floor(diffInHours / 24);
+	        const diffInMonths = Math.floor(diffInDays / 30);
+	        const diffInYears = Math.floor(diffInDays / 365);
+	        if (diffInDays < 30) {
+	        	if(diffInHours < 24) {
+	        		if(diffInMinutes < 60) {
+	        			return diffInMinutes.toString() + "분 전";
+	        		}
+	        		return diffInHours.toString() + "시간 전";
+	        	}
+	        	return diffInDays.toString() + "일 전";
+	        } else if (diffInDays >= 30 && diffInDays < 365) {
+	            return diffInMonths.toString() + "달 전";
+	        } else {
+	            return diffInYears.toString() + "년 전";
+	        }
+	    }
+	
+	    const reviewElements = document.querySelectorAll('.profile-item-review2');
+	    reviewElements.forEach(function(element) {
+	        const dateStr = element.getAttribute('data-date');
+	        const date = new Date(dateStr);
+	        if (!isNaN(date.getTime())) {
+	            const timeAgo = formatTimeAgo(date);
+	            const timeElement = element.querySelector('.zzim-time');
+	            if (timeElement) {
+	                timeElement.textContent = timeAgo;
+	            }
+	        }
+	    });
+	});
+	
+	let contextPath = '${pageContext.request.contextPath}';
+	let productId = 
+	console.log(${productDTO.product_id});
+	
+	const nosell = document.getElementById.("nosell");
+	nosell.addEventListener("click", function(){
+		let result = confirm("판매 취소하시겠습니까?");
+		if(result){
+			location.replace(contextPath + '/my/sell?nosell=' + productId);
+		}
+	})
 
 </script>
 </body>

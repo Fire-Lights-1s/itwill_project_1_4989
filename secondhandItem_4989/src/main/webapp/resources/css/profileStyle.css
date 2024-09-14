@@ -296,6 +296,14 @@ main {
 	right: 19px;
 }
 
+.profile-item-review4 {
+	text-align:center;
+	white-space:nowrap; /* 줄바꿈 방지 */
+    position: absolute;
+	top: 165px;
+	right: 12px;
+}
+
 .asdf {
 	text-align:center;
 	white-space:nowrap; /* 줄바꿈 방지 */
