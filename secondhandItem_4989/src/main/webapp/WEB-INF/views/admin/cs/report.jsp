@@ -13,7 +13,7 @@
     <!-- Title Page-->
     <title>4989 관리자 메뉴</title>
 
-	<jsp:include page="./inc/cssLink.jsp"></jsp:include>
+	<jsp:include page="../inc/cssLink.jsp"></jsp:include>
 	<!-- 본인의 커스텀 css link 위치는 여기서부터 -->
 	<link href="${pageContext.request.contextPath }/resources/css/admin/admin_table.css"  rel="stylesheet">
 </head>
@@ -21,13 +21,13 @@
 	<div class="page-wrapper">
         
         <!-- MENU SIDEBAR-->
-        <jsp:include page="./inc/menu_sidebar.jsp"></jsp:include>
+        <jsp:include page="../inc/menu_sidebar.jsp"></jsp:include>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
-	        <jsp:include page="./inc/header_in_page_container.jsp"></jsp:include>
+	        <jsp:include page="../inc/header_in_page_container.jsp"></jsp:include>
 			<!-- HEADER DESKTOP-->
 			
 			<div class="main-content">
@@ -206,7 +206,7 @@
     </div>
 	<!-- END page-wrapper-->
 
-    <jsp:include page="./inc/jsLink.jsp"></jsp:include>
+    <jsp:include page="../inc/jsLink.jsp"></jsp:include>
     <!-- 본인의 커스텀 js link 위치는 여기서부터 -->
     <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/admin_cs.js"></script>
     <script>
