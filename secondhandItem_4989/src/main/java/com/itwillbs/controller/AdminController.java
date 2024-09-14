@@ -1,5 +1,6 @@
 package com.itwillbs.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -7,9 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.itwillbs.service.AdminService;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	@Inject
+	private AdminService adminService;
 	
 	//admin이 아닐경우 admin페이지에 접근차단
 	@GetMapping("/")
@@ -52,9 +57,10 @@ public class AdminController {
 //		return "/admin/pay/list";
 //	}
 //	
-	@GetMapping("/cs")
+	@GetMapping("/report")
 	public String cs() {
-		return "/admin/cs";
+		
+		return "/admin/cs/report";
 	}
 //	
 //	@GetMapping("/notice")
