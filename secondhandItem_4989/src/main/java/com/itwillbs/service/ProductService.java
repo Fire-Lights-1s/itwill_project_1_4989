@@ -2,6 +2,8 @@ package com.itwillbs.service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.time.Duration;
 
 import javax.inject.Inject;
@@ -14,7 +16,10 @@ import com.itwillbs.domain.ProductDTO;
 @Service
 public class ProductService {
 	@Inject
-	ProductDAO productDAO = new ProductDAO();
+	ProductDAO productDAO;
+	//ProductDAO productDAO = new ProductDAO();
+	ZzimService zzimService;
+	
 	//상품 등록
 	public void registerProduct(ProductDTO productDTO) {
 		System.out.println("ProductService registerProduct()");
@@ -36,8 +41,10 @@ public class ProductService {
 		        product.setElapsedTime(elapsedTime);
 
 		        // 찜 개수 조회 및 설정
-		        int like_count = getLikeCount(Integer.parseInt(product_id));
-		        product.setLike_count(like_count);
+		        int like_count = productDAO.getLikeCount(Integer.parseInt(product_id));
+	            product.setLike_count(like_count);
+		        //Map<String, String> zzimRequest = new HashMap<>();
+		        //zzimRequest.put("product_id", product_id);
 		        
 		      
 		    } else {
@@ -68,11 +75,25 @@ public class ProductService {
 		        }
 		    }
 		 
-		 //찜 개수 증가
-		 public void increaseLikeCount(int product_id) {
-			 productDAO.increaseLikeCount(product_id);
-	
-		 }
+		// 찜 개수 증가 (중복 체크 포함)
+		 public void increaseLikeCount(int product_id, String member_id) {
+		        // 찜 상태 확인
+		        Map<String, String> zzimRequest = new HashMap<>();
+		        zzimRequest.put("product_id", String.valueOf(product_id));
+		        zzimRequest.put("member_id", member_id);
+		        
+		        // 이미 찜한 상태인지 확인
+		        boolean isZzimSaved = zzimService.checkZzim(zzimRequest);
+
+		        if (!isZzimSaved) {
+		            // 찜하지 않은 상태면 찜 추가
+		            productDAO.increaseLikeCount(product_id);
+		            zzimService.saveZzim(zzimRequest); // Zzim 테이블에 추가
+		        } else {
+		            System.out.println("이미 찜한 상품입니다.");
+		        }
+		    }
+
 		 //찜 개수 조회
 		public int getLikeCount(int product_id) {
 			

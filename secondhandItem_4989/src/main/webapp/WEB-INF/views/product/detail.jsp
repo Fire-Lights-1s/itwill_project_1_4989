@@ -53,7 +53,8 @@
               <div class="product-meta">
                 <span class="meta-item">${productDTO.elapsedTime}</span>
 			<!--  찜, 조회수 개수  -->
-    		<span class="meta-item">찜 ${productDTO.like_count}</span>
+    		<span class="meta-item">찜 <span id="like_count">${productDTO.like_count}</span></span>
+
     		<span class="meta-item">조회수 ${productDTO.view_count}</span>
               </div>
               <br>
@@ -77,7 +78,9 @@
               <!-- 버튼 그룹 -->
               <div class="button-group">
               <!-- 찜하기 버튼 -->
-            <div class="zzim-button position-absolute" data-product_id="${product.product_id }" data-member_id="${sessionScope.member_id }" style="bottom: 50%; right: 1rem">♥</div>
+            <div class="zzim-button position-absolute" 
+            data-product_id="${productDTO.product_id }" 
+            data-member_id="${sessionScope.member_id }" style="bottom: 50%; right: 1rem">♥</div>
                 <button class="button" id="startChat">톡하기</button>
                 <button class="button" id="">신고하기</button>
               </div>

@@ -36,6 +36,8 @@ public class ProductController {
 
     @Inject
     private ProductService productService;
+    
+    @Inject
     private ZzimService zzimService;
     
     @Resource(name = "uploadPath")
@@ -119,17 +121,35 @@ public class ProductController {
     	        throw new IllegalArgumentException("Invalid product_id");
     	    }
     	  
-    	  System.out.println("Product ID: " + product_id);
-          String member_id = (String) session.getAttribute("member_id");
-          
-          //조회수 증가 처리
-          productService.increseViewCount(Integer.parseInt(product_id));
-         
-          
-        //상품 상세 정보
-        ProductDTO productDTO = productService.getProductDetail(product_id);
-       //모델에 필요한 정보 추가
-        model.addAttribute("productDTO", productDTO);
+
+    	// 현재 로그인한 사용자 확인
+    	    String member_id = (String) session.getAttribute("member_id");
+    	    if (member_id == null || member_id.isEmpty()) {
+    	        throw new IllegalArgumentException("User must be logged in to perform this action.");
+    	    }
+    	    System.out.println("Product ID: " + product_id);
+    	    System.out.println("Member ID: " + member_id);
+    	  	// 조회수 증가 처리
+    	    productService.increseViewCount(Integer.parseInt(product_id));
+
+    	    // 상품 상세 정보
+    	    ProductDTO productDTO = productService.getProductDetail(product_id);
+    	    
+    	    // 찜 여부 확인을 위한 요청 데이터 생성
+    	    Map<String, String> zzimRequest = new HashMap<>();
+    	    zzimRequest.put("product_id", product_id);
+    	    zzimRequest.put("member_id", member_id);
+
+    	    System.out.println("ZzimRequest: " + zzimRequest);
+
+    	    // 찜 여부 확인
+    	    boolean isZzimSaved = zzimService.checkZzim(zzimRequest);
+    	    System.out.println("Zzim Saved: " + isZzimSaved);
+    	    
+    	    // 모델에 필요한 정보 추가
+    	    model.addAttribute("productDTO", productDTO);
+    	    model.addAttribute("isZzimSaved", isZzimSaved);
+    	 
 
         return "/product/detail";
     }
