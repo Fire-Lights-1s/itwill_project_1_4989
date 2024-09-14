@@ -173,9 +173,9 @@
 											<label for="trade_method">거래 방식</label> <select
 												id="trade_method" name="trade_method">
 												<option value="" disabled selected>선택</option>
+													<option value="직거래">직거래</option>
 												<option value="택배">택배</option>
-												<option value="직거래">직거래</option>
-												<option value="택배/직거래">택배/직거래</option>
+												<option value="직거래/택배">직거래/택배</option>
 											</select>
 										</div>
 
