@@ -4,8 +4,25 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.itwillbs.mapper.AdminMapper">
-	<select id="getReport" resultType="com.itwillbs.domain.ReportDTO"> 
+	<select id="getReportCount" resultType="java.lang.Integer">
+		select count(*)
+		from Report
+		<if test="search != null">
+			where reporter_id like "%#{search}%" 
+			or reporter_id like "%#{search}%" 
+			or reportee_id like "%#{search}%" 
+			or CONVERT(reported_item_id, CHAR) like "%#{search}%" 
+			or report_type like "%#{search}%" 
+			or report_contents like "%#{search}%" 
+			or reported_at like "%#{search}%" 
+			or report_status like "%#{search}%" 
+		</if>
+		order by reported_at desc
+	</select>
+	<select id="getReportList" resultType="com.itwillbs.domain.ReportDTO"> 
 		select *
 		from Report
+		order by reported_at desc
 	</select>
+	
 </mapper>
