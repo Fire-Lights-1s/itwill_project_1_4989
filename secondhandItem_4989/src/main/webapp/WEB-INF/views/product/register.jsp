@@ -69,16 +69,42 @@
 				document.getElementById('imageInput').click();
 			});
 
-	// 파일 선택 후 미리보기 이미지 업데이트
-	function previewImage(event) {
-		const reader = new FileReader();
-		reader.onload = function() {
-			const output = document.getElementById('imagePreview');
-			output.src = reader.result;
-		}
-		reader.readAsDataURL(event.target.files[0]);
-	}
 </script>
+<!-- // 파일 선택 후 미리보기 이미지 업데이트 -->
+<script>
+    // 파일 선택 후 미리보기 이미지 업데이트
+    function previewImage(event) {
+        const files = event.target.files;
+        const container = document.querySelector('.image-preview-container');
+        
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const imgWrapper = document.createElement('div');
+                imgWrapper.className = 'img-wrapper';
+
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = '이미지 미리보기';
+
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML = 'X';
+                deleteButton.onclick = function() {
+                    container.removeChild(imgWrapper);
+                };
+
+                imgWrapper.appendChild(img);
+                imgWrapper.appendChild(deleteButton);
+                container.appendChild(imgWrapper);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
 
 </head>
 <body>
@@ -90,17 +116,17 @@
 	</header>
 
 	<section>
-		<div id="main-container">
-			<main>
-				<!-- 본문 영역 -->
-				<div class="addBox">
-					<form
-						action="${pageContext.request.contextPath}/product/registerPro"
-						class="appform" method="post" name="fr"
-						enctype="multipart/form-data">
-						<hr style="border: 0; height: 3px; color: black;">
-						<div class="container">
-							<!-- 이미지 업로드 및 미리보기 영역 -->
+<div id="main-container">
+<main>
+<!-- 본문 영역 -->
+<div class="addBox">
+    <form action="${pageContext.request.contextPath}/product/registerPro"
+          class="appform" method="post" name="fr"
+          enctype="multipart/form-data">
+        <hr style="border: 0; height: 3px; color: black;">
+        <div class="container">
+           
+           <!-- 이미지 업로드 및 미리보기 영역 -->
 							<div class="form-group image-upload">
 								<label for="product_img">사진 선택</label> 
 								<input type="file" id="product_img1" name="product_img" class="login-bttn">
@@ -108,7 +134,14 @@
 								<input type="file" id="product_img3" name="product_img" class="login-bttn">
 								<input type="file" id="product_img4" name="product_img" class="login-bttn">
 								<input type="file" id="product_img5" name="product_img" class="login-bttn">
-							</div>
+                
+             <!--    <!-- 여러 파일을 한 번에 선택할 수 있게 multiple 속성 추가 -->
+                <input type="file" id="product_img" name="product_img" multiple onchange="previewImage(event)"> 
+            </div>
+            <!-- 이미지 미리보기 영역 추가 -->
+            <div class="form-group image-preview-container">
+                <!-- 미리보기 이미지들이 여기에 추가됩니다. -->
+            </div>
 
 
 							<!-- 카테고리 등 다른 폼 요소 -->

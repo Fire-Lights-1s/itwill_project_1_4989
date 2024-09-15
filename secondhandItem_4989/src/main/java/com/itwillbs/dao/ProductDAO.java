@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.ProductDTO;
 
 @Repository
@@ -55,5 +56,20 @@ public class ProductDAO {
 		sqlSession.selectOne(namespace + ".increaseLikeCount", product_id);
 
 	}
+	// update Product
+	public void updateProduct(ProductDTO productDTO) {
+	    System.out.println("ProductDAO updateProduct() - ProductDTO: " + productDTO);
+	    int result = sqlSession.update(namespace + ".updateProduct", productDTO);
+	    
+	    try {
+	        int result1 = sqlSession.update(namespace + ".updateProduct", productDTO);
+	        System.out.println("Update result: " + result1);
+	    } catch (Exception e) {
+	        e.printStackTrace(); 
+	    }
+	    
+	    System.out.println("Update result: " + result);
+	}
+
 
 }

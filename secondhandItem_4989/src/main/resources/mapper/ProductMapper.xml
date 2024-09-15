@@ -22,13 +22,11 @@
 		#{product_img3},
 		#{product_img4}, #{product_img5}, #{trade_method},
 		#{pay_method}, #{trade_area},
-		0, 0, '거래 가능'
+		#{view_count}, #{like_count}, '거래 가능'
 		);
 	</insert>
 
-
-	<!-- product_id로 상품 상세정보 가져오기 -->
-	<!-- null일 경우 빈 문자열 반환 COALESCE 추가 -->
+	<!-- product_id로 상품 상세정보 가져오기. null일 경우 빈 문자열 반환 COALESCE -->
 	<select id="getProductDetail"
 		resultType="com.itwillbs.domain.ProductDTO">
 		<!-- SELECT * FROM Product WHERE product_id = #{product_id} -->
@@ -69,7 +67,8 @@
 	<update id="increaseViewCount">
 		UPDATE Product
 		SET view_count = view_count + 1
-		WHERE product_id = #{product_id}
+		WHERE
+		product_id = #{product_id}
 	</update>
 
 	<!-- 특정 상품에 대한 전체 찜 개수 조회 -->
@@ -78,5 +77,24 @@
 		like_count from Product where product_id = #{product_id}
 	</select>
 
+
+	<update id="updateProduct">
+		UPDATE Product
+		SET
+		product_name = #{product_name},
+		category_name = #{category_name},
+		product_price = #{product_price},
+		trade_area = #{trade_area},
+		trade_method = #{trade_method},
+		pay_method = #{pay_method},
+		product_desc = #{product_desc},
+		product_img1 = #{product_img1},
+		product_img2 = #{product_img2},
+		product_img3 = #{product_img3},
+		product_img4 = #{product_img4},
+		product_img5 = #{product_img5},
+		year_purchase = #{year_purchase}
+		WHERE product_id = #{product_id}
+	</update>
 
 </mapper>

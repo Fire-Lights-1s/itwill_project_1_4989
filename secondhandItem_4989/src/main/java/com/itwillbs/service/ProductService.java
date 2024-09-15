@@ -103,6 +103,12 @@ public class ProductService {
 		public void increseViewCount(int product_id) {
 			productDAO.increaseViewCount(product_id);
 		}
+		
+		
+		public void updateProduct(ProductDTO productDTO) {
+		    productDAO.updateProduct(productDTO);
+		}
+
 
 	
 	

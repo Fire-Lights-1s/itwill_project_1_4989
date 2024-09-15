@@ -102,9 +102,6 @@ public class ProductController {
 
         return "redirect:/product/all";
     }
-	/*
-	 * @GetMapping("/all") public String all() { return "/product/all"; }
-	 */
 
     @GetMapping("/detail")
     public String detail(HttpServletRequest request, Model model, HttpSession session) throws NumberFormatException {
@@ -149,22 +146,37 @@ public class ProductController {
     }
     
     //member_id = seller_id 동일 할 때 품 수정 페이지로 이동
- 
     @GetMapping("/update")
-    public String showUpdateForm(HttpServletRequest request, Model model, HttpSession session) {
-        String product_id = request.getParameter("product_id");
-
-        // 상품 상세 정보 불러오기
+    public String updateProduct(@RequestParam("product_id") String product_id, Model model) {
+        // 상품 정보 조회
         ProductDTO productDTO = productService.getProductDetail(product_id);
         
-        // 모델에 상품 정보 추가
+        // 모델에 상품 정보를 추가하여 update.jsp로 전달
         model.addAttribute("productDTO", productDTO);
-
-        return "/product/update";
+        
+        return "/product/update";  // update.jsp로 이동
     }
     
-    
+    @PostMapping("/updatePro")
+    public String updateProductPro(ProductDTO productDTO, HttpSession session) {
+        // 현재 로그인한 사용자와 상품 등록자의 일치 여부 확인
+        String member_id = (String) session.getAttribute("member_id");
+        if (member_id == null || !member_id.equals(productDTO.getSeller_id())) {
+            throw new IllegalArgumentException("수정 권한이 없습니다.");
+        }
+     // productDTO에 데이터가 제대로 바인딩 되었는지 확인 (디버깅용)
+        System.out.println("ProductDTO: " + productDTO.toString());
+        
+     // trade_area 값 확인
+        System.out.println("trade_area: " + productDTO.getTrade_area());
 
+        // 상품 정보 수정
+        productService.updateProduct(productDTO);
+
+        // 수정 후 상세 페이지로 리다이렉트
+        return "redirect:/product/detail?product_id=" + productDTO.getProduct_id();
+    }
 
 
 }// ProductController()
+
