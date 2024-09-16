@@ -154,28 +154,37 @@ public class ProductController {
         // 모델에 상품 정보를 추가하여 update.jsp로 전달
         model.addAttribute("productDTO", productDTO);
         
-        return "/product/update";  // update.jsp로 이동
+        return "product/update";  // update.jsp로 이동
     }
     
     @PostMapping("/updatePro")
     public String updateProductPro(ProductDTO productDTO, HttpSession session) {
-        // 현재 로그인한 사용자와 상품 등록자의 일치 여부 확인
+        // 로그인한 사용자와 상품 등록자의 일치 여부 확인
         String member_id = (String) session.getAttribute("member_id");
+        
+        System.out.println("로그인한 사용자 ID: " + member_id);
+        System.out.println("상품 등록자 ID: " + productDTO.getSeller_id());
+
+        
         if (member_id == null || !member_id.equals(productDTO.getSeller_id())) {
             throw new IllegalArgumentException("수정 권한이 없습니다.");
         }
-     // productDTO에 데이터가 제대로 바인딩 되었는지 확인 (디버깅용)
+        // 유효성 검사: 상품 정보 확인
+        if (productDTO == null || productDTO.getProduct_id() == 0) {
+            throw new IllegalArgumentException("유효하지 않은 상품 정보입니다.");
+        }
+
+        // 디버깅용
         System.out.println("ProductDTO: " + productDTO.toString());
-        
-     // trade_area 값 확인
-        System.out.println("trade_area: " + productDTO.getTrade_area());
 
         // 상품 정보 수정
         productService.updateProduct(productDTO);
 
-        // 수정 후 상세 페이지로 리다이렉트
-        return "redirect:/product/detail?product_id=" + productDTO.getProduct_id();
+        // 수정 후 상품의 상세 페이지로 리다이렉트
+        return "product/update";
+        //return "redirect:/product/detail?product_id=" + productDTO.getProduct_id();
     }
+
 
 
 }// ProductController()

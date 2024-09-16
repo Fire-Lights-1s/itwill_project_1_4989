@@ -78,14 +78,14 @@ body {
 .button {
     padding: 10px 20px;
     border: none;
-    background-color: #007bff;
+    background-color: #4B0082; /*보라색 버튼*/
     color: white;
     cursor: pointer;
     border-radius: 5px;
     margin-right: 10px;
 }
 .button:hover {
-    background-color: #0056b3;
+    background-color: #5a1b9a; /*보라색 버튼 호버 시 더 어두운 색*/
 }
 .product-description {
     margin-top: 20px;

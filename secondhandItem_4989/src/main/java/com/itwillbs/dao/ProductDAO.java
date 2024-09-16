@@ -56,20 +56,19 @@ public class ProductDAO {
 		sqlSession.selectOne(namespace + ".increaseLikeCount", product_id);
 
 	}
-	// update Product
-	public void updateProduct(ProductDTO productDTO) {
-	    System.out.println("ProductDAO updateProduct() - ProductDTO: " + productDTO);
-	    int result = sqlSession.update(namespace + ".updateProduct", productDTO);
-	    
-	    try {
-	        int result1 = sqlSession.update(namespace + ".updateProduct", productDTO);
-	        System.out.println("Update result: " + result1);
-	    } catch (Exception e) {
-	        e.printStackTrace(); 
-	    }
-	    
-	    System.out.println("Update result: " + result);
-	}
+	// 상품 업데이트 메서드
+    public void updateProduct(ProductDTO productDTO) {
+        // 기존 상품 정보 조회
+        ProductDTO existingProduct = sqlSession.selectOne(namespace + ".getProductDetail", productDTO.getProduct_id());
+
+        // 기존의 view_count, like_count, trade_status 값 유지
+        productDTO.setView_count(existingProduct.getView_count());
+        productDTO.setLike_count(existingProduct.getLike_count());
+        productDTO.setTrade_status(existingProduct.getTrade_status());
+
+        // 업데이트 실행
+        sqlSession.update(namespace + ".updateProduct", productDTO);
+    }
 
 
 }
