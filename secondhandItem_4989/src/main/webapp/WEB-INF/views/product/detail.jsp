@@ -6,111 +6,174 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>판매상품 상세</title>
-<script type="text/javascript"
-	src="//code.jquery.com/jquery-3.4.0.min.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/style.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/productDetail.css">
+    <meta charset="UTF-8">
+    <title>판매상품 상세</title>
 
-<!--     index의 찜 등록/취소 -->
-<script
-	src="${pageContext.request.contextPath }/resources/js/zzimScript.js"
-	defer></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- jQuery and Bootstrap -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.4.0.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- 추가된 스타일 -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productDetail.css">
+
+    <script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script>
 
 </head>
 <body>
 
-	<jsp:include page="../inc/header.jsp"></jsp:include>
+    <jsp:include page="../inc/header.jsp"></jsp:include>
 
-	<header>
-		<div id="menu-name">상품 상세</div>
-	</header>
+    <header>
+        <div id="menu-name">상품 상세</div>
+    </header>
 
-	<section>
-		<c:set var="productDTO" value="${productDTO}" />
-		<div id="main-container">
-			<main>
-				<!-- 상품 상세 정보 및 이미지 영역 -->
-				<div class="container">
-					<!-- 이미지 영역 -->
-					<div class="image-box">
-						<div class="card">
-							<img
-								src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}"
-								alt="Product Image">
-						</div>
-					</div>
+    <section>
+        <c:set var="productDTO" value="${productDTO}" />
+        <div id="main-container">
+            <main>
+<!-- 상품 상세 정보 및 이미지 영역 -->
+<div class="container">
+    <!-- 이미지 영역 -->
+    <div class="image-box">
+        <div class="card">
+            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" alt="Product Image">
+        </div>
+    </div>
 
-					<!-- 상품 상세 정보 -->
-					<div class="details-box">
-						<div class="card">
-							<!-- 카테고리 한글 변환 및 글씨 크기 작게 적용 -->
-							<div class="product-title" id="category-name"
-								style="font-size: 14px; color: #888;"></div>
-							<div class="product-title">${productDTO.product_name}</div>
-							<!-- 상품 가격 (1000원 단위로 , 추가) -->
-							<div class="product-price" id="product-price"></div>
-							<div class="product-meta">
-								<span class="meta-item">${productDTO.elapsedTime}</span>
-								<!--  찜, 조회수 개수  -->
-								<span class="meta-item">찜 <span id="like_count">${productDTO.like_count}</span></span>
+    <!-- 상품 상세 정보 -->
+    <div class="details-box">
+        <div class="card">
+            <!-- 카테고리 한글 변환 및 글씨 크기 작게 적용 -->
+            <div class="product-title" id="category-name" style="font-size: 14px; color: #888;"></div>
+            <div class="product-title">${productDTO.product_name}</div>
+            <!-- 상품 가격 (1000원 단위로 , 추가) -->
+            <div class="product-price" id="product-price"></div>
+            <div class="product-meta">
+                <span class="meta-item">${productDTO.elapsedTime}</span>
+                <!-- 찜, 조회수 개수 -->
+                <span class="meta-item">찜 <span id="like_count">${productDTO.like_count}</span></span>
+                <span class="meta-item">조회수 ${productDTO.view_count}</span>
+            </div>
+            <br>
+            <hr>
+            <br>
 
-								<span class="meta-item">조회수 ${productDTO.view_count}</span>
-							</div>
-							<br>
-							<hr>
-							<br>
-							<!-- 거래 지역, 거래 방식, 결제방식  -->
-							<button class="button" type="button">${productDTO.trade_area}</button>
-							<button class="button" type="button">${productDTO.trade_method}</button>
-							<button class="button" type="button">${productDTO.pay_method}</button>
-							<br>
-							<!-- 판매자 정보 및 결제 방식 -->
-							<div class="product-info">
-								<strong>판매자 </strong> <a
-									href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}"
-									class="button"> ${productDTO.seller_id} </a><br> <br>
+            <!-- 거래 지역, 거래 방식, 결제방식 -->
+            <div class="button-container" style="display: flex; gap: 10px;">
+                <button class="button" type="button">${productDTO.trade_area}</button>
+                <button class="button" type="button">${productDTO.trade_method}</button>
+                <button class="button" type="button">${productDTO.pay_method}</button>
+            </div>
+            <br>
 
-								<!-- ⭐판매자와 로그인한 사용자가 같으면 '상품 수정' 버튼 추가 -->
-								<c:if test="${productDTO.seller_id == sessionScope.member_id}">
-									<a
-										href="${pageContext.request.contextPath}/product/update?product_id=${productDTO.product_id}"
-										class="button"> 상품 수정 </a>
-								</c:if>
+            <!-- 판매자 정보 및 결제 방식 -->
+            <div class="product-info">
+                <strong>판매자 </strong>
+                <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}" class="button"> ${productDTO.seller_id} </a>
+                <br><br>
 
-							</div>
+                <!-- 판매자와 로그인한 사용자가 같으면 '상품 수정' 버튼 추가 -->
+                <c:if test="${productDTO.seller_id == sessionScope.member_id}">
+                    <a href="${pageContext.request.contextPath}/product/update?product_id=${productDTO.product_id}" class="button"> 상품 수정 </a>
+                </c:if>
 
-							<!-- 버튼 그룹 -->
-							<div class="button-group">
-								<!-- 찜하기 버튼 -->
-								<div class="zzim-button position-absolute"
-									data-product_id="${productDTO.product_id }"
-									data-member_id="${sessionScope.member_id }"
-									style="bottom: 50%; right: 1rem">♥</div>
-								<button class="button" id="startChat">톡하기</button>
-								<button class="button" id="">신고하기</button>
-							</div>
-						</div>
-					</div>
-				</div>
+            </div>
+
+            <!-- 버튼 그룹 -->
+            <div class="button-group" style="display: flex; align-items: center; gap: 10px;">
+                <!-- 찜하기 버튼 -->
+                <div class="zzim-button" data-product_id="${productDTO.product_id }" data-member_id="${sessionScope.member_id }" style="bottom: 50%;">♥</div>
+                <button class="button" id="startChat">채팅하기</button>
+                <button class="button" id="openReportModal" data-toggle="modal" data-target="#reportModal">신고하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+      
 
 				<!-- 상품 설명 -->
 				<div class="product-description">
 					<h3>상품 정보</h3>
 					<p>${productDTO.product_desc}</p>
 				</div>
+	
 			</main>
+			 <!-- 신고하기 모달 -->
+            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="reportModalLabel">신고하기</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="reportForm">
+<!--                                 Checkbox for selecting report type
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="상품" id="productReport" name="report_type" onclick="onlyOneCheckbox(this.id)">
+                                    <label class="form-check-label" for="productReport">상품 신고</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="회원" id="memberReport" name="report_type" onclick="onlyOneCheckbox(this.id)">
+                                    <label class="form-check-label" for="memberReport">회원 신고</label>
+                                </div> -->
+
+                                <!-- Textarea for report details -->
+                                <div class="accordion-subject"><b>신고 내용</b></div>
+                                <textarea class="form-control" placeholder="상품 신고 사유를 입력해주세요" id="report_contents" name="report_contents" required></textarea>
+
+                                <!-- Submission button -->
+                                <button type="button" class="btn btn-primary mt-3" id="reportBtn" onclick="submitReport()">상품 신고</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+			
 		</div>
 	</section>
+
+<!-- 신고 내용 서버로 보내기 -->
+<script>
+function submitReport() {
+    var reportContents = $("#report_contents").val();
+    var reporterId = "${sessionScope.member_id}";
+    var reporteeId = "${productDTO.seller_id}";
+    var reportedItemId = "${productDTO.product_id}";
+    var reportType = "상품"; // 고정값
+
+    $.ajax({
+        type: "POST",
+        url: "${pageContext.request.contextPath}/product/report",
+        data: {
+            reporter_id: reporterId,
+            reportee_id: reporteeId,
+            reported_item_id: reportedItemId,
+            report_type: reportType,
+            report_contents: reportContents
+        },
+        success: function(response) {
+            if (response.success) {
+                alert("신고가 접수되었습니다.");
+                $('#reportModal').modal('hide');
+            } else {
+                alert("신고 접수 중 오류가 발생했습니다.");
+            }
+        },
+        error: function() {
+            alert("서버 통신 중 오류가 발생했습니다.");
+        }
+    });
+}
+
+</script>
 
 	<!-- 자바스크립트 함수 추가 -->
 	<script type="text/javascript">

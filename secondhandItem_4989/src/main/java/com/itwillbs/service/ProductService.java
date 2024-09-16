@@ -11,13 +11,13 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import com.itwillbs.dao.ProductDAO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.ReportDTO;
 
 
 @Service
 public class ProductService {
 	@Inject
 	ProductDAO productDAO;
-	//ProductDAO productDAO = new ProductDAO();
 	ZzimService zzimService;
 	
 	//상품 등록
@@ -103,6 +103,17 @@ public class ProductService {
 		public void increseViewCount(int product_id) {
 			productDAO.increaseViewCount(product_id);
 		}
+		
+		//판매 상품 수정
+		public void updateProduct(ProductDTO productDTO) {
+		    productDAO.updateProduct(productDTO);
+		}
+
+		public void submitReport(ReportDTO reportDTO) {
+			productDAO.insertReport(reportDTO);
+			
+		}
+
 
 	
 	

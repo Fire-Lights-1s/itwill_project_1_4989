@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.ReportDTO;
 import com.itwillbs.service.ProductService;
 import com.itwillbs.service.ZzimService;
 
@@ -102,9 +104,6 @@ public class ProductController {
 
         return "redirect:/product/all";
     }
-	/*
-	 * @GetMapping("/all") public String all() { return "/product/all"; }
-	 */
 
     @GetMapping("/detail")
     public String detail(HttpServletRequest request, Model model, HttpSession session) throws NumberFormatException {
@@ -149,22 +148,80 @@ public class ProductController {
     }
     
     //member_id = seller_id 동일 할 때 품 수정 페이지로 이동
- 
     @GetMapping("/update")
-    public String showUpdateForm(HttpServletRequest request, Model model, HttpSession session) {
-        String product_id = request.getParameter("product_id");
-
-        // 상품 상세 정보 불러오기
+    public String updateProduct(@RequestParam("product_id") String product_id, Model model) {
+        // 상품 정보 조회
         ProductDTO productDTO = productService.getProductDetail(product_id);
         
-        // 모델에 상품 정보 추가
+        // 모델에 상품 정보를 추가하여 update.jsp로 전달
         model.addAttribute("productDTO", productDTO);
-
-        return "/product/update";
+        
+        return "product/update";  // update.jsp로 이동
     }
     
+    @PostMapping("/updatePro")
+    public String updateProductPro(ProductDTO productDTO, HttpSession session) {
+        // 로그인한 사용자와 상품 등록자의 일치 여부 확인
+        String member_id = (String) session.getAttribute("member_id");
+        
+        System.out.println("로그인한 사용자 ID: " + member_id);
+        System.out.println("상품 등록자 ID: " + productDTO.getSeller_id());
+
+        
+        if (member_id == null || !member_id.equals(productDTO.getSeller_id())) {
+            throw new IllegalArgumentException("수정 권한이 없습니다.");
+        }
+        // 유효성 검사: 상품 정보 확인
+        if (productDTO == null || productDTO.getProduct_id() == 0) {
+            throw new IllegalArgumentException("유효하지 않은 상품 정보입니다.");
+        }
+
+        // 디버깅용
+        System.out.println("ProductDTO: " + productDTO.toString());
+
+        // 상품 정보 수정
+        productService.updateProduct(productDTO);
+
+        // 수정 후 상품의 상세 페이지로 리다이렉트
+        return "product/update";
+        //return "redirect:/product/detail?product_id=" + productDTO.getProduct_id();
+    }
+    
+    // 신고하기
+    @PostMapping("/report")
+    @ResponseBody
+    public Map<String, Object> submitReport(
+            @RequestParam("reporter_id") String reporterId,
+            @RequestParam("reportee_id") String reporteeId,
+            @RequestParam("reported_item_id") int reportedItemId,
+            @RequestParam("report_type") String reportType,
+            @RequestParam("report_contents") String reportContents) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        try {
+            // 신고 정보를 DTO에 담아 Service로 전달
+            ReportDTO reportDTO = new ReportDTO();
+            reportDTO.setReporter_id(reporterId);
+            reportDTO.setReportee_id(reporteeId);
+            reportDTO.setReported_item_id(reportedItemId);
+            reportDTO.setReport_type(reportType);
+            reportDTO.setReport_contents(reportContents);
+            reportDTO.setReport_status("접수"); // 초기 상태는 '접수'
+
+            productService.submitReport(reportDTO);
+            response.put("success", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.put("success", false);
+            response.put("message", "신고 처리 중 오류가 발생했습니다.");
+        }
+
+        return response;
+    }
     
 
 
 
 }// ProductController()
+
