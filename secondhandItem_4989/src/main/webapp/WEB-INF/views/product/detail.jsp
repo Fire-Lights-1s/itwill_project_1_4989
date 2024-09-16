@@ -113,22 +113,22 @@
                         </div>
                         <div class="modal-body">
                             <form id="reportForm">
-                                <!-- Checkbox for selecting report type -->
+<!--                                 Checkbox for selecting report type
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="상품" id="productReport" name="reportType" onclick="onlyOneCheckbox(this.id)">
+                                  <input class="form-check-input" type="checkbox" value="상품" id="productReport" name="report_type" onclick="onlyOneCheckbox(this.id)">
                                     <label class="form-check-label" for="productReport">상품 신고</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="회원" id="memberReport" name="reportType" onclick="onlyOneCheckbox(this.id)">
+                                    <input class="form-check-input" type="checkbox" value="회원" id="memberReport" name="report_type" onclick="onlyOneCheckbox(this.id)">
                                     <label class="form-check-label" for="memberReport">회원 신고</label>
-                                </div>
+                                </div> -->
 
                                 <!-- Textarea for report details -->
-                                <div class="accordion-subject"><b>상세 내용</b></div>
-                                <textarea class="form-control" placeholder="신고내용을 직접 입력해주세요" id="reportContents" name="reportContents" required></textarea>
+                                <div class="accordion-subject"><b>신고 내용</b></div>
+                                <textarea class="form-control" placeholder="상품 신고 사유를 입력해주세요" id="report_contents" name="report_contents" required></textarea>
 
                                 <!-- Submission button -->
-                                <button type="button" class="btn btn-primary mt-3" id="reportBtn" onclick="submitReport()">신고 하기</button>
+                                <button type="button" class="btn btn-primary mt-3" id="reportBtn" onclick="submitReport()">상품 신고</button>
                             </form>
                         </div>
                     </div>
@@ -140,33 +140,35 @@
 		</div>
 	</section>
 
+<!-- 신고 내용 서버로 보내기 -->
 <script>
-// 신고하기
-function onlyOneCheckbox(id) {
-    var checkboxes = document.getElementsByName('reportType');
-    checkboxes.forEach((item) => {
-        if (item.id !== id) item.checked = false;
-    });
-}
-
 function submitReport() {
-    var reportType = document.querySelector('input[name="reportType"]:checked').value;
-    var reportContents = document.getElementById('reportContents').value;
+    var reportContents = $("#report_contents").val();
+    var reporterId = "${sessionScope.member_id}";
+    var reporteeId = "${productDTO.seller_id}";
+    var reportedItemId = "${productDTO.product_id}";
+    var reportType = "상품"; // 고정값
 
-    // Implement AJAX call to send data to server
     $.ajax({
-        url: '/path/to/server/endpoint',  // Change this URL to your server endpoint
-        type: 'POST',
+        type: "POST",
+        url: "${pageContext.request.contextPath}/product/report",
         data: {
-            reportType: reportType,
-            reportContents: reportContents
+            reporter_id: reporterId,
+            reportee_id: reporteeId,
+            reported_item_id: reportedItemId,
+            report_type: reportType,
+            report_contents: reportContents
         },
         success: function(response) {
-            alert('신고가 접수되었습니다.');
-            $('#reportModal').modal('hide');
+            if (response.success) {
+                alert("신고가 접수되었습니다.");
+                $('#reportModal').modal('hide');
+            } else {
+                alert("신고 접수 중 오류가 발생했습니다.");
+            }
         },
-        error: function(error) {
-            alert('신고 접수에 실패하였습니다. 다시 시도해주세요.');
+        error: function() {
+            alert("서버 통신 중 오류가 발생했습니다.");
         }
     });
 }
