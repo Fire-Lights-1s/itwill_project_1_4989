@@ -30,7 +30,7 @@
                                 <i></i>페이 관리</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/admin/cs">
+                            <a href="${pageContext.request.contextPath}/admin/report">
                                 <i></i>신고 관리</a>
                         </li>
                         <li class="has-sub">
