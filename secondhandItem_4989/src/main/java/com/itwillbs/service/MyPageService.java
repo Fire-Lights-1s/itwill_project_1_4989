@@ -19,7 +19,6 @@ public class MyPageService {
 	private MyPageDAO myPageDAO;
 
 	public List<ProductDTO> getProductList(PageDTO pageDTO) {
-		System.out.println("MyPageService getProductList()");
 		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
 		int endRow = startRow + pageDTO.getPageSize() - 1;
 		pageDTO.setStartRow(startRow - 1);
@@ -28,12 +27,10 @@ public class MyPageService {
 	}
 	
 	public int getProductCount(PageDTO pageDTO) {
-		System.out.println("MyPageService getProductCount()");
 		return myPageDAO.getProductCount(pageDTO);
 	}
 
 	public List<ProductDTO> getZzimList(PageDTO pageDTO) {
-		System.out.println("MyPageService getZzimList()");
 		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
 		int endRow = startRow + pageDTO.getPageSize() - 1;
 		pageDTO.setStartRow(startRow - 1);
@@ -42,17 +39,14 @@ public class MyPageService {
 	}
 	
 	public int getZzimCount(PageDTO pageDTO) {
-		System.out.println("MyPageService getZzimCount()");
 		return myPageDAO.getZzimCount(pageDTO);
 	}
 
 	public void deleteZzim(ZzimDTO zzimDTO) {
-		System.out.println("MyPageService deleteZzim()");
 		myPageDAO.deleteZzim(zzimDTO);
 	}
 
 	public List<ProductDTO> getBuyList(PageDTO pageDTO) {
-		System.out.println("MyPageService getBuyList()");
 		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
 		int endRow = startRow + pageDTO.getPageSize() - 1;
 		pageDTO.setStartRow(startRow - 1);
@@ -61,17 +55,22 @@ public class MyPageService {
 	}
 
 	public int getBuyCount(PageDTO pageDTO) {
-		System.out.println("MyPageService getBuyList()");
 		return myPageDAO.getBuyCount(pageDTO);
 	}
 
 	public void deleteMem(String member_id) {
-		System.out.println("MyPageService deleteMem()");
 		myPageDAO.deleteMem(member_id);
 	}
 
 	public int allTX(String id) {
-		System.out.println("MyPageService allTX()");
 		return myPageDAO.allTX(id);
+	}
+
+	public void deleteSell(ProductDTO productDTO) {
+		myPageDAO.deleteSell(productDTO);
+	}
+
+	public void updateReserv(ProductDTO productDTO) {
+		myPageDAO.updateReserv(productDTO);
 	}
 }

@@ -293,7 +293,7 @@ main {
 	white-space:nowrap; /* 줄바꿈 방지 */
     position: absolute;
 	top: 165px;
-	right: 19px;
+	right: 80px;
 }
 
 .profile-item-review4 {
@@ -301,7 +301,7 @@ main {
 	white-space:nowrap; /* 줄바꿈 방지 */
     position: absolute;
 	top: 165px;
-	right: 12px;
+	right: 65px;
 }
 
 .asdf {

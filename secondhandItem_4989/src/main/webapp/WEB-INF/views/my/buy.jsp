@@ -36,28 +36,28 @@
 			<h2>구매 내역</h2>
 			<div class="profile-a">				
 				<c:if test="${empty param.sort}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceDesc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceAsc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateDesc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateAsc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<br>
-				<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?sort=dateDesc&sale=pro'">구매 진행 중</button>
-				<button onclick="window.location.href='${pageContext.request.contextPath}/my/buy?sort=dateDesc&sale=com'">구매 완료</button>
+				<button onclick="location.href='${pageContext.request.contextPath}/my/buy?sort=dateDesc&sale=pro'">구매 진행 중</button>
+				<button onclick="location.href='${pageContext.request.contextPath}/my/buy?sort=dateDesc&sale=com'">구매 완료</button>
 			</div>
 			<div class="profile-item-list">
 			<c:forEach var="productDTO" items="${productList}">
@@ -88,8 +88,12 @@
 						</div>
 					</div>
 					<div class="profile-item-review4">
-						<button>후기 작성</button>&emsp;&emsp;
-						<button>판매자와 채팅</button>
+						<c:if test="${productDTO.trade_status eq '예약 중'}">
+							<button>판매자와 채팅</button>
+						</c:if>
+						<c:if test="${productDTO.trade_status eq '거래 완료'}">
+							&emsp;<button>후기 작성</button>&emsp;
+						</c:if>
 					</div>
 					<div class="profile-item-detail1">
 							<a href="${pageContext.request.contextPath}/product/detail?product_id=${productDTO.product_id}">상품 상세 보기</a>

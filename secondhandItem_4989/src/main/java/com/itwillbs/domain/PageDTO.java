@@ -18,6 +18,7 @@ public class PageDTO {
 	private String sale;
 	private boolean is_reserved;
 
+	
 	public boolean isIs_reserved() {
 		return is_reserved;
 	}

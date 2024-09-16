@@ -36,24 +36,24 @@
 			<h2>찜 목록</h2>
 			<div class="profile-a">				
 				<c:if test="${empty param.sort}">		
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc'" style="margin-bottom: 41px;">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc'" style="margin-bottom: 41px;">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceDesc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceAsc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateDesc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateAsc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'">날짜 순</button>
 				</c:if>
 				<br>
 			</div>

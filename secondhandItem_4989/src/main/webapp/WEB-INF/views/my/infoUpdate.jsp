@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileUpdate.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"></jsp:include>
@@ -38,6 +39,7 @@
 				    <img src="${pageContext.request.contextPath}/resources/img/btn_edit.png" class="profile-circle-edit" id="editIcon">
 				</label>
 				<input id="fileInput" type="file" accept="image/*" style="display:none;" name="file">
+				<input type="hidden" name="oldfile" value="${memberDTO.profile_img}">
 				<a href="#"><img src="${pageContext.request.contextPath}/resources/img/btn_cancel.png" class="profile-circle-cancel"></a>
 			</div>
             <div class="form-group">
@@ -47,7 +49,7 @@
             <div class="form-group">
                 <label for="password">비밀번호</label>
                 <input type="password" id="password" name="pass" value="${memberDTO.pass}" required readonly>                
-                <p>영문자, 숫자, 특수문자 중 2가지 이상 사용하여 8자 이상으로 입력해주세요.</p>
+                <p></p>
             </div>
             <div class="form-group">
                 <label for="confirmPassword">비밀번호 확인</label>
@@ -56,8 +58,10 @@
             </div>
             <div class="form-group">
                 <label for="nickname">닉네임</label>
-                <input type="text" id="nickname" name="nickname" value="${memberDTO.nickname}" required readonly>
-                <button type="button">중복 확인</button>
+                <input type="text" id="nickname" name="nickname" value="${memberDTO.nickname}" required>
+                <button type="button" id="nickBtn">중복 확인</button>
+                <div id="nickCheck" class="form-group">
+                </div>
             </div>
             <div class="form-group">
                 <label for="name">이름</label>
@@ -83,6 +87,7 @@
 	const pass1 = document.getElementById('password');
 	const pass2 = document.getElementById('confirmPassword');
 	const nickname = document.getElementById('nickname');
+	const beforeNick = document.getElementById('nickname').value;
 	const name = document.getElementById('name');
 	const phone = document.getElementById('phoneNumber');
 	const email = document.getElementById('email');
@@ -95,23 +100,29 @@
 	function updateCheck() {
 		if(pass1.value === "" || pass2.value === "") {
 			alert("비밀번호를 입력해주세요.");
-			return false;
+			event.preventDefault();
 		}
 		if(nickname.value === "") {
 			alert("닉네임을 입력해주세요.");
-			return false;
+			event.preventDefault();
+		}
+		if(nickname.value != beforeNick) {
+			if(nickCheck.innerText == "" || nickCheck.innerText != "사용 가능한 닉네임입니다."){
+				alert("닉네임 중복 확인해주세요.");
+				event.preventDefault();
+			}			
 		}
 		if(name.value === "") {
 			alert("이름을 입력해주세요.");
-			return false;
+			event.preventDefault();
 		}
 		if(phone.value === "") {
 			alert("휴대폰 번호를 입력해주세요.");
-			return false;
+			event.preventDefault();
 		}
 		if(email.value === "") {
 			alert("이메일을 입력해주세요.");
-			return false;
+			event.preventDefault();
 		}
 		
 	}
@@ -139,7 +150,27 @@
 	        event.preventDefault();
 	    }
 	});
+</script>
 
+<!-- 닉네임 중복 확인 -->
+<script type="text/javascript">
+$(function(){
+	$('#nickBtn').click(function(){
+		$.ajax({
+			url:'${pageContext.request.contextPath}/member/nickCheck',
+			data:{'nickname':$('#nickname').val()},
+			success:function(result){
+				if(result == 'nickdup'){
+					result = "이미 존재하는 닉네임입니다.";
+					$('#nickCheck').html(result).css('color', 'red');
+				}else{
+					result = "사용 가능한 닉네임입니다.";
+					$('#nickCheck').html(result).css('color', 'green');
+				}					
+			}
+		});
+	});
+});
 </script>
 
 </body>

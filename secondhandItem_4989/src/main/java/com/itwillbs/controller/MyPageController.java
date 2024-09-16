@@ -41,7 +41,6 @@ public class MyPageController {
 	
 	@GetMapping("/profile")
 	public String profile(HttpSession session, Model model) {
-		System.out.println("MyPageController profile()");
 		String id = (String)session.getAttribute("member_id");
 		MemberDTO memberDTO = memberService.getMember(id);
 		if(memberDTO == null) {
@@ -54,7 +53,6 @@ public class MyPageController {
 	
 	@GetMapping("/infoCheck")
 	public String infoCheck(HttpSession session) {
-		System.out.println("MyPageController infoCheck()");
 		String id = (String)session.getAttribute("member_id");
 		MemberDTO memberDTO = memberService.getMember(id);
 		if(memberDTO == null) {
@@ -65,7 +63,6 @@ public class MyPageController {
 	
 	@PostMapping("/infoCheckPro")
 	public String infoCheckPro(MemberDTO memberDTO, HttpSession session) {
-		System.out.println("MyPageController infoCheckPro()");
 		String id = (String)session.getAttribute("member_id");
 		memberDTO.setMember_id(id);
 		MemberDTO memberDTO2 = memberService.userCheck(memberDTO);
@@ -79,7 +76,6 @@ public class MyPageController {
 	
 	@GetMapping("/infoUpdate")
 	public String infoUpdate(HttpSession session, Model model) {
-		System.out.println("MyPageController infoUpdate()");
 		String id = (String)session.getAttribute("member_id");
 		MemberDTO memberDTO = memberService.getMember(id);
 		if(memberDTO == null) {
@@ -91,10 +87,18 @@ public class MyPageController {
 	
 	@PostMapping("/infoUpdatePro")
 	public String infoUpdatePro(HttpServletRequest request, MultipartFile file)throws Exception {
-		System.out.println("MyPageController infoUpdatePro()");
-		UUID uuid = UUID.randomUUID();
-		String filename = uuid.toString() + "_" + file.getOriginalFilename();
-		FileCopyUtils.copy(file.getBytes(), new File(uploadPath, filename));
+		String filename = "";
+		if(file.isEmpty()) {
+			filename = "51d26ab9-a276-4d41-9196-2f12cd1d1e28_defaultUserImage.png";
+		}else {
+			UUID uuid = UUID.randomUUID();
+			filename = uuid.toString() + "_" + file.getOriginalFilename();
+			FileCopyUtils.copy(file.getBytes(), new File(uploadPath, filename));
+			File oldfile = new File(uploadPath, request.getParameter("oldfile"));
+			if(oldfile.exists()) {
+				oldfile.delete();
+			}
+		}
 		String member_id = request.getParameter("member_id");
 		String name = request.getParameter("name");
 		String pass = request.getParameter("pass");
@@ -115,7 +119,6 @@ public class MyPageController {
 	
 	@GetMapping("/sell")
 	public String sell(HttpSession session, Model model, HttpServletRequest request) {
-		System.out.println("MyPageController sell()");
 		String id = (String)session.getAttribute("member_id");
 		MemberDTO memberDTO = memberService.getMember(id);
 		if(memberDTO == null) {
@@ -124,6 +127,8 @@ public class MyPageController {
 		String pageNum = request.getParameter("pageNum");
 		String sort = request.getParameter("sort");
 		String sale = request.getParameter("sale");
+		String nosell = request.getParameter("nosell");
+		String noreserv = request.getParameter("noreserv");
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -136,6 +141,18 @@ public class MyPageController {
 		pageDTO.setSeller_id(id);
 		pageDTO.setSort(sort);
 		pageDTO.setSale(sale);
+		if(nosell != null) {
+			ProductDTO productDTO = new ProductDTO();
+			productDTO.setProduct_id(Integer.parseInt(nosell));
+			productDTO.setSeller_id(id);
+			myPageService.deleteSell(productDTO);
+		}
+		if(noreserv != null) {
+			ProductDTO productDTO = new ProductDTO();
+			productDTO.setProduct_id(Integer.parseInt(noreserv));
+			productDTO.setSeller_id(id);
+			myPageService.updateReserv(productDTO);
+		}
 		List<ProductDTO> productList = myPageService.getProductList(pageDTO);
 		int count = myPageService.getProductCount(pageDTO);
 		int pageBlock = 5;
@@ -157,7 +174,6 @@ public class MyPageController {
 	
 	@GetMapping("/buy")
 	public String buy(HttpSession session, Model model, HttpServletRequest request) {
-		System.out.println("MyPageController buy()");
 		String id = (String)session.getAttribute("member_id");
 		MemberDTO memberDTO = memberService.getMember(id);
 		if(memberDTO == null) {
@@ -199,7 +215,6 @@ public class MyPageController {
 	
 	@GetMapping("/zzim")
 	public String zzim(HttpSession session, Model model, HttpServletRequest request) {
-		System.out.println("MyPageController zzim()");
 		String id = (String)session.getAttribute("member_id");
 		MemberDTO memberDTO = memberService.getMember(id);
 		if(memberDTO == null) {
@@ -246,7 +261,6 @@ public class MyPageController {
 	
 	@PostMapping("/deleteMem")
 	public String deleteMem(HttpSession session) {
-		System.out.println("MyPageController deleteMem()");
 		String member_id = (String)session.getAttribute("member_id");
 		myPageService.deleteMem(member_id);
 		return "redirect:/";

@@ -56,9 +56,9 @@
 					<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<br>
-				<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=pro'">판매 중</button>
-				<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=rsv'">예약 중</button>
-				<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=com'">판매 완료</button>
+				<button onclick="location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=pro'">판매 중</button>
+				<button onclick="location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=rsv'">예약 중</button>
+				<button onclick="location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=com'">판매 완료</button>
 			</div>
 			<div class="profile-item-list">
 			<c:forEach var="productDTO" items="${productList}">
@@ -94,11 +94,18 @@
 						</div>
 					</div>
 					<div class="profile-item-review3">
-						<button>구매자 후기</button>&emsp;&emsp;
-						<button id="nosell" data-id="${productDTO.product_id}">판매 취소</button>
+						<c:if test="${productDTO.trade_status eq '거래 가능'}">
+							<button class="profile-nosell" data-id="${productDTO.product_id}">판매 취소</button>
+						</c:if>
+						<c:if test="${productDTO.trade_status eq '예약 중'}">
+							<button class="profile-noreserv" data-id="${productDTO.product_id}">예약 취소</button>
+						</c:if>
+						<c:if test="${productDTO.trade_status eq '거래 완료'}">
+							<button>구매 후기</button>
+						</c:if>
 					</div>
 					<div class="profile-item-detail1">
-							<a href="${pageContext.request.contextPath}/product/detail?product_id=${productDTO.product_id}">상품 상세 보기</a>
+						<a href="${pageContext.request.contextPath}/product/detail?product_id=${productDTO.product_id}">상품 상세 보기</a>
 					</div>
 					</div>
 				</div>
@@ -167,18 +174,26 @@
 	        }
 	    });
 	});
-	
-	let contextPath = '${pageContext.request.contextPath}';
-	let productId = 
-	console.log(${productDTO.product_id});
-	
-	const nosell = document.getElementById.("nosell");
-	nosell.addEventListener("click", function(){
-		let result = confirm("판매 취소하시겠습니까?");
-		if(result){
-			location.replace(contextPath + '/my/sell?nosell=' + productId);
+		
+	document.querySelectorAll('.profile-nosell').forEach(function(btn){
+		btn.onclick = function(){
+			let id = btn.getAttribute('data-id');
+			if(confirm('판매 취소하시겠습니까?')){
+				location.replace("${pageContext.request.contextPath}/my/sell?nosell=" + id);
+			}
 		}
 	})
+	
+	document.querySelectorAll('.profile-noreserv').forEach(function(btn){
+		btn.onclick = function(){
+			let id = btn.getAttribute('data-id');
+			if(confirm('예약 취소하시겠습니까?')){
+				location.replace("${pageContext.request.contextPath}/my/sell?noreserv=" + id);
+			}
+		}
+	})
+	
+
 
 </script>
 </body>

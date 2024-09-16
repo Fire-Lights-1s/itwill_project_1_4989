@@ -84,7 +84,7 @@
 		Product p join TX t
 		on p.product_id = t.product_id
 		where t.buyer_id = #{seller_id}
-		<if test="sale == ''">
+		<if test="sale == '' or sale == null">
 			and t.is_reserved = true 
 		</if>
 		<if test="sale == 'pro'">
@@ -95,19 +95,19 @@
 			and t.transaction_end_date is not null 
 		</if>
 		<if test="sort == 'priceDesc'">
-			order by t.is_reserved desc, t.transaction_end_date desc, p.product_price desc
+			order by t.transaction_end_date, p.product_price desc
 		</if>
 		<if test="sort == 'priceAsc'">
-			order by t.is_reserved desc, t.transaction_end_date desc, p.product_price
+			order by t.transaction_end_date, p.product_price
 		</if>
 		<if test="sort == 'dateDesc'">
-			order by t.is_reserved desc, t.transaction_end_date desc, t.reservation_date desc
+			order by t.transaction_end_date, t.reservation_date desc
 		</if>
 		<if test="sort == 'dateAsc'">
-			order by t.is_reserved desc, t.transaction_end_date desc, t.reservation_date
+			order by t.transaction_end_date, t.reservation_date
 		</if>
-		<if test="sort == ''">
-			order by t.transaction_end_date desc, t.reservation_date desc
+		<if test="sort == null or sort == ''">
+			order by t.transaction_end_date, t.reservation_date desc
 		</if>
 		limit #{startRow},#{pageSize}
 	</select>
@@ -115,7 +115,7 @@
 	<select id="getBuyCount" resultType="java.lang.Integer">
 		select count(*) from TX
 		where buyer_id = #{seller_id}
-		<if test="sale == ''">
+		<if test="sale == '' or sale == null">
 			and is_reserved = true
 		</if>
 		<if test="sale == 'pro'">
@@ -145,5 +145,18 @@
 			WHERE buyer_id = #{id} 
 			AND transaction_end_date IS NOT NULL);
 	</select>
+	
+	<delete id="deleteSell">
+		delete from Product
+		where product_id = #{product_id}
+	</delete>
+	
+	<update id="updateReserv">
+		update Product p join TX t
+		on p.product_id = t.product_id
+		set t.is_reserved = false, p.trade_status = '거래 가능'
+		where p.product_id = #{product_id}
+		and p.seller_id = #{seller_id}
+	</update>
 </mapper>
 
