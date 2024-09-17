@@ -27,33 +27,50 @@
 	</insert>
 
 	<!-- product_id로 상품 상세정보 가져오기. null일 경우 빈 문자열 반환 COALESCE -->
-	<select id="getProductDetail"
-		resultType="com.itwillbs.domain.ProductDTO">
-		<!-- SELECT * FROM Product WHERE product_id = #{product_id} -->
-		select product_id,
-		category_name,
-		seller_id,
-		product_name,
-		product_price,
-		year_purchase,
-		product_desc,
-		product_img1,
-		product_img2,
-		product_img3,
-		product_img4,
-		product_img5,
-		created_datetime,
-		COALESCE(view_count, 0) as
-		view_count,
-		COALESCE(like_count, 0) as like_count,
-		COALESCE(trade_area,
-		'') as trade_area,
-		trade_method,
-		pay_method
-		from Product
-		where product_id
-		= #{product_id}
-	</select>
+<select id="getProductDetail" resultType="com.itwillbs.domain.ProductDTO">
+    SELECT 
+        product_id,
+        category_name,
+        seller_id,  <!-- 반드시 seller_id가 포함되어야 함 -->
+        product_name,
+        product_price,
+        year_purchase,
+        product_desc,
+        product_img1,
+        product_img2,
+        product_img3,
+        product_img4,
+        product_img5,
+        created_datetime,
+        COALESCE(view_count, 0) as view_count,
+        COALESCE(like_count, 0) as like_count,
+        COALESCE(trade_area, '') as trade_area,
+        trade_method,
+        pay_method
+    FROM Product
+    WHERE product_id = #{product_id}
+</select>
+
+<resultMap id="productDetailMap" type="com.itwillbs.domain.ProductDTO">
+    <result property="product_id" column="product_id"/>
+    <result property="category_name" column="category_name"/>
+    <result property="seller_id" column="seller_id"/> <!-- 명시적으로 매핑 -->
+    <result property="product_name" column="product_name"/>
+    <result property="product_price" column="product_price"/>
+    <result property="year_purchase" column="year_purchase"/>
+    <result property="product_desc" column="product_desc"/>
+    <result property="product_img1" column="product_img1"/>
+    <result property="product_img2" column="product_img2"/>
+    <result property="product_img3" column="product_img3"/>
+    <result property="product_img4" column="product_img4"/>
+    <result property="product_img5" column="product_img5"/>
+    <result property="created_datetime" column="created_datetime"/>
+    <result property="view_count" column="view_count"/>
+    <result property="like_count" column="like_count"/>
+    <result property="trade_area" column="trade_area"/>
+    <result property="trade_method" column="trade_method"/>
+    <result property="pay_method" column="pay_method"/>
+</resultMap>
 
 	<!-- 찜할 때마다 해당 상품 like_count 필드를 증가 -->
 	<update id="increaseLikeCount">
@@ -93,7 +110,7 @@
         product_img3 = #{product_img3},
         product_img4 = #{product_img4},
         product_img5 = #{product_img5},
-        year_purchase = #{year_purchase},
+        year_purchase = #{year_purchase}
             
         WHERE product_id = #{product_id}
 </update>

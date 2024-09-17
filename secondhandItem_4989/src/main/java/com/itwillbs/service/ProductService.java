@@ -31,7 +31,7 @@ public class ProductService {
     }
 	
 	//상품 상세 조회
-		public ProductDTO getProductDetail(String product_id) {
+		public ProductDTO getProductDetail(String product_id) throws Exception {
 			System.out.println(product_id);
 			ProductDTO product = productDAO.getProductDetail(product_id);
 			System.out.println(product);
@@ -108,7 +108,8 @@ public class ProductService {
 		public void updateProduct(ProductDTO productDTO) {
 		    productDAO.updateProduct(productDTO);
 		}
-
+		
+		//상품 신고
 		public void submitReport(ReportDTO reportDTO) {
 			productDAO.insertReport(reportDTO);
 			

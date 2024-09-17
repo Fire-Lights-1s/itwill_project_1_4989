@@ -47,7 +47,7 @@ public class ProductDTO {
 
 	@Override
 	public String toString() {
-		return "ProductDTO [product_id=" + product_id + ", category_name=" + category_name + ", seller_id=" + seller_id
+		return "ProductDTO [product_id=" + product_id + ", category_name=" + category_name + ", seller_id=" + seller_id 
 				+ ", product_name=" + product_name + ", product_price=" + product_price + ", year_purchase="
 				+ year_purchase + ", product_desc=" + product_desc + ", product_img1=" + product_img1
 				+ ", created_datetime=" + created_datetime + ", view_count=" + view_count + ", like_count=" + like_count
@@ -122,15 +122,6 @@ public class ProductDTO {
 		this.category_name = category_name;
 	}
 
-
-	public String getSeller_id() {
-		return seller_id;
-	}
-
-
-	public void setSeller_id(String seller_id) {
-		this.seller_id = seller_id;
-	}
 
 
 	public String getProduct_name() {
@@ -271,6 +262,22 @@ public class ProductDTO {
 
 	public void setBuyer_id(String buyer_id) {
 		this.buyer_id = buyer_id;
+	}
+
+
+
+
+
+	public String getSeller_id() {
+		return seller_id;
+	}
+
+
+
+
+
+	public void setSeller_id(String seller_id) {
+		this.seller_id = seller_id;
 	}
 
 

@@ -26,13 +26,8 @@ public class ProductDAO {
 	}
 
 	// 상품 상세 정보
-	public ProductDTO getProductDetail(String product_id) {
+	public ProductDTO getProductDetail(String product_id) throws Exception{
 		System.out.println("ProductDAO productDetail()");
-		ProductDTO productDTO = sqlSession.selectOne(namespace + ".getProductDetail", product_id);
-		/*
-		 * if (productDTO == null) { System.out.println("No product found with ID: " +
-		 * product_id); } return productDTO;
-		 */
 		return sqlSession.selectOne(namespace + ".getProductDetail", product_id);
 
 	}
