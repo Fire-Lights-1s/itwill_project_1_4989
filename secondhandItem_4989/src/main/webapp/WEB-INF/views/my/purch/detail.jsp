@@ -71,8 +71,8 @@
  		<br>
  		<div style="text-align:center;">
 		<button id="reset" onclick="window.history.back();">목록으로 돌아가기</button>
-		<c:if test="${detail.purchase_status ne '매입 취소' }"> &nbsp;&nbsp;
-		<button id="submit_form">신청 취소하기</button>
+		<c:if test="${detail.purchase_status ne '매입 취소' && detail.purchase_status ne '매입 완료'}"> &nbsp;&nbsp;
+			<button id="submit_form">신청 취소하기</button>
 		</c:if>
 		</div>
 			<br><br><br>
@@ -100,6 +100,7 @@
     const modal = document.getElementById('myModal');
     const confirmButton = document.getElementById('confirmButton');
     const cancelButton = document.getElementById('cancelButton');
+    let purchase_id = '${detail.purchase_id}';
 
     // 버튼을 클릭하면 모달 창 열기
     submit_form.addEventListener('click', function() {
@@ -108,7 +109,7 @@
 
     // '확인' 버튼을 클릭하면 링크로 이동
     confirmButton.addEventListener('click', function() {
-        window.location.href = 'cancel?purchase_id=${detail.purchase_id}'; // 원하는 링크로 이동
+        window.location.href = 'cancel?purchase_id=' + purchase_id; // 원하는 링크로 이동
     });
 
     // '취소' 버튼을 클릭하면 모달 창 닫기

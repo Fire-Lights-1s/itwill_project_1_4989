@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -38,10 +39,12 @@
 				<div class="col-lg-auto">
 	                <h2 class="title-1 m-b-25">매입신청 관리</h2>
 	                <div class="input-group mb-3 flex-right-50pct">
-					  <input type="text" class="form-control" placeholder="검색어 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
-					  <button class="btn btn-outline-secondary" type="button" id="button-addon2">
-					  	<img alt="검색" src="${pageContext.request.contextPath }/resources/img/icon/search.png">
-					  </button>
+	                  <form action="${pageContext.request.contextPath }/admin/purchase" style="display:flex;">
+					    <input type="text" class="form-control" name="search" placeholder="회원아이디, 상품명 등으로 검색" aria-label="Recipient's username" aria-describedby="button-addon2" style="width:300px;">
+					    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+					  	  <img alt="검색" src="${pageContext.request.contextPath }/resources/img/icon/search.png">
+					    </button>
+					  </form>
 					</div>
 	                <div class="table-responsive table--no-card m-b-40">
 	                    <table class="table table-borderless table-striped table-earning">
@@ -62,11 +65,20 @@
 	                            <tr data-purchase-id="${purchaseList.purchase_id }">
 	                                <td class="text-center">${purchaseList.purchase_id}</td>
 	                                <td class="text-center">${purchaseList.member_id}</td>
-	                                <td class="text-center">${purchaseList.pc_item_name}</td>
+	                                <td class="text-center">
+	                                <c:choose>
+									    <c:when test="${fn:length(purchaseList.pc_item_name) > 10}">
+									        ${fn:substring(purchaseList.pc_item_name, 0, 10)}...
+									    </c:when>
+									    <c:otherwise>
+									        ${purchaseList.pc_item_name}
+									    </c:otherwise>
+									</c:choose>
+	                                </td>
 	                                <td class="text-center">${purchaseList.expected_grade}</td>
 	                                <td class="text-center"><fmt:formatNumber value="${purchaseList.expected_price}" type="number"/></td>
 	                                <td class="text-center">${purchaseList.shipping_method}</td>
-	                                <td class="text-center">${purchaseList.request_date}</td>
+	                                <td class="text-center"><fmt:formatDate value="${purchaseList.request_date}" pattern="yyyy-MM-dd HH:mm"/></td>
 	                                <td class="text-center">${purchaseList.purchase_status}</td>
 	                            </tr>
 	                            </c:forEach>
@@ -162,7 +174,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			        <button type="button" class="btn btn-purple ">처리상태 저장</button>
+			        <button type="button" class="btn btn-purple" id="status_save">처리상태 저장</button>
 			      </div>
 			    </div>
 			  </div>

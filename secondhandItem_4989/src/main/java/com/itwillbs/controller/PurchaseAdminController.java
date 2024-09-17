@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,6 +37,8 @@ public class PurchaseAdminController {
 	public String purchaseAdmin(HttpServletRequest request, Model model) {
 		PageDTO pageDTO = new PageDTO();
 		String pageNum = request.getParameter("pageNum");
+		String searchKey = request.getParameter("search");
+		
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -43,8 +47,13 @@ public class PurchaseAdminController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		pageDTO.setPageSize(pageSize);
+		
+		if(searchKey != null && !searchKey.isEmpty()) {
+			pageDTO.setSearch(searchKey);
+		}
+		
 		List<PurchaseRequestDTO> purchaseList = purchaseAdminService.getPurchaseList(pageDTO);
-		int count = purchaseAdminService.getPurchaseCount();
+		int count = purchaseAdminService.getPurchaseCount(pageDTO);
 		
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
@@ -88,10 +97,16 @@ public class PurchaseAdminController {
 		purchaseInfo.put("expected_price", purchaseDTO.getExpected_price());
 		String account_info = purchaseDTO.getBank_name() + " / " + purchaseDTO.getTransfer_account();
 		purchaseInfo.put("account_info", account_info);
-		
-		System.out.println(purchaseDTO);
+		purchaseInfo.put("purchase_status", purchaseDTO.getPurchase_status());
 		
 		return purchaseInfo;
 	}
+	
+	@PostMapping("/savePurchaseInfo")
+    @ResponseBody
+    public String savePurchaseInfo(@RequestBody Map<String, Object> saveData) {
+		purchaseAdminService.savePurchaseInfo(saveData);		
+        return "success";
+    }
 	
 }

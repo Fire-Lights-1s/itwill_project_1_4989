@@ -77,7 +77,7 @@ h1, h3 { text-align:center; }
             <input type="radio" name="shipping_method" value="방문"> 센터 직접 방문
         </div>
     </div>
-  	<div class="form-group">
+  	<div class="form-group" style="height:100px;">
         <div id="label_title"> </div>
         <div id="service-center-box">
             <p><strong>4989 매입서비스센터</strong><br>
@@ -90,13 +90,13 @@ h1, h3 { text-align:center; }
     <div class="form-group">
         <div class="select-group">
         <div id="label_title"><label for="bank">정산계좌등록</label></div>
-            <select id="bank_code" name="transfer_bank" style="max-height:100px; overflow-y:auto;" required>
+            <select id="bank_code" name="transfer_bank" style="height:40px;" required>
                 <option disabled selected>은행명 선택</option>
                 <c:forEach var="banks" items="${banks}">
                 <option value="${banks.bank_code }" >${banks.bank_name }</option>
                 </c:forEach>
             </select>
-            <input type="text" id="bank_account" class="textform" name="transfer_account" placeholder="계좌번호(숫자만 입력)" required>
+            <input type="text" id="bank_account" class="textform" name="transfer_account" placeholder="계좌번호(하이픈 포함 가능)" style="margin:0;" required>
             <button id="account_confirm" type="button">확인</button> &nbsp;&nbsp; <small><span id="account-checked" style="color:blue;"></span></small></div>
         </div>
         <div id="label_title"> </div>
