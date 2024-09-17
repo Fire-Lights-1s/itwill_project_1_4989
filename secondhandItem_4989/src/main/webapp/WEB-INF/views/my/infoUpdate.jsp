@@ -6,10 +6,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원 정보 수정</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileStyle.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileUpdate.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileStyle.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileUpdate.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
@@ -17,9 +17,9 @@
 <section>
 	<header>
 		<div id="menu-name">
-   			<a href="${pageContext.request.contextPath}">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/my/profile">마이 페이지 </a> >
-   			<a href="${pageContext.request.contextPath}/my/infoUpdate">회원 정보 수정</a>
+   			<a href="${pageContext.request.contextPath}" style="color: #372161;">홈 </a> >
+   			<a href="${pageContext.request.contextPath}/my/profile" style="color: #372161;">마이 페이지 </a> >
+   			<a href="${pageContext.request.contextPath}/my/infoUpdate" style="color: #372161;">회원 정보 수정</a>
 		</div>
 	</header>
 	<div class="content-container">

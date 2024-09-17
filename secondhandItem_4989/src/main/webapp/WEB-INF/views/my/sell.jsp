@@ -18,6 +18,46 @@
 <%-- 	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script> --%>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<style>
+  /* 모달창 기본 스타일 */
+  .modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  /* 모달 콘텐츠 스타일 */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+  }
+
+  /* 닫기 버튼 스타일 */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: right;
+  }
+
+  .close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+	
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"></jsp:include>
@@ -33,27 +73,39 @@
 	<jsp:include page="../inc/myPageLefter.jsp"></jsp:include>
 		<div class="main-container-side-profile">
 		<main>
+		<div id="reviewModal" class="modal" style="display: none;">
+			<div class="modal-content">
+		   		<span class="close">&times;</span>
+		   		<h2>구매 후기</h2>
+		    	<form action="/submitReview" method="post">
+		      		<label for="reviewText">후기 내용:</label><br>
+		      		<textarea id="reviewText" name="reviewText" rows="4" cols="50"></textarea><br>
+		      		<input type="hidden" value="">
+		      		<button type="submit">후기 작성</button>
+		    	</form>
+			</div>
+		</div>
 			<h2>판매 내역</h2>
 			<div class="profile-a">				
 				<c:if test="${empty param.sort}">		
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceDesc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceAsc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateDesc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateAsc'}">
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="window.location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
+					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<br>
 				<button onclick="location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=pro'">판매 중</button>
@@ -101,7 +153,7 @@
 							<button class="profile-noreserv" data-id="${productDTO.product_id}">예약 취소</button>
 						</c:if>
 						<c:if test="${productDTO.trade_status eq '거래 완료'}">
-							<button>구매 후기</button>
+							<button class="reviewBtn">구매 후기</button>
 						</c:if>
 					</div>
 					<div class="profile-item-detail1">
@@ -132,9 +184,32 @@
 		</main>
 		</div>
 	</div>
-	<a re></a>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
+<script>
+	// 모달 및 버튼 요소 가져오기
+	const modal = document.querySelector("#reviewModal");
+	const span = document.getElementsByClassName("close")[0];
+	document.querySelectorAll('.reviewBtn').forEach(function(btn) {
+	   btn.onclick = function() {
+	     modal.style.display = "block";
+	   }
+	});
+	
+	// 닫기 버튼(X)을 클릭하면 모달을 닫기
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+	
+	// 모달 외부를 클릭하면 모달을 닫기
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+</script>
+
 <script>
 
 	document.addEventListener('DOMContentLoaded', function() {
@@ -193,8 +268,6 @@
 		}
 	})
 	
-
-
 </script>
 </body>
 </html>

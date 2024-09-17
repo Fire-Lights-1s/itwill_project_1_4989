@@ -28,17 +28,30 @@ public class YourPageController {
 	private MemberService memberService;
 	
 	@GetMapping("/seller")
-	public String seller(HttpSession session, Model model, HttpServletRequest request) {
-		System.out.println("YourPageController seller()");
+	public String seller(HttpSession session, HttpServletRequest request, Model model) {
 		String id = (String)session.getAttribute("member_id");
 		MemberDTO memberDTO = memberService.getMember(id);
 		if(memberDTO == null) {
 			return "redirect:/member/login";
 		}
-		id = request.getParameter("otherUser");
+		String otherUser = request.getParameter("otherUser");
+		MemberDTO otherUserDTO = memberService.getMember(otherUser);
+		otherUserDTO.setAllTX(myPageService.allTX(otherUser));
+		model.addAttribute("otherUserDTO", otherUserDTO);
+		return "your/seller";
+	}
+	
+	@GetMapping("/sellerHistory")
+	public String seller(HttpSession session, Model model, HttpServletRequest request) {
+		String id = (String)session.getAttribute("member_id");
+		MemberDTO memberDTO = memberService.getMember(id);
+		if(memberDTO == null) {
+			return "redirect:/member/login";
+		}
 		String pageNum = request.getParameter("pageNum");
 		String sort = request.getParameter("sort");
 		String sale = request.getParameter("sale");
+		String otherUser = request.getParameter("otherUser");
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -48,12 +61,10 @@ public class YourPageController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		pageDTO.setPageSize(pageSize);
-		pageDTO.setSeller_id(id);
+		pageDTO.setSeller_id(otherUser);
 		pageDTO.setSort(sort);
 		pageDTO.setSale(sale);
 		List<ProductDTO> productList = myPageService.getProductList(pageDTO);
-		ProductDTO productDTO = new ProductDTO();
-		productDTO.setSeller_id(id);
 		int count = myPageService.getProductCount(pageDTO);
 		int pageBlock = 5;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
@@ -67,14 +78,9 @@ public class YourPageController {
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
+		model.addAttribute("otherUser", otherUser);
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("productList", productList);
-		return "your/seller";
-	}
-	
-	@GetMapping("/sellerHistory")
-	public String seller() {
-		System.out.println("YourPageController sellerHistory()");
 		return "your/sellerHistory";
 	}
 	
