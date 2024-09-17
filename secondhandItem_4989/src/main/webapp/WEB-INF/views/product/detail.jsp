@@ -38,8 +38,27 @@
 <div class="container">
     <!-- 이미지 영역 -->
     <div class="image-box">
-        <div class="card">
-            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" alt="Product Image">
+        <!-- 메인 이미지 (크게 출력) -->
+        <div class="main-image">
+             <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}"
+             id="current" 
+         alt="#" 
+         height="620px" 
+         style="display:block; width:100%;" 
+         class="mx-auto" 
+         onclick="imageModal(this)">
+        </div>
+
+        <!-- 썸네일 이미지들 (작게 출력) -->
+        <div class="thumbnail-images"> 
+            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img2}" 
+            class="img" alt="#" height="100px" onclick="switchMainImage(this)"> 
+            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img3}" 
+            class="img" alt="#" height="100px" onclick="switchMainImage(this)"> 
+            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img4}" 
+            class="img" alt="#" height="100px" onclick="switchMainImage(this)"> 
+            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img5}" 
+            class="img" alt="#" height="100px" onclick="switchMainImage(this)"> 
         </div>
     </div>
 
@@ -174,8 +193,64 @@ function submitReport() {
 }
 
 </script>
+<!-- 메인 이미지 클릭 시 모달 창 -->
+<script>
+function imageModal(image) {
+    console.log($(image).attr("src"));
+    let modal = $("#myModal");
+    $(".modal-content").attr("src", $(image).attr("src"));
+    modal.show();
+}
+</script>
+<!-- 썸네일을 클릭하면 메인 이미지를 교체 -->
+<script>
+function switchMainImage(thumbnail) {
+    const mainImage = document.getElementById('current');
+    mainImage.src = thumbnail.src;
+}
+</script>
+<!-- 이미지가 로드되지 않으면 숨기기 -->
+<script>
 
-	<!-- 자바스크립트 함수 추가 -->
+document.querySelectorAll('.thumbnail-images img').forEach(function(image) {
+    image.onerror = function() {
+        this.style.display = 'none';  // 이미지 로딩에 실패하면 숨김
+    };
+});
+
+</script>
+
+<!-- 모든 이미지를 새로운 팝업 창에서 띄우는 함수 -->
+<script>
+function openPopup() {
+    var images = document.querySelectorAll('.images img');
+    var imageSrcs = [];
+
+    images.forEach(function(image) {
+        imageSrcs.push(image.src);
+    });
+
+    var popupWindow = window.open('', '_blank', 'width=900,height=620');
+    popupWindow.document.write('<div style="display:flex; flex-direction: row;">');
+
+    imageSrcs.forEach(function(src) {
+        popupWindow.document.write('<img src="' + src + '" style="width: 540px; height: 540px; margin-right: 10px; margin-top : 20px;">');
+    });
+
+    popupWindow.document.write('</div>');
+    popupWindow.document.close();
+}
+</script>
+<!-- 해당 이미지를 팝업 창에 단독으로 표시 -->
+<script>
+function imagePopup(src) {
+    var newWindow = window.open('', '_blank', 'width=800,height=600');
+    newWindow.document.write('<html><head><title>Image</title></head><body style="background-color: black; margin: 0; display: flex; justify-content: center; align-items: center;"><img src="' + src + '" style="max-width: 100%; max-height: 100%;"></body></html>');
+}
+
+</script>
+
+	<!-- 카테고리 영문 변환 -->
 	<script type="text/javascript">
 		// 카테고리 영문명을 한글로 변환하는 함수
 		function convertCategoryToKorean(categoryName) {
