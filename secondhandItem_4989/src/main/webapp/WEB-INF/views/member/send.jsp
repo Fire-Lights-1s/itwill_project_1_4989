@@ -29,7 +29,8 @@
                 <input type="text" id="token1" name="token1" placeholder="인증번호 6자리" required>
                 <button type="submit" class="submit-button">인증하기</button>
             </div>
-			
+           
+			<% out.println(session.getAttribute("name")); %>
 		</form>
 	  </main>
 	</div>
