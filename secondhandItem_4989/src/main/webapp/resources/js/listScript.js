@@ -147,6 +147,10 @@ window.addEventListener('load', function() {
     function updateProductList(productsHtml) {
     document.getElementById('product-list').innerHTML = productsHtml || '<p>결과가 없습니다.</p>';
 	}
+	
+	loadZzimStatus();
+	selectZzim();
+	
 });
 
 

@@ -10,6 +10,7 @@ import com.itwillbs.dao.MyPageDAO;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.ReviewDTO;
 import com.itwillbs.domain.ZzimDTO;
 
 @Service
@@ -72,5 +73,13 @@ public class MyPageService {
 
 	public void updateReserv(ProductDTO productDTO) {
 		myPageDAO.updateReserv(productDTO);
+	}
+
+	public void insertReview(ReviewDTO reviewDTO) {
+		myPageDAO.insertReview(reviewDTO);		
+	}
+
+	public void updateReviewStatus(int product_id) {
+		myPageDAO.updateReviewStatus(product_id);
 	}
 }

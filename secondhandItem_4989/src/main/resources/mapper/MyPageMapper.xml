@@ -162,5 +162,16 @@
 		and p.seller_id = #{seller_id}
 		and t.is_reserved = true
 	</update>
+	
+	<insert id="insertReview">
+		insert into Review
+		values(default, #{product_id}, #{review_quality}, #{review_price}, #{review_time}, #{review_manner}, #{review_content}, now())
+	</insert>
+	
+	<update id="updateReviewStatus">
+		update Product
+		set review_status = true
+		where product_id = #{product_id}
+	</update>
 </mapper>
 

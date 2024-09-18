@@ -98,8 +98,8 @@ display: inline-block;
 		<main>
 		<div id="reviewModal" class="modal" style="display: none;">
 			<div class="modal-content">
-				<h2>구매 후기</h2>
 				<span class="close">&times;</span>
+				<h2 style="margin-bottom: 20px;">구매 후기</h2>
 				<div style="float: left; overflow:hidden;">
 					<img id="modalImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
 		    	</div>
@@ -138,13 +138,13 @@ display: inline-block;
 						    <span class="star" data-value="5">☆</span>
 					    </div>
 					</div>
-					<input type="hidden" id="qualityRating" name="qualityRating" value="">
-					<input type="hidden" id="priceRating" name="priceRating" value="">
-					<input type="hidden" id="punctualityRating" name="punctualityRating" value="">
-					<input type="hidden" id="mannerRating" name="mannerRating" value="">
+					<input type="hidden" id="qualityRating" name="qualityRating" value="1">
+					<input type="hidden" id="priceRating" name="priceRating" value="1">
+					<input type="hidden" id="punctualityRating" name="punctualityRating" value="1">
+					<input type="hidden" id="mannerRating" name="mannerRating" value="1">
 		      		<textarea id="reviewText" name="reviewText" rows="4" cols="50" placeholder="후기 내용"></textarea><br>
 		      		<input type="hidden" id="productId" name="productId" value="">
-		      		<button type="submit">후기 작성</button>
+		      		<button type="submit">작성 완료</button>
 		    	</form>
 			</div>
 		</div>
@@ -209,6 +209,9 @@ display: inline-block;
 						</c:if>
 						<c:if test="${productDTO.trade_status eq '거래 완료'}">
 							&emsp;<button class="reviewBtn">후기 작성</button>&emsp;
+						</c:if>
+						<c:if test="${productDTO.review_status}">
+							&emsp;<button class="reviewBtn">나의 후기</button>&emsp;
 						</c:if>
 					</div>
 					<div class="profile-item-detail1">
@@ -293,8 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	            s.classList.remove('selected');
 	          }
 	        });
-	        // 클릭된 별의 값을 hidden input에 저장
-	        hiddenInput.value = star.getAttribute('data-value');
+	        hiddenInput.value = star.getAttribute('data-value');	
 	      });
 	    });
 	  });

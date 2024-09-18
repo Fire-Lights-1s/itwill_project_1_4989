@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="container px-1 px-lg-1 mt-1" style="margin-top:100px;">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
+  <div id="product_container" class="row gx-4 gx-lg-5 justify-content-center">
                 
 		<c:set var="size" value="${fn:length(productList)}" />
 		<c:if test="${size > 0}">
@@ -64,3 +64,6 @@
         </c:if>
 	</div>
 	</div>
+	<div style="text-align: center;">
+      <button id="load_more" class="btn btn-outline-dark">더 보기</button>
+   	</div>

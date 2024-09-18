@@ -1,5 +1,7 @@
 package com.itwillbs.service;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -26,8 +28,26 @@ public class TradeAdminService {
 		pageDTO.setEndRow(endRow);
 		
 		// 거래 목록을 DAO에서 가져옴
-		return tradeAdminDAO.getTradeList(pageDTO);
-	}
+		List<ProductDTO> tradeList = tradeAdminDAO.getTradeList(pageDTO);
+
+		// Timestamp를 문자열로 변환하여 설정
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        tradeList.forEach(trade -> {
+            trade.setFormattedCreatedDatetime(formatTimestamp(trade.getCreated_datetime(), formatter));
+            trade.setFormattedTransactionEndDate(formatTimestamp(trade.getTransaction_end_date(), formatter));
+        });
+
+        return tradeList;
+    }
+
+    // Timestamp를 포맷된 문자열로 변환하는 메서드
+    private String formatTimestamp(Timestamp timestamp, SimpleDateFormat formatter) {
+        if (timestamp == null) {
+            return "N/A";
+        }
+        return formatter.format(timestamp);
+    }
+
 
 	// 거래 목록의 총 개수를 가져오는 메서드
 	public int getTradeCount(PageDTO pageDTO) {
