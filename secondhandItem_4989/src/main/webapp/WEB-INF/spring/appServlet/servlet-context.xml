@@ -43,7 +43,7 @@
  	</beans:bean>
 	<!-- 경로 설정 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-	    <beans:constructor-arg value="D:\\workspace_sts\\itwill_project_1_4989\\secondhandItem_4989\\src\\main\\webapp\\resources\\upload" />
+	    <beans:constructor-arg value="C:\Users\choi6\Pictures" />
 	</beans:bean>
 	
 	<context:component-scan base-package="com.itwillbs.secondhand4989"/>

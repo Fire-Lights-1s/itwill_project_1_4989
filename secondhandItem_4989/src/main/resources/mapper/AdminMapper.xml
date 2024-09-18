@@ -25,4 +25,6 @@
 		order by reported_at desc
 	</select>
 	
+	
+	
 </mapper>

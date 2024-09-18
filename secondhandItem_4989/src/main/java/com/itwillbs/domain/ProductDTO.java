@@ -43,7 +43,11 @@ public class ProductDTO {
     private String trade_status;
     //구매자 아이디 for chat
     private String buyer_id;
+    //거래 종료일
+    private Timestamp transaction_end_date;
     
+   
+  
 
 	@Override
 	public String toString() {
@@ -279,6 +283,25 @@ public class ProductDTO {
 	public void setSeller_id(String seller_id) {
 		this.seller_id = seller_id;
 	}
+
+
+
+
+
+	public Timestamp getTransaction_end_date() {
+		return transaction_end_date;
+	}
+
+
+
+
+
+	public void setTransaction_end_date(Timestamp transaction_end_date) {
+		this.transaction_end_date = transaction_end_date;
+	}
+
+
+
 
 
 	
