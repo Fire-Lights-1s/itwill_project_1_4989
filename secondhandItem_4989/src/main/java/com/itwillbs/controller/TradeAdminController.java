@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +21,8 @@ import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.service.TradeAdminService;
 
+
+
 @Controller
 @RequestMapping("/admin")
 public class TradeAdminController {
@@ -25,7 +30,7 @@ public class TradeAdminController {
 	private TradeAdminService tradeAdminService;
 	
 	@GetMapping("/trade")
-	public String getTradeList(HttpServletRequest request,Model model) {
+	public String tradeAdmin(HttpServletRequest request,Model model) {
 		PageDTO pageDTO = new PageDTO();
 		String pageNum = request.getParameter("pageNum");
 		String searchKey = request.getParameter("search");
@@ -68,7 +73,7 @@ public class TradeAdminController {
         model.addAttribute("pageDTO", pageDTO);
         model.addAttribute("tradeList", tradeList);
 
-        return "/admin/trade"; // trade.jsp로 이동
+        return "/admin/trade/list"; 
     }
 
     // 거래 상세 정보를 가져오는 메서드 (AJAX 응답용)
@@ -89,6 +94,14 @@ public class TradeAdminController {
 
         return tradeInfo; // AJAX 요청에 대한 응답
     }
+    @PostMapping("/saveTradeInfo")
+    @ResponseBody
+    public String saveTradeInfo(@RequestBody Map<String, Object> saveData) {
+    	tradeAdminService.saveTradeInfo(saveData);
+    	return "success";
+    	
+    }
+    
 }
 	
 	

@@ -5,9 +5,39 @@
 
 <mapper namespace="com.itwillbs.mapper.TradeAdminMapper">
 
+<!-- ProductDTO에 매핑할 수 있도록 resultMap 설정 -->
+<resultMap id="tradeResultMap" type="com.itwillbs.domain.ProductDTO">
+    <result property="product_id" column="product_id" />
+    <result property="trade_status" column="trade_status" />
+    <result property="seller_id" column="seller_id" />
+    <result property="buyer_id" column="buyer_id" />
+    <result property="product_name" column="product_name" />
+    <result property="created_datetime" column="created_datetime" />
+    <result property="transaction_end_date" column="transaction_end_date" />
+</resultMap>
+
+<!-- 거래 목록을 가져오는 SQL 쿼리 -->
+<select id="getTradeList" resultMap="tradeResultMap">
+    SELECT
+        p.product_id,
+        p.trade_status,
+        p.seller_id,
+        t.buyer_id,
+        p.product_name,
+        p.created_datetime,
+        t.transaction_end_date
+    FROM
+        Product p
+    LEFT JOIN
+        TX t ON p.product_id = t.product_id
+    ORDER BY
+        p.created_datetime DESC
+    LIMIT
+        #{startRow}, #{pageSize}
+</select>
 
 
-	<!-- 거래 목록을 페이지네이션을 통해 가져오기 -->
+	<!-- 거래 목록을 페이지네이션을 통해 가져오기 
 	<select id="getTradeList" resultMap="tradeResultMap">
 		SELECT
 		p.product_id,
@@ -37,7 +67,7 @@
 		<result property="created_datetime" column="created_datetime" />
 		<result property="transaction_end_date"
 			column="transaction_end_date" />
-	</resultMap>
+	</resultMap> -->
 
 
 

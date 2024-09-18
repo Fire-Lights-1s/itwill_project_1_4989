@@ -45,6 +45,9 @@ public class ProductDTO {
     private String buyer_id;
     //거래 종료일
     private Timestamp transaction_end_date;
+    // 날짜 포맷된 문자열을 저장할 필드
+    private String formattedCreatedDatetime;
+    private String formattedTransactionEndDate;
     
    
   
@@ -299,6 +302,39 @@ public class ProductDTO {
 	public void setTransaction_end_date(Timestamp transaction_end_date) {
 		this.transaction_end_date = transaction_end_date;
 	}
+
+
+
+
+
+	public String getFormattedCreatedDatetime() {
+		return formattedCreatedDatetime;
+	}
+
+
+
+
+
+	public void setFormattedCreatedDatetime(String formattedCreatedDatetime) {
+		this.formattedCreatedDatetime = formattedCreatedDatetime;
+	}
+
+
+
+
+
+	public String getFormattedTransactionEndDate() {
+		return formattedTransactionEndDate;
+	}
+
+
+
+
+
+	public void setFormattedTransactionEndDate(String formattedTransactionEndDate) {
+		this.formattedTransactionEndDate = formattedTransactionEndDate;
+	}
+
 
 
 

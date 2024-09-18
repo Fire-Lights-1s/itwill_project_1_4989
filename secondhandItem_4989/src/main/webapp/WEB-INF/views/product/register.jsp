@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>판매상품 등록</title>
+<title>판매등록</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet"
@@ -112,7 +112,7 @@
 	<jsp:include page="../inc/header.jsp"></jsp:include>
 
 	<header>
-		<div id="menu-name">물품등록</div>
+		<div id="menu-name">판매등록</div>
 	</header>
 
 	<section>
