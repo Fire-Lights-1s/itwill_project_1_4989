@@ -341,13 +341,82 @@ aside {
 
 /* 상품 목록 처리 끝 */
 
-#guide {
+.guide {
 	width:100%;
-	height:300px;
-	background-color:#27224c;
+	height:100%;
+	padding: 30px 0;
+	background-color:#27224C;
 }
- 
- 
- 
+
+.guide-container {
+    display: flex;
+    margin: 0 auto;
+    width: 80%;
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.guide-sidebar {
+    width: 25%;
+    padding: 45px;
+
+}
+
+.guide-sidebar h2 {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom:30px;
+}
+
+.guide-sidebar p {
+    font-size: 14px;
+    color: #666;
+}
+
+.accordion-container {
+    width: 75%;
+    padding: 20px;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.accordion-button {
+    width: 100%;
+    text-align: left;
+    background-color: #f7f7f7;
+    border: solid 2px #53308f;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 16px;
+    color: #53308f;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-button:hover {
+    background-color: #53308f;
+    color: white;
+}
+
+.accordion-content {
+    display: none;
+    padding: 15px;
+    border-top: 1px solid #ccc;
+    background-color: #fafafa;
+}
+
+.accordion-content p {
+    margin: 0;
+}
+
+.accordion-item.active .accordion-content {
+    display: block;
+}
 
 
