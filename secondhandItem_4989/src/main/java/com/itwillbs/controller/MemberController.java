@@ -357,15 +357,28 @@ public class MemberController {
 	@PostMapping("/verify")
 	public String verify(MemberDTO memberDTO, HttpSession session, HttpServletRequest request) {
 		System.out.println("MemberController verify");
+		
+		String member_id = (String)session.getAttribute("id");
+		memberDTO.setMember_id(member_id);
+		String pass = (String)session.getAttribute("pass");
+		memberDTO.setPass(pass);
+		String nickname = (String)session.getAttribute("nick");
+		memberDTO.setNickname(nickname);
+		String name = (String)session.getAttribute("name");
+		memberDTO.setName(name);
+		String phone = (String)session.getAttribute("phone");
+		memberDTO.setPhone(phone);
+		String email = (String)session.getAttribute("email");
+		memberDTO.setEmail(email);
+		String token = (String) session.getAttribute("token");
 		System.out.println(memberDTO);
 		
-		String token = (String) session.getAttribute("token");
 		String token1 = request.getParameter("token1");
-//		memberService.insertMember(memberDTO);
 		System.out.println(session.getAttribute("token1"));
 		System.out.println(session.getAttribute("token"));
 		
 		if(token.equals(token1) ) {
+			memberService.insertMember(memberDTO);
 			return "redirect:/member/welcome";
 		} else {
 			return "redirect:/member/send";
