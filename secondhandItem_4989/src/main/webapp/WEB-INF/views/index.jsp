@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/animate.css">
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script>
+	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 
@@ -206,6 +206,7 @@ $(document).ready(function() {
 
 
 //더보기 기능
+
 const contextPath = '${pageContext.request.contextPath}';
 
 let currentPage = 1;
@@ -266,6 +267,9 @@ $('#load_more').click(function() {
                  
                  $('#product_container').append(productHtml);
 				}
+				
+				loadZzimStatus();
+				selectZzim();
 
              if (response.isLastPage) {
                  $('#load_more').hide();
@@ -276,10 +280,10 @@ $('#load_more').click(function() {
      }
  });
 	
-	// 추가로드 될 때 찜 저장내역, 찜 기능 붙여야 함. 함수화 예정.
 });
 
 
+// 이용자가이드(아코디언) 동작
 document.querySelectorAll('.accordion-button').forEach(button => {
     button.addEventListener('click', function() {
         const accordionItem = this.parentElement;

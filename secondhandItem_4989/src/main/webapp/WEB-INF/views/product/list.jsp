@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/listStyle.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
-	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/listScript.js" defer></script>
 
 </head>
@@ -105,7 +107,7 @@
 <!-- 상품 목록 시작: 부트스트랩 적용 -->
         <div id="product-list" style="width:100%; margin:0 auto;" class="py-5 bg-light">
         <div class="container px-1 px-lg-1 mt-1" style="margin-top:100px;">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div id="product_container" class="row gx-4 gx-lg-5 justify-content-center">
                 
 		<c:set var="size" value="${fn:length(productList)}" />
 		<c:if test="${size > 0}">
@@ -241,8 +243,11 @@ $('#load_more').click(function() {
                      </div>
                  </div>`;
                  
-                 $('#product-container').append(productHtml);
+                 $('#product_container').append(productHtml);
 				}
+				
+				loadZzimStatus();
+				selectZzim();
 
              if (response.isLastPage) {
                  $('#load_more').hide();
@@ -253,7 +258,6 @@ $('#load_more').click(function() {
      }
  });
 	
-	// 추가로드 될 때 찜 저장내역, 찜 기능 붙여야 함. 함수화 예정.
 });
 
 </script>

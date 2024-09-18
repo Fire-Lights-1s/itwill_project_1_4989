@@ -24,6 +24,9 @@ public class MyPurchaseController {
 	@GetMapping("/purchlist")
 	public String getPurchList(HttpSession session, Model model) {
 		String member_id = (String) session.getAttribute("member_id");
+		if (member_id == null || member_id.isEmpty()) {
+			return "redirect:/member/login";
+		}
 		List<PurchaseRequestDTO> list = purchaseService.getPurchList(member_id);
 		model.addAttribute("list", list);
 		return "my/purch/list";

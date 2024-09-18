@@ -1,5 +1,6 @@
 // 찜 등록 및 취소
 
+function selectZzim() {
 const zzim_buttons = document.querySelectorAll('.zzim-button');
 zzim_buttons.forEach(button => {
 	button.addEventListener('click', function() {
@@ -32,12 +33,12 @@ zzim_buttons.forEach(button => {
    		}
 	});
 });
+};
 
+//찜 여부 가져와서 표시
 
-//페이지가 로드될 때에 찜 여부 가져와서 표시
-
-window.onload = function() {
- const contextPath = "/secondhand4989";
+function loadZzimStatus() {
+	 const contextPath = "/secondhand4989";
  const member_id = document.querySelector('.zzim-button').getAttribute('data-member_id');
 
  if (member_id !== null && member_id !== '') {
@@ -68,4 +69,14 @@ window.onload = function() {
      });
  }
 };
+
+
+// 처음 창 열릴 때 찜 활성화
+
+window.onload = function() {
+	loadZzimStatus();
+	selectZzim();
+};
+
+
 
