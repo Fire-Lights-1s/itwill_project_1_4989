@@ -1,16 +1,15 @@
 package com.itwillbs.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.itwillbs.dao.AdminDAO;
 import com.itwillbs.dao.PurchaseAdminDAO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.PurchaseRequestDTO;
-import com.itwillbs.domain.ReportDTO;
 
 @Service
 public class PurchaseAdminService {
@@ -26,7 +25,11 @@ public class PurchaseAdminService {
 		return purchaseAdminDAO.getPurchaseList(pageDTO);
 	}
 
-	public int getPurchaseCount() {
-		return purchaseAdminDAO.getPurchaseCount();
+	public int getPurchaseCount(PageDTO pageDTO) {
+		return purchaseAdminDAO.getPurchaseCount(pageDTO);
+	}
+
+	public void savePurchaseInfo(Map<String, Object> saveData) {
+		purchaseAdminDAO.savePurchaseInfo(saveData);
 	}
 }

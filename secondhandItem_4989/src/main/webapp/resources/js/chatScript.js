@@ -7,12 +7,14 @@ let productGlobal = null;
 
 $(document).ready(function(){
     if(userId == null || userId == ''){
-        location.replace("../secondhand4989/");
+        location.replace("./");
         alert('로그인 후 이용해주세요.');
     }
     if(!Object.is(objChatRoomDTO, undefined) && !Object.is(objChatRoomDTO, null) && !Object.is(objChatRoomDTO, '')){
     	connect(objChatRoomDTO);
     }
+    $('#reportBtn').on('click', submitReport);
+    
 });
 // html 채팅방 영역 지우기
 function setConnected() {
@@ -55,7 +57,7 @@ function disconnect() {
 function loadChatList(chatRoom_json){
 	$.ajax({
 	    type: "POST",
-	    url : "../secondhand4989/chat/reciveChatList/"+chatRoom_json.chat_room_id,
+	    url : "./chat/reciveChatList/"+chatRoom_json.chat_room_id,
 	    data : {
 	    	chat_room_id : chatRoom_json.chat_room_id,
 	    	product_id : chatRoom_json.product_id
@@ -77,7 +79,7 @@ function loadChatList(chatRoom_json){
 function loadProduct(chatRoom_json){
 	$.ajax({
 	    type: "POST",
-	    url : "../secondhand4989/chat/reciveRoomProduct/",
+	    url : "./chat/reciveRoomProduct/",
 	    data : {
 	    	chat_room_id : chatRoom_json.chat_room_id,
 	    	product_id : chatRoom_json.product_id
@@ -88,13 +90,17 @@ function loadProduct(chatRoom_json){
 	        //Ajax 성공시
 	        //console.log(data);
 	        productGlobal = data;
-	        let TXButton = '#productInfo div:nth-child(3) button';
+	        let TXButton = '#productInfo div:nth-child(3) #trade-btn';
 	        $('#productInfo div:nth-child(1) img').attr( "src", productGlobal.product_img1 );
 	        $('#productInfo div:nth-child(2) h3').text(productGlobal.product_name);
 	        $('#productInfo div:nth-child(2) p:nth-child(2)').text("상품 가격 : "+productGlobal.product_price+"원");
 	        $('#productInfo div:nth-child(2) p:nth-child(3)').text("구매 연도 : "+productGlobal.year_purchase);
 	        $('#productInfo div:nth-child(2) p:nth-child(4)').text("거래 상태 : "+productGlobal.trade_status);
-	        $('#productInfo div:nth-child(3) p').text(productGlobal.trade_area);
+	        if(productGlobal.trade_area == null){
+		        $('#productInfo div:nth-child(3) p').text("거래 지역 : 작성되지 않음");
+	        }else{
+		        $('#productInfo div:nth-child(3) p').text("거래 지역 : "+productGlobal.trade_area);
+	        }
 	        if(productGlobal.seller_id == userId){
 	        	switch(productGlobal.trade_status) {
 				  case '거래 가능':
@@ -227,7 +233,7 @@ function showChat(chatMessage) {
 
 //상품 예약 및 구매
 function promiseTrade(){
-	let TXButton = '#productInfo div:nth-child(3) button';
+	let TXButton = '#productInfo div:nth-child(3) #trade-btn';
 	let TXButtonFunc = $(TXButton).text();
 	let tradeState = null;
 	let tradeFinish = false;
@@ -273,7 +279,36 @@ function productLoadingStart(){
 function productLoadingEnd(){
 	$('#productLoading').addClass('loading_visibility');
 }
+function submitReport() {
+    var reportContents = $("#report_contents").val();
+    var reporterId = userId;
+    var reporteeId = productGlobal.seller_id;
+    var reportedItemId = productGlobal.product_id;
+    var reportType = $('input[name=reportType]:checked').val(); // 고정값
 
+    $.ajax({
+        type: "POST",
+        url: "./product/report",
+        data: {
+            reporter_id: reporterId,
+            reportee_id: reporteeId,
+            reported_item_id: reportedItemId,
+            report_type: reportType,
+            report_contents: reportContents
+        },
+        success: function(response) {
+            if (response.success) {
+                alert("신고가 접수되었습니다.");
+                $('#reportModal').modal('hide');
+            } else {
+                alert("신고 접수 중 오류가 발생했습니다.");
+            }
+        },
+        error: function() {
+            alert("서버 통신 중 오류가 발생했습니다.");
+        }
+    });
+}
 //상품 상태 변경하기
 function changeProductState(product){
 	//console.log('changeProductState : ' + product);

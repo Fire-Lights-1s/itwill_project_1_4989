@@ -8,6 +8,7 @@ $(document).ready(function(){
     });
 });
 
+
 // 모달창 오픈 시 상세정보 가져오기
 
 function loadPurchaseDetails(purchase_id) {
@@ -26,11 +27,43 @@ function loadPurchaseDetails(purchase_id) {
             modal.find('#expected_grade').val(data.expected_grade);
             modal.find('#expected_price').val(data.expected_price);
             modal.find('#account_info').val(data.account_info);
+            modal.find('#purchase_status').val(data.purchase_status);
         },
         error: function () {
             alert('데이터를 가져오는 중 오류가 발생했습니다.');
         }
     });
 }
+
+
+// 상태변경 저장하기
+
+$('#status_save').on('click', function() {
+
+	let modal = $('#purchaseAdminModal');
+	let formData = {
+		purchase_id: modal.find('#purchase_id').val(),
+		expected_grade: modal.find('#expected_grade').val(),
+		expected_price: modal.find('#expected_price').val(),
+		purchase_status: modal.find('#purchase_status').val()
+		};
+	
+	$.ajax({
+		type: 'POST',
+		url: '/secondhand4989/admin/savePurchaseInfo',
+		data: JSON.stringify(formData),
+		contentType: 'application/json',
+		success: function() {
+			alert('매입상태가 저장되었습니다');
+			modal.modal('hide');
+			window.location.reload();
+		},
+		error: function() {
+			alert('저장 중 오류가 발생했습니다');
+		}
+	});
+});
+
+
 
 

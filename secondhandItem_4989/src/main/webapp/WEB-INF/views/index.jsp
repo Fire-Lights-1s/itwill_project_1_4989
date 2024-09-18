@@ -37,7 +37,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-7 col-12 order-md-1 order-2">
                             <h4>맘편하게 <span style="color:yellow;">사구</span> <br>
-                                간편하게 <span style="color:yellow;">팔구</span></h4>
+                                간편하게 <span style="color:yellow;">팔구</span></h4><br>
                             <p>IT기기 중고거래 플랫폼 4989와 함께, 합리적인 테크 라이프를 즐기세요</p>
                         </div>
                         <div class="col-md-5 col-12 order-md-2 order-1"><img src="https://i.imgur.com/NKvkfTT.png" class="mx-auto" alt="slide"></div>
@@ -51,7 +51,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-7 col-12 order-md-1 order-2">
                             <h4>맘편하게 <span style="color:yellow;">사구</span> <br>
-                                간편하게 <span style="color:yellow;">팔구</span></h4>
+                                간편하게 <span style="color:yellow;">팔구</span></h4><br>
                             <p>IT기기 중고거래 플랫폼 4989와 함께, 합리적인 테크 라이프를 즐기세요</p> </div>
                         <div class="col-md-5 col-12 order-md-2 order-1"><img src="https://i.imgur.com/duWgXRs.png" class="mx-auto" alt="slide"></div>
                     </div>
@@ -64,7 +64,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-7 col-12 order-md-1 order-2">
                             <h4>맘편하게 <span style="color:yellow;">사구</span> <br>
-                                간편하게 <span style="color:yellow;">팔구</span></h4>
+                                간편하게 <span style="color:yellow;">팔구</span></h4><br>
                             <p>IT기기 중고거래 플랫폼 4989와 함께, 합리적인 테크 라이프를 즐기세요</p> </div>
                         <div class="col-md-5 col-12 order-md-2 order-1"><img src="https://i.imgur.com/DGkR4OQ.png" class="mx-auto" alt="slide"></div>
                     </div>
@@ -146,13 +146,50 @@
 		<div style="text-align: center;">
             <button id="load_more" class="btn btn-outline-dark">더 보기</button>
         </div>
-  </div>   
+  </div>
+     
 </section>
 <!-- 상품목록 끝 -->
 
-    <div id="guide">
-        <p style="line-height: 300px; text-align: center;">이용자 가이드 (나중에 넣기)</p>
+<section class="guide">
+ <div class="guide-container">
+    <div class="guide-sidebar">
+        <h2 style>4989 <br>이용자 가이드</h2>
+        <p>4989가 처음이라면, 여기를 읽어보세요.</p>
     </div>
+    <div class="accordion-container">
+        <div class="accordion-item">
+            <button class="accordion-button">4989는 뭐하는 곳인가요?</button>
+            <div class="accordion-content">
+                <p>IT/전자기기를 자유롭게 사고 팔 수 있도록 돕는 중고거래 플랫폼입니다.</p>
+                <p>가입 후, 필요없는 제품은 팔고 관심있는 제품은 합리적인 가격에 구해보세요.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button class="accordion-button">어떻게 사고 팔 수 있나요?</button>
+            <div class="accordion-content">
+                <p><strong>사려면?</strong></p>
+                ① 관심있는 상품을 키워드로 검색하거나 목록에서 둘러보고<br>
+                ② 구매하고 싶은 상품이 있다면, 상품 상세페이지에서 판매자에게 채팅으로 문의<br>
+                ③ 판매자와의 거래의사가 통하면, 사전에 정한 방식대로 물건과 대금을 교환<br><br>
+                <p><strong>팔려면?</strong></p>
+                ① '판매등록' 메뉴를 통해 팔려는 물품의 사진과 정보를 기재하여 게시<br>
+                ② 구매의사가 있는 이용자와 채팅으로 대화<br>
+                ③ 구매자와의 거래의사가 통하면, 사전에 정한 방식대로 물건과 대금을 교환<br><br>
+                <p>※ 거래 참여는 가입(인증)한 회원만 가능합니다.</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button class="accordion-button">중고거래, 약속 잡고 흥정하기 너무 귀찮은데요?</button>
+            <div class="accordion-content">
+                <p>개인 간 중고거래에 피로를 느끼시거나 신속한 판매가 필요한 이용자분들을 위해 4989에서 직접 물품을 매입해드리고 있습니다.</p>
+                <p>수요와 시세를 고려하여 미리 정한 품목과 가격에 따라 빠르고 투명하게 제품을 판매하실 수 있습니다.</p>
+                <p>자세한 내용의 확인과 신청을 원하신다면 '매입신청' 메뉴를 이용해주세요.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
 
 </main>
 
@@ -241,6 +278,16 @@ $('#load_more').click(function() {
 	
 	// 추가로드 될 때 찜 저장내역, 찜 기능 붙여야 함. 함수화 예정.
 });
+
+
+document.querySelectorAll('.accordion-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const accordionItem = this.parentElement;
+        accordionItem.classList.toggle('active');
+    });
+});
+
+
 
 </script>
 

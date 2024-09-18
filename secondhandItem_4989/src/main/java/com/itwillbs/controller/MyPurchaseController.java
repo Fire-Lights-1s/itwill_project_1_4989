@@ -39,7 +39,7 @@ public class MyPurchaseController {
 	@GetMapping("/cancel")
 	public String cancelRequest(@RequestParam int purchase_id) {
 		purchaseService.cancelRequest(purchase_id);		
-		return "redirect:purchdetail";
+		return "redirect:purchlist";
 	}
 	
 }

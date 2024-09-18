@@ -18,21 +18,136 @@
 <%-- 	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script> --%>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<style>
+textarea {
+    width: 100%;
+    height: 6.25em;
+    resize: none;
+  }
+  
+.modal {
+  display: none;
+  text-align: center;
+  position: fixed;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 8% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 500px;
+  max-width: 80%;
+  height: 750px;
+  max-height: 80vh;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.close:hover, .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.stars {
+display: inline-block;
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.star.selected {
+  color: gold;
+}
+</style>
+
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"></jsp:include>
 <section>
 	<header>
 		<div id="menu-name">
-   			<a href="${pageContext.request.contextPath}">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/my/profile">마이 페이지 </a> >
-   			<a href="${pageContext.request.contextPath}/my/buy">구매 내역</a>
+   			<a href="${pageContext.request.contextPath}" style="color: #372161;">홈 </a> >
+   			<a href="${pageContext.request.contextPath}/my/profile" style="color: #372161;">마이 페이지 </a> >
+   			<a href="${pageContext.request.contextPath}/my/buy" style="color: #372161;">구매 내역</a>
 		</div>
 	</header>
 	<div class="content-container">
 	<jsp:include page="../inc/myPageLefter.jsp"></jsp:include>
 		<div class="main-container-side-profile">
 		<main>
+		<div id="reviewModal" class="modal" style="display: none;">
+			<div class="modal-content">
+				<h2>구매 후기</h2>
+				<span class="close">&times;</span>
+				<div style="float: left; overflow:hidden;">
+					<img id="modalImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
+		    	</div>
+		    	<form action="${pageContext.request.contextPath}/my/reviewPro" method="post">
+					<div id="starRating">
+					<label for="quality">품&emsp;&emsp;질 :</label>
+						<div class="stars" data-name="quality" style="display: inline-block;">
+						    <span class="star" data-value="1">☆</span>
+						    <span class="star" data-value="2">☆</span>
+						    <span class="star" data-value="3">☆</span>
+						    <span class="star" data-value="4">☆</span>
+						    <span class="star" data-value="5">☆</span>
+						</div><br>
+				    <label for="price">가&emsp;&emsp;격 :</label>
+						<div class="stars" data-name="price" style="display: inline-block;">
+						    <span class="star" data-value="1">☆</span>
+						    <span class="star" data-value="2">☆</span>
+						    <span class="star" data-value="3">☆</span>
+						    <span class="star" data-value="4">☆</span>
+						    <span class="star" data-value="5">☆</span>
+						</div><br>
+					<label for="punctuality">시간 약속 :</label>
+					    <div class="stars" data-name="punctuality" style="display: inline-block;">
+						    <span class="star" data-value="1">☆</span>
+						    <span class="star" data-value="2">☆</span>
+						    <span class="star" data-value="3">☆</span>
+						    <span class="star" data-value="4">☆</span>
+						    <span class="star" data-value="5">☆</span>
+					    </div><br>
+					<label for="manner">매&emsp;&emsp;너 :</label>
+					    <div class="stars" data-name="manner" style="display: inline-block; margin-bottom: 20px;">
+						    <span class="star" data-value="1">☆</span>
+						    <span class="star" data-value="2">☆</span>
+						    <span class="star" data-value="3">☆</span>
+						    <span class="star" data-value="4">☆</span>
+						    <span class="star" data-value="5">☆</span>
+					    </div>
+					</div>
+					<input type="hidden" id="qualityRating" name="qualityRating" value="">
+					<input type="hidden" id="priceRating" name="priceRating" value="">
+					<input type="hidden" id="punctualityRating" name="punctualityRating" value="">
+					<input type="hidden" id="mannerRating" name="mannerRating" value="">
+		      		<textarea id="reviewText" name="reviewText" rows="4" cols="50" placeholder="후기 내용"></textarea><br>
+		      		<input type="hidden" id="productId" name="productId" value="">
+		      		<button type="submit">후기 작성</button>
+		    	</form>
+			</div>
+		</div>
 			<h2>구매 내역</h2>
 			<div class="profile-a">				
 				<c:if test="${empty param.sort}">
@@ -63,7 +178,8 @@
 			<c:forEach var="productDTO" items="${productList}">
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" class="profile-item-imagesell">
+						<img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" class="profile-item-imagesell"
+						data-image-src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" data-product-id="${productDTO.product_id}">
 					</div>
 					<div class="profile-item-image-div">
 					<c:if test="${productDTO.trade_status eq '예약 중'}">
@@ -92,7 +208,7 @@
 							<button>판매자와 채팅</button>
 						</c:if>
 						<c:if test="${productDTO.trade_status eq '거래 완료'}">
-							&emsp;<button>후기 작성</button>&emsp;
+							&emsp;<button class="reviewBtn">후기 작성</button>&emsp;
 						</c:if>
 					</div>
 					<div class="profile-item-detail1">
@@ -125,9 +241,65 @@
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
+<script>
+	// 모달 및 버튼 요소 가져오기
+	const modalImage = document.querySelector("#modalImage");
+	const productIdInput = document.querySelector("#productId");
+	const modal = document.querySelector("#reviewModal");
+	const span = document.getElementsByClassName("close")[0];
+	
+	document.querySelectorAll('.reviewBtn').forEach(function(btn) {
+		btn.onclick = function(event) {
+			const productElement = event.target.closest('.profile-item-list-piece');
+            const img = productElement.querySelector('img.profile-item-imagesell');
+            const imageSrc = img.getAttribute('data-image-src');
+            const productId = img.getAttribute('data-product-id');
+            modalImage.src = imageSrc;
+            productIdInput.value = productId;
+			modal.style.display = "block";
+		}
+	});
+	
+	// 닫기 버튼(X)을 클릭하면 모달을 닫기
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+	
+	// 모달 외부를 클릭하면 모달을 닫기
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+</script>
+
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
+	// 구매 후기 별모양 이벤트
+	document.querySelectorAll('.stars').forEach(function(starGroup) {
+	    const stars = starGroup.querySelectorAll('.star');
+	    const hiddenInputId = starGroup.getAttribute('data-name') + 'Rating';
+	    const hiddenInput = document.getElementById(hiddenInputId);
+
+	    stars.forEach(function(star, index) {
+	      star.addEventListener('click', function() {
+	        // 선택된 별까지 색상 변경
+	        stars.forEach(function(s, i) {
+	          if (i <= index) {
+	            s.classList.add('selected');
+	          } else {
+	            s.classList.remove('selected');
+	          }
+	        });
+	        // 클릭된 별의 값을 hidden input에 저장
+	        hiddenInput.value = star.getAttribute('data-value');
+	      });
+	    });
+	  });
+	
+	// 물품 등록 시간 가져오기
     function formatTimeAgo(date) {
         const now = new Date();
         const diffInSeconds = Math.floor((now - date) / 1000);

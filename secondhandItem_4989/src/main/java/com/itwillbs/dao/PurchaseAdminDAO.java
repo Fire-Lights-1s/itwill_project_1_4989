@@ -1,6 +1,7 @@
 package com.itwillbs.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,17 +18,17 @@ public class PurchaseAdminDAO {
 	
 	private static final String namespace="com.itwillbs.mapper.PurchaseAdminMapper";
 
-	public int getReportCount(PageDTO pageDTO) {
-		int count = sqlSession.selectOne(namespace+".getProductInfo", pageDTO);
-		return count;
-	}
 
 	public List<PurchaseRequestDTO> getPurchaseList(PageDTO pageDTO) {
 		return sqlSession.selectList(namespace + ".getPurchaseList", pageDTO);
 	}
 
-	public int getPurchaseCount() {
+	public int getPurchaseCount(PageDTO pageDTO) {
 		return sqlSession.selectOne(namespace + ".getPurchaseCount");
+	}
+
+	public void savePurchaseInfo(Map<String, Object> saveData) {
+		sqlSession.update(namespace + ".savePurchaseInfo", saveData);
 	}	
 	
 }
