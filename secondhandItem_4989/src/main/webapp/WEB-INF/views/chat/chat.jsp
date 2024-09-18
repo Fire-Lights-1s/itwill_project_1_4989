@@ -127,15 +127,6 @@
                 </div>
                 <div class="modal-body">
                     <form id="reportForm">
-<!--                                 Checkbox for selecting report type
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="상품" id="productReport" name="report_type" onclick="onlyOneCheckbox(this.id)">
-                                    <label class="form-check-label" for="productReport">상품 신고</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="회원" id="memberReport" name="report_type" onclick="onlyOneCheckbox(this.id)">
-                                    <label class="form-check-label" for="memberReport">회원 신고</label>
-                                </div> -->
 
                         <!-- Textarea for report details -->
                         <div class="accordion-subject"><b>신고 대상</b></div>

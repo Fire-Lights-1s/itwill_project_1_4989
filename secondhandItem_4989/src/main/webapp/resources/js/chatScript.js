@@ -279,6 +279,7 @@ function productLoadingStart(){
 function productLoadingEnd(){
 	$('#productLoading').addClass('loading_visibility');
 }
+
 function submitReport() {
     var reportContents = $("#report_contents").val();
     var reporterId = userId;
