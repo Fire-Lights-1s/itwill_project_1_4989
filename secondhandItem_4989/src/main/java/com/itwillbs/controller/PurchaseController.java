@@ -46,7 +46,11 @@ public class PurchaseController {
 	}
 	
 	@GetMapping("/register")
-	public String category() {
+	public String category(HttpSession session) {
+		String member_id = (String) session.getAttribute("member_id");
+		if (member_id == null || member_id.isEmpty()) {
+			return "redirect:/member/login";
+		}
 		return "purchase/regi/category";
 	}
 	

@@ -1,6 +1,7 @@
 package com.itwillbs.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -41,4 +42,6 @@ public class AdminService {
 		int count = adminDAO.getReportCount(pageDTO);
 		return count;
 	}
+	
+	
 }

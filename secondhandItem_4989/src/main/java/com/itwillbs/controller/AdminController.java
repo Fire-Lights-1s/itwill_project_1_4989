@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -48,10 +49,15 @@ public class AdminController {
 //		return "/admin/member/list";
 //	}
 //	
-//	@GetMapping("/trade")
-//	public String trade() {
-//		return "/admin/trade";
-//	}
+	/*
+	 * @GetMapping("/trade") public String getTradeList(Model model) {
+	 * List<Map<String, Object>> tradeList = adminService.getTradeList();
+	 * System.out.println(tradeList); model.addAttribute("tradeList", tradeList);
+	 * return "/admin/trade";
+	 * 
+	 * }
+	 */
+	
 //	
 //	@GetMapping("/purchase")
 //	public String puchase() {

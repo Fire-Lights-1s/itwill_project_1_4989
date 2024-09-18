@@ -1,5 +1,8 @@
 package com.itwillbs.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,4 +26,7 @@ public class AdminDAO {
 		int count = sqlSession.selectOne(namespace+".getProductInfo", pageDTO);
 		return count;
 	}
+
+
+
 }
