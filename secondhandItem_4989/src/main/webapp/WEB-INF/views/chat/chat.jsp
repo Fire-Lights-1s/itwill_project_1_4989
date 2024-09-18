@@ -18,16 +18,23 @@
 	let sessionUserId = '<c:out value="${sessionUID}"/>';
 	let objChatRoomDTO = '<c:out value="${chatRoomDTO}"/>'.replaceAll("&#034;", "\"");
 </script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css?">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/chatStyle.css?">
+
 <!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath }/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
 <script src="${pageContext.request.contextPath }/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/chatScript.js"></script>
 </head>
 <body>
 	<jsp:include page="../inc/header.jsp"></jsp:include>
+	<header>
+        <div id="menu-name">채팅</div>
+    </header>
 	<section>
 	<div id="main-container-chat">
 		<div id="container">
@@ -85,7 +92,10 @@
 					</div>
 					<div>
 						<p></p>
-						<button></button>
+						<div>
+							<button id="trade-btn"></button>
+							<button id="openReportModal" data-toggle="modal" data-target="#reportModal">신고하기</button>
+						</div>
 					</div>
 					<div id="productLoading" class="box">
 						<div class="loader10"></div>
@@ -105,6 +115,42 @@
 			</div>
 		</div>
 	</div>
+	<!-- 신고하기 모달 -->
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">신고하기</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="reportForm">
+<!--                                 Checkbox for selecting report type
+                                <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="상품" id="productReport" name="report_type" onclick="onlyOneCheckbox(this.id)">
+                                    <label class="form-check-label" for="productReport">상품 신고</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="회원" id="memberReport" name="report_type" onclick="onlyOneCheckbox(this.id)">
+                                    <label class="form-check-label" for="memberReport">회원 신고</label>
+                                </div> -->
+
+                        <!-- Textarea for report details -->
+                        <div class="accordion-subject"><b>신고 대상</b></div>
+                        <label><input type="radio" name="reportType" value="회원" checked>회원</label>
+                        <input type="radio" name="reportType" value="상품">상품
+                        <div class="accordion-subject"><b>신고 내용</b></div>
+                        <textarea class="form-control" placeholder="상품 신고 사유를 입력해주세요" id="report_contents" name="report_contents" required></textarea>
+
+                        <!-- Submission button -->
+                        <button type="button" class="btn btn-primary mt-3" id="reportBtn">상품 신고</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 	</section>
   <jsp:include page="../inc/footer.jsp"></jsp:include>
 
