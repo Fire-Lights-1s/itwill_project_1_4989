@@ -79,6 +79,10 @@ display: inline-block;
 .star.selected {
   color: gold;
 }
+
+.star.active {
+    color: gold;
+}
 </style>
 
 </head>
@@ -101,7 +105,7 @@ display: inline-block;
 				<span class="close">&times;</span>
 				<h2 style="margin-bottom: 20px;">구매 후기</h2>
 				<div style="float: left; overflow:hidden;">
-					<img class="modalImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
+					<img id="modalImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
 		    	</div>
 		    	<form action="${pageContext.request.contextPath}/my/reviewPro" method="post">
 					<div class="starRating">
@@ -153,7 +157,7 @@ display: inline-block;
 				<span class="close">&times;</span>
 				<h2 style="margin-bottom: 20px;">구매 후기</h2>
 				<div style="float: left; overflow:hidden;">
-					<img class="modalImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
+					<img id="modalComImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
 		    	</div>
 					<div class="starRating">
 					<label for="quality">품&emsp;&emsp;질 :</label>
@@ -189,7 +193,7 @@ display: inline-block;
 						    <span class="star" data-value="5">☆</span>
 					    </div>
 					</div>
-		      		<textarea class="reviewText" name="reviewText" rows="4" cols="50"></textarea><br>
+		      		<textarea id="reviewText1" name="reviewText" rows="4" cols="50" readonly></textarea><br>
 			</div>
 		</div>
 			<h2>구매 내역</h2>
@@ -255,7 +259,8 @@ display: inline-block;
 							&emsp;<button class="reviewBtn">후기 작성</button>&emsp;
 						</c:if>
 						<c:if test="${productDTO.trade_status eq '후기 작성 완료'}">
-							&emsp;<button class="reviewComBtn" style="background-color: #0040FF;" data-content="${productDTO.review_content}">나의 후기</button>&emsp;
+							&emsp;<button class="reviewComBtn" style="background-color: #0040FF;" data-content="${productDTO.review_content}" data-reviewQ="${productDTO.review_quality}" 
+						    data-reviewP="${productDTO.review_price}" data-reviewT="${productDTO.review_time}" data-reviewM="${productDTO.review_manner}">나의 후기</button>&emsp;
 						</c:if>
 					</div>
 					<div class="profile-item-detail1">
@@ -290,14 +295,47 @@ display: inline-block;
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
 <script>
-	// 모달 및 버튼 요소 가져오기
-	const modalImage = document.querySelector(".modalImage");
+	function updateStarRating(category, value) {
+	    const starsCom = document.querySelectorAll('.stars[data-name="' + category + '"] .star');
+	    starsCom.forEach(star => {
+	        const starValue = parseInt(star.getAttribute('data-value'), 10);
+	        console.log(starValue);
+	        if (starValue <= value) {
+	            star.classList.add('active');
+	        } else {
+	            star.classList.remove('active');
+	        }
+	    });
+	}
+	const modalImage = document.querySelector("#modalImage");
+	const modalComImage = document.querySelector("#modalComImage");
 	const productIdInput = document.querySelector("#productId");
 	const modal = document.querySelector("#reviewModal");
+	const modalCom = document.querySelector("#reviewComModal");
 	const span = document.getElementsByClassName("close")[0];
+	const span2 = document.getElementsByClassName("close")[1];
 	
 	document.querySelectorAll('.reviewBtn').forEach(function(btn) {
 		btn.onclick = function(event) {
+			document.querySelectorAll('.stars').forEach(function(starGroup) {
+			    const stars = starGroup.querySelectorAll('.star');
+			    const hiddenInputId = starGroup.getAttribute('data-name') + 'Rating';
+			    const hiddenInput = document.getElementById(hiddenInputId);
+
+			    stars.forEach(function(star, index) {
+			      star.addEventListener('click', function() {
+			        // 선택된 별까지 색상 변경
+			        stars.forEach(function(s, i) {
+			          if (i <= index) {
+			            s.classList.add('selected');
+			          } else {
+			            s.classList.remove('selected');
+			          }
+			        });
+			        hiddenInput.value = star.getAttribute('data-value');	
+			      });
+			    });
+			  });
 			const productElement = event.target.closest('.profile-item-list-piece');
             const img = productElement.querySelector('img.profile-item-imagesell');
             const imageSrc = img.getAttribute('data-image-src');
@@ -314,11 +352,15 @@ display: inline-block;
             const img = productElement.querySelector('img.profile-item-imagesell');
             const imageSrc = img.getAttribute('data-image-src');
             const productId = img.getAttribute('data-product-id');
-            const reviewContent = img.getAttribute('data-content');
-            document.querySelector('.reviewText').value = reviewContent;
-            modalImage.src = imageSrc;
+            const reviewContent = event.target.getAttribute('data-content');
+            document.querySelector('#reviewText1').value = reviewContent;
+            modalComImage.src = imageSrc;
             productIdInput.value = productId;
-			modal.style.display = "block";
+            updateStarRating('quality', parseInt(event.target.getAttribute('data-reviewQ'), 10));
+            updateStarRating('price', parseInt(event.target.getAttribute('data-reviewP'), 10));
+            updateStarRating('punctuality', parseInt(event.target.getAttribute('data-reviewT'), 10));
+            updateStarRating('manner', parseInt(event.target.getAttribute('data-reviewM'), 10));
+			modalCom.style.display = "block";
 		}
 	});
 	
@@ -327,37 +369,29 @@ display: inline-block;
 	  modal.style.display = "none";
 	}
 	
+	span2.onclick = function() {
+		  modalCom.style.display = "none";
+		}
+	
 	// 모달 외부를 클릭하면 모달을 닫기
 	window.onclick = function(event) {
 	  if (event.target == modal) {
 	    modal.style.display = "none";
 	  }
 	}
+	
+	window.onclick = function(event) {
+		  if (event.target == modalCom) {
+		    modalCom.style.display = "none";
+		  }
+		}
 </script>
 
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
 	// 구매 후기 별모양 이벤트
-	document.querySelectorAll('.stars').forEach(function(starGroup) {
-	    const stars = starGroup.querySelectorAll('.star');
-	    const hiddenInputId = starGroup.getAttribute('data-name') + 'Rating';
-	    const hiddenInput = document.getElementById(hiddenInputId);
-
-	    stars.forEach(function(star, index) {
-	      star.addEventListener('click', function() {
-	        // 선택된 별까지 색상 변경
-	        stars.forEach(function(s, i) {
-	          if (i <= index) {
-	            s.classList.add('selected');
-	          } else {
-	            s.classList.remove('selected');
-	          }
-	        });
-	        hiddenInput.value = star.getAttribute('data-value');	
-	      });
-	    });
-	  });
+	
 	
 	// 물품 등록 시간 가져오기
     function formatTimeAgo(date) {
