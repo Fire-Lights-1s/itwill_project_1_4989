@@ -55,7 +55,7 @@
 				</div>	
 				<div id="chatTotalRoom">
 					<c:forEach var="chatRoom" items="${chatRoomDTOList }">
-					<div id="${chatRoom.chat_room_id }" onclick="connect('<c:out value="${chatRoom}"/>');">
+					<div id="${chatRoom.chat_room_id }" onclick="connect(`<c:out value="${chatRoom}"/>`);">
 						<div class="profile">
 							<img alt="" src="${chatRoom.product_img1 }">
 						</div>
@@ -107,7 +107,7 @@
 					<button>
 						<img alt="" src="${pageContext.request.contextPath }/resources/img/icon/plus_icon.png">
 					</button>
-					<textarea id="message"></textarea>
+					<textarea id="message" onkeyup="enterkey()"></textarea>
 					<button onclick="sendChat()">
 						<img alt="" src="${pageContext.request.contextPath }/resources/img/icon/chat_send.png">
 					</button>

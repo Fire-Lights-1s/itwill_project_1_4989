@@ -8,7 +8,7 @@
 		select count(*)
 		from Report
 		<if test="search != null">
-			where reporter_id like "%#{search}%" 
+			where report_id like "%#{search}%" 
 			or reporter_id like "%#{search}%" 
 			or reportee_id like "%#{search}%" 
 			or CONVERT(reported_item_id, CHAR) like "%#{search}%" 
@@ -22,7 +22,18 @@
 	<select id="getReportList" resultType="com.itwillbs.domain.ReportDTO"> 
 		select *
 		from Report
+		<if test="search != null">
+			where report_id like "%#{search}%" 
+			or reporter_id like "%#{search}%" 
+			or reportee_id like "%#{search}%" 
+			or CONVERT(reported_item_id, CHAR) like "%#{search}%" 
+			or report_type like "%#{search}%" 
+			or report_contents like "%#{search}%" 
+			or reported_at like "%#{search}%" 
+			or report_status like "%#{search}%" 
+		</if>
 		order by reported_at desc
+		limit #{startRow}, #{pageSize}
 	</select>
 	
 	
