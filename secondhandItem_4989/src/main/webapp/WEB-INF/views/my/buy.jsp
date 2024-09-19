@@ -18,8 +18,8 @@
 <%-- 	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script> --%>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
 <style>
+
 textarea {
     width: 100%;
     height: 6.25em;
@@ -101,10 +101,10 @@ display: inline-block;
 				<span class="close">&times;</span>
 				<h2 style="margin-bottom: 20px;">구매 후기</h2>
 				<div style="float: left; overflow:hidden;">
-					<img id="modalImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
+					<img class="modalImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
 		    	</div>
 		    	<form action="${pageContext.request.contextPath}/my/reviewPro" method="post">
-					<div id="starRating">
+					<div class="starRating">
 					<label for="quality">품&emsp;&emsp;질 :</label>
 						<div class="stars" data-name="quality" style="display: inline-block;">
 						    <span class="star" data-value="1">☆</span>
@@ -142,10 +142,54 @@ display: inline-block;
 					<input type="hidden" id="priceRating" name="priceRating" value="1">
 					<input type="hidden" id="punctualityRating" name="punctualityRating" value="1">
 					<input type="hidden" id="mannerRating" name="mannerRating" value="1">
-		      		<textarea id="reviewText" name="reviewText" rows="4" cols="50" placeholder="후기 내용"></textarea><br>
+		      		<textarea class="reviewText" name="reviewText" rows="4" cols="50" placeholder="후기 내용"></textarea><br>
 		      		<input type="hidden" id="productId" name="productId" value="">
 		      		<button type="submit">작성 완료</button>
 		    	</form>
+			</div>
+		</div>
+		<div id="reviewComModal" class="modal" style="display: none;">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2 style="margin-bottom: 20px;">구매 후기</h2>
+				<div style="float: left; overflow:hidden;">
+					<img class="modalImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
+		    	</div>
+					<div class="starRating">
+					<label for="quality">품&emsp;&emsp;질 :</label>
+						<div class="stars" data-name="quality" style="display: inline-block;">
+						    <span class="star" data-value="1">☆</span>
+						    <span class="star" data-value="2">☆</span>
+						    <span class="star" data-value="3">☆</span>
+						    <span class="star" data-value="4">☆</span>
+						    <span class="star" data-value="5">☆</span>
+						</div><br>
+				    <label for="price">가&emsp;&emsp;격 :</label>
+						<div class="stars" data-name="price" style="display: inline-block;">
+						    <span class="star" data-value="1">☆</span>
+						    <span class="star" data-value="2">☆</span>
+						    <span class="star" data-value="3">☆</span>
+						    <span class="star" data-value="4">☆</span>
+						    <span class="star" data-value="5">☆</span>
+						</div><br>
+					<label for="punctuality">시간 약속 :</label>
+					    <div class="stars" data-name="punctuality" style="display: inline-block;">
+						    <span class="star" data-value="1">☆</span>
+						    <span class="star" data-value="2">☆</span>
+						    <span class="star" data-value="3">☆</span>
+						    <span class="star" data-value="4">☆</span>
+						    <span class="star" data-value="5">☆</span>
+					    </div><br>
+					<label for="manner">매&emsp;&emsp;너 :</label>
+					    <div class="stars" data-name="manner" style="display: inline-block; margin-bottom: 20px;">
+						    <span class="star" data-value="1">☆</span>
+						    <span class="star" data-value="2">☆</span>
+						    <span class="star" data-value="3">☆</span>
+						    <span class="star" data-value="4">☆</span>
+						    <span class="star" data-value="5">☆</span>
+					    </div>
+					</div>
+		      		<textarea class="reviewText" name="reviewText" rows="4" cols="50"></textarea><br>
 			</div>
 		</div>
 			<h2>구매 내역</h2>
@@ -187,7 +231,7 @@ display: inline-block;
 							구매 진행 중
 						</div>
 					</c:if>
-					<c:if test="${productDTO.trade_status eq '거래 완료'}">
+					<c:if test="${productDTO.trade_status eq '거래 완료' or productDTO.trade_status eq '후기 작성 완료'}">
 						<div class="profile-item-image-cover2">
 							구매 완료
 						</div>	
@@ -210,8 +254,8 @@ display: inline-block;
 						<c:if test="${productDTO.trade_status eq '거래 완료'}">
 							&emsp;<button class="reviewBtn">후기 작성</button>&emsp;
 						</c:if>
-						<c:if test="${productDTO.review_status}">
-							&emsp;<button class="reviewBtn">나의 후기</button>&emsp;
+						<c:if test="${productDTO.trade_status eq '후기 작성 완료'}">
+							&emsp;<button class="reviewComBtn" style="background-color: #0040FF;" data-content="${productDTO.review_content}">나의 후기</button>&emsp;
 						</c:if>
 					</div>
 					<div class="profile-item-detail1">
@@ -247,7 +291,7 @@ display: inline-block;
 
 <script>
 	// 모달 및 버튼 요소 가져오기
-	const modalImage = document.querySelector("#modalImage");
+	const modalImage = document.querySelector(".modalImage");
 	const productIdInput = document.querySelector("#productId");
 	const modal = document.querySelector("#reviewModal");
 	const span = document.getElementsByClassName("close")[0];
@@ -258,6 +302,20 @@ display: inline-block;
             const img = productElement.querySelector('img.profile-item-imagesell');
             const imageSrc = img.getAttribute('data-image-src');
             const productId = img.getAttribute('data-product-id');
+            modalImage.src = imageSrc;
+            productIdInput.value = productId;
+			modal.style.display = "block";
+		}
+	});
+	
+	document.querySelectorAll('.reviewComBtn').forEach(function(btn) {
+		btn.onclick = function(event) {
+			const productElement = event.target.closest('.profile-item-list-piece');
+            const img = productElement.querySelector('img.profile-item-imagesell');
+            const imageSrc = img.getAttribute('data-image-src');
+            const productId = img.getAttribute('data-product-id');
+            const reviewContent = img.getAttribute('data-content');
+            document.querySelector('.reviewText').value = reviewContent;
             modalImage.src = imageSrc;
             productIdInput.value = productId;
 			modal.style.display = "block";
