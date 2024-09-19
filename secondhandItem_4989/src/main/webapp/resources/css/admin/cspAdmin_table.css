@@ -1,0 +1,212 @@
+@charset "UTF-8";
+.flex-right-50pct{
+	margin-left: auto;
+	flex-direction:row;
+	justify-content: flex-end;
+	width: 50%;
+}
+.btn img{
+	width: 1rem;
+	height: 1rem;
+}
+.table-earning thead th{
+	background-color: #4b0082;
+}
+.up-triangle{
+	float:right;
+	vertical-align: middle;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0px 10px 10px 10px;
+	border-color: transparent transparent #ebe8ff transparent;
+}
+.down-triangle{
+	float:right;
+	vertical-align: middle;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 10px 10px 0px 10px;
+	border-color: transparent transparent #ebe8ff transparent;
+}
+.page-link{
+	min-width: 35px;
+	text-align: center;
+}
+.page-item.active .page-link{
+	background-color: #4b0082;
+	border-color: #4b0082;
+}
+.page-link{
+	color: #4b0082;	
+}
+.btn-purple {
+    color: #fff;
+    background-color: #4b0082;
+    border-color: #4b0082;
+}
+
+.btn-write {
+	border: solid 1px #4b0082;
+	border-radius: 5px;
+	font-weight: 500;
+	color: white;
+	background-color: #4b0082;
+}
+
+.btn-write:hover {
+	color: white;
+	background-color: #1c0037;
+	}
+
+
+/* 폼 관련 시작 */
+
+.form-container {
+    width: 60%;
+    margin: 50px auto;
+    padding: 50px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-container .form-group {
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.form-container
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.form-container textarea {
+    resize: none;
+}
+
+.form-container .submit-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+    background-color: #5e239d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+}
+
+.form-container .submit-btn:hover {
+    background-color: #481a7a;
+}
+	
+
+
+.detail-container {
+    width: 60%;
+    margin: 50px auto;
+    padding: 50px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.detail-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.detail-container .post-detail {
+    margin-bottom: 30px;
+}
+
+.detail-container .post-group {
+    margin-bottom: 20px;
+}
+
+.detail-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.detail-container p, pre {
+    padding: 12px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.detail-container pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.button-group {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.detail-container .btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+    background-color: #5e239d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+}
+
+.detail-container .btn:hover {
+    background-color: #481a7a;
+}
+
+.detail-container .btn-edit {
+    background-color: #007bff;
+}
+
+.detail-container .btn-edit:hover {
+    background-color: #0056b3;
+}
+
+.detail-container .btn-delete {
+    background-color: #dc3545;
+}
+
+.detail-container .btn-delete:hover {
+    background-color: #c82333;
+}
+	
+	

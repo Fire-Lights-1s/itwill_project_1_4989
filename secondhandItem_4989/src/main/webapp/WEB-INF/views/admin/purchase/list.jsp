@@ -18,7 +18,7 @@
 
 	<jsp:include page="../inc/cssLink.jsp"></jsp:include>
 	<!-- 본인의 커스텀 css link 위치는 여기서부터 -->
-	<link href="${pageContext.request.contextPath }/resources/css/admin/purchaseAdmin_table.css"  rel="stylesheet">
+	<link href="${pageContext.request.contextPath }/resources/css/admin/cspAdmin_table.css"  rel="stylesheet">
 </head>
 <body>
 	<div class="page-wrapper">

@@ -16,26 +16,45 @@ public class AdminService {
 	@Inject
 	private AdminDAO adminDAO;
 	
-	public PageDTO getPageDTOStartEndBoard(PageDTO pageDTO) {
+	public void getStartEndRow(PageDTO pageDTO) {
 		PageDTO page = pageDTO; 
 		int pageSize = page.getPageSize();
 		int currentPage = page.getCurrentPage();
 		int pageCount = (int) Math.ceil(page.getCount() / (double)pageSize);
 		//page.getCount() + (pageSize - (page.getCount() % pageSize)) % pageSize
 		
+		if(currentPage < 1) {
+			currentPage = 1;
+		}
 		if(currentPage > pageCount) {
 			currentPage = pageCount;
 		}
 		page.setCurrentPage(currentPage);
 		page.setPageCount(pageCount);
-		page.setStartRow((currentPage-1)*pageSize + 1);
+		page.setStartRow((currentPage-1)*pageSize);
 		page.setEndRow(currentPage*pageSize);
 		
-		return page;
 	}
-	public List<ReportDTO> getReportList(Object object) {
-		// TODO Auto-generated method stub
-		return null;
+	public void getStartEndPage(PageDTO pageDTO) {
+		int pageBlock = pageDTO.getPageBlock();
+		int currentPage = pageDTO.getCurrentPage();
+		int startPage = ((currentPage-1)/pageBlock)*pageBlock +1;
+		int endPage = ((currentPage-1)/pageBlock)*pageBlock+pageBlock;
+		if(pageDTO.getPageCount() <startPage ) {
+			startPage = pageDTO.getPageCount();
+		}
+		if(pageDTO.getPageCount() <endPage ) {
+			endPage = pageDTO.getPageCount();
+		}
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+	}
+	public List<ReportDTO> getReportList(PageDTO pageDTO) {
+		getStartEndRow(pageDTO);
+		getStartEndPage(pageDTO);
+		
+		List<ReportDTO> reportList = adminDAO.getReportList(pageDTO);
+		return reportList;
 	}
 
 	public int getReportCount(PageDTO pageDTO) {

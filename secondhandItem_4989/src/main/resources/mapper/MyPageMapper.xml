@@ -83,10 +83,10 @@
 	</delete>
 	
 	<select id="getBuyList" resultType="com.itwillbs.domain.ProductDTO">
-		select p.product_id, p.seller_id, p.product_name, p.product_price, p.product_img1, p.created_datetime, p.trade_status, t.buyer_id, t.transaction_end_date, t.is_reserved, t.reservation_date, r.review_content from 
+		select p.product_id, p.seller_id, p.product_name, p.product_price, p.product_img1, p.created_datetime, p.trade_status, t.buyer_id, t.transaction_end_date, t.is_reserved, t.reservation_date, r.review_content, r.review_quality, r.review_price, r.review_time, r.review_manner from 
 		Product p join TX t
 		on p.product_id = t.product_id
-		join Review r
+		left join Review r
 		on p.product_id = r.product_id
 		where t.buyer_id = #{seller_id}
 		<if test="sale == '' or sale == null">

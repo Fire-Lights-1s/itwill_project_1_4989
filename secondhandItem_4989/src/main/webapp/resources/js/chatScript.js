@@ -23,7 +23,7 @@ function setConnected() {
 // 채팅방 연결
 function connect(chatRoom_json){
 	
-	chatRoomGlobal = JSON.parse(chatRoom_json.replaceAll("&#034;", "\""));
+	chatRoomGlobal = JSON.parse(chatRoom_json.replaceAll("&#034;", "\"").replaceAll("\n","<br>"));
     disconnect();
     let socket = new SockJS('/secondhand4989/chatting');
     stompClient = Stomp.over(socket);
@@ -174,16 +174,23 @@ function loadProduct(chatRoom_json){
 
 //채팅 보내기
 function sendChat() {
-    if ($("#message").val() != "") {
+	let sendMessage = $("#message").val();
+    if (sendMessage != "" && sendMessage.replaceAll("\n","") != "" ) {
     	let data = {
     	"message_type":"MESSAGE",
     	"user_id": userId,
-    	"message":$('#message').val(),
+    	"message":sendMessage,
     	}
     	
         stompClient.send("/send/"+chatRoomGlobal.chat_room_id, {},
             JSON.stringify(data));
         $("#message").val('');
+    }
+}
+function enterkey() {
+	if (window.event.keyCode == 13) {
+    	sendChat();
+    	$("#message").val('');
     }
 }
 //보낸 채팅 보기
@@ -227,9 +234,9 @@ function showChat(chatMessage) {
     messageDiv.append(message);
     messageDiv.append(sendTime);
     $("#chatContent").append(messageDiv);
-    //console.log(chatMessage);
-    //console.log(message);
+    $("#chatContent").scrollTop($("#chatContent")[0].scrollHeight);
 }//showChat()
+
 
 //상품 예약 및 구매
 function promiseTrade(){
