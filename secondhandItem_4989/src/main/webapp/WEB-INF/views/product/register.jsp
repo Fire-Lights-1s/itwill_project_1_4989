@@ -98,8 +98,7 @@
 							<div class="form-group image-upload">
 								<label for="product_img">사진 선택</label>
 								<!--     <input type="file" id="product_img" name="product_img" class="login-bttn" multiple> -->
-								<input type="file" id="product_img1" name="product_img"
-									class="file_upload">
+								<input type="file" id="product_img1" name="product_img" class="file_upload">
 								<input type="file" id="product_img2" name="product_img" class="file_upload">
 								<input type="file" id="product_img3" name="product_img" class="file_upload">
 								<input type="file" id="product_img4" name="product_img" class="file_upload">
@@ -220,15 +219,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function getImageFiles(event) {
         const files = event.currentTarget.files;
-
+        
+        //alert( files);
         // 선택된 파일들을 배열에 추가
         [...files].forEach(file => {
             uploadFiles.push(file);
             dataTransfer.items.add(file);  // **노란색 주석: dataTransfer에 파일 추가**
+           
+            
         });
 
-        // 파일 입력 요소에 DataTransfer의 파일 리스트를 설정
-        event.currentTarget.files = dataTransfer.files;  // **노란색 주석: 입력 요소에 누적된 파일 리스트 설정**
+        // 이놈 때문에 업로드 안한 파일명에 중복 이름 들어갔음!!
+        //event.currentTarget.files = dataTransfer.files;
 
         // 미리보기 업데이트
         updateImagePreview();

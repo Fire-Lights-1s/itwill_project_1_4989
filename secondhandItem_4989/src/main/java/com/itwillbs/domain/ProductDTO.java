@@ -59,18 +59,26 @@ public class ProductDTO {
    
   
 
+	
+	
+
+
 	@Override
 	public String toString() {
-		return "ProductDTO [product_id=" + product_id + ", category_name=" + category_name + ", seller_id=" + seller_id 
+		return "ProductDTO [product_id=" + product_id + ", category_name=" + category_name + ", seller_id=" + seller_id
 				+ ", product_name=" + product_name + ", product_price=" + product_price + ", year_purchase="
 				+ year_purchase + ", product_desc=" + product_desc + ", product_img1=" + product_img1
-				+ ", created_datetime=" + created_datetime + ", view_count=" + view_count + ", like_count=" + like_count
-				+ ", trade_method=" + trade_method + ", pay_method=" + pay_method + ", trade_area=" + trade_area
-				+ ", trade_status=" + trade_status + "]";
+				+ ", product_img2=" + product_img2 + ", product_img3=" + product_img3 + ", product_img4=" + product_img4
+				+ ", product_img5=" + product_img5 + ", created_datetime=" + created_datetime + ", elapsedTime="
+				+ elapsedTime + ", view_count=" + view_count + ", like_count=" + like_count + ", trade_method="
+				+ trade_method + ", pay_method=" + pay_method + ", trade_area=" + trade_area + ", trade_status="
+				+ trade_status + ", buyer_id=" + buyer_id + ", transaction_end_date=" + transaction_end_date
+				+ ", formattedCreatedDatetime=" + formattedCreatedDatetime + ", formattedTransactionEndDate="
+				+ formattedTransactionEndDate + ", review_content=" + review_content + ", review_quality="
+				+ review_quality + ", review_price=" + review_price + ", review_time=" + review_time
+				+ ", review_manner=" + review_manner + "]";
 	}
-	
-	
-	
+
 
 
 	public String getElapsedTime() {

@@ -45,22 +45,9 @@
                 yearInput.value = yearInput.value.slice(0, 4);
             }
         }
+ </script>   
 
-        // 이미지 클릭 시 파일 선택 창 열기
-        document.getElementById('imagePreview').addEventListener('click', function() {
-            document.getElementById('imageInput').click();
-        });
 
-        // 파일 선택 후 미리보기 이미지 업데이트
-        function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                const output = document.getElementById('imagePreview');
-                output.src = reader.result;
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script>
 </head>
 
 <body>
@@ -77,15 +64,68 @@
                     <form action="${pageContext.request.contextPath}/product/updatePro" method="post" class="appform" enctype="multipart/form-data">
                         <input type="hidden" name="product_id" value="${productDTO.product_id}">
 
-                        <!-- 이미지 업로드 및 미리보기 영역 -->
-                        <div class="form-group image-upload">
-                            <label for="product_img">사진 변경</label>
-                            <input type="file" id="product_img1" name="product_img[]" class="login-bttn">
-                            <input type="file" id="product_img2" name="product_img[]" class="login-bttn">
-                            <input type="file" id="product_img3" name="product_img[]" class="login-bttn">
-                            <input type="file" id="product_img4" name="product_img[]" class="login-bttn">
-                            <input type="file" id="product_img5" name="product_img[]" class="login-bttn">
-                        </div>
+<!-- 이미지 업로드 및 미리보기 영역 -->
+<div class="form-group image-upload">
+    <label for="product_img">사진 변경</label>
+
+<!-- 기존 이미지 미리보기 -->
+<c:if test="${not empty productDTO.product_img1}">
+    <div class="image-preview" data-image="${productDTO.product_img1}" style="position:relative; display:inline-block;">
+        <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" alt="이미지 미리보기1" style="width:100px;height:100px;">
+        <button type="button" class="delete-button" onclick="deleteExistingImage('${productDTO.product_img1}')">
+            X
+        </button>
+    </div>
+</c:if>
+
+<c:if test="${not empty productDTO.product_img2}">
+    <div class="image-preview" data-image="${productDTO.product_img2}" style="position:relative; display:inline-block;">
+        <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img2}" alt="이미지 미리보기2" style="width:100px;height:100px;">
+        <button type="button" class="delete-button" onclick="deleteExistingImage('${productDTO.product_img2}')">
+            X
+        </button>
+    </div>
+</c:if>
+
+<c:if test="${not empty productDTO.product_img3}">
+    <div class="image-preview" data-image="${productDTO.product_img3}" style="position:relative; display:inline-block;">
+        <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img3}" alt="이미지 미리보기3" style="width:100px;height:100px;">
+        <button type="button" class="delete-button" onclick="deleteExistingImage('${productDTO.product_img3}')">
+            X
+        </button>
+    </div>
+</c:if>
+
+<c:if test="${not empty productDTO.product_img4}">
+    <div class="image-preview" data-image="${productDTO.product_img4}" style="position:relative; display:inline-block;">
+        <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img4}" alt="이미지 미리보기4" style="width:100px;height:100px;">
+        <button type="button" class="delete-button" onclick="deleteExistingImage('${productDTO.product_img4}')">
+            X
+        </button>
+    </div>
+</c:if>
+
+<c:if test="${not empty productDTO.product_img5}">
+    <div class="image-preview" data-image="${productDTO.product_img5}" style="position:relative; display:inline-block;">
+        <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img5}" alt="이미지 미리보기5" style="width:100px;height:100px;">
+        <button type="button" class="delete-button" onclick="deleteExistingImage('${productDTO.product_img5}')">
+            X
+        </button>
+    </div>
+</c:if>
+
+
+    <!-- 새로운 이미지 업로드 -->
+    <input type="file" id="product_img1" name="product_img[]" class="file_upload">
+    <input type="file" id="product_img2" name="product_img[]" class="file_upload">
+    <input type="file" id="product_img3" name="product_img[]" class="file_upload">
+    <input type="file" id="product_img4" name="product_img[]" class="file_upload">
+    <input type="file" id="product_img5" name="product_img[]" class="file_upload">
+</div>
+
+                        
+                        <!-- 미리보기 이미지가 표시될 컨테이너 -->
+                        <div class="form-group image-preview-container"></div>
 
                         <!-- 카테고리 등 다른 폼 요소 -->
                         <div class="form-group inline-group">
@@ -160,7 +200,99 @@
             </main>
         </div>
     </section>
+    
+<!-- 이미지 관련  -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let uploadFiles = [];
+    let dataTransfer = new DataTransfer(); // **선택한 파일 순서대로 누적 관리**
+    let deletedImages = []; // **삭제된 기존 이미지를 관리할 배열**
 
+    function getImageFiles(event) {
+        const files = event.currentTarget.files;
+
+        // 선택된 파일들을 배열에 추가
+        [...files].forEach(file => {
+            uploadFiles.push(file);
+            dataTransfer.items.add(file);  // **dataTransfer에 파일 추가**
+        });
+
+        // 파일 입력 요소에 DataTransfer의 파일 리스트를 설정
+        event.currentTarget.files = dataTransfer.files;  // **입력 요소에 누적된 파일 리스트 설정**
+
+        // 미리보기 업데이트
+        updateImagePreview();
+    }
+
+    function updateImagePreview() {
+        const container = document.querySelector('.image-preview-container');
+        container.innerHTML = ''; // 기존 미리보기 삭제
+
+        uploadFiles.forEach((file) => {  // **index 매개변수 삭제**
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const imgWrapper = document.createElement('div');
+                imgWrapper.className = 'img-wrapper';
+
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = '이미지 미리보기';
+                img.style.width = '100px';
+                img.style.height = '100px';
+
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML = 'X';
+
+                // **동적 인덱스 사용**
+                deleteButton.onclick = function() {
+                    const currentIndex = uploadFiles.indexOf(file);  // **현재 파일의 인덱스를 동적으로 계산**
+                    if (currentIndex !== -1) {  // **해당 파일이 배열에 존재하는지 확인**
+                        uploadFiles.splice(currentIndex, 1);  // **파일 배열에서 해당 파일 제거**
+                        dataTransfer.items.remove(currentIndex);  // **DataTransfer에서 해당 파일 제거**
+                        updateImagePreview();  // **미리보기 업데이트**
+                    }
+                };
+
+                imgWrapper.appendChild(img);
+                imgWrapper.appendChild(deleteButton);
+                container.appendChild(imgWrapper);
+            }
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+ // **기존 이미지 삭제 기능 추가**
+    function deleteExistingImage(imageName) {
+    const existingImageElement = document.querySelector(`[data-image="${imageName}"]`);
+    if (existingImageElement) {
+        console.log("삭제할 이미지 찾음:", imageName); // 로그 추가
+        existingImageElement.remove();  // 미리보기에서 이미지 삭제
+    } else {
+        console.log("이미지 찾지 못함:", imageName); // 로그 추가
+    }
+}
+
+    // **서버에 삭제할 이미지를 전송하기 위한 히든 필드 설정**
+    document.querySelector('form').addEventListener('submit', function() {
+        const deletedImagesInput = document.createElement('input');
+        deletedImagesInput.type = 'hidden';
+        deletedImagesInput.name = 'deletedImages';
+        deletedImagesInput.value = deletedImages.join(',');  // **삭제된 이미지를 문자열로 변환하여 전송**
+        this.appendChild(deletedImagesInput);
+    });
+
+    // **모든 파일 입력 요소에 동일한 이벤트 핸들러 연결**
+    const fileInputs = document.querySelectorAll('.file_upload');
+    fileInputs.forEach(input => {
+        input.addEventListener('change', getImageFiles);
+    });
+});
+</script>
+    
+    
+<!-- 주소 api  -->
     <script>
         // 다음 주소 API
         function daum_address() {
