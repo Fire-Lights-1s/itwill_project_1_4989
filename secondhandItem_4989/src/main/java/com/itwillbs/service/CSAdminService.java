@@ -57,6 +57,34 @@ public class CSAdminService {
 	public void submitNotice(NoticeDTO noticeDTO) {
 		csAdminDAO.submitNotice(noticeDTO);		
 	}
+
+	public void submitFaq(FaqDTO faqDTO) {
+		csAdminDAO.submitFaq(faqDTO);
+	}
+
+	public NoticeDTO noticeDetail(int notice_id) {
+		return csAdminDAO.noticeDetail(notice_id);
+	}
+
+	public void editNotice(NoticeDTO noticeDTO) {
+		csAdminDAO.editNotice(noticeDTO);		
+	}
+
+	public void deleteNotice(int notice_id) {
+		csAdminDAO.deleteNotice(notice_id);		
+	}
+
+	public FaqDTO faqDetail(int faq_id) {
+		return csAdminDAO.faqDetail(faq_id);
+	}
+
+	public void editFaq(FaqDTO faqDTO) {
+		csAdminDAO.editFaq(faqDTO);
+	}
+
+	public void deleteFaq(int faq_id) {
+		csAdminDAO.deletFaq(faq_id);
+	}
 	
 	
 }

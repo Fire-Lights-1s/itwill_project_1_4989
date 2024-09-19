@@ -200,6 +200,14 @@
             });
         });
     });
+    
+	const contextPath = '${pageContext.request.contextPath}/admin/cs/';
+	$(document).ready(function(){
+	    $("tr").off('click').on('click', function(){
+			window.location.href = contextPath + 'inquirydetail?inquiry_id=' + $(this).data('inquiry-id');
+	    });
+	});
+    
 	</script>
 </body>
 </html>

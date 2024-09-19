@@ -63,8 +63,8 @@
 	                                <td class="text-center">${noticeList.notice_id}</td>
 	                                <td class="text-center">
 		                                <c:choose>
-										    <c:when test="${fn:length(noticeList.notice_name) > 15}">
-										        ${fn:substring(noticeList.notice_name, 0, 15)}...
+										    <c:when test="${fn:length(noticeList.notice_name) > 18}">
+										        ${fn:substring(noticeList.notice_name, 0, 18)}...
 										    </c:when>
 										    <c:otherwise>
 										        ${noticeList.notice_name}
@@ -189,7 +189,7 @@
 
     <jsp:include page="../../inc/jsLink.jsp"></jsp:include>
     <!-- 본인의 커스텀 js link 위치는 여기서부터 -->
-    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/purchase_admin.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/cs_admin.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const menuItems = document.querySelectorAll('.has-sub .js-arrow');
@@ -202,6 +202,14 @@
             });
         });
     });
+    
+	const contextPath = '${pageContext.request.contextPath}/admin/cs/';
+	$(document).ready(function(){
+	    $("tr").off('click').on('click', function(){
+			window.location.href = contextPath + 'noticedetail?notice_id=' + $(this).data('notice-id');
+	    });
+	});
+
 	</script>
 </body>
 </html>

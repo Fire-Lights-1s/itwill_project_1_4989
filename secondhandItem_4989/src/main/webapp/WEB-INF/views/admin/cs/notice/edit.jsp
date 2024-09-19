@@ -37,19 +37,23 @@
             <!-- 본문내용은-->
             
     <div class="form-container">
-        <h2>공지사항 등록</h2>
-        <form action="${pageContext.request.contextPath }/admin/cs/submitNotice" method="POST">
+        <h2>공지사항 수정</h2>
+        <form action="${pageContext.request.contextPath }/admin/cs/editNotice" method="POST">
+         	<div class="form-group">
+                <label for="post-title">공지사항ID</label>
+                <input type="text" id="id" name="notice_id" value="${noticeDTO.notice_id }" readonly>
+            </div>
             <div class="form-group">
                 <label for="title">제목</label>
-                <input type="text" id="title" name="notice_name" required>
+                <input type="text" id="title" name="notice_name" value="${noticeDTO.notice_name}" required>
             </div>
             <div class="form-group">
                 <label for="content">내용</label>
-                <textarea id="content" name="notice_cont" rows="10" required></textarea>
+                <textarea id="content" name="notice_cont" rows="10" required>${noticeDTO.notice_cont}</textarea>
             </div>
             <div class="button-group">
                 <button type="button" class="submit-btn" onclick="window.history.back();">취소하기</button>
-                <button type="submit" class="submit-btn">등록하기</button>
+                <button type="submit" class="submit-btn">수정하기</button>
             </div>
         </form>
     </div>     

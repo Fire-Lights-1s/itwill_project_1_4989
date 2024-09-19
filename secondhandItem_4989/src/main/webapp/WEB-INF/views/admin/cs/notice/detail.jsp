@@ -36,23 +36,33 @@
 			<div class="main-content">
             <!-- 본문내용은-->
             
-    <div class="form-container">
-        <h2>공지사항 등록</h2>
-        <form action="${pageContext.request.contextPath }/admin/cs/submitNotice" method="POST">
-            <div class="form-group">
-                <label for="title">제목</label>
-                <input type="text" id="title" name="notice_name" required>
+     <div class="detail-container">
+        <h2>${noticeDTO.notice_id }번 공지사항 내용 조회</h2>
+        <div class="post-detail">
+            <div class="post-group">
+                <label for="post-title">공지사항ID</label>
+                <p>${noticeDTO.notice_id }</p>
             </div>
-            <div class="form-group">
-                <label for="content">내용</label>
-                <textarea id="content" name="notice_cont" rows="10" required></textarea>
+            <div class="post-group">
+                <label for="post-title">제목</label>
+                <p>${noticeDTO.notice_name }</p>
             </div>
-            <div class="button-group">
-                <button type="button" class="submit-btn" onclick="window.history.back();">취소하기</button>
-                <button type="submit" class="submit-btn">등록하기</button>
+            <div class="post-group">
+                <label for="post-content">내용</label>
+                <pre>${noticeDTO.notice_cont }</pre>
             </div>
-        </form>
-    </div>     
+            <div class="post-group">
+                <label for="post-content">등록일</label>
+                <pre>${noticeDTO.notice_date }</pre>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="${pageContext.request.contextPath }/admin/cs/notice" class="btn">목록으로</a>
+            <a href="${pageContext.request.contextPath }/admin/cs/notice/edit?notice_id=${noticeDTO.notice_id}" class="btn btn-edit">수정</a>
+            <a href="${pageContext.request.contextPath }/admin/cs/notice/delete?notice_id=${noticeDTO.notice_id}" class="btn btn-delete" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+        </div>
+    </div>
             
             <!-- 이 사이에 넣어주세요.-->
             </div>

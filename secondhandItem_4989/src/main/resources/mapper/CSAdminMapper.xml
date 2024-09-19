@@ -70,6 +70,34 @@
 	INSERT INTO Notice(notice_name, notice_cont) VALUES(#{notice_name}, #{notice_cont})
 	</insert>
 	
+	<select id="noticeDetail" resultType="com.itwillbs.domain.NoticeDTO">
+	SELECT * FROM Notice WHERE notice_id=#{notice_id}
+	</select>
+	
+	<update id="editNotice">
+	UPDATE Notice SET notice_name=#{notice_name}, notice_cont=#{notice_cont} WHERE notice_id=#{notice_id}
+	</update>
+	
+	<delete id="deleteNotice">
+	DELETE FROM Notice WHERE notice_id=#{notice_id}
+	</delete>
+	
+	<insert id="submitFaq">
+	INSERT INTO FAQ(faq_quest, faq_answer) VALUES(#{faq_quest}, #{faq_answer})
+	</insert>
+	
+	<select id="faqDetail" resultType="com.itwillbs.domain.FaqDTO">
+	SELECT * FROM FAQ WHERE faq_id=#{faq_id}
+	</select>
+	
+	<update id="editFaq">
+	UPDATE FAQ SET faq_quest=#{faq_quest}, faq_answer=#{faq_answer} WHERE faq_id=#{faq_id}
+	</update>
+	
+	<delete id="deleteFaq">
+	DELETE FROM FAQ WHERE faq_id=#{faq_id}
+	</delete>
+	
 	
 	
 <!-- 	<update id="savePurchaseInfo" parameterType="map"> -->

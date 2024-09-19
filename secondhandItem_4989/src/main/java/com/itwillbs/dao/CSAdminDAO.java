@@ -47,7 +47,35 @@ public class CSAdminDAO {
 	public void submitNotice(NoticeDTO noticeDTO) {
 		sqlSession.insert(namespace + ".submitNotice", noticeDTO);	
 	}
-	
+
+	public void submitFaq(FaqDTO faqDTO) {
+		sqlSession.insert(namespace + ".submitFaq", faqDTO);
+		
+	}
+
+	public NoticeDTO noticeDetail(int notice_id) {
+		return sqlSession.selectOne(namespace + ".noticeDetail", notice_id);
+	}
+
+	public void editNotice(NoticeDTO noticeDTO) {
+		sqlSession.update(namespace + ".editNotice", noticeDTO);
+	}
+
+	public void deleteNotice(int notice_id) {
+		sqlSession.delete(namespace + ".deleteNotice", notice_id);
+	}
+
+	public FaqDTO faqDetail(int faq_id) {
+		return sqlSession.selectOne(namespace + ".faqDetail", faq_id);
+	}
+
+	public void editFaq(FaqDTO faqDTO) {
+		sqlSession.update(namespace + ".editFaq", faqDTO);
+	}
+
+	public void deletFaq(int faq_id) {
+		sqlSession.delete(namespace + ".deleteFaq", faq_id);
+	}
 	
 	
 

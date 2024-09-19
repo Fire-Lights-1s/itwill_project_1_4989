@@ -35,25 +35,27 @@
 			
 			<div class="main-content">
             <!-- 본문내용은-->
-            
     <div class="form-container">
-        <h2>공지사항 등록</h2>
-        <form action="${pageContext.request.contextPath }/admin/cs/submitNotice" method="POST">
-            <div class="form-group">
-                <label for="title">제목</label>
-                <input type="text" id="title" name="notice_name" required>
+        <h2>자주 묻는 질문(FAQ) 수정</h2>
+        <form action="${pageContext.request.contextPath }/admin/cs/editFaq" method="POST">
+         	<div class="form-group">
+                <label for="post-title">FAQ ID</label>
+                <input type="text" id="id" name="faq_id" value="${faqDTO.faq_id }" readonly>
             </div>
             <div class="form-group">
-                <label for="content">내용</label>
-                <textarea id="content" name="notice_cont" rows="10" required></textarea>
+                <label for="title">자주 묻는 질문</label>
+                <input type="text" id="title" name="faq_quest" value="${faqDTO.faq_quest}" required>
+            </div>
+            <div class="form-group">
+                <label for="content">답변</label>
+                <textarea id="content" name="faq_answer" rows="10" required>${faqDTO.faq_answer}</textarea>
             </div>
             <div class="button-group">
                 <button type="button" class="submit-btn" onclick="window.history.back();">취소하기</button>
-                <button type="submit" class="submit-btn">등록하기</button>
+                <button type="submit" class="submit-btn">수정하기</button>
             </div>
         </form>
     </div>     
-            
             <!-- 이 사이에 넣어주세요.-->
             </div>
 			

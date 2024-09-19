@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.domain.FaqDTO;
 import com.itwillbs.domain.InquiryDTO;
@@ -79,6 +80,31 @@ public class CSAdminController {
 		return "redirect:/admin/cs/notice";
 	}
 	
+	@GetMapping("/noticedetail")
+	public String noticeDetail(@RequestParam int notice_id, Model model) {
+		NoticeDTO noticeDTO = csAdminService.noticeDetail(notice_id);
+		model.addAttribute("noticeDTO", noticeDTO);
+		return "/admin/cs/notice/detail";
+	}
+	
+	@GetMapping("/notice/edit")
+	public String editNotice(@RequestParam int notice_id, Model model) {
+		NoticeDTO noticeDTO = csAdminService.noticeDetail(notice_id);
+		model.addAttribute("noticeDTO", noticeDTO);
+		return "/admin/cs/notice/edit";
+	}
+	
+	@PostMapping("/editNotice")
+	public String editNoticePro(NoticeDTO noticeDTO) {
+		csAdminService.editNotice(noticeDTO);
+		return "redirect:/admin/cs/notice";
+	}
+	
+	@GetMapping("/notice/delete")
+	public String deleteNotice(@RequestParam int notice_id) {
+		csAdminService.deleteNotice(notice_id);
+		return "redirect:/admin/cs/notice";
+	}
 	
 	
 	@GetMapping("/faq")
@@ -128,6 +154,38 @@ public class CSAdminController {
 	@GetMapping("/faqform")
 	public String faqForm() {
 		return "/admin/cs/faq/form";
+	}
+	
+	@PostMapping("/submitFaq")
+	public String submitFaq(FaqDTO faqDTO) {
+		csAdminService.submitFaq(faqDTO);
+		return "redirect:/admin/cs/faq";
+	}
+	
+	@GetMapping("/faqdetail")
+	public String faqDetail(@RequestParam int faq_id, Model model) {
+		FaqDTO faqDTO = csAdminService.faqDetail(faq_id);
+		model.addAttribute("faqDTO", faqDTO);
+		return "/admin/cs/faq/detail";
+	}
+	
+	@GetMapping("/faq/edit")
+	public String editFaq(@RequestParam int faq_id, Model model) {
+		FaqDTO faqDTO = csAdminService.faqDetail(faq_id);
+		model.addAttribute("faqDTO", faqDTO);
+		return "/admin/cs/faq/edit";
+	}
+	
+	@PostMapping("/editFaq")
+	public String editFaqPro(FaqDTO faqDTO) {
+		csAdminService.editFaq(faqDTO);
+		return "redirect:/admin/cs/faq";
+	}
+	
+	@GetMapping("/faq/delete")
+	public String deleteFaq(@RequestParam int faq_id) {
+		csAdminService.deleteFaq(faq_id);
+		return "redirect:/admin/cs/faq";
 	}
 	
 	
