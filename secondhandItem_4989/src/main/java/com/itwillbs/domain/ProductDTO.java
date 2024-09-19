@@ -48,6 +48,8 @@ public class ProductDTO {
     // 날짜 포맷된 문자열을 저장할 필드
     private String formattedCreatedDatetime;
     private String formattedTransactionEndDate;
+    //review 유무
+    private String review_content;
     
    
   
@@ -333,6 +335,22 @@ public class ProductDTO {
 
 	public void setFormattedTransactionEndDate(String formattedTransactionEndDate) {
 		this.formattedTransactionEndDate = formattedTransactionEndDate;
+	}
+
+
+
+
+
+	public String getReview_content() {
+		return review_content;
+	}
+
+
+
+
+
+	public void setReview_content(String review_content) {
+		this.review_content = review_content;
 	}
 
 
