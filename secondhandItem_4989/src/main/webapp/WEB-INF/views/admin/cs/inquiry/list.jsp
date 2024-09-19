@@ -37,10 +37,10 @@
             <!-- 본문내용은-->
             <div class="container-fluid">
 				<div class="col-lg-auto">
-	                <h2 class="title-1 m-b-25">1:1문의 관리</h2>
+	                <h2 class="title-1 m-b-25">1 : 1 문의 관리</h2>
 	                <div class="input-group mb-3 flex-right-50pct">
-	                  <form action="${pageContext.request.contextPath }/admin/purchase" style="display:flex;">
-					    <input type="text" class="form-control" name="search" placeholder="회원아이디, 상품명 등으로 검색" aria-label="Recipient's username" aria-describedby="button-addon2" style="width:300px;">
+	                  <form action="${pageContext.request.contextPath }/admin/inquiry" style="display:flex;">
+					    <input type="text" class="form-control" name="search" placeholder="회원아이디, 문의내용 등으로 검색" aria-label="Recipient's username" aria-describedby="button-addon2" style="width:300px;">
 					    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
 					  	  <img alt="검색" src="${pageContext.request.contextPath }/resources/img/icon/search.png">
 					    </button>
@@ -50,36 +50,48 @@
 	                    <table class="table table-borderless table-striped table-earning">
 	                        <thead>
 	                            <tr>
-	                                <th id="purchase_id" class="text-center">매입ID</th>
-	                                <th id="member_id" class="text-center">신청자ID</th>
-	                                <th id="pc_item_name" class="text-center">매입상품</th>
-	                                <th id="expected_grade" class="text-center">예상등급</th>
-	                                <th id="expected_price" class="text-center">예상매입가</th>
-	                                <th id="shipping_method" class="text-center">발송방법</th>
-	                                <th id="request_date" class="text-center">신청일시</th>
-	                                <th id="purchase_status" class="text-center">상태</th>
-	                            </tr>
+	                                <th id="inquiry_id" class="text-center">문의번호</th>
+	                                <th id="member_id" class="text-center">문의자ID</th>
+	                                <th id="inquiry_title" class="text-center">문의 제목</th>
+	                                <th id="inquiry_contents" class="text-center">문의 내용</th>
+	                                <th id="inquiried_at" class="text-center">문의 일시</th>
+	                                <th id="replied_at" class="text-center">답변 일시</th>
+                                </tr>
 	                        </thead>
 	                        <tbody>
-	                        	<c:forEach var="purchaseList" items="${purchaseList }">
-	                            <tr data-purchase-id="${purchaseList.purchase_id }">
-	                                <td class="text-center">${purchaseList.purchase_id}</td>
-	                                <td class="text-center">${purchaseList.member_id}</td>
+	                        	<c:forEach var="inquiryList" items="${inquiryList }">
+	                            <tr data-inquiry-id="${inquiryList.inquiry_id }">
+	                                <td class="text-center">${inquiryList.inquiry_id}</td>
+	                                <td class="text-center">${inquiryList.member_id}</td>
 	                                <td class="text-center">
 	                                <c:choose>
-									    <c:when test="${fn:length(purchaseList.pc_item_name) > 10}">
-									        ${fn:substring(purchaseList.pc_item_name, 0, 10)}...
+									    <c:when test="${fn:length(inquiryList.inquiry_title) > 15}">
+									        ${fn:substring(inquiryList.inquiry_title, 0, 15)}...
 									    </c:when>
 									    <c:otherwise>
-									        ${purchaseList.pc_item_name}
+									        ${inquiryList.inquiry_title}
 									    </c:otherwise>
 									</c:choose>
 	                                </td>
-	                                <td class="text-center">${purchaseList.expected_grade}</td>
-	                                <td class="text-center"><fmt:formatNumber value="${purchaseList.expected_price}" type="number"/></td>
-	                                <td class="text-center">${purchaseList.shipping_method}</td>
-	                                <td class="text-center"><fmt:formatDate value="${purchaseList.request_date}" pattern="yyyy-MM-dd HH:mm"/></td>
-	                                <td class="text-center">${purchaseList.purchase_status}</td>
+	                                <td class="text-center">
+	                                <c:choose>
+									    <c:when test="${fn:length(inquiryList.inquiry_contents) > 25}">
+									        ${fn:substring(inquiryList.inquiry_contents, 0, 25)}...
+									    </c:when>
+									    <c:otherwise>
+									        ${inquiryList.inquiry_contents}
+									    </c:otherwise>
+									</c:choose>
+	                                </td>
+	                                <td class="text-center"><fmt:formatDate value="${inquiryList.inquiried_at}" pattern="yyyy-MM-dd HH:mm"/></td>
+	                                <c:choose>
+	                                	<c:when test="${inquiryList.replied_at != null || inquiryList.replied_at != '' }">
+	                                		<td class="text-center"><fmt:formatDate value="${inquiryList.replied_at}" pattern="yyyy-MM-dd HH:mm"/></td>
+                                		</c:when>
+                                		<c:otherwise>
+	                                		<td class="text-center" style="color:red;">미답변</td>
+                                		</c:otherwise>
+                               		</c:choose>
 	                            </tr>
 	                            </c:forEach>
 	                        </tbody>
@@ -90,30 +102,30 @@
 	                <div class="position-relative ">
 			            <ul class="pagination justify-content-end">
 			            <li class="page-item">
-				    		<a class="page-link" href="${pageContext.request.contextPath}/admin/purchase?pageNum=1" aria-label="Go to First">
+				    		<a class="page-link" href="${pageContext.request.contextPath}/admin/inquiry?pageNum=1" aria-label="Go to First">
 					      	<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></span>
 					    	</a>
 						</li>
 						<c:if test="${pageDTO.currentPage > 10 }">
 							<li class="page-item">
-					    		<a class="page-link" href="${pageContext.request.contextPath}/admin/purchase?pageNum=${pageDTO.startPage - 1}" aria-label="Previous">
+					    		<a class="page-link" href="${pageContext.request.contextPath}/admin/inquiry?pageNum=${pageDTO.startPage - 1}" aria-label="Previous">
 						      	<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></span>
 						    	</a>
 							</li>
 						</c:if>
 							<c:forEach var="page" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/purchase?pageNum=${page}"
+								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/inquiry?pageNum=${page}"
 								 ${pageDTO.currentPage eq page ? 'active':''}>${page }</a></li>
 							</c:forEach>
 						<c:if test="${pageDTO.currentPage + 10 <= pageDTO.pageCount }">
 							<li class="page-item">
-							  <a class="page-link" href="${pageContext.request.contextPath}/admin/purchase?pageNum=${pageDTO.endPage + 1}" aria-label="Next">
+							  <a class="page-link" href="${pageContext.request.contextPath}/admin/inquiry?pageNum=${pageDTO.endPage + 1}" aria-label="Next">
 							    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="이전"></span>
 							  </a>
 							</li>
 						</c:if>
 						<li class="page-item">
-						  <a class="page-link" href="${pageContext.request.contextPath}/admin/purchase?pageNum=${pageDTO.pageCount}" aria-label="Next">
+						  <a class="page-link" href="${pageContext.request.contextPath}/admin/inquiry?pageNum=${pageDTO.pageCount}" aria-label="Next">
 						    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="이전"></span>
 						  </a>
 						</li>
