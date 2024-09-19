@@ -51,6 +51,11 @@ public class ProductDTO {
     //review 유무
     private String review_content;
     
+    private int review_quality;
+    private int review_price;
+    private int review_time;
+    private int review_manner;
+    
    
   
 
@@ -351,6 +356,70 @@ public class ProductDTO {
 
 	public void setReview_content(String review_content) {
 		this.review_content = review_content;
+	}
+
+
+
+
+
+	public int getReview_quality() {
+		return review_quality;
+	}
+
+
+
+
+
+	public void setReview_quality(int review_quality) {
+		this.review_quality = review_quality;
+	}
+
+
+
+
+
+	public int getReview_price() {
+		return review_price;
+	}
+
+
+
+
+
+	public void setReview_price(int review_price) {
+		this.review_price = review_price;
+	}
+
+
+
+
+
+	public int getReview_time() {
+		return review_time;
+	}
+
+
+
+
+
+	public void setReview_time(int review_time) {
+		this.review_time = review_time;
+	}
+
+
+
+
+
+	public int getReview_manner() {
+		return review_manner;
+	}
+
+
+
+
+
+	public void setReview_manner(int review_manner) {
+		this.review_manner = review_manner;
 	}
 
 
