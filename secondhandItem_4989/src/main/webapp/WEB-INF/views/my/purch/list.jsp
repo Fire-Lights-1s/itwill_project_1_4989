@@ -15,14 +15,15 @@
 </head>
 <body>
 <jsp:include page="../../inc/header.jsp"></jsp:include>
+<header>
+	<div id="menu-name">
+		<a href="${pageContext.request.contextPath}">홈 </a> >
+		<a href="${pageContext.request.contextPath}/my/profile">마이 페이지 </a> >
+		<a href="${pageContext.request.contextPath}/my/purchlist">매입 신청내역</a>
+	</div>
+</header>
+	
 <section>
-	<header>
-		<div id="menu-name">
-   			<a href="${pageContext.request.contextPath}">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/my/profile">마이 페이지 </a> >
-   			<a href="${pageContext.request.contextPath}/my/purchlist">매입 신청내역</a>
-		</div>
-	</header>
 	<div class="content-container">
 		<jsp:include page="../../inc/myPageLefter.jsp"></jsp:include>
 		<div class="main-container-side-profile">

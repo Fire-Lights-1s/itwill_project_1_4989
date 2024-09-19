@@ -81,25 +81,13 @@ public class AdminController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		pageDTO.setPageSize(pageSize);
-		List<ReportDTO> reportList = adminService.getReportList(pageDTO);
 		int count = adminService.getReportCount(pageDTO);
 		
 		int pageBlock = 10;
-		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
-		int endPage = startPage + pageBlock - 1;
-		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-		if(startPage < 1) {
-			startPage = 1;
-		}
-		if(endPage > pageCount) {
-			endPage = pageCount;
-		}
 		pageDTO.setCount(count);
 		pageDTO.setPageBlock(pageBlock);
-		pageDTO.setStartPage(startPage);
-		pageDTO.setEndPage(endPage);
-		pageDTO.setPageCount(pageCount);
 		
+		List<ReportDTO> reportList = adminService.getReportList(pageDTO);
 		
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("reportList", reportList);

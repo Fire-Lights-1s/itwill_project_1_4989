@@ -1,40 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>공지사항</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileStyle.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
+<title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/CsStyle.css">
 </head>
 <body>
+
 <jsp:include page="../inc/header.jsp"></jsp:include>
-<section>
-	<header>
-		<div id="menu-name">
-   			<a href="${pageContext.request.contextPath}">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/my/profile">마이 페이지 </a> >
-   			<a href="${pageContext.request.contextPath}/my/profile">내 프로필</a>
-		</div>
-	</header>
-	<div class="content-container">
-		<jsp:include page="../inc/myPageLefter.jsp"></jsp:include>
-		<div class="main-container-side-profile">
-		<main>
-			<h2>내 프로필</h2>
-			<div class="profile-circle-div">
-				<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg" class="profile-circle">
-			</div>
-			<p class="profile-nickname">${memberDTO.nickname}</p>
-			<p class="profile-nickname">누적 거래 횟수</p>
-			<p class="profile-nickname">7</p>
-		</main>
-		</div>
+
+<header>
+	<div id="menu-name">
+		<a href="${pageContext.request.contextPath}">홈 </a> >
+		<a href="${pageContext.request.contextPath}/cs/notice">고객센터 </a> >
+		<a href="${pageContext.request.contextPath}/cs/notice">공지사항</a>
 	</div>
+</header>
+
+<!-- 메뉴 아래 시작 -->
+<section>
+	<div class="content-container">
+	<!-- 사이드 메뉴 시작 -->
+      <aside class="side-nav">
+        <h3>고객센터</h3>
+        <br>
+        <ul>
+            <li><a href="#">공지사항</a></li>
+            <li><a href="#">자주 묻는 질문</a></li>
+            <li><a href="#">1:1 문의</a></li>
+        </ul>
+      </aside>
+
+<!-- 사이드 메뉴 끝 -->
+
+<!-- 본문영역 시작 -->
+	<div id="main-container-side">
+	  <main>
+
+		<br>
+		<h1 style="text-align:center;">공지사항</h1>
+
+
+	<div id="notice-list"> 
+  	 		<table>
+  	 			<tr>
+  	 				<th>공지번호</th>
+  	 				<th>제목</th>
+  	 				<th>등록일</th>
+  	 			</tr>
+  	 			<c:set var="noticeList" value="${noticeList }" />
+  	 			<c:if test="${noticeList == null || noticeList.size() == 0 }">
+  	 				<tr><td colspan="3" style="text-align:center;">등록된 공지사항이 없습니다.</td></tr>
+  	 			</c:if>
+  	 			
+  	 			<c:forEach var="noticeList" items="${noticeList}">
+  	 			<tr>
+  	 				<td>${noticeList.notice_id }</td>
+  	 				<td><a href="noticedetail?notice_id=${noticeList.notice_id }">
+					<c:choose>
+					    <c:when test="${fn:length(noticeList.notice_name) > 18}">
+					        ${fn:substring(noticeList.notice_name, 0, 18)}...
+					    </c:when>
+					    <c:otherwise>
+					        ${noticeList.notice_name}
+					    </c:otherwise>
+					</c:choose>
+					</a></td>
+  	 				<td><fmt:formatDate value="${noticeList.notice_date }" pattern="yyyy-MM-dd"/></td>
+ 				</tr>
+ 				</c:forEach>
+  	 		</table>
+ 		</div>
+
+
+
+	  </main>
+	</div>
+  </div>
 </section>
+
+<!-- 본문영역 끝 -->
+
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
+
 </body>
 </html>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,6 +18,7 @@
 	<jsp:include page="../inc/cssLink.jsp"></jsp:include>
 	<!-- 본인의 커스텀 css link 위치는 여기서부터 -->
 	<link href="${pageContext.request.contextPath }/resources/css/admin/admin_table.css"  rel="stylesheet">
+	<link href="${pageContext.request.contextPath }/resources/css/admin/admin_report.css"  rel="stylesheet">
 </head>
 <body>
 	<div class="page-wrapper">
@@ -56,86 +59,18 @@
 	                            </tr>
 	                        </thead>
 	                        <tbody>
+	            			<c:forEach var="report" items="${reportList }">
 	                            <tr>
-	                                <td>2018-09-29 05:57</td>
-	                                <td>100398</td>
-	                                <td>iPhone X 64Gb Grey</td>
-	                                <td class="text-right">$999.00</td>
-	                                <td class="text-right">1</td>
-	                                <td class="text-right">$999.00</td>
-	                                <td class="text-right">$999.00</td>
-	                                <td class="text-right">$999.00</td>
+	                                <td>${report.report_id }</td>
+	                                <td>${report.reporter_id }</td>
+	                                <td>${report.reportee_id }</td>
+	                                <td>${report.reported_item_id }</td>
+	                                <td class="text-right">${report.report_type }</td>
+	                                <td class="text-right">${report.report_contents }</td>
+	                                <td class="text-right">${report.reported_at }</td>
+	                                <td class="text-right">${report.report_status }</td>
 	                            </tr>
-	                            <tr>
-	                                <td>2018-09-28 01:22</td>
-	                                <td>100397</td>
-	                                <td>Samsung S8 Black</td>
-	                                <td class="text-right">$756.00</td>
-	                                <td class="text-right">1</td>
-	                                <td class="text-right">$756.00</td>
-	                                <td class="text-right">$756.00</td>
-	                                <td class="text-right">$756.00</td>
-	                            </tr>
-	                            <tr>
-	                                <td>2018-09-27 02:12</td>
-	                                <td>100396</td>
-	                                <td>Game Console Controller</td>
-	                                <td class="text-right">$22.00</td>
-	                                <td class="text-right">2</td>
-	                                <td class="text-right">$44.00</td>
-	                                <td class="text-right">$44.00</td>
-	                                <td class="text-right">$44.00</td>
-	                            </tr>
-	                            <tr>
-	                                <td>2018-09-26 23:06</td>
-	                                <td>100395</td>
-	                                <td>iPhone X 256Gb Black</td>
-	                                <td class="text-right">$1199.00</td>
-	                                <td class="text-right">1</td>
-	                                <td class="text-right">$1199.00</td>
-	                                <td class="text-right">$1199.00</td>
-	                                <td class="text-right">$1199.00</td>
-	                            </tr>
-	                            <tr>
-	                                <td>2018-09-25 19:03</td>
-	                                <td>100393</td>
-	                                <td>USB 3.0 Cable</td>
-	                                <td class="text-right">$10.00</td>
-	                                <td class="text-right">3</td>
-	                                <td class="text-right">$30.00</td>
-	                                <td class="text-right">$30.00</td>
-	                                <td class="text-right">$30.00</td>
-	                            </tr>
-	                            <tr>
-	                                <td>2018-09-29 05:57</td>
-	                                <td>100392</td>
-	                                <td>Smartwatch 4.0 LTE Wifi</td>
-	                                <td class="text-right">$199.00</td>
-	                                <td class="text-right">6</td>
-	                                <td class="text-right">$1494.00</td>
-	                                <td class="text-right">$1494.00</td>
-	                                <td class="text-right">$1494.00</td>
-	                            </tr>
-	                            <tr>
-	                                <td>2018-09-24 19:10</td>
-	                                <td>100391</td>
-	                                <td>Camera C430W 4k</td>
-	                                <td class="text-right">$699.00</td>
-	                                <td class="text-right">1</td>
-	                                <td class="text-right">$699.00</td>
-	                                <td class="text-right">$699.00</td>
-	                                <td class="text-right">$699.00</td>
-	                            </tr>
-	                            <tr>
-	                                <td>2018-09-22 00:43</td>
-	                                <td>100393</td>
-	                                <td>USB 3.0 Cable</td>
-	                                <td class="text-right">$10.00</td>
-	                                <td class="text-right">3</td>
-	                                <td class="text-right">$30.00</td>
-	                                <td class="text-right">$30.00</td>
-	                                <td class="text-right">$30.00</td>
-	                            </tr>
+	          				</c:forEach>
 	                        </tbody>
 	                    </table>
 	                </div>
@@ -144,25 +79,38 @@
 	                <div class="position-relative ">
 			            <ul class="pagination justify-content-end">
 							<li class="page-item">
-					    		<a class="page-link" href="#" aria-label="Previous">
+					    		<a class="page-link" href="../admin/report?page=${1}" aria-label="Previous">
 						      	<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="이전"></span>
 						    	</a>
 							</li>
+			            	<!-- 페이지 한칸 씩 이동 -->
+			            	<c:if test="${pageDTO.currentPage ne 1 }">
 							<li class="page-item">
-					    		<a class="page-link" href="#" aria-label="Previous">
+					    		<a class="page-link" href="../admin/report?page=${pageDTO.currentPage - 1}" aria-label="Previous">
 						      	<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></span>
 						    	</a>
 							</li>
-							<li class="page-item  active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
+			            	</c:if>
+			            	<!-- 페이지 번호로 이동 -->
+							<c:forEach var="i" begin="${pageDTO.startPage }" 
+								end="${pageDTO.endPage }" step="1">
+							<c:if test="${pageDTO.currentPage eq i }">
+							<li class="page-item  active"><a class="page-link" href="../admin/report?page=${i}">${i}</a></li>
+							</c:if>
+							<c:if test="${pageDTO.currentPage ne i }">
+							<li class="page-item"><a class="page-link" href="../admin/report?page=${i}">${i}</a></li>
+							</c:if>
+							</c:forEach>
+			            	<!-- 페이지 한칸 씩 이동 -->
+							<c:if test="${pageDTO.currentPage ne pageDTO.pageCount }">
 							<li class="page-item">
-							  <a class="page-link" href="#" aria-label="Next">
+							  <a class="page-link" href="../admin/report?page=${pageDTO.currentPage + 1}" aria-label="Next">
 							    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="이전"></span>
 							  </a>
 							</li>
+							</c:if>
 							<li class="page-item">
-							  <a class="page-link" href="#" aria-label="Next">
+							  <a class="page-link" href="../admin/report?page=${pageDTO.pageCount}" aria-label="Next">
 							    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="이전"></span>
 							  </a>
 							</li>
@@ -174,25 +122,56 @@
             <!-- 이 사이에 넣어주세요.-->
             </div>
 			<!-- 모달 창  -->
-			<div class="modal fade" id="csModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
+			<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-lg">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+			        <h1 class="modal-title fs-5" id="exampleModalLabel">신고 관리</h1>
 			        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
 			      <!-- 모달 창 메인 body -->
-			      	모달 창 메인 body input 태그 넣어서 나머지 필요한 부분 구현 하시면 될 것 같습니다
 			      	<div class="form-floating mb-3">
-					  <label for="floatingInput">Email address</label>
-					  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+					  <label for="report_id_modal">신고ID</label>
+					  <input type="text" class="form-control-plaintext" id="report_id_modal">
+			      	</div>
+			      	<div class="form-floating d-flex flex-row mb-3">
+				      	<div class="form-floating flex-fill mr-3">
+							<label for="reporter_id_modal">신고자ID</label>
+							<input type="text" class="form-control-plaintext" id="reporter_id_modal">
+				      	</div>
+				      	<div class="form-floating flex-fill ">
+							<label for="report_type_modal">신고유형</label>
+							<input type="text" class="form-control-plaintext" id="report_type_modal" placeholder="Password">
+				      	</div>
 					</div>
-					<div class="form-floating">
-					  <label for="floatingPassword">Password</label>
-					  <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+			      	<div class="form-floating d-flex flex-row mb-3">
+						<div class="form-floating flex-fill mr-3">
+							<label for="reportee_id_modal">신고대상ID</label>
+							<input type="text" class="form-control-plaintext" id="reportee_id_modal">
+						</div>
+						<div class="form-floating flex-fill">
+							<label for="reported_item_id_modal">신고상품ID</label>
+							<input type="text" class="form-control-plaintext" id="reported_item_id_modal" placeholder="Password">
+						</div>
 					</div>
+					<div class="form-floating d-flex flex-row mb-3">
+						<div class="form-floating flex-fill mr-3">
+							<label for="reported_at_modal">신고일시</label>
+							<input type="text" class="form-control-plaintext" id="reported_at_modal" placeholder="Password">
+						</div>
+						<div class="form-floating flex-fill">
+							<label for="report_status_modal">처리상태</label>
+							<input type="text" class="form-control" id="report_status_modal" placeholder="Password">
+						</div>
+					</div>
+					<div class="form-floating mb-3">
+					  <label for="report_contents_modal">신고내용ID</label>
+					  <textarea class="form-control" id="report_contents_modal"></textarea>
+					</div>
+					
 			      </div>
+			      
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			        <button type="button" class="btn btn-purple ">Save changes</button>
@@ -208,7 +187,7 @@
 
     <jsp:include page="../inc/jsLink.jsp"></jsp:include>
     <!-- 본인의 커스텀 js link 위치는 여기서부터 -->
-    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/admin_cs.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/admin_cs_report.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const menuItems = document.querySelectorAll('.has-sub .js-arrow');

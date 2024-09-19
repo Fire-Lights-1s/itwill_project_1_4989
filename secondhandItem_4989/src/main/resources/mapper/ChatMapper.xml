@@ -31,10 +31,8 @@
 		on room.product_id = Product.product_id
 		LEFT OUTER join ChatMessage message
         on room.chat_room_id = message.chat_room_id 
-        and message.chat_id = (select chat_id from ChatMessage
-									order by ChatMessage.send_time desc
-                                    limit 1
-									)
+        and message.chat_id in (select max(chat_id) from ChatMessage
+									group by chat_room_id)
 		where room.buyer_id = #{member_id} or room.seller_id = #{member_id}
 	</select>
 	

@@ -16,6 +16,7 @@ public class ReportDTO {
 	private String report_contents;
 	private Timestamp reported_at;
 	private String report_status;
+	
 	public int getReport_id() {
 		return report_id;
 	}
