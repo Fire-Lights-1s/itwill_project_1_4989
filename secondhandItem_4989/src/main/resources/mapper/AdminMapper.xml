@@ -35,7 +35,10 @@
 		order by reported_at desc
 		limit #{startRow}, #{pageSize}
 	</select>
-	
+	<update id="updateReport">
+		update Report set report_contents = #{report_contents}, report_status = #{report_status}
+		where report_id = #{report_id}
+	</update>
 	
 	
 </mapper>

@@ -10,9 +10,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ReportDTO;
 import com.itwillbs.service.AdminService;
@@ -93,6 +97,22 @@ public class AdminController {
 		model.addAttribute("reportList", reportList);
 		
 		return "/admin/cs/report";
+	}
+	@PostMapping(value = "/report/update", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String reportUpdate(ReportDTO reportDTO) {
+		String json = null;
+		ReportDTO report = null;
+		report = adminService.updateReport(reportDTO);
+		
+		try {
+			json = new ObjectMapper().writeValueAsString(report);
+			System.out.println("json productDTO"+json);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		return json;
 	}
 //	
 //	@GetMapping("/notice")

@@ -30,5 +30,10 @@ public class AdminDAO {
 	}
 
 
+	public void updateReport(ReportDTO reportDTO) {
+		sqlSession.update(namespace+".updateReport", reportDTO);
+	}
+
+
 
 }
