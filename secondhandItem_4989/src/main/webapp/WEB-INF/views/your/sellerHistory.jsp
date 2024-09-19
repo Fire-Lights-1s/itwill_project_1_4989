@@ -18,6 +18,84 @@
 <%-- 	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script> --%>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	
+<style>
+
+textarea {
+    width: 100%;
+    height: 6.25em;
+    resize: none;
+}
+  
+.modal {
+  display: none;
+  text-align: center;
+  position: fixed;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 8% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 500px;
+  max-width: 80%;
+  height: 750px;
+  max-height: 80vh;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.close:hover, .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.stars {
+display: inline-block;
+}
+
+.stars1 {
+display: inline-block;
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.star1 {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.star.selected {
+  color: gold;
+}
+
+.star1.active {
+    color: gold;
+}
+</style>
+
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"></jsp:include>
@@ -25,15 +103,16 @@
 	<header>
 		<div id="menu-name">
    			<a href="${pageContext.request.contextPath}" style="color: #372161;">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUser}" style="color: #372161;">${otherUser}님의 페이지 </a> >
+   			<a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUser}" style="color: #372161;">${otherUser}님의 프로필 </a> >
    			<a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}" style="color: #372161;">${otherUser}님의 판매 내역</a>
 		</div>
 	</header>
 	<div class="content-container">
 	<aside class="side-nav">
-		<h3 style="overflow:hidden; text-overflow:ellipsis;">${otherUser}님의 페이지</h3>
+		<h3 style="overflow:hidden; text-overflow:ellipsis;">Other User</h3>
 		<br>
 		<ul>
+			<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUser}">${otherUser}님의 프로필</a></li>
 			<li><a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}">판매 내역</a></li>
 		</ul>
 	</aside>
