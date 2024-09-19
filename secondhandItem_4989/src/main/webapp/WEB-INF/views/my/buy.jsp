@@ -70,7 +70,17 @@ textarea {
 display: inline-block;
 }
 
+.stars1 {
+display: inline-block;
+}
+
 .star {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.star1 {
   font-size: 24px;
   cursor: pointer;
   color: gray;
@@ -80,7 +90,7 @@ display: inline-block;
   color: gold;
 }
 
-.star.active {
+.star1.active {
     color: gold;
 }
 </style>
@@ -148,7 +158,7 @@ display: inline-block;
 					<input type="hidden" id="mannerRating" name="mannerRating" value="1">
 		      		<textarea class="reviewText" name="reviewText" rows="4" cols="50" placeholder="후기 내용"></textarea><br>
 		      		<input type="hidden" id="productId" name="productId" value="">
-		      		<button type="submit">작성 완료</button>
+		      		<button type="submit" style="background-color: #4E229E; padding: 5px; color: white; border-radius: 5px; cursor: pointer;">작성 완료</button>
 		    	</form>
 			</div>
 		</div>
@@ -161,36 +171,36 @@ display: inline-block;
 		    	</div>
 					<div class="starRating">
 					<label for="quality">품&emsp;&emsp;질 :</label>
-						<div class="stars" data-name="quality" style="display: inline-block;">
-						    <span class="star" data-value="1">☆</span>
-						    <span class="star" data-value="2">☆</span>
-						    <span class="star" data-value="3">☆</span>
-						    <span class="star" data-value="4">☆</span>
-						    <span class="star" data-value="5">☆</span>
+						<div class="stars1" data-name="quality" style="display: inline-block;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
 						</div><br>
 				    <label for="price">가&emsp;&emsp;격 :</label>
-						<div class="stars" data-name="price" style="display: inline-block;">
-						    <span class="star" data-value="1">☆</span>
-						    <span class="star" data-value="2">☆</span>
-						    <span class="star" data-value="3">☆</span>
-						    <span class="star" data-value="4">☆</span>
-						    <span class="star" data-value="5">☆</span>
+						<div class="stars1" data-name="price" style="display: inline-block;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
 						</div><br>
 					<label for="punctuality">시간 약속 :</label>
-					    <div class="stars" data-name="punctuality" style="display: inline-block;">
-						    <span class="star" data-value="1">☆</span>
-						    <span class="star" data-value="2">☆</span>
-						    <span class="star" data-value="3">☆</span>
-						    <span class="star" data-value="4">☆</span>
-						    <span class="star" data-value="5">☆</span>
+					    <div class="stars1" data-name="punctuality" style="display: inline-block;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
 					    </div><br>
 					<label for="manner">매&emsp;&emsp;너 :</label>
-					    <div class="stars" data-name="manner" style="display: inline-block; margin-bottom: 20px;">
-						    <span class="star" data-value="1">☆</span>
-						    <span class="star" data-value="2">☆</span>
-						    <span class="star" data-value="3">☆</span>
-						    <span class="star" data-value="4">☆</span>
-						    <span class="star" data-value="5">☆</span>
+					    <div class="stars1" data-name="manner" style="display: inline-block; margin-bottom: 20px;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
 					    </div>
 					</div>
 		      		<textarea id="reviewText1" name="reviewText" rows="4" cols="50" readonly></textarea><br>
@@ -296,14 +306,13 @@ display: inline-block;
 
 <script>
 	function updateStarRating(category, value) {
-	    const starsCom = document.querySelectorAll('.stars[data-name="' + category + '"] .star');
-	    starsCom.forEach(star => {
-	        const starValue = parseInt(star.getAttribute('data-value'), 10);
-	        console.log(starValue);
+	    const starsCom = document.querySelectorAll('.stars1[data-name="' + category + '"] .star1');
+	    starsCom.forEach(star1 => {
+	        const starValue = parseInt(star1.getAttribute('data-value'), 10);
 	        if (starValue <= value) {
-	            star.classList.add('active');
+	            star1.classList.add('active');
 	        } else {
-	            star.classList.remove('active');
+	            star1.classList.remove('active');
 	        }
 	    });
 	}
@@ -321,7 +330,12 @@ display: inline-block;
 			    const stars = starGroup.querySelectorAll('.star');
 			    const hiddenInputId = starGroup.getAttribute('data-name') + 'Rating';
 			    const hiddenInput = document.getElementById(hiddenInputId);
-
+				
+			    stars.forEach(function(star) {
+			        star.classList.remove('selected');
+			    });
+			    hiddenInput.value = ''; 
+			    
 			    stars.forEach(function(star, index) {
 			      star.addEventListener('click', function() {
 			        // 선택된 별까지 색상 변경
@@ -364,7 +378,6 @@ display: inline-block;
 		}
 	});
 	
-	// 닫기 버튼(X)을 클릭하면 모달을 닫기
 	span.onclick = function() {
 	  modal.style.display = "none";
 	}
@@ -372,28 +385,19 @@ display: inline-block;
 	span2.onclick = function() {
 		  modalCom.style.display = "none";
 		}
-	
-	// 모달 외부를 클릭하면 모달을 닫기
+		
 	window.onclick = function(event) {
-	  if (event.target == modal) {
-	    modal.style.display = "none";
-	  }
-	}
-	
-	window.onclick = function(event) {
-		  if (event.target == modalCom) {
-		    modalCom.style.display = "none";
-		  }
+		if (event.target == modalCom) {
+			modalCom.style.display = "none";
+		}else if(event.target == modal){
+			modal.style.display = "none";
 		}
+	}
 </script>
 
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
-	// 구매 후기 별모양 이벤트
-	
-	
-	// 물품 등록 시간 가져오기
     function formatTimeAgo(date) {
         const now = new Date();
         const diffInSeconds = Math.floor((now - date) / 1000);

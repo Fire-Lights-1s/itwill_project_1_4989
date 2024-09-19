@@ -61,6 +61,10 @@ public class AdminService {
 		int count = adminDAO.getReportCount(pageDTO);
 		return count;
 	}
+	public ReportDTO updateReport(ReportDTO reportDTO) {
+		adminDAO.updateReport(reportDTO);
+		return reportDTO;
+	}
 	
 	
 }

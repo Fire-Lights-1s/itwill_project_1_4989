@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <aside class="side-nav">
-	<h3>마이 페이지</h3>
+	<h3>My Page</h3>
 	<br>
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/my/profile">내 프로필</a></li>

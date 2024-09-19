@@ -5,31 +5,33 @@
   
 <mapper namespace="com.itwillbs.mapper.MyPageMapper">
 	<select id="getProductList" resultType="com.itwillbs.domain.ProductDTO">
-		select * from Product
-		where seller_id = #{seller_id}
+		select p.product_id, p.seller_id, p.product_name, p.product_price, p.product_img1, p.created_datetime, p.trade_status, r.review_content, r.review_quality, r.review_price, r.review_time, r.review_manner 
+		from Product p left join Review r
+		on p.product_id = r.product_id
+		where p.seller_id = #{seller_id}
 		<if test="sale == 'pro'">
-			and trade_status = '거래 가능' 
+			and p.trade_status = '거래 가능'
 		</if>
 		<if test="sale == 'com'">
-			and trade_status = '거래 완료' 
+			and p.trade_status in ('거래 완료', '후기 작성 완료')
 		</if>
 		<if test="sale == 'rsv'">
-			and trade_status = '예약 중' 
+			and p.trade_status = '예약 중' 
 		</if>
 		<if test="sort == 'priceDesc'">
-			order by field(trade_status, '거래 중', '예약 중', '거래 완료'), product_price desc
+			order by field(p.trade_status, '거래 중', '예약 중', '거래 완료', '후기 작성 완료'), p.product_price desc
 		</if>
 		<if test="sort == 'priceAsc'">
-			order by field(trade_status, '거래 중', '예약 중', '거래 완료'), product_price
+			order by field(p.trade_status, '거래 중', '예약 중', '거래 완료', '후기 작성 완료'), p.product_price
 		</if>
 		<if test="sort == 'dateDesc'">
-			order by field(trade_status, '거래 중', '예약 중', '거래 완료'), created_datetime desc
+			order by field(p.trade_status, '거래 중', '예약 중', '거래 완료', '후기 작성 완료'), p.created_datetime desc
 		</if>
 		<if test="sort == 'dateAsc'">
-			order by field(trade_status, '거래 중', '예약 중', '거래 완료'), created_datetime
+			order by field(p.trade_status, '거래 중', '예약 중', '거래 완료', '후기 작성 완료'), p.created_datetime
 		</if>
 		<if test="sort == null or sort == ''">
-			order by field(trade_status, '거래 중', '예약 중', '거래 완료'), created_datetime desc
+			order by field(p.trade_status, '거래 중', '예약 중', '거래 완료', '후기 작성 완료'), p.created_datetime desc
 		</if>
 		limit #{startRow},#{pageSize}
 	</select>
@@ -83,8 +85,8 @@
 	</delete>
 	
 	<select id="getBuyList" resultType="com.itwillbs.domain.ProductDTO">
-		select p.product_id, p.seller_id, p.product_name, p.product_price, p.product_img1, p.created_datetime, p.trade_status, t.buyer_id, t.transaction_end_date, t.is_reserved, t.reservation_date, r.review_content, r.review_quality, r.review_price, r.review_time, r.review_manner from 
-		Product p join TX t
+		select p.product_id, p.seller_id, p.product_name, p.product_price, p.product_img1, p.created_datetime, p.trade_status, t.buyer_id, t.transaction_end_date, t.is_reserved, t.reservation_date, r.review_content, r.review_quality, r.review_price, r.review_time, r.review_manner  
+		from Product p join TX t
 		on p.product_id = t.product_id
 		left join Review r
 		on p.product_id = r.product_id
@@ -100,19 +102,19 @@
 			and t.transaction_end_date is not null 
 		</if>
 		<if test="sort == 'priceDesc'">
-			order by t.transaction_end_date, p.product_price desc
+			order by field(p.trade_status, '예약 중', '거래 완료', '후기 작성 완료'), p.product_price desc
 		</if>
 		<if test="sort == 'priceAsc'">
-			order by t.transaction_end_date, p.product_price
+			order by field(p.trade_status, '예약 중', '거래 완료', '후기 작성 완료'), p.product_price
 		</if>
 		<if test="sort == 'dateDesc'">
-			order by t.transaction_end_date, t.reservation_date desc
+			order by field(p.trade_status, '예약 중', '거래 완료', '후기 작성 완료'), t.reservation_date desc
 		</if>
 		<if test="sort == 'dateAsc'">
-			order by t.transaction_end_date, t.reservation_date
+			order by field(p.trade_status, '예약 중', '거래 완료', '후기 작성 완료'), t.reservation_date
 		</if>
 		<if test="sort == null or sort == ''">
-			order by t.transaction_end_date, t.reservation_date desc
+			order by field(p.trade_status, '예약 중', '거래 완료', '후기 작성 완료'), t.reservation_date desc
 		</if>
 		limit #{startRow},#{pageSize}
 	</select>

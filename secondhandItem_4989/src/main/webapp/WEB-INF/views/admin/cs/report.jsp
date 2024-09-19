@@ -60,7 +60,7 @@
 	                        </thead>
 	                        <tbody>
 	            			<c:forEach var="report" items="${reportList }">
-	                            <tr>
+	                            <tr id="${report.report_id }">
 	                                <td>${report.report_id }</td>
 	                                <td>${report.reporter_id }</td>
 	                                <td>${report.reportee_id }</td>
@@ -133,36 +133,40 @@
 			      <!-- 모달 창 메인 body -->
 			      	<div class="form-floating mb-3">
 					  <label for="report_id_modal">신고ID</label>
-					  <input type="text" class="form-control-plaintext" id="report_id_modal">
+					  <input type="text" class="form-control-plaintext" id="report_id_modal" readonly>
 			      	</div>
 			      	<div class="form-floating d-flex flex-row mb-3">
 				      	<div class="form-floating flex-fill mr-3">
 							<label for="reporter_id_modal">신고자ID</label>
-							<input type="text" class="form-control-plaintext" id="reporter_id_modal">
+							<input type="text" class="form-control-plaintext" id="reporter_id_modal" readonly>
 				      	</div>
 				      	<div class="form-floating flex-fill ">
 							<label for="report_type_modal">신고유형</label>
-							<input type="text" class="form-control-plaintext" id="report_type_modal" placeholder="Password">
+							<input type="text" class="form-control-plaintext" id="report_type_modal" placeholder="Password" readonly>
 				      	</div>
 					</div>
 			      	<div class="form-floating d-flex flex-row mb-3">
 						<div class="form-floating flex-fill mr-3">
 							<label for="reportee_id_modal">신고대상ID</label>
-							<input type="text" class="form-control-plaintext" id="reportee_id_modal">
+							<input type="text" class="form-control-plaintext" id="reportee_id_modal" readonly>
 						</div>
 						<div class="form-floating flex-fill">
 							<label for="reported_item_id_modal">신고상품ID</label>
-							<input type="text" class="form-control-plaintext" id="reported_item_id_modal" placeholder="Password">
+							<input type="text" class="form-control-plaintext" id="reported_item_id_modal" placeholder="Password" readonly>
 						</div>
 					</div>
 					<div class="form-floating d-flex flex-row mb-3">
-						<div class="form-floating flex-fill mr-3">
+						<div class="form-floating flex-fill">
 							<label for="reported_at_modal">신고일시</label>
-							<input type="text" class="form-control-plaintext" id="reported_at_modal" placeholder="Password">
+							<input type="text" class="form-control-plaintext" id="reported_at_modal" placeholder="Password" readonly>
 						</div>
 						<div class="form-floating flex-fill">
 							<label for="report_status_modal">처리상태</label>
-							<input type="text" class="form-control" id="report_status_modal" placeholder="Password">
+							<select class="custom-select " id="report_status_modal">
+								<option value="접수">접수</option>
+								<option value="처리 완료">처리 완료</option>
+								<option value="해당 없음">해당 없음</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-floating mb-3">
@@ -174,7 +178,7 @@
 			      
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			        <button type="button" class="btn btn-purple ">Save changes</button>
+			        <button type="button" class="btn btn-purple"  data-dismiss="modal" onclick="editReport()">Save changes</button>
 			      </div>
 			    </div>
 			  </div>

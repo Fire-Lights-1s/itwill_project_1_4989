@@ -257,56 +257,35 @@ public class ProductController {
 			throw new IllegalArgumentException("수정 권한이 없습니다.");
 		}
 
-		// **노란색 하이라이트: 삭제된 이미지 처리**
-		String[] deletedImages = request.getParameter("deletedImages").split(",");
-		for (String imageName : deletedImages) {
-			if (imageName != null && !imageName.isEmpty()) {
-				// 이미지 파일 경로
-				String filePath = session.getServletContext().getRealPath("/resources/upload/" + imageName);
+		// **삭제된 이미지 처리 부분에서 null 값 체크 추가**
+	    String[] deletedImages = request.getParameter("deletedImages") != null ? request.getParameter("deletedImages").split(",") : new String[0];
 
-				// 실제 파일 삭제
-				File file = new File(filePath);
-				if (file.exists()) {
-					file.delete(); // 파일 삭제
-					System.out.println("파일 삭제됨: " + filePath);
-				}
+	    for (String imageName : deletedImages) {
+	        if (imageName != null && !imageName.isEmpty()) {
+	            // 이미지 파일 경로
+	            String filePath = session.getServletContext().getRealPath("/resources/upload/" + imageName);
 
-				// 데이터베이스에서 이미지 필드 업데이트
-				if (imageName.equals(existingProduct.getProduct_img1())) {
-					productDTO.setProduct_img1(null);
-				} else if (imageName.equals(existingProduct.getProduct_img2())) {
-					productDTO.setProduct_img2(null);
-				} else if (imageName.equals(existingProduct.getProduct_img3())) {
-					productDTO.setProduct_img3(null);
-				} else if (imageName.equals(existingProduct.getProduct_img4())) {
-					productDTO.setProduct_img4(null);
-				} else if (imageName.equals(existingProduct.getProduct_img5())) {
-					productDTO.setProduct_img5(null);
-				}
-			}
-		}
+	            // 실제 파일 삭제
+	            File file = new File(filePath);
+	            if (file.exists()) {
+	                file.delete(); // 파일 삭제
+	                System.out.println("파일 삭제됨: " + filePath);
+	            }
 
-		// **노란색 하이라이트: 새로운 파일 업로드 처리**
-		String uploadDir = session.getServletContext().getRealPath("/resources/upload/");
-		for (int i = 0; i < newFiles.length; i++) {
-			if (newFiles[i] != null && !newFiles[i].isEmpty()) {
-				String fileName = System.currentTimeMillis() + "_" + newFiles[i].getOriginalFilename();
-				File newFile = new File(uploadDir + fileName);
-				newFiles[i].transferTo(newFile); // 파일 업로드
-
-				// 업로드된 파일 경로를 ProductDTO에 설정
-				if (i == 0)
-					productDTO.setProduct_img1(fileName);
-				else if (i == 1)
-					productDTO.setProduct_img2(fileName);
-				else if (i == 2)
-					productDTO.setProduct_img3(fileName);
-				else if (i == 3)
-					productDTO.setProduct_img4(fileName);
-				else if (i == 4)
-					productDTO.setProduct_img5(fileName);
-			}
-		}
+	            // 데이터베이스에서 이미지 필드 업데이트
+	            if (imageName.equals(existingProduct.getProduct_img1())) {
+	                productDTO.setProduct_img1(null);
+	            } else if (imageName.equals(existingProduct.getProduct_img2())) {
+	                productDTO.setProduct_img2(null);
+	            } else if (imageName.equals(existingProduct.getProduct_img3())) {
+	                productDTO.setProduct_img3(null);
+	            } else if (imageName.equals(existingProduct.getProduct_img4())) {
+	                productDTO.setProduct_img4(null);
+	            } else if (imageName.equals(existingProduct.getProduct_img5())) {
+	                productDTO.setProduct_img5(null);
+	            }
+	        }
+	    }
 
 		// 상품 정보 수정
 		productService.updateProduct(productDTO);

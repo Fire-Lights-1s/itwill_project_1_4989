@@ -24,15 +24,15 @@
 	<header>
 		<div id="menu-name">
    			<a href="${pageContext.request.contextPath}" style="color: #372161;">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUserDTO.member_id}" style="color: #372161;">${otherUserDTO.member_id}님의 페이지 </a> >
    			<a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUserDTO.member_id}" style="color: #372161;">${otherUserDTO.member_id}님의 프로필</a>
 		</div>
 	</header>
 	<div class="content-container">
 <aside class="side-nav">
-	<h3>${otherUserDTO.member_id}님의 페이지</h3>
+	<h3>Other User</h3>
 	<br>
 	<ul>
+		<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUserDTO.member_id}">${otherUserDTO.member_id}님의 프로필</a></li>
 		<li><a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUserDTO.member_id}">판매 내역</a></li>
 	</ul>
 </aside>

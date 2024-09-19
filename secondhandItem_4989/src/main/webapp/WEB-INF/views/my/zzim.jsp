@@ -62,7 +62,6 @@
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
 						<img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" class="profile-item-image">
-						<div class="zzim-button position-absolute" data-product_id="${product.product_id }" data-member_id="${sessionScope.member_id }" style="bottom: 10%; right: 1rem">♥</div>
 					</div>
 					<div class="profile-item-image-div">
 						<div class="profile-item-name" title="${productDTO.product_name}">
