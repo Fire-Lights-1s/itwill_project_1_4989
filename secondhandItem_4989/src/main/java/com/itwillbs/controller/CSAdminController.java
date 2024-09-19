@@ -1,10 +1,6 @@
 package com.itwillbs.controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -13,25 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwillbs.domain.FaqDTO;
+import com.itwillbs.domain.InquiryDTO;
+import com.itwillbs.domain.NoticeDTO;
 import com.itwillbs.domain.PageDTO;
-import com.itwillbs.domain.PurchaseRequestDTO;
-import com.itwillbs.service.PurchaseAdminService;
-import com.itwillbs.service.PurchaseService;
+import com.itwillbs.service.CSAdminService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/cs")
 public class CSAdminController {
 
 	@Inject
-	private PurchaseService purchaseService;
-	
-	@Inject
-	private PurchaseAdminService purchaseAdminService;
+	private CSAdminService csAdminService;
 
 	@GetMapping("/notice")
 	public String noticeAdmin(HttpServletRequest request, Model model) {
@@ -52,8 +43,8 @@ public class CSAdminController {
 			pageDTO.setSearch(searchKey);
 		}
 		
-		List<PurchaseRequestDTO> purchaseList = purchaseAdminService.getPurchaseList(pageDTO);
-		int count = purchaseAdminService.getPurchaseCount(pageDTO);
+		List<NoticeDTO> noticeList = csAdminService.getNoticeList(pageDTO);
+		int count = csAdminService.getNoticeCount(pageDTO);
 		
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
@@ -72,10 +63,23 @@ public class CSAdminController {
 		pageDTO.setPageCount(pageCount);
 		
 		model.addAttribute("pageDTO", pageDTO);
-		model.addAttribute("purchaseList", purchaseList);
+		model.addAttribute("noticeList", noticeList);
 		
-		return "/admin/cs/notice";
+		return "/admin/cs/notice/list";
 	}
+	
+	@GetMapping("/noticeform")
+	public String noticeForm() {
+		return "/admin/cs/notice/form";
+	}
+	
+	@PostMapping("/submitNotice")
+	public String submitNotice(NoticeDTO noticeDTO) {
+		csAdminService.submitNotice(noticeDTO);
+		return "redirect:/admin/cs/notice";
+	}
+	
+	
 	
 	@GetMapping("/faq")
 	public String faqAdmin(HttpServletRequest request, Model model) {
@@ -96,8 +100,8 @@ public class CSAdminController {
 			pageDTO.setSearch(searchKey);
 		}
 		
-		List<PurchaseRequestDTO> purchaseList = purchaseAdminService.getPurchaseList(pageDTO);
-		int count = purchaseAdminService.getPurchaseCount(pageDTO);
+		List<FaqDTO> faqList = csAdminService.getFaqList(pageDTO);
+		int count = csAdminService.getFaqCount(pageDTO);
 		
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
@@ -116,9 +120,14 @@ public class CSAdminController {
 		pageDTO.setPageCount(pageCount);
 		
 		model.addAttribute("pageDTO", pageDTO);
-		model.addAttribute("purchaseList", purchaseList);
+		model.addAttribute("faqList", faqList);
 		
-		return "/admin/cs/faq";
+		return "/admin/cs/faq/list";
+	}
+	
+	@GetMapping("/faqform")
+	public String faqForm() {
+		return "/admin/cs/faq/form";
 	}
 	
 	
@@ -141,8 +150,8 @@ public class CSAdminController {
 			pageDTO.setSearch(searchKey);
 		}
 		
-		List<PurchaseRequestDTO> purchaseList = purchaseAdminService.getPurchaseList(pageDTO);
-		int count = purchaseAdminService.getPurchaseCount(pageDTO);
+		List<InquiryDTO> inquiryList = csAdminService.getInquiryList(pageDTO);
+		int count = csAdminService.getInquiryCount(pageDTO);
 		
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
@@ -161,10 +170,17 @@ public class CSAdminController {
 		pageDTO.setPageCount(pageCount);
 		
 		model.addAttribute("pageDTO", pageDTO);
-		model.addAttribute("purchaseList", purchaseList);
+		model.addAttribute("inquiryList", inquiryList);
 		
-		return "/admin/cs/inquiry";
+		return "/admin/cs/inquiry/list";
 	}
+	
+	@GetMapping("/inquirymanage")
+	public String inquiryManage() {
+		return "/admin/cs/inquiry/manage";
+	}
+	
+	
 //	
 //	@GetMapping("/getPurchaseInfo")
 //	@ResponseBody

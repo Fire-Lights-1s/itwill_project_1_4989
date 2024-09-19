@@ -16,28 +16,28 @@
     <!-- Title Page-->
     <title>4989 관리자 메뉴</title>
 
-	<jsp:include page="../inc/cssLink.jsp"></jsp:include>
+	<jsp:include page="../../inc/cssLink.jsp"></jsp:include>
 	<!-- 본인의 커스텀 css link 위치는 여기서부터 -->
-	<link href="${pageContext.request.contextPath }/resources/css/admin/purchaseAdmin_table.css"  rel="stylesheet">
+	<link href="${pageContext.request.contextPath }/resources/css/admin/cspAdmin_table.css"  rel="stylesheet">
 </head>
 <body>
 	<div class="page-wrapper">
         
         <!-- MENU SIDEBAR-->
-        <jsp:include page="../inc/menu_sidebar.jsp"></jsp:include>
+        <jsp:include page="../../inc/menu_sidebar.jsp"></jsp:include>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
-	        <jsp:include page="../inc/header_in_page_container.jsp"></jsp:include>
+	        <jsp:include page="../../inc/header_in_page_container.jsp"></jsp:include>
 			<!-- HEADER DESKTOP-->
 			
 			<div class="main-content">
             <!-- 본문내용은-->
             <div class="container-fluid">
 				<div class="col-lg-auto">
-	                <h2 class="title-1 m-b-25">매입신청 관리</h2>
+	                <h2 class="title-1 m-b-25">자주 묻는 질문(FAQ) 관리</h2>
 	                <div class="input-group mb-3 flex-right-50pct">
 	                  <form action="${pageContext.request.contextPath }/admin/purchase" style="display:flex;">
 					    <input type="text" class="form-control" name="search" placeholder="회원아이디, 상품명 등으로 검색" aria-label="Recipient's username" aria-describedby="button-addon2" style="width:300px;">
@@ -185,7 +185,7 @@
     </div>
 	<!-- END page-wrapper-->
 
-    <jsp:include page="../inc/jsLink.jsp"></jsp:include>
+    <jsp:include page="../../inc/jsLink.jsp"></jsp:include>
     <!-- 본인의 커스텀 js link 위치는 여기서부터 -->
     <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/purchase_admin.js"></script>
     <script>

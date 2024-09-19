@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.mapper.CSAdminMapper">
+
+	<select id="getNoticeCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM Notice
+		WHERE 1=1
+	    <if test="search != null and search != ''">
+	        AND notice_id LIKE CONCAT('%', #{search}, '%')
+	        OR	notice_name LIKE CONCAT('%', #{search}, '%')
+	        OR	notice_cont LIKE CONCAT('%', #{search}, '%')
+	    </if>
+	</select>
+	
+	<select id="getNoticeList" resultType="com.itwillbs.domain.NoticeDTO">
+		SELECT * FROM Notice
+		WHERE 1=1
+		<if test="search != null and search != ''">
+	        AND notice_id LIKE CONCAT('%', #{search}, '%')
+	        OR	notice_name LIKE CONCAT('%', #{search}, '%')
+	        OR	notice_cont LIKE CONCAT('%', #{search}, '%')
+	    </if>
+		ORDER BY notice_id DESC LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<select id="getFaqCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM FAQ
+		WHERE 1=1
+	    <if test="search != null and search != ''">
+	        AND faq_quest LIKE CONCAT('%', #{search}, '%')
+	        OR	faq_answer LIKE CONCAT('%', #{search}, '%')
+	    </if>
+	</select>
+	
+	<select id="getFaqList" resultType="com.itwillbs.domain.FaqDTO">
+		SELECT * FROM FAQ
+		WHERE 1=1
+		<if test="search != null and search != ''">
+	        AND faq_quest LIKE CONCAT('%', #{search}, '%')
+	        OR	faq_answer LIKE CONCAT('%', #{search}, '%')
+	    </if>
+		ORDER BY faq_id DESC LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<select id="getInquiryCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM Inquiry
+		WHERE 1=1
+	    <if test="search != null and search != ''">
+	        AND member_id LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_title LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_contents LIKE CONCAT('%', #{search}, '%')
+	    </if>
+	</select>
+	
+	<select id="getInquiryList" resultType="com.itwillbs.domain.InquiryDTO">
+		SELECT * FROM Inquiry
+		WHERE 1=1
+		<if test="search != null and search != ''">
+	        AND member_id LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_title LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_contents LIKE CONCAT('%', #{search}, '%')
+	    </if>
+		ORDER BY inquiry_id DESC LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<insert id="submitNotice">
+	INSERT INTO Notice(notice_name, notice_cont) VALUES(#{notice_name}, #{notice_cont})
+	</insert>
+	
+	
+	
+<!-- 	<update id="savePurchaseInfo" parameterType="map"> -->
+<!-- 		UPDATE PurchaseRequest SET expected_grade=#{expected_grade}, expected_price=#{expected_price}, -->
+<!-- 		purchase_status=#{purchase_status} WHERE purchase_id=#{purchase_id} -->
+<!-- 	</update> -->
+	
+</mapper>
