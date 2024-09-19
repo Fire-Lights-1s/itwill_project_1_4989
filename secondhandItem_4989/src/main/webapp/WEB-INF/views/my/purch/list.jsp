@@ -71,6 +71,41 @@
  				</c:forEach>
   	 		</table>
  		</div>
+ 		
+ 		<c:if test="${list.size() > 0 }">
+ 		<div class="position-relative">
+	    <ul class="pagination">
+		    <li class="page-item">
+				<a class="page-link" href="${pageContext.request.contextPath}/my/purchlist?pageNum=1" aria-label="Go to First">
+		  		<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></span>
+		   		</a>
+			</li>
+		<c:if test="${pageDTO.currentPage > 10 }">
+			<li class="page-item">
+		  		<a class="page-link" href="${pageContext.request.contextPath}/my/purchlist?pageNum=${pageDTO.startPage - 1}" aria-label="Previous">
+		   		<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></span>
+		   		</a>
+			</li>
+		</c:if>
+		<c:forEach var="page" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+			<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/my/purchlist?pageNum=${page}"
+			${pageDTO.currentPage eq page ? 'active':''}>${page }</a></li>
+		</c:forEach>
+		<c:if test="${pageDTO.currentPage + 10 <= pageDTO.pageCount }">
+			<li class="page-item">
+			  <a class="page-link" href="${pageContext.request.contextPath}/my/purchlist?pageNum=${pageDTO.endPage + 1}" aria-label="Next">
+			  <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="이전"></span>
+			  </a>
+			</li>
+		</c:if>
+		<li class="page-item">
+			<a class="page-link" href="${pageContext.request.contextPath}/my/purchlist?pageNum=${pageDTO.pageCount}" aria-label="Next">
+		 	<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="이전"></span>
+			</a>
+		</li>
+      </ul>
+	</div>
+ 		</c:if>
  		<br>
  		<div style="text-align:right; padding-right:100px;">
 		<a href="${pageContext.request.contextPath}/purchase/register"><button id="submit_form">매입 신청하기</button></a>

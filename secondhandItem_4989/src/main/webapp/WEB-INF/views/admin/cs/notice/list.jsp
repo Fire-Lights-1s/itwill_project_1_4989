@@ -126,62 +126,6 @@
             </div>
             <!-- 이 사이에 넣어주세요.-->
             </div>
-			<!-- 모달 창  -->
-			<div class="modal fade" id="purchaseAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h1 class="modal-title fs-5" id="exampleModalLabel">매입신청 관리</h1>
-			        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      <div class="modal-body">
-			      <!-- 모달 창 메인 body -->
-			      	<div class="form-floating mb-3">
-					  <label for="floatingInput">신청번호</label>
-					  <input type="text" class="form-control" id="purchase_id" readonly>
-					</div>
-			      	<div class="form-floating mb-3">
-					  <label for="floatingInput">신청자 ID</label>
-					  <input type="text" class="form-control" id="member_id" readonly>
-					</div>
-			      	<div class="form-floating mb-3">
-					  <label for="floatingInput">신청일</label>
-					  <input type="text" class="form-control" id="request_date" readonly>
-					</div>
-			      	<div class="form-floating mb-3">
-					  <label for="floatingInput">매입제품</label>
-					  <input type="text" class="form-control" id="pc_item_name" readonly>
-					</div>
-			      	<div class="form-floating mb-3">
-					  <label for="floatingInput">등급</label>
-					  <input type="text" class="form-control" id="expected_grade">
-					</div>
-			      	<div class="form-floating mb-3">
-					  <label for="floatingInput">매입가</label>
-					  <input type="text" class="form-control" id="expected_price">
-					</div>
-			      	<div class="form-floating mb-3">
-					  <label for="floatingInput">매입정산계좌</label>
-					  <input type="text" class="form-control" id="account_info" readonly>
-					</div>
-			      	<div class="form-floating mb-3">
-	  		      	  <label for="floatingInput">처리 상태</label>
-			      	  <select id="purchase_status" class="form-select">
-			      	    <option value="신청 완료">신청 완료(접수)</option>
-			      	    <option value="검수 중">검수 중</option>
-			      	    <option value="매입 완료">매입 완료</option>
-			      	    <option value="매입 취소">매입 취소</option>
-		      	      </select>
-			      	</div>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			        <button type="button" class="btn btn-purple" id="status_save">처리상태 저장</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-			<!-- end modal -->
         </div>
 		<!-- END PAGE CONTAINER-->
     </div>

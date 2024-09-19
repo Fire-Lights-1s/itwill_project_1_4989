@@ -1,6 +1,7 @@
 package com.itwillbs.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -13,19 +14,19 @@ import com.itwillbs.domain.NoticeDTO;
 import com.itwillbs.domain.PageDTO;
 
 @Repository
-public class CSAdminDAO {
+public class CSDAO {
 	
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String namespace="com.itwillbs.mapper.CSAdminMapper";
+	private static final String namespace="com.itwillbs.mapper.CSMapper";
 
 	public List<NoticeDTO> getNoticeList(PageDTO pageDTO) {
 		return sqlSession.selectList(namespace + ".getNoticeList", pageDTO);
 	}
 
 	public int getNoticeCount(PageDTO pageDTO) {
-		return sqlSession.selectOne(namespace + ".getNoticeCount");
+		return sqlSession.selectOne(namespace + ".getNoticeCount", pageDTO);
 	}
 
 	public List<FaqDTO> getFaqList(PageDTO pageDTO) {
@@ -33,7 +34,7 @@ public class CSAdminDAO {
 	}
 
 	public int getFaqCount(PageDTO pageDTO) {
-		return sqlSession.selectOne(namespace + ".getFaqCount");
+		return sqlSession.selectOne(namespace + ".getFaqCount", pageDTO);
 	}
 
 	public List<InquiryDTO> getInquiryList(PageDTO pageDTO) {
@@ -41,7 +42,7 @@ public class CSAdminDAO {
 	}
 
 	public int getInquiryCount(PageDTO pageDTO) {
-		return sqlSession.selectOne(namespace + ".getInquiryCount");
+		return sqlSession.selectOne(namespace + ".getInquiryCount", pageDTO);
 	}
 
 	public void submitNotice(NoticeDTO noticeDTO) {
@@ -75,6 +76,26 @@ public class CSAdminDAO {
 
 	public void deletFaq(int faq_id) {
 		sqlSession.delete(namespace + ".deleteFaq", faq_id);
+	}
+
+	public void inquirySubmit(InquiryDTO inquiryDTO) {
+		sqlSession.insert(namespace + ".inquirySubmit", inquiryDTO);
+	}
+
+	public InquiryDTO inquiryDetail(int inquiry_id) {
+		return sqlSession.selectOne(namespace + ".inquiryDetail", inquiry_id);
+	}
+
+	public List<InquiryDTO> getMyInquiryList(Map<String, Object> inquiryMap) {
+		return sqlSession.selectList(namespace + ".getMyInquiryList", inquiryMap);
+	}
+
+	public int getMyInquiryCount(String member_id) {
+		return sqlSession.selectOne(namespace + ".getMyInquiryCount", member_id);
+	}
+
+	public void inquiryReply(InquiryDTO inquiryDTO) {
+		sqlSession.update(namespace + ".inquiryReply", inquiryDTO);
 	}
 	
 	

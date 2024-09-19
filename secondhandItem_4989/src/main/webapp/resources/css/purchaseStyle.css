@@ -363,3 +363,67 @@ button {
     border: 1px solid #ddd;
 }
 
+
+
+/* 페이지네이션 스타일 */
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+    margin-top: 20px;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-item .page-link {
+    position: relative;
+    display: block;
+    padding: 8px 12px;
+    color: #4b0082; /* 보라색 포인트 컬러 */
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.page-item .page-link:hover {
+    background-color: #4b0082;
+    color: white;
+    border-color: #4b0082;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: white;
+    background-color: #4b0082; /* 활성화된 상태의 보라색 */
+    border-color: #4b0082;
+}
+
+.page-item .page-link img {
+    width: 16px; /* 이미지 크기 조정 */
+    height: 16px;
+    vertical-align: middle;
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.pagination {
+    justify-content: center;
+}
+
+.pagination.justify-content-end {
+    justify-content: flex-end;
+}
+
+

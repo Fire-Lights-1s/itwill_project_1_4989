@@ -28,15 +28,7 @@
 <section>
 	<div class="content-container">
 	<!-- 사이드 메뉴 시작 -->
-      <aside class="side-nav">
-        <h3>고객센터</h3>
-        <br>
-        <ul>
-            <li><a href="#">공지사항</a></li>
-            <li><a href="#">자주 묻는 질문</a></li>
-            <li><a href="#">1:1 문의</a></li>
-        </ul>
-      </aside>
+      <jsp:include page="cs_sidenav.jsp"></jsp:include>
 
 <!-- 사이드 메뉴 끝 -->
 
@@ -46,7 +38,7 @@
 
 		<br>
 		<h1 style="text-align:center;">공지사항</h1>
-
+		<p class="guide-text">4989 이용자분들에게 전하는 공지사항입니다.<br>각종 알림사항, 이벤트 정보, 서비스 점검일정 등을 안내드립니다.</p>
 
 	<div id="notice-list"> 
   	 		<table>
@@ -55,7 +47,6 @@
   	 				<th>제목</th>
   	 				<th>등록일</th>
   	 			</tr>
-  	 			<c:set var="noticeList" value="${noticeList }" />
   	 			<c:if test="${noticeList == null || noticeList.size() == 0 }">
   	 				<tr><td colspan="3" style="text-align:center;">등록된 공지사항이 없습니다.</td></tr>
   	 			</c:if>
@@ -78,8 +69,41 @@
  				</c:forEach>
   	 		</table>
  		</div>
-
-
+ 	
+ 	<c:if test="${noticeList.size() > 0 }">
+	  <div class="position-relative">
+	    <ul class="pagination">
+		    <li class="page-item">
+				<a class="page-link" href="${pageContext.request.contextPath}/cs/notice?pageNum=1" aria-label="Go to First">
+		  		<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="처음"></span>
+		   		</a>
+			</li>
+		<c:if test="${pageDTO.currentPage > 10 }">
+			<li class="page-item">
+		  		<a class="page-link" href="${pageContext.request.contextPath}/cs/notice?pageNum=${pageDTO.startPage - 1}" aria-label="Previous">
+		   		<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></span>
+		   		</a>
+			</li>
+		</c:if>
+		<c:forEach var="page" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+			<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/cs/notice?pageNum=${page}"
+			${pageDTO.currentPage eq page ? 'active':''}>${page }</a></li>
+		</c:forEach>
+		<c:if test="${pageDTO.currentPage + 10 <= pageDTO.pageCount }">
+			<li class="page-item">
+			  <a class="page-link" href="${pageContext.request.contextPath}/cs/notice?pageNum=${pageDTO.endPage + 1}" aria-label="Next">
+			  <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="이전"></span>
+			  </a>
+			</li>
+		</c:if>
+		<li class="page-item">
+			<a class="page-link" href="${pageContext.request.contextPath}/cs/notice?pageNum=${pageDTO.pageCount}" aria-label="Next">
+		 	<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="이전"></span>
+			</a>
+		</li>
+      </ul>
+	</div>
+  </c:if>
 
 	  </main>
 	</div>

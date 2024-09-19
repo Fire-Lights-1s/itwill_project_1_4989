@@ -16,14 +16,14 @@ import com.itwillbs.domain.FaqDTO;
 import com.itwillbs.domain.InquiryDTO;
 import com.itwillbs.domain.NoticeDTO;
 import com.itwillbs.domain.PageDTO;
-import com.itwillbs.service.CSAdminService;
+import com.itwillbs.service.CSService;
 
 @Controller
 @RequestMapping("/admin/cs")
 public class CSAdminController {
 
 	@Inject
-	private CSAdminService csAdminService;
+	private CSService csService;
 
 	@GetMapping("/notice")
 	public String noticeAdmin(HttpServletRequest request, Model model) {
@@ -44,8 +44,8 @@ public class CSAdminController {
 			pageDTO.setSearch(searchKey);
 		}
 		
-		List<NoticeDTO> noticeList = csAdminService.getNoticeList(pageDTO);
-		int count = csAdminService.getNoticeCount(pageDTO);
+		List<NoticeDTO> noticeList = csService.getNoticeList(pageDTO);
+		int count = csService.getNoticeCount(pageDTO);
 		
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
@@ -76,33 +76,33 @@ public class CSAdminController {
 	
 	@PostMapping("/submitNotice")
 	public String submitNotice(NoticeDTO noticeDTO) {
-		csAdminService.submitNotice(noticeDTO);
+		csService.submitNotice(noticeDTO);
 		return "redirect:/admin/cs/notice";
 	}
 	
 	@GetMapping("/noticedetail")
 	public String noticeDetail(@RequestParam int notice_id, Model model) {
-		NoticeDTO noticeDTO = csAdminService.noticeDetail(notice_id);
+		NoticeDTO noticeDTO = csService.noticeDetail(notice_id);
 		model.addAttribute("noticeDTO", noticeDTO);
 		return "/admin/cs/notice/detail";
 	}
 	
 	@GetMapping("/notice/edit")
 	public String editNotice(@RequestParam int notice_id, Model model) {
-		NoticeDTO noticeDTO = csAdminService.noticeDetail(notice_id);
+		NoticeDTO noticeDTO = csService.noticeDetail(notice_id);
 		model.addAttribute("noticeDTO", noticeDTO);
 		return "/admin/cs/notice/edit";
 	}
 	
 	@PostMapping("/editNotice")
 	public String editNoticePro(NoticeDTO noticeDTO) {
-		csAdminService.editNotice(noticeDTO);
+		csService.editNotice(noticeDTO);
 		return "redirect:/admin/cs/notice";
 	}
 	
 	@GetMapping("/notice/delete")
 	public String deleteNotice(@RequestParam int notice_id) {
-		csAdminService.deleteNotice(notice_id);
+		csService.deleteNotice(notice_id);
 		return "redirect:/admin/cs/notice";
 	}
 	
@@ -126,8 +126,8 @@ public class CSAdminController {
 			pageDTO.setSearch(searchKey);
 		}
 		
-		List<FaqDTO> faqList = csAdminService.getFaqList(pageDTO);
-		int count = csAdminService.getFaqCount(pageDTO);
+		List<FaqDTO> faqList = csService.getFaqList(pageDTO);
+		int count = csService.getFaqCount(pageDTO);
 		
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
@@ -158,33 +158,33 @@ public class CSAdminController {
 	
 	@PostMapping("/submitFaq")
 	public String submitFaq(FaqDTO faqDTO) {
-		csAdminService.submitFaq(faqDTO);
+		csService.submitFaq(faqDTO);
 		return "redirect:/admin/cs/faq";
 	}
 	
 	@GetMapping("/faqdetail")
 	public String faqDetail(@RequestParam int faq_id, Model model) {
-		FaqDTO faqDTO = csAdminService.faqDetail(faq_id);
+		FaqDTO faqDTO = csService.faqDetail(faq_id);
 		model.addAttribute("faqDTO", faqDTO);
 		return "/admin/cs/faq/detail";
 	}
 	
 	@GetMapping("/faq/edit")
 	public String editFaq(@RequestParam int faq_id, Model model) {
-		FaqDTO faqDTO = csAdminService.faqDetail(faq_id);
+		FaqDTO faqDTO = csService.faqDetail(faq_id);
 		model.addAttribute("faqDTO", faqDTO);
 		return "/admin/cs/faq/edit";
 	}
 	
 	@PostMapping("/editFaq")
 	public String editFaqPro(FaqDTO faqDTO) {
-		csAdminService.editFaq(faqDTO);
+		csService.editFaq(faqDTO);
 		return "redirect:/admin/cs/faq";
 	}
 	
 	@GetMapping("/faq/delete")
 	public String deleteFaq(@RequestParam int faq_id) {
-		csAdminService.deleteFaq(faq_id);
+		csService.deleteFaq(faq_id);
 		return "redirect:/admin/cs/faq";
 	}
 	
@@ -208,8 +208,8 @@ public class CSAdminController {
 			pageDTO.setSearch(searchKey);
 		}
 		
-		List<InquiryDTO> inquiryList = csAdminService.getInquiryList(pageDTO);
-		int count = csAdminService.getInquiryCount(pageDTO);
+		List<InquiryDTO> inquiryList = csService.getInquiryList(pageDTO);
+		int count = csService.getInquiryCount(pageDTO);
 		
 		int pageBlock = 10;
 		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
@@ -234,42 +234,17 @@ public class CSAdminController {
 	}
 	
 	@GetMapping("/inquirymanage")
-	public String inquiryManage() {
+	public String inquiryManage(@RequestParam int inquiry_id, Model model) {
+		InquiryDTO inquiryDTO = csService.inquiryDetail(inquiry_id);
+		model.addAttribute("inquiryDTO", inquiryDTO);
 		return "/admin/cs/inquiry/manage";
 	}
 	
+	@PostMapping("/inquiry/reply")
+	public String inquiryReply(@RequestParam int inquiry_id, InquiryDTO inquiryDTO) {
+		inquiryDTO.setInquiry_id(inquiry_id);
+		csService.inquiryReply(inquiryDTO);
+		return "redirect:/admin/cs/inquiry";
+	}
 	
-//	
-//	@GetMapping("/getPurchaseInfo")
-//	@ResponseBody
-//	public Map<String, Object> getPurchaseInfo(@RequestParam int purchase_id) {
-//		
-//		PurchaseRequestDTO purchaseDTO = purchaseService.getPurchDetail(purchase_id);
-//
-//		Map<String, Object> purchaseInfo = new HashMap<>();
-//		purchaseInfo.put("purchase_id", purchaseDTO.getPurchase_id());
-//		purchaseInfo.put("member_id", purchaseDTO.getMember_id());
-//		
-//	    LocalDateTime localDateTime = purchaseDTO.getRequest_date().toLocalDateTime();
-//	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//	    String formattedDate = localDateTime.format(formatter);
-//	    purchaseInfo.put("request_date", formattedDate);
-//
-//		purchaseInfo.put("pc_item_name", purchaseDTO.getPc_item_name());
-//		purchaseInfo.put("expected_grade", purchaseDTO.getExpected_grade());
-//		purchaseInfo.put("expected_price", purchaseDTO.getExpected_price());
-//		String account_info = purchaseDTO.getBank_name() + " / " + purchaseDTO.getTransfer_account();
-//		purchaseInfo.put("account_info", account_info);
-//		purchaseInfo.put("purchase_status", purchaseDTO.getPurchase_status());
-//		
-//		return purchaseInfo;
-//	}
-//	
-//	@PostMapping("/savePurchaseInfo")
-//    @ResponseBody
-//    public String savePurchaseInfo(@RequestBody Map<String, Object> saveData) {
-//		purchaseAdminService.savePurchaseInfo(saveData);		
-//        return "success";
-//    }
-//	
 }

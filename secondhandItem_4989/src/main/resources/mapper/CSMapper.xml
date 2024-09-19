@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.itwillbs.mapper.CSAdminMapper">
+<mapper namespace="com.itwillbs.mapper.CSMapper">
 
 	<select id="getNoticeCount" resultType="java.lang.Integer">
 		SELECT count(*) FROM Notice
@@ -50,6 +50,7 @@
 		WHERE 1=1
 	    <if test="search != null and search != ''">
 	        AND member_id LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_type LIKE CONCAT('%', #{search}, '%')
 	        OR	inquiry_title LIKE CONCAT('%', #{search}, '%')
 	        OR	inquiry_contents LIKE CONCAT('%', #{search}, '%')
 	    </if>
@@ -60,6 +61,7 @@
 		WHERE 1=1
 		<if test="search != null and search != ''">
 	        AND member_id LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_type LIKE CONCAT('%', #{search}, '%')
 	        OR	inquiry_title LIKE CONCAT('%', #{search}, '%')
 	        OR	inquiry_contents LIKE CONCAT('%', #{search}, '%')
 	    </if>
@@ -98,7 +100,27 @@
 	DELETE FROM FAQ WHERE faq_id=#{faq_id}
 	</delete>
 	
+	<insert id="inquirySubmit">
+	INSERT INTO Inquiry(member_id, inquiry_type, inquiry_title, inquiry_contents, inquired_at)
+	VALUES(#{member_id}, #{inquiry_type}, #{inquiry_title}, #{inquiry_contents}, #{inquired_at})
+	</insert>
 	
+	<select id="inquiryDetail" resultType="com.itwillbs.domain.InquiryDTO">
+	SELECT * FROM Inquiry WHERE inquiry_id=#{inquiry_id}
+	</select>
+	
+	<select id="getMyInquiryList" parameterType="map" resultType="com.itwillbs.domain.InquiryDTO">
+	SELECT * FROM Inquiry WHERE member_id=#{member_id}
+	ORDER BY inquiry_id DESC LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	
+	<select id="getMyInquiryCount" parameterType="map" resultType="java.lang.Integer">
+	SELECT count(*) FROM Inquiry WHERE member_id=#{member_id}
+	</select>
+	
+	<update id="inquiryReply">
+	UPDATE Inquiry SET inquiry_reply=#{inquiry_reply}, replied_at=#{replied_at} WHERE inquiry_id=#{inquiry_id}
+	</update>
 	
 <!-- 	<update id="savePurchaseInfo" parameterType="map"> -->
 <!-- 		UPDATE PurchaseRequest SET expected_grade=#{expected_grade}, expected_price=#{expected_price}, -->
