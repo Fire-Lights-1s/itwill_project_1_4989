@@ -83,9 +83,11 @@
 	</delete>
 	
 	<select id="getBuyList" resultType="com.itwillbs.domain.ProductDTO">
-		select * from 
+		select p.product_id, p.seller_id, p.product_name, p.product_price, p.product_img1, p.created_datetime, p.trade_status, t.buyer_id, t.transaction_end_date, t.is_reserved, t.reservation_date, r.review_content from 
 		Product p join TX t
 		on p.product_id = t.product_id
+		join Review r
+		on p.product_id = r.product_id
 		where t.buyer_id = #{seller_id}
 		<if test="sale == '' or sale == null">
 			and t.is_reserved = true 
@@ -170,7 +172,7 @@
 	
 	<update id="updateReviewStatus">
 		update Product
-		set review_status = true
+		set trade_status = '후기 작성 완료'
 		where product_id = #{product_id}
 	</update>
 </mapper>
