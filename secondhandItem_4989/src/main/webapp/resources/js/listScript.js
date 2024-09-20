@@ -1,3 +1,4 @@
+
 // 카테고리 선택
 window.addEventListener('load', function() {
 	
@@ -77,6 +78,7 @@ window.addEventListener('load', function() {
     
     // 필터 적용 함수
     function applyFilters() {
+    	
         let selectedFilters = {}; // 필터 데이터를 담을 객체
 
         let tradeMethodSelected = false;
@@ -140,6 +142,9 @@ window.addEventListener('load', function() {
         .then(response => response.text())
         .then(html => {
             updateProductList(html);
+            selectZzim();
+            loadZzimStatus();
+            setupLoadMore();
         });
     }
         
@@ -148,9 +153,7 @@ window.addEventListener('load', function() {
     document.getElementById('product-list').innerHTML = productsHtml || '<p>결과가 없습니다.</p>';
 	}
 	
-	loadZzimStatus();
-	selectZzim();
-	
 });
+
 
 

@@ -20,42 +20,80 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <style>
-  /* 모달창 기본 스타일 */
-  .modal {
-    display: none; /* 기본적으로 숨김 */
-    position: fixed; 
-    z-index: 1; 
-    left: 0;
-    top: 0;
+
+textarea {
     width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
+    height: 6.25em;
+    resize: none;
+}
+  
+.modal {
+  display: none;
+  text-align: center;
+  position: fixed;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
 
-  /* 모달 콘텐츠 스타일 */
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 40%;
-  }
+.modal-content {
+  background-color: #fefefe;
+  margin: 8% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 500px;
+  max-width: 80%;
+  height: 750px;
+  max-height: 80vh;
+  overflow: auto;
+  box-sizing: border-box;
+}
 
-  /* 닫기 버튼 스타일 */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    text-align: right;
-  }
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: right;
+}
 
-  .close:hover, .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
+.close:hover, .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.stars {
+display: inline-block;
+}
+
+.stars1 {
+display: inline-block;
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.star1 {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.star.selected {
+  color: gold;
+}
+
+.star1.active {
+    color: gold;
+}
 </style>
 	
 </head>
@@ -73,16 +111,48 @@
 	<jsp:include page="../inc/myPageLefter.jsp"></jsp:include>
 		<div class="main-container-side-profile">
 		<main>
-		<div id="reviewModal" class="modal" style="display: none;">
+		<div id="reviewComModal" class="modal" style="display: none;">
 			<div class="modal-content">
-		   		<span class="close">&times;</span>
-		   		<h2>구매 후기</h2>
-		    	<form action="/submitReview" method="post">
-		      		<label for="reviewText">후기 내용:</label><br>
-		      		<textarea id="reviewText" name="reviewText" rows="4" cols="50"></textarea><br>
-		      		<input type="hidden" value="">
-		      		<button type="submit">후기 작성</button>
-		    	</form>
+				<span class="close">&times;</span>
+				<h2 style="margin-bottom: 20px;">구매 후기</h2>
+				<div style="float: left; overflow:hidden;">
+					<img id="modalComImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
+		    	</div>
+					<div class="starRating">
+					<label for="quality">품&emsp;&emsp;질 :</label>
+						<div class="stars1" data-name="quality" style="display: inline-block;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
+						</div><br>
+				    <label for="price">가&emsp;&emsp;격 :</label>
+						<div class="stars1" data-name="price" style="display: inline-block;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
+						</div><br>
+					<label for="punctuality">시간 약속 :</label>
+					    <div class="stars1" data-name="punctuality" style="display: inline-block;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
+					    </div><br>
+					<label for="manner">매&emsp;&emsp;너 :</label>
+					    <div class="stars1" data-name="manner" style="display: inline-block; margin-bottom: 20px;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
+					    </div>
+					</div>
+		      		<textarea id="reviewText1" name="reviewText" rows="4" cols="50" readonly></textarea><br>
 			</div>
 		</div>
 			<h2>판매 내역</h2>
@@ -116,7 +186,8 @@
 			<c:forEach var="productDTO" items="${productList}">
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" class="profile-item-imagesell">
+						<img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" class="profile-item-imagesell"
+						data-image-src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" data-product-id="${productDTO.product_id}">
 					</div>
 					<div class="profile-item-image-div">
 					<c:if test="${productDTO.trade_status eq '거래 가능'}">
@@ -124,7 +195,7 @@
 							판매 중
 						</div>
 					</c:if>
-					<c:if test="${productDTO.trade_status eq '거래 완료'}">
+					<c:if test="${productDTO.trade_status eq '거래 완료' or productDTO.trade_status eq '후기 작성 완료'}">
 						<div class="profile-item-image-cover2">
 							판매 완료
 						</div>	
@@ -153,7 +224,11 @@
 							<button class="profile-noreserv" data-id="${productDTO.product_id}">예약 취소</button>
 						</c:if>
 						<c:if test="${productDTO.trade_status eq '거래 완료'}">
-							<button class="reviewBtn">구매 후기</button>
+							<span style="border: 1px solid black; padding: 5px; border-radius: 5px;">구매 후기</span>
+						</c:if>
+						<c:if test="${productDTO.trade_status eq '후기 작성 완료'}">
+							<button class="reviewComBtn" style="background-color: #0040FF;" data-content="${productDTO.review_content}" data-reviewQ="${productDTO.review_quality}" 
+						    data-reviewP="${productDTO.review_price}" data-reviewT="${productDTO.review_time}" data-reviewM="${productDTO.review_manner}">구매 후기</button>
 						</c:if>
 					</div>
 					<div class="profile-item-detail1">
@@ -187,26 +262,47 @@
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
-<script>
-	// 모달 및 버튼 요소 가져오기
-	const modal = document.querySelector("#reviewModal");
-	const span = document.getElementsByClassName("close")[0];
-	document.querySelectorAll('.reviewBtn').forEach(function(btn) {
-	   btn.onclick = function() {
-	     modal.style.display = "block";
-	   }
-	});
-	
-	// 닫기 버튼(X)을 클릭하면 모달을 닫기
-	span.onclick = function() {
-	  modal.style.display = "none";
+<script type="text/javascript">
+	function updateStarRating(category, value) {
+	    const starsCom = document.querySelectorAll('.stars1[data-name="' + category + '"] .star1');
+	    starsCom.forEach(star1 => {
+	        const starValue = parseInt(star1.getAttribute('data-value'), 10);
+	        if (starValue <= value) {
+	            star1.classList.add('active');
+	        } else {
+	            star1.classList.remove('active');
+	        }
+	    });
 	}
+	const modalComImage = document.querySelector("#modalComImage");
+	const modalCom = document.querySelector("#reviewComModal");
+	const span = document.getElementsByClassName("close")[0];
 	
-	// 모달 외부를 클릭하면 모달을 닫기
+	document.querySelectorAll('.reviewComBtn').forEach(function(btn) {
+		btn.onclick = function(event) {
+			const productElement = event.target.closest('.profile-item-list-piece');
+            const img = productElement.querySelector('img.profile-item-imagesell');
+            const imageSrc = img.getAttribute('data-image-src');
+            const productId = img.getAttribute('data-product-id');
+            const reviewContent = event.target.getAttribute('data-content');
+            document.querySelector('#reviewText1').value = reviewContent;
+            modalComImage.src = imageSrc;
+            updateStarRating('quality', parseInt(event.target.getAttribute('data-reviewQ'), 10));
+            updateStarRating('price', parseInt(event.target.getAttribute('data-reviewP'), 10));
+            updateStarRating('punctuality', parseInt(event.target.getAttribute('data-reviewT'), 10));
+            updateStarRating('manner', parseInt(event.target.getAttribute('data-reviewM'), 10));
+			modalCom.style.display = "block";
+		}
+	});
+		
+	span.onclick = function() {
+		  modalCom.style.display = "none";
+		}
+		
 	window.onclick = function(event) {
-	  if (event.target == modal) {
-	    modal.style.display = "none";
-	  }
+		if (event.target == modalCom) {
+			modalCom.style.display = "none";
+		}
 	}
 </script>
 

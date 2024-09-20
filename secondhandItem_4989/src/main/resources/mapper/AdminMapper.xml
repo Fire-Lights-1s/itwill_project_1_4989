@@ -8,23 +8,37 @@
 		select count(*)
 		from Report
 		<if test="search != null">
-			where reporter_id like "%#{search}%" 
-			or reporter_id like "%#{search}%" 
-			or reportee_id like "%#{search}%" 
-			or CONVERT(reported_item_id, CHAR) like "%#{search}%" 
-			or report_type like "%#{search}%" 
-			or report_contents like "%#{search}%" 
-			or reported_at like "%#{search}%" 
-			or report_status like "%#{search}%" 
+			where report_id like CONCAT('%',#{search},'%')
+			or reporter_id like CONCAT('%',#{search},'%') 
+			or reportee_id like CONCAT('%',#{search},'%') 
+			or CONVERT(reported_item_id, CHAR) like CONCAT('%',#{search},'%') 
+			or report_type like CONCAT('%',#{search},'%') 
+			or report_contents like CONCAT('%',#{search},'%') 
+			or reported_at like CONCAT('%',#{search},'%') 
+			or report_status like CONCAT('%',#{search},'%') 
 		</if>
 		order by reported_at desc
 	</select>
 	<select id="getReportList" resultType="com.itwillbs.domain.ReportDTO"> 
 		select *
 		from Report
+		<if test="search != null">
+			where report_id like CONCAT('%',#{search},'%')
+			or reporter_id like CONCAT('%',#{search},'%') 
+			or reportee_id like CONCAT('%',#{search},'%') 
+			or CONVERT(reported_item_id, CHAR) like CONCAT('%',#{search},'%') 
+			or report_type like CONCAT('%',#{search},'%') 
+			or report_contents like CONCAT('%',#{search},'%') 
+			or reported_at like CONCAT('%',#{search},'%') 
+			or report_status like CONCAT('%',#{search},'%') 
+		</if>
 		order by reported_at desc
+		limit #{startRow}, #{pageSize}
 	</select>
-	
+	<update id="updateReport">
+		update Report set report_contents = #{report_contents}, report_status = #{report_status}
+		where report_id = #{report_id}
+	</update>
 	
 	
 </mapper>

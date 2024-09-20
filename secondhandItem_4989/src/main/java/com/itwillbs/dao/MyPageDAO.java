@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.ReviewDTO;
 import com.itwillbs.domain.ZzimDTO;
 
 @Repository
@@ -61,6 +62,14 @@ public class MyPageDAO {
 
 	public void updateReserv(ProductDTO productDTO) {
 		sqlSession.update(namespace + ".updateReserv", productDTO);
+	}
+
+	public void insertReview(ReviewDTO reviewDTO) {
+		sqlSession.insert(namespace + ".insertReview", reviewDTO);		
+	}
+
+	public void updateReviewStatus(int product_id) {
+		sqlSession.update(namespace + ".updateReviewStatus", product_id);		
 	}
 	
 		

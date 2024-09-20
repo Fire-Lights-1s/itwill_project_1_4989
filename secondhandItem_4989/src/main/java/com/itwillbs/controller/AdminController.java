@@ -10,9 +10,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ReportDTO;
 import com.itwillbs.service.AdminService;
@@ -69,10 +73,15 @@ public class AdminController {
 //		return "/admin/pay/list";
 //	}
 //	
-	@GetMapping("/report")
+	@GetMapping(value = "/report", produces = "application/text; charset=UTF-8")
 	public String report(HttpServletRequest request, Model model) {
 		PageDTO pageDTO = new PageDTO();
 		String pageNum = request.getParameter("pageNum");
+		
+		System.out.println(request.getParameter("search"));
+		if(request.getParameter("search") != null && request.getParameter("search") != "") {
+			pageDTO.setSearch(request.getParameter("search"));
+		}
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -81,30 +90,33 @@ public class AdminController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		pageDTO.setPageSize(pageSize);
-		List<ReportDTO> reportList = adminService.getReportList(pageDTO);
 		int count = adminService.getReportCount(pageDTO);
 		
 		int pageBlock = 10;
-		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
-		int endPage = startPage + pageBlock - 1;
-		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-		if(startPage < 1) {
-			startPage = 1;
-		}
-		if(endPage > pageCount) {
-			endPage = pageCount;
-		}
 		pageDTO.setCount(count);
 		pageDTO.setPageBlock(pageBlock);
-		pageDTO.setStartPage(startPage);
-		pageDTO.setEndPage(endPage);
-		pageDTO.setPageCount(pageCount);
 		
+		List<ReportDTO> reportList = adminService.getReportList(pageDTO);
 		
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("reportList", reportList);
-		
 		return "/admin/cs/report";
+	}
+	@PostMapping(value = "/report/update", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String reportUpdate(ReportDTO reportDTO) {
+		String json = null;
+		ReportDTO report = null;
+		report = adminService.updateReport(reportDTO);
+		
+		try {
+			json = new ObjectMapper().writeValueAsString(report);
+			System.out.println("json productDTO"+json);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		return json;
 	}
 //	
 //	@GetMapping("/notice")

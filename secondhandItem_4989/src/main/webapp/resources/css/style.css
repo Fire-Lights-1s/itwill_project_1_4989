@@ -64,6 +64,7 @@ input.search {
 }
 .nav-links li{
   list-style: none;
+  min-width: fit-content
 }
 .nav-links li a{
   color: #f2f2f2;
@@ -213,8 +214,6 @@ input.search {
   }
 }
 
-
-
 .zzim-button {
     width: 30px; /* 원의 지름 */
     height: 30px; /* 원의 지름 */
@@ -248,10 +247,12 @@ header {
 
 #menu-name {
 	margin: auto;
-	padding-left:330px;
+	padding-left:5%;
 	font-size: 14pt;
 	font-weight:900;
 	color:#372161;
+	position: relative;
+	max-width: 1300px;
 }
 
 #menu-name a {
@@ -262,7 +263,7 @@ header {
 	margin: 0 auto; /* 페이지 중앙에 컨테이너 위치 */
     padding: 20px;
     max-width: 1400px; /* 원하는 최대 너비 설정 */
-    background-color: #f8f8f8;
+/*     background-color: #f8f8f8; */
     display: flex; /* 사이드 내비게이션과 본문을 나란히 배치 */
 }
 
@@ -338,6 +339,9 @@ aside {
     display: block !important;
 }
 
+.img-height-fix.sold {
+	filter: brightness(0.5) !important;
+}
 
 /* 상품 목록 처리 끝 */
 

@@ -105,9 +105,48 @@ public class ProductService {
 		}
 		
 		//판매 상품 수정
-		public void updateProduct(ProductDTO productDTO) {
+		public void updateProduct(ProductDTO productDTO) throws Exception {
+		    // 기존 상품 정보 조회
+		    ProductDTO existingProduct = productDAO.getProductDetail(String.valueOf(productDTO.getProduct_id()));
+
+		    // **노란색 하이라이트: 새로 업로드된 이미지가 없으면 기존 이미지를 유지**
+		    if (productDTO.getProduct_img1() == null || productDTO.getProduct_img1().isEmpty()) {
+		        productDTO.setProduct_img1(existingProduct.getProduct_img1());
+		    }
+		    if (productDTO.getProduct_img2() == null || productDTO.getProduct_img2().isEmpty()) {
+		        productDTO.setProduct_img2(existingProduct.getProduct_img2());
+		    }
+		    if (productDTO.getProduct_img3() == null || productDTO.getProduct_img3().isEmpty()) {
+		        productDTO.setProduct_img3(existingProduct.getProduct_img3());
+		    }
+		    if (productDTO.getProduct_img4() == null || productDTO.getProduct_img4().isEmpty()) {
+		        productDTO.setProduct_img4(existingProduct.getProduct_img4());
+		    }
+		    if (productDTO.getProduct_img5() == null || productDTO.getProduct_img5().isEmpty()) {
+		        productDTO.setProduct_img5(existingProduct.getProduct_img5());
+		    }
+
+		    // **노란색 하이라이트: 새로 업로드된 이미지가 있으면 기존 이미지를 덮어씀**
+		    if (productDTO.getProduct_img1() != null && !productDTO.getProduct_img1().isEmpty()) {
+		        // 새로운 이미지 처리 로직이 이미 ProductController에서 처리되므로 여기서는 단순히 DTO를 업데이트
+		    }
+		    if (productDTO.getProduct_img2() != null && !productDTO.getProduct_img2().isEmpty()) {
+		        // 같은 방식으로 처리
+		    }
+		    if (productDTO.getProduct_img3() != null && !productDTO.getProduct_img3().isEmpty()) {
+		        // 같은 방식으로 처리
+		    }
+		    if (productDTO.getProduct_img4() != null && !productDTO.getProduct_img4().isEmpty()) {
+		        // 같은 방식으로 처리
+		    }
+		    if (productDTO.getProduct_img5() != null && !productDTO.getProduct_img5().isEmpty()) {
+		        // 같은 방식으로 처리
+		    }
+
+		    // 상품 정보 업데이트
 		    productDAO.updateProduct(productDTO);
 		}
+
 		
 		//상품 신고
 		public void submitReport(ReportDTO reportDTO) {

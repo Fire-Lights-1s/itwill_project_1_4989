@@ -55,7 +55,7 @@
 				</div>	
 				<div id="chatTotalRoom">
 					<c:forEach var="chatRoom" items="${chatRoomDTOList }">
-					<div id="${chatRoom.chat_room_id }" onclick="connect('<c:out value="${chatRoom}"/>');">
+					<div id="${chatRoom.chat_room_id }" onclick="connect(`<c:out value="${chatRoom}"/>`);">
 						<div class="profile">
 							<img alt="" src="${chatRoom.product_img1 }">
 						</div>
@@ -107,7 +107,7 @@
 					<button>
 						<img alt="" src="${pageContext.request.contextPath }/resources/img/icon/plus_icon.png">
 					</button>
-					<textarea id="message"></textarea>
+					<textarea id="message" onkeyup="enterkey()"></textarea>
 					<button onclick="sendChat()">
 						<img alt="" src="${pageContext.request.contextPath }/resources/img/icon/chat_send.png">
 					</button>
@@ -127,15 +127,6 @@
                 </div>
                 <div class="modal-body">
                     <form id="reportForm">
-<!--                                 Checkbox for selecting report type
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="상품" id="productReport" name="report_type" onclick="onlyOneCheckbox(this.id)">
-                                    <label class="form-check-label" for="productReport">상품 신고</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="회원" id="memberReport" name="report_type" onclick="onlyOneCheckbox(this.id)">
-                                    <label class="form-check-label" for="memberReport">회원 신고</label>
-                                </div> -->
 
                         <!-- Textarea for report details -->
                         <div class="accordion-subject"><b>신고 대상</b></div>

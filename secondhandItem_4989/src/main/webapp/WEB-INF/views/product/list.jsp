@@ -121,7 +121,12 @@
                         <img class="card-img-top img-height-fix" src="https://i.namu.wiki/i/tgJKui-B3sVdzHzJ_P2oLzBdPRihL7X4Jj5W9e7ReG6k9qcBRF-NuCmcM-j37ikoyBu7c_hq3P7juN3AnYlp0jiS3OD8wmaFC3SzSRHXOmTpxNdUrXcTs3ARbONhDcYAMbbMw7niOSM3khaPh7_DGQ.webp" alt="..." />
                         </c:if>
                         <c:if test="${!empty product.product_img1 && product.product_img1 ne '' }">
-                        <img class="card-img-top img-height-fix" src="${pageContext.request.contextPath }/resources/upload/${product.product_img1 }" alt="..." />                        
+                        	<c:if test="${product.trade_status ne '거래 가능' }">
+                        	<img class="card-img-top img-height-fix" style="filter:brightness(0.3);" src="${pageContext.request.contextPath }/resources/upload/${product.product_img1 }" alt="..." />
+                        	</c:if>
+                        	<c:if test="${product.trade_status eq '거래 가능' }">
+                        	<img class="card-img-top img-height-fix" src="${pageContext.request.contextPath }/resources/upload/${product.product_img1 }" alt="..." />
+                        	</c:if>                        
                         </c:if>
                         <!-- 페이 뱃지 -->
                     <c:if test="${product.pay_method eq '페이' || product.pay_method eq '현금/페이'}">
@@ -166,9 +171,9 @@
         </c:if>
 	</div>
 	</div>
-		<div style="text-align: center;">
-           <button id="load_more" class="btn btn-outline-dark">더 보기</button>
-    	</div>
+	    <div style="text-align: center;">
+            <button id="load_more" class="btn btn-outline-dark">더 보기</button>
+        </div>
 	</div>
 
 	  </main>
@@ -244,10 +249,11 @@ $('#load_more').click(function() {
                  </div>`;
                  
                  $('#product_container').append(productHtml);
-				}
+                
+                selectZzim();
+ 				loadZzimStatus();
 				
-				loadZzimStatus();
-				selectZzim();
+				}
 
              if (response.isLastPage) {
                  $('#load_more').hide();
@@ -259,6 +265,7 @@ $('#load_more').click(function() {
  });
 	
 });
+
 
 </script>
 

@@ -70,40 +70,7 @@
 			});
 
 </script>
-<!-- // 파일 선택 후 미리보기 이미지 업데이트 -->
-<script>
-    // 파일 선택 후 미리보기 이미지 업데이트
-    function previewImage(event) {
-        const files = event.target.files;
-        const container = document.querySelector('.image-preview-container');
-        
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const reader = new FileReader();
 
-            reader.onload = function(e) {
-                const imgWrapper = document.createElement('div');
-                imgWrapper.className = 'img-wrapper';
-
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = '이미지 미리보기';
-
-                const deleteButton = document.createElement('button');
-                deleteButton.innerHTML = 'X';
-                deleteButton.onclick = function() {
-                    container.removeChild(imgWrapper);
-                };
-
-                imgWrapper.appendChild(img);
-                imgWrapper.appendChild(deleteButton);
-                container.appendChild(imgWrapper);
-            }
-
-            reader.readAsDataURL(file);
-        }
-    }
-</script>
 
 
 </head>
@@ -116,32 +83,33 @@
 	</header>
 
 	<section>
-<div id="main-container">
-<main>
-<!-- 본문 영역 -->
-<div class="addBox">
-    <form action="${pageContext.request.contextPath}/product/registerPro"
-          class="appform" method="post" name="fr"
-          enctype="multipart/form-data">
-        <hr style="border: 0; height: 3px; color: black;">
-        <div class="container">
-           
-           <!-- 이미지 업로드 및 미리보기 영역 -->
+		<div id="main-container">
+			<main>
+				<!-- 본문 영역 -->
+				<div class="addBox">
+					<form
+						action="${pageContext.request.contextPath}/product/registerPro"
+						class="appform" method="post" name="fr"
+						enctype="multipart/form-data">
+						<hr style="border: 0; height: 3px; color: black;">
+						<div class="container">
+
+							<!-- 이미지 업로드 및 미리보기 영역 -->
 							<div class="form-group image-upload">
-								<label for="product_img">사진 선택</label> 
-								<input type="file" id="product_img1" name="product_img" class="login-bttn">
-								<input type="file" id="product_img2" name="product_img" class="login-bttn">
-								<input type="file" id="product_img3" name="product_img" class="login-bttn">
-								<input type="file" id="product_img4" name="product_img" class="login-bttn">
-								<input type="file" id="product_img5" name="product_img" class="login-bttn">
-                
-             <!--    <!-- 여러 파일을 한 번에 선택할 수 있게 multiple 속성 추가 -->
-                <input type="file" id="product_img" name="product_img" multiple onchange="previewImage(event)"> 
-            </div>
-            <!-- 이미지 미리보기 영역 추가 -->
-            <div class="form-group image-preview-container">
-                <!-- 미리보기 이미지들이 여기에 추가됩니다. -->
-            </div>
+								<label for="product_img">사진 선택</label>
+								<!--     <input type="file" id="product_img" name="product_img" class="login-bttn" multiple> -->
+								<input type="file" id="product_img1" name="product_img" class="file_upload">
+								<input type="file" id="product_img2" name="product_img" class="file_upload">
+								<input type="file" id="product_img3" name="product_img" class="file_upload">
+								<input type="file" id="product_img4" name="product_img" class="file_upload">
+								<input type="file" id="product_img5" name="product_img" class="file_upload">
+
+
+							</div>
+							<!-- 이미지 미리보기 영역 추가 -->
+							<div class="form-group image-preview-container">
+								<!-- 미리보기 이미지들이 여기에 추가됩니다. -->
+							</div>
 
 
 							<!-- 카테고리 등 다른 폼 요소 -->
@@ -188,10 +156,11 @@
 								<div style="display: flex; gap: 10px;">
 									<!-- 주소 검색 버튼을 왼쪽으로 이동 -->
 									<input type="button" value="주소 검색" onclick="daum_address();"
-										class="login-bttn">
+										class="addr-bttn">
 									<!-- 		<input type="text" id="trade_area" name="trade_area" placeholder="시군구 코드"> -->
 									<input type="text" id="sido" name="sido" placeholder="도/시 이름">
-									<input type="text" id="sigungu" name="sigungu" placeholder="시/군/구 이름">
+									<input type="text" id="sigungu" name="sigungu"
+										placeholder="시/군/구 이름">
 									<!-- 시와 구 합친 거래지역 값 저장 -->
 									<input type="hidden" id="trade_area" name="trade_area">
 								</div>
@@ -206,7 +175,7 @@
 											<label for="trade_method">거래 방식</label> <select
 												id="trade_method" name="trade_method">
 												<option value="" disabled selected>선택</option>
-													<option value="직거래">직거래</option>
+												<option value="직거래">직거래</option>
 												<option value="택배">택배</option>
 												<option value="직거래/택배">직거래/택배</option>
 											</select>
@@ -242,6 +211,75 @@
 					</form>
 				</div>
 
+<!-- 여러 파일 선택 후 미리보기 및 파일 누적 관리 -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let uploadFiles = [];
+    let dataTransfer = new DataTransfer(); // **노란색 주석: 선택한 파일 순서대로 누적 관리**
+
+    function getImageFiles(event) {
+        const files = event.currentTarget.files;
+        
+        //alert( files);
+        // 선택된 파일들을 배열에 추가
+        [...files].forEach(file => {
+            uploadFiles.push(file);
+            dataTransfer.items.add(file);  // **노란색 주석: dataTransfer에 파일 추가**
+           
+            
+        });
+
+        // 이놈 때문에 업로드 안한 파일명에 중복 이름 들어갔음!!
+        //event.currentTarget.files = dataTransfer.files;
+
+        // 미리보기 업데이트
+        updateImagePreview();
+    }
+
+    function updateImagePreview() {
+        const container = document.querySelector('.image-preview-container');
+        container.innerHTML = ''; // 기존 미리보기 삭제
+
+        uploadFiles.forEach((file, index) => {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const imgWrapper = document.createElement('div');
+                imgWrapper.className = 'img-wrapper';
+
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = '이미지 미리보기';
+                img.style.width = '100px';
+                img.style.height = '100px';
+
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML = 'X';
+                deleteButton.onclick = function() {
+                    uploadFiles.splice(index, 1);  // 파일 배열에서 해당 파일 제거
+                    dataTransfer.items.remove(index);  // **노란색 주석: DataTransfer에서 해당 파일 제거**
+                    updateImagePreview();  // **노란색 주석: 미리보기 업데이트**
+                };
+
+                imgWrapper.appendChild(img);
+                imgWrapper.appendChild(deleteButton);
+                container.appendChild(imgWrapper);
+            }
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // 모든 파일 입력 요소에 동일한 이벤트 핸들러 연결
+    const fileInputs = document.querySelectorAll('.file_upload');
+    fileInputs.forEach(input => {
+        input.addEventListener('change', getImageFiles);
+    });
+});
+
+
+</script>
+				<!-- 다음 주소 api				 -->
 				<script>
 					//다음 주소 api
 					function daum_address() {

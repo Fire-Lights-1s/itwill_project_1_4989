@@ -18,8 +18,8 @@
 <%-- 	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script> --%>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
 <style>
+
 textarea {
     width: 100%;
     height: 6.25em;
@@ -70,7 +70,17 @@ textarea {
 display: inline-block;
 }
 
+.stars1 {
+display: inline-block;
+}
+
 .star {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.star1 {
   font-size: 24px;
   cursor: pointer;
   color: gray;
@@ -78,6 +88,10 @@ display: inline-block;
 
 .star.selected {
   color: gold;
+}
+
+.star1.active {
+    color: gold;
 }
 </style>
 
@@ -98,13 +112,13 @@ display: inline-block;
 		<main>
 		<div id="reviewModal" class="modal" style="display: none;">
 			<div class="modal-content">
-				<h2>구매 후기</h2>
 				<span class="close">&times;</span>
+				<h2 style="margin-bottom: 20px;">구매 후기</h2>
 				<div style="float: left; overflow:hidden;">
 					<img id="modalImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
 		    	</div>
 		    	<form action="${pageContext.request.contextPath}/my/reviewPro" method="post">
-					<div id="starRating">
+					<div class="starRating">
 					<label for="quality">품&emsp;&emsp;질 :</label>
 						<div class="stars" data-name="quality" style="display: inline-block;">
 						    <span class="star" data-value="1">☆</span>
@@ -138,14 +152,58 @@ display: inline-block;
 						    <span class="star" data-value="5">☆</span>
 					    </div>
 					</div>
-					<input type="hidden" id="qualityRating" name="qualityRating" value="">
-					<input type="hidden" id="priceRating" name="priceRating" value="">
-					<input type="hidden" id="punctualityRating" name="punctualityRating" value="">
-					<input type="hidden" id="mannerRating" name="mannerRating" value="">
-		      		<textarea id="reviewText" name="reviewText" rows="4" cols="50" placeholder="후기 내용"></textarea><br>
+					<input type="hidden" id="qualityRating" name="qualityRating" value="1">
+					<input type="hidden" id="priceRating" name="priceRating" value="1">
+					<input type="hidden" id="punctualityRating" name="punctualityRating" value="1">
+					<input type="hidden" id="mannerRating" name="mannerRating" value="1">
+		      		<textarea class="reviewText" name="reviewText" rows="4" cols="50" placeholder="후기 내용"></textarea><br>
 		      		<input type="hidden" id="productId" name="productId" value="">
-		      		<button type="submit">후기 작성</button>
+		      		<button type="submit" style="background-color: #4E229E; padding: 5px; color: white; border-radius: 5px; cursor: pointer;">작성 완료</button>
 		    	</form>
+			</div>
+		</div>
+		<div id="reviewComModal" class="modal" style="display: none;">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2 style="margin-bottom: 20px;">구매 후기</h2>
+				<div style="float: left; overflow:hidden;">
+					<img id="modalComImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
+		    	</div>
+					<div class="starRating">
+					<label for="quality">품&emsp;&emsp;질 :</label>
+						<div class="stars1" data-name="quality" style="display: inline-block;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
+						</div><br>
+				    <label for="price">가&emsp;&emsp;격 :</label>
+						<div class="stars1" data-name="price" style="display: inline-block;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
+						</div><br>
+					<label for="punctuality">시간 약속 :</label>
+					    <div class="stars1" data-name="punctuality" style="display: inline-block;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
+					    </div><br>
+					<label for="manner">매&emsp;&emsp;너 :</label>
+					    <div class="stars1" data-name="manner" style="display: inline-block; margin-bottom: 20px;">
+						    <span class="star1" data-value="1">☆</span>
+						    <span class="star1" data-value="2">☆</span>
+						    <span class="star1" data-value="3">☆</span>
+						    <span class="star1" data-value="4">☆</span>
+						    <span class="star1" data-value="5">☆</span>
+					    </div>
+					</div>
+		      		<textarea id="reviewText1" name="reviewText" rows="4" cols="50" readonly></textarea><br>
 			</div>
 		</div>
 			<h2>구매 내역</h2>
@@ -187,7 +245,7 @@ display: inline-block;
 							구매 진행 중
 						</div>
 					</c:if>
-					<c:if test="${productDTO.trade_status eq '거래 완료'}">
+					<c:if test="${productDTO.trade_status eq '거래 완료' or productDTO.trade_status eq '후기 작성 완료'}">
 						<div class="profile-item-image-cover2">
 							구매 완료
 						</div>	
@@ -209,6 +267,10 @@ display: inline-block;
 						</c:if>
 						<c:if test="${productDTO.trade_status eq '거래 완료'}">
 							&emsp;<button class="reviewBtn">후기 작성</button>&emsp;
+						</c:if>
+						<c:if test="${productDTO.trade_status eq '후기 작성 완료'}">
+							&emsp;<button class="reviewComBtn" style="background-color: #0040FF;" data-content="${productDTO.review_content}" data-reviewQ="${productDTO.review_quality}" 
+						    data-reviewP="${productDTO.review_price}" data-reviewT="${productDTO.review_time}" data-reviewM="${productDTO.review_manner}">나의 후기</button>&emsp;
 						</c:if>
 					</div>
 					<div class="profile-item-detail1">
@@ -243,14 +305,51 @@ display: inline-block;
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
 <script>
-	// 모달 및 버튼 요소 가져오기
+	function updateStarRating(category, value) {
+	    const starsCom = document.querySelectorAll('.stars1[data-name="' + category + '"] .star1');
+	    starsCom.forEach(star1 => {
+	        const starValue = parseInt(star1.getAttribute('data-value'), 10);
+	        if (starValue <= value) {
+	            star1.classList.add('active');
+	        } else {
+	            star1.classList.remove('active');
+	        }
+	    });
+	}
 	const modalImage = document.querySelector("#modalImage");
+	const modalComImage = document.querySelector("#modalComImage");
 	const productIdInput = document.querySelector("#productId");
 	const modal = document.querySelector("#reviewModal");
+	const modalCom = document.querySelector("#reviewComModal");
 	const span = document.getElementsByClassName("close")[0];
+	const span2 = document.getElementsByClassName("close")[1];
 	
 	document.querySelectorAll('.reviewBtn').forEach(function(btn) {
 		btn.onclick = function(event) {
+			document.querySelectorAll('.stars').forEach(function(starGroup) {
+			    const stars = starGroup.querySelectorAll('.star');
+			    const hiddenInputId = starGroup.getAttribute('data-name') + 'Rating';
+			    const hiddenInput = document.getElementById(hiddenInputId);
+				
+			    stars.forEach(function(star) {
+			        star.classList.remove('selected');
+			    });
+			    hiddenInput.value = ''; 
+			    
+			    stars.forEach(function(star, index) {
+			      star.addEventListener('click', function() {
+			        // 선택된 별까지 색상 변경
+			        stars.forEach(function(s, i) {
+			          if (i <= index) {
+			            s.classList.add('selected');
+			          } else {
+			            s.classList.remove('selected');
+			          }
+			        });
+			        hiddenInput.value = star.getAttribute('data-value');	
+			      });
+			    });
+			  });
 			const productElement = event.target.closest('.profile-item-list-piece');
             const img = productElement.querySelector('img.profile-item-imagesell');
             const imageSrc = img.getAttribute('data-image-src');
@@ -261,45 +360,44 @@ display: inline-block;
 		}
 	});
 	
-	// 닫기 버튼(X)을 클릭하면 모달을 닫기
+	document.querySelectorAll('.reviewComBtn').forEach(function(btn) {
+		btn.onclick = function(event) {
+			const productElement = event.target.closest('.profile-item-list-piece');
+            const img = productElement.querySelector('img.profile-item-imagesell');
+            const imageSrc = img.getAttribute('data-image-src');
+            const productId = img.getAttribute('data-product-id');
+            const reviewContent = event.target.getAttribute('data-content');
+            document.querySelector('#reviewText1').value = reviewContent;
+            modalComImage.src = imageSrc;
+            productIdInput.value = productId;
+            updateStarRating('quality', parseInt(event.target.getAttribute('data-reviewQ'), 10));
+            updateStarRating('price', parseInt(event.target.getAttribute('data-reviewP'), 10));
+            updateStarRating('punctuality', parseInt(event.target.getAttribute('data-reviewT'), 10));
+            updateStarRating('manner', parseInt(event.target.getAttribute('data-reviewM'), 10));
+			modalCom.style.display = "block";
+		}
+	});
+	
 	span.onclick = function() {
 	  modal.style.display = "none";
 	}
 	
-	// 모달 외부를 클릭하면 모달을 닫기
+	span2.onclick = function() {
+		  modalCom.style.display = "none";
+		}
+		
 	window.onclick = function(event) {
-	  if (event.target == modal) {
-	    modal.style.display = "none";
-	  }
+		if (event.target == modalCom) {
+			modalCom.style.display = "none";
+		}else if(event.target == modal){
+			modal.style.display = "none";
+		}
 	}
 </script>
 
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
-	// 구매 후기 별모양 이벤트
-	document.querySelectorAll('.stars').forEach(function(starGroup) {
-	    const stars = starGroup.querySelectorAll('.star');
-	    const hiddenInputId = starGroup.getAttribute('data-name') + 'Rating';
-	    const hiddenInput = document.getElementById(hiddenInputId);
-
-	    stars.forEach(function(star, index) {
-	      star.addEventListener('click', function() {
-	        // 선택된 별까지 색상 변경
-	        stars.forEach(function(s, i) {
-	          if (i <= index) {
-	            s.classList.add('selected');
-	          } else {
-	            s.classList.remove('selected');
-	          }
-	        });
-	        // 클릭된 별의 값을 hidden input에 저장
-	        hiddenInput.value = star.getAttribute('data-value');
-	      });
-	    });
-	  });
-	
-	// 물품 등록 시간 가져오기
     function formatTimeAgo(date) {
         const now = new Date();
         const diffInSeconds = Math.floor((now - date) / 1000);

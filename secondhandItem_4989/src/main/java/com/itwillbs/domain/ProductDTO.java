@@ -48,22 +48,37 @@ public class ProductDTO {
     // 날짜 포맷된 문자열을 저장할 필드
     private String formattedCreatedDatetime;
     private String formattedTransactionEndDate;
+    //review 유무
+    private String review_content;
+    
+    private int review_quality;
+    private int review_price;
+    private int review_time;
+    private int review_manner;
     
    
   
 
+	
+	
+
+
 	@Override
 	public String toString() {
-		return "ProductDTO [product_id=" + product_id + ", category_name=" + category_name + ", seller_id=" + seller_id 
+		return "ProductDTO [product_id=" + product_id + ", category_name=" + category_name + ", seller_id=" + seller_id
 				+ ", product_name=" + product_name + ", product_price=" + product_price + ", year_purchase="
 				+ year_purchase + ", product_desc=" + product_desc + ", product_img1=" + product_img1
-				+ ", created_datetime=" + created_datetime + ", view_count=" + view_count + ", like_count=" + like_count
-				+ ", trade_method=" + trade_method + ", pay_method=" + pay_method + ", trade_area=" + trade_area
-				+ ", trade_status=" + trade_status + "]";
+				+ ", product_img2=" + product_img2 + ", product_img3=" + product_img3 + ", product_img4=" + product_img4
+				+ ", product_img5=" + product_img5 + ", created_datetime=" + created_datetime + ", elapsedTime="
+				+ elapsedTime + ", view_count=" + view_count + ", like_count=" + like_count + ", trade_method="
+				+ trade_method + ", pay_method=" + pay_method + ", trade_area=" + trade_area + ", trade_status="
+				+ trade_status + ", buyer_id=" + buyer_id + ", transaction_end_date=" + transaction_end_date
+				+ ", formattedCreatedDatetime=" + formattedCreatedDatetime + ", formattedTransactionEndDate="
+				+ formattedTransactionEndDate + ", review_content=" + review_content + ", review_quality="
+				+ review_quality + ", review_price=" + review_price + ", review_time=" + review_time
+				+ ", review_manner=" + review_manner + "]";
 	}
-	
-	
-	
+
 
 
 	public String getElapsedTime() {
@@ -333,6 +348,86 @@ public class ProductDTO {
 
 	public void setFormattedTransactionEndDate(String formattedTransactionEndDate) {
 		this.formattedTransactionEndDate = formattedTransactionEndDate;
+	}
+
+
+
+
+
+	public String getReview_content() {
+		return review_content;
+	}
+
+
+
+
+
+	public void setReview_content(String review_content) {
+		this.review_content = review_content;
+	}
+
+
+
+
+
+	public int getReview_quality() {
+		return review_quality;
+	}
+
+
+
+
+
+	public void setReview_quality(int review_quality) {
+		this.review_quality = review_quality;
+	}
+
+
+
+
+
+	public int getReview_price() {
+		return review_price;
+	}
+
+
+
+
+
+	public void setReview_price(int review_price) {
+		this.review_price = review_price;
+	}
+
+
+
+
+
+	public int getReview_time() {
+		return review_time;
+	}
+
+
+
+
+
+	public void setReview_time(int review_time) {
+		this.review_time = review_time;
+	}
+
+
+
+
+
+	public int getReview_manner() {
+		return review_manner;
+	}
+
+
+
+
+
+	public void setReview_manner(int review_manner) {
+		this.review_manner = review_manner;
 	}
 
 

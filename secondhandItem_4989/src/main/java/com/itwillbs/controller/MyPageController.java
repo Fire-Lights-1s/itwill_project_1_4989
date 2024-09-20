@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.ReviewDTO;
 import com.itwillbs.domain.ZzimDTO;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.MyPageService;
@@ -264,6 +265,38 @@ public class MyPageController {
 		String member_id = (String)session.getAttribute("member_id");
 		myPageService.deleteMem(member_id);
 		return "redirect:/";
+	}
+	
+	@PostMapping("/reviewPro")
+	public String reviewPro(HttpServletRequest request) {
+		int product_id = Integer.parseInt(request.getParameter("productId"));
+		int review_quality = Integer.parseInt(request.getParameter("qualityRating"));
+		int review_price = Integer.parseInt(request.getParameter("priceRating"));
+		int review_time = Integer.parseInt(request.getParameter("punctualityRating"));
+		int review_manner = Integer.parseInt(request.getParameter("mannerRating"));
+		if(review_quality <= 0) {
+			review_quality = 1;
+		}
+		if(review_price <= 0) {
+			review_price = 1;
+		}
+		if(review_time <= 0) {
+			review_time = 1;
+		}
+		if(review_manner <= 0) {
+			review_manner = 1;
+		}
+		String review_content = request.getParameter("reviewText");
+		ReviewDTO reviewDTO = new ReviewDTO();
+		reviewDTO.setProduct_id(product_id);
+		reviewDTO.setReview_quality(review_quality);
+		reviewDTO.setReview_price(review_price);
+		reviewDTO.setReview_time(review_time);
+		reviewDTO.setReview_manner(review_manner);
+		reviewDTO.setReview_content(review_content);
+		myPageService.insertReview(reviewDTO);
+		myPageService.updateReviewStatus(product_id);
+		return "redirect:/my/buy";
 	}
 	
 	@GetMapping("/payPoint")

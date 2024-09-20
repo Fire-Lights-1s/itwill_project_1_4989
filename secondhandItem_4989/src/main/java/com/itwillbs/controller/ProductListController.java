@@ -79,7 +79,7 @@ public class ProductListController {
 	    // 경과시간 넘겨주기
 	    List<String> elapsedTimeList = productListService.getElapsedTimeList(productList);
 		model.addAttribute("elapsedTimeList", elapsedTimeList);
-	    
+		
 		return "product/list_fragment";
 		
 	}
