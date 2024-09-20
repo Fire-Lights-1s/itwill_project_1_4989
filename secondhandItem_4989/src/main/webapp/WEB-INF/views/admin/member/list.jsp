@@ -117,16 +117,30 @@
 <!-- 							<li class="page-item  active"><a class="page-link" href="#">1</a></li> -->
 <!-- 							<li class="page-item"><a class="page-link" href="#">2</a></li> -->
 <!-- 							<li class="page-item"><a class="page-link" href="#">3</a></li> -->
-							<li class="page-item">
-							  <a class="page-link" href="#" aria-label="Next">
-							    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="이전"></span>
-							  </a>
-							</li>
-							<li class="page-item">
-							  <a class="page-link" href="#" aria-label="Next">
-							    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="이전"></span>
-							  </a>
-							</li>
+
+								<c:if test="${pageDTO.currentPage ne pageDTO.pageCount}">
+									<a class="page-link" href="${pageContext.request.contextPath}/admin/member?pageNum=${pageDTO.currentPage+1}&search=${pageDTO.search}">
+									<img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="다음 페이지로 이동"></a>
+								</c:if>
+								
+								<c:if test="${pageDTO.currentPage ne pageDTO.pageCount - 1}">
+									<a class="page-link" href="${pageContext.request.contextPath}/admin/member?pageNum=${pageDTO.currentPage+1}&search=${pageDTO.search}">
+									<img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="다음 페이지로 이동"></a>
+								</c:if>
+								
+								
+								
+								
+<!-- 							<li class="page-item"> -->
+<!-- 							  <a class="page-link" href="#" aria-label="Next"> -->
+<%-- 							    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="이전"></span> --%>
+<!-- 							  </a> -->
+<!-- 							</li> -->
+<!-- 							<li class="page-item"> -->
+<!-- 							  <a class="page-link" href="#" aria-label="Next"> -->
+<%-- 							    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="이전"></span> --%>
+<!-- 							  </a> -->
+<!-- 							</li> -->
 						</ul>
 					</div>
 					<!-- 페이지 전환 버튼 부분 -->
