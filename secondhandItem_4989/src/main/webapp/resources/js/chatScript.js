@@ -25,7 +25,7 @@ function connect(chatRoom_json){
 	
 	chatRoomGlobal = JSON.parse(chatRoom_json.replaceAll("&#034;", "\"").replaceAll("\n","<br>"));
     disconnect();
-    let socket = new SockJS('/secondhand4989/chatting');
+    let socket = new SockJS('./chatting');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame){
     
