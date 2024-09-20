@@ -183,6 +183,7 @@ public class MyPageController {
 		String pageNum = request.getParameter("pageNum");
 		String sort = request.getParameter("sort");
 		String sale = request.getParameter("sale");
+		String noreserv = request.getParameter("noreserv");
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -195,6 +196,12 @@ public class MyPageController {
 		pageDTO.setSeller_id(id);
 		pageDTO.setSort(sort);
 		pageDTO.setSale(sale);
+		if(noreserv != null) {
+			ProductDTO productDTO = new ProductDTO();
+			productDTO.setProduct_id(Integer.parseInt(noreserv));
+			productDTO.setSeller_id(id);
+			myPageService.updateReserv(productDTO);
+		}
 		List<ProductDTO> productList = myPageService.getBuyList(pageDTO);
 		int count = myPageService.getBuyCount(pageDTO);
 		int pageBlock = 5;

@@ -116,10 +116,20 @@
 </update>
 
     <!-- 신고 정보 삽입 쿼리 -->
-    <insert id="insertReport">
+<!--     <insert id="insertReport"> -->
+<!--         INSERT INTO Report (reporter_id, reportee_id, reported_item_id, report_type, report_contents, reported_at, report_status) -->
+<!--         VALUES (#{reporter_id}, #{reportee_id}, #{reported_item_id}, #{report_type}, #{report_contents}, NOW(), #{report_status}) -->
+<!--     </insert> -->
+	<insert id="insertReport">
         INSERT INTO Report (reporter_id, reportee_id, reported_item_id, report_type, report_contents, reported_at, report_status)
-        VALUES (#{reporter_id}, #{reportee_id}, #{reported_item_id}, #{report_type}, #{report_contents}, NOW(), #{report_status})
+        VALUES (#{reporter_id}, #{reportee_id}, 
+	        <if test="reported_item_id == 0">
+	        	null,
+	        </if>
+	        <if test="reported_item_id != 0">
+	        	#{reported_item_id},
+	        </if>
+        	#{report_type}, #{report_contents}, NOW(), #{report_status})
     </insert>
-
 
 </mapper>

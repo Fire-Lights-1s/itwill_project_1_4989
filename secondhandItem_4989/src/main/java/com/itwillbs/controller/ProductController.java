@@ -183,9 +183,11 @@ public class ProductController {
 
 		// 현재 로그인한 사용자 확인
 		String member_id = (String) session.getAttribute("member_id");
+		// 로그인하지 않은 경우를 처리
 		if (member_id == null || member_id.isEmpty()) {
-			throw new IllegalArgumentException("User must be logged in to perform this action.");
+		    member_id = "";  // 로그인하지 않은 상태에서는 member_id를 빈 값으로 설정
 		}
+		
 		System.out.println("Product ID: " + product_id);
 		System.out.println("Member ID: " + member_id);
 		// 조회수 증가 처리
@@ -201,11 +203,15 @@ public class ProductController {
 		Map<String, String> zzimRequest = new HashMap<>();
 		zzimRequest.put("product_id", product_id);
 		zzimRequest.put("member_id", member_id);
+		
+		boolean isZzimSaved = false;
+
+		// 로그인한 경우에만 찜 여부 확인
+		if (!member_id.isEmpty()) {
+		    isZzimSaved = zzimService.checkZzim(zzimRequest);
+		}
 
 		System.out.println("ZzimRequest: " + zzimRequest);
-
-		// 찜 여부 확인
-		boolean isZzimSaved = zzimService.checkZzim(zzimRequest);
 		System.out.println("Zzim Saved: " + isZzimSaved);
 
 		// 모델에 필요한 정보 추가
