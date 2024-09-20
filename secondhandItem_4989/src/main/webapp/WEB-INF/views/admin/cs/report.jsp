@@ -39,10 +39,12 @@
 				<div class="col-lg-auto">
 	                <h2 class="title-1 m-b-25">테이블 제목 </h2>
 	                <div class="input-group mb-3 flex-right-50pct">
-					  <input type="text" class="form-control" placeholder="검색어 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
-					  <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+	                <form action="../admin/report" method="get" class="input-group ">
+					  <input type="text" class="form-control" id="search" name="search" value="${pageDTO.search }" placeholder="검색어 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
+					  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
 					  	<img alt="검색" src="${pageContext.request.contextPath }/resources/img/icon/search.png">
 					  </button>
+	                </form>
 					</div>
 	                <div class="table-responsive table--no-card m-b-40">
 	                    <table class="table table-borderless table-striped table-earning">
@@ -79,40 +81,78 @@
 	                <div class="position-relative ">
 			            <ul class="pagination justify-content-end">
 							<li class="page-item">
+								<c:if test="${empty pageDTO.search }">
 					    		<a class="page-link" href="../admin/report?page=${1}" aria-label="Previous">
 						      	<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="이전"></span>
 						    	</a>
+								</c:if>
+								<c:if test="${!empty pageDTO.search }">
+					    		<a class="page-link" href="../admin/report?page=${1}&search=${pageDTO.search}" aria-label="Previous">
+						      	<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_firstpage.png" alt="이전"></span>
+						    	</a>
+								</c:if>
 							</li>
 			            	<!-- 페이지 한칸 씩 이동 -->
 			            	<c:if test="${pageDTO.currentPage ne 1 }">
 							<li class="page-item">
-					    		<a class="page-link" href="../admin/report?page=${pageDTO.currentPage - 1}" aria-label="Previous">
-						      	<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></span>
+								<c:if test="${empty pageDTO.search }">
+					    			<a class="page-link" href="../admin/report?page=${pageDTO.currentPage - 1}" aria-label="Previous">
+						      		<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></span>
 						    	</a>
+							    </c:if>
+								<c:if test="${!empty pageDTO.search }">
+						    		<a class="page-link" href="../admin/report?page=${pageDTO.currentPage - 1}&search=${pageDTO.search}" aria-label="Previous">
+							      	<span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_prevpage.png" alt="이전"></span>
+						    	</a>
+						    	</c:if>
 							</li>
 			            	</c:if>
 			            	<!-- 페이지 번호로 이동 -->
 							<c:forEach var="i" begin="${pageDTO.startPage }" 
 								end="${pageDTO.endPage }" step="1">
-							<c:if test="${pageDTO.currentPage eq i }">
-							<li class="page-item  active"><a class="page-link" href="../admin/report?page=${i}">${i}</a></li>
-							</c:if>
-							<c:if test="${pageDTO.currentPage ne i }">
-							<li class="page-item"><a class="page-link" href="../admin/report?page=${i}">${i}</a></li>
-							</c:if>
+								<c:if test="${pageDTO.currentPage eq i }">
+									<c:if test="${empty pageDTO.search }">
+										<li class="page-item  active"><a class="page-link" href="../admin/report?page=${i}">${i}</a></li>
+									</c:if>
+									<c:if test="${!empty pageDTO.search }">
+										<li class="page-item  active"><a class="page-link" href="../admin/report?page=${i}&search=${pageDTO.search}">${i}</a></li>
+									</c:if>
+								</c:if>
+								<c:if test="${pageDTO.currentPage ne i }">
+									<c:if test="${empty pageDTO.search }">
+										<li class="page-item"><a class="page-link" href="../admin/report?page=${i}">${i}</a></li>
+									</c:if>
+									<c:if test="${!empty pageDTO.search }">
+										<li class="page-item"><a class="page-link" href="../admin/report?page=${i}&search=${pageDTO.search}">${i}</a></li>
+									</c:if>
+								</c:if>
 							</c:forEach>
 			            	<!-- 페이지 한칸 씩 이동 -->
 							<c:if test="${pageDTO.currentPage ne pageDTO.pageCount }">
-							<li class="page-item">
-							  <a class="page-link" href="../admin/report?page=${pageDTO.currentPage + 1}" aria-label="Next">
-							    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="이전"></span>
-							  </a>
-							</li>
+								<li class="page-item">
+								<c:if test="${empty pageDTO.search }">
+									  <a class="page-link" href="../admin/report?page=${pageDTO.currentPage + 1}" aria-label="Next">
+									    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="이전"></span>
+									  </a>
+								</c:if>
+								<c:if test="${!empty pageDTO.search }">
+									  <a class="page-link" href="../admin/report?page=${pageDTO.currentPage + 1}&search=${pageDTO.search}" aria-label="Next">
+									    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_nextpage.png" alt="이전"></span>
+									  </a>
+								</c:if>
+								</li>
 							</c:if>
 							<li class="page-item">
+							<c:if test="${empty pageDTO.search }">
 							  <a class="page-link" href="../admin/report?page=${pageDTO.pageCount}" aria-label="Next">
 							    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="이전"></span>
 							  </a>
+							</c:if>
+							<c:if test="${!empty pageDTO.search }">
+							  <a class="page-link" href="../admin/report?page=${pageDTO.pageCount}&search=${pageDTO.search}" aria-label="Next">
+							    <span aria-hidden="true"><img src="${pageContext.request.contextPath}/resources/img/btn_lastpage.png" alt="이전"></span>
+							  </a>
+							</c:if>
 							</li>
 						</ul>
 					</div>

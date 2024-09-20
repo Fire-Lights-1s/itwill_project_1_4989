@@ -73,10 +73,15 @@ public class AdminController {
 //		return "/admin/pay/list";
 //	}
 //	
-	@GetMapping("/report")
+	@GetMapping(value = "/report", produces = "application/text; charset=UTF-8")
 	public String report(HttpServletRequest request, Model model) {
 		PageDTO pageDTO = new PageDTO();
 		String pageNum = request.getParameter("pageNum");
+		
+		System.out.println(request.getParameter("search"));
+		if(request.getParameter("search") != null && request.getParameter("search") != "") {
+			pageDTO.setSearch(request.getParameter("search"));
+		}
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -95,7 +100,6 @@ public class AdminController {
 		
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("reportList", reportList);
-		
 		return "/admin/cs/report";
 	}
 	@PostMapping(value = "/report/update", produces = "application/text; charset=UTF-8")

@@ -247,7 +247,6 @@ function imagePopup(src) {
     var newWindow = window.open('', '_blank', 'width=800,height=600');
     newWindow.document.write('<html><head><title>Image</title></head><body style="background-color: black; margin: 0; display: flex; justify-content: center; align-items: center;"><img src="' + src + '" style="max-width: 100%; max-height: 100%;"></body></html>');
 }
-
 </script>
 
 	<!-- 카테고리 영문 변환 -->
