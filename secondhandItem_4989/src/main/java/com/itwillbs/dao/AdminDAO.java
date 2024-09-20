@@ -1,13 +1,13 @@
 package com.itwillbs.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ReportDTO;
 
@@ -34,6 +34,15 @@ public class AdminDAO {
 		sqlSession.update(namespace+".updateReport", reportDTO);
 	}
 
-
+	//member
+	public List<MemberDTO> getMemberList(PageDTO pageDTO) {
+		List<MemberDTO> memberList = sqlSession.selectList(namespace+".getMemberList", pageDTO);
+		return memberList;
+	}
+	
+	public int getMemberCount(PageDTO pageDTO) {
+		int count = sqlSession.selectOne(namespace+".getMemberCount", pageDTO);
+		return count;
+	}
 
 }

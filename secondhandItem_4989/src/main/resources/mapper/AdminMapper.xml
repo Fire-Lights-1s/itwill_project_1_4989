@@ -40,5 +40,42 @@
 		where report_id = #{report_id}
 	</update>
 	
+<!-- 	member -->
+	<select id="getMemberCount" resultType="java.lang.Integer">
+    select count(*)
+    from Mem
+    <if test="search != null">
+        where member_id like "%#{search}%" 
+        or name like "%#{search}%" 
+        or email like "%#{search}%" 
+<!--         or phone like "%#{search}%" -->
+        or created_at like "%#{search}%"
+    </if>
+		order by created_at desc
+	</select>
+	
+	<select id="getMemberList" resultType="com.itwillbs.domain.MemberDTO"> 
+    select member_id,
+        nickname,
+        name,
+        email,
+<!--         phone, -->
+        social_loginfo,
+        rating,
+        created_at
+    from Mem
+    <if test="search != null">
+        where member_id like "%#{search}%"
+        or name like "%#{search}%"
+        or email like "%#{search}%"
+<!--         or phone like "%#{search}%" -->
+        or nickname like "%#{search}%"
+        or created_at like "%#{search}%"
+    </if>
+    order by created_at desc
+    limit #{startRow}, #{pageSize}
+</select>
+
+	
 	
 </mapper>

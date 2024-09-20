@@ -14,14 +14,24 @@ public class MemberDTO {
     private Timestamp created_at;
     private int allTX;
     private double rating;
-    
+    private boolean is_withdrawn;
+    private String social_loginfo;
     
     public double getRating() {
 		return rating;
+    }
+    
+    public void setRating(double rating) {
+		this.rating = rating;
+	}
+    
+    public boolean getIs_withdrawn() {
+		return is_withdrawn;
 	}
 
-	public void setRating(double rating) {
-		this.rating = rating;
+	
+	public void setIs_withdrawn(boolean is_withdrawn) {
+		this.is_withdrawn = is_withdrawn;
 	}
 
 	// 기본 생성자
@@ -114,6 +124,14 @@ public class MemberDTO {
     public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
     }
+    
+    public String getSocial_loginfo() {
+        return social_loginfo;
+    }
+
+    public void setSocial_loginfo(String social_loginfo) {
+        this.social_loginfo = social_loginfo;
+    }
 
     // toString 메서드 (디버깅용)
     @Override
@@ -126,6 +144,8 @@ public class MemberDTO {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", created_at=" + created_at +
+                ", social_loginfo=" + social_loginfo +
+                ", is_withdrawn=" + is_withdrawn +
                 '}';
     }
 }
