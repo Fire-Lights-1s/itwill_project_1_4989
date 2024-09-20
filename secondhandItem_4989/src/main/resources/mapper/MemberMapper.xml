@@ -22,7 +22,7 @@
 	
 	<select id="getMember" resultType="com.itwillbs.domain.MemberDTO">
 		select * from Mem
-		where member_id = #{member_id}
+		where member_id = #{id}
 	</select>
 	<update id="updateMember">
 		update Mem

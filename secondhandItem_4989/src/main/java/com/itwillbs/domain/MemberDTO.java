@@ -13,8 +13,18 @@ public class MemberDTO {
     private String profile_img;
     private Timestamp created_at;
     private int allTX;
+    private double rating;
+    
+    
+    public double getRating() {
+		return rating;
+	}
 
-    // 기본 생성자
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+
+	// 기본 생성자
     public MemberDTO() {
     }
 

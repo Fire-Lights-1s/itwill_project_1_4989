@@ -71,6 +71,10 @@ public class MyPageDAO {
 	public void updateReviewStatus(int product_id) {
 		sqlSession.update(namespace + ".updateReviewStatus", product_id);		
 	}
+
+	public double allRating(String id) {
+		return sqlSession.selectOne(namespace + ".allRating", id);
+	}
 	
 		
 	

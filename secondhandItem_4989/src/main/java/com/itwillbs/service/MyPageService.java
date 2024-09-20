@@ -82,4 +82,8 @@ public class MyPageService {
 	public void updateReviewStatus(int product_id) {
 		myPageDAO.updateReviewStatus(product_id);
 	}
+
+	public double allRating(String id) {
+		return myPageDAO.allRating(id);
+	}
 }

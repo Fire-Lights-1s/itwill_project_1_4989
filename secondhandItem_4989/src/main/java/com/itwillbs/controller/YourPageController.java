@@ -41,6 +41,7 @@ public class YourPageController {
 		String otherUser = request.getParameter("otherUser");
 		MemberDTO otherUserDTO = memberService.getMember(otherUser);
 		otherUserDTO.setAllTX(myPageService.allTX(otherUser));
+		otherUserDTO.setRating(myPageService.allRating(otherUser));
 		model.addAttribute("otherUserDTO", otherUserDTO);
 		return "your/seller";
 	}

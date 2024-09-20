@@ -33,10 +33,8 @@ public class MyPageController {
 	
 	@Inject
 	private MyPageService myPageService;
-	
 	@Inject
 	private MemberService memberService;
-	
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
@@ -47,7 +45,8 @@ public class MyPageController {
 		if(memberDTO == null) {
 			return "redirect:/member/login";
 		}
-		memberDTO.setAllTX(myPageService.allTX(id)); 
+		memberDTO.setAllTX(myPageService.allTX(id));
+		memberDTO.setRating(myPageService.allRating(id));
 		model.addAttribute("memberDTO", memberDTO);
 		return "my/profile";
 	}

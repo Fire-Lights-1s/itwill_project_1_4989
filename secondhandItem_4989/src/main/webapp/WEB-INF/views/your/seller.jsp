@@ -69,6 +69,7 @@
 			<p class="profile-nickname">${otherUserDTO.nickname}</p>
 			<p class="profile-nickname">누적 거래 횟수</p>
 			<p class="profile-nickname">${otherUserDTO.allTX}</p>
+			<p class="profile-nickname" style="font-size: 24px;"><span style="color: gold;">★</span>${otherUserDTO.rating}</p>
 		</main>
 		</div>
 	</div>
