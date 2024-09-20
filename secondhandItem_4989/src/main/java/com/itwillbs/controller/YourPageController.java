@@ -96,7 +96,6 @@ public class YourPageController {
 		ReportDTO reportDTO = new ReportDTO();
 		reportDTO.setReporter_id(reporterId);
 		reportDTO.setReportee_id(reporteeId);
-		reportDTO.setReported_item_id(10);
 		reportDTO.setReport_type("회원");
 		reportDTO.setReport_contents(reportContents);
 		reportDTO.setReport_status("접수"); // 초기 상태는 '접수'

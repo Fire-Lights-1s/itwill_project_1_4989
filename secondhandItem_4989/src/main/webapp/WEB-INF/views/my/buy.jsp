@@ -266,7 +266,10 @@ display: inline-block;
 					</div>
 					<div class="profile-item-review4">
 						<c:if test="${productDTO.trade_status eq '예약 중'}">
-							<button onclick="location.href='${pageContext.request.contextPath}/chat'">판매자와 채팅</button>
+							<div style="position: absolute; left: -154px;">
+								<button class="profile-noreserv" data-id="${productDTO.product_id}">예약 취소</button>&emsp;
+								<button onclick="location.href='${pageContext.request.contextPath}/chat'">판매자와 채팅</button>
+							</div>
 						</c:if>
 						<c:if test="${productDTO.trade_status eq '거래 완료'}">
 							&emsp;<button class="reviewBtn">후기 작성</button>&emsp;
@@ -398,6 +401,17 @@ display: inline-block;
 			modal.style.display = "none";
 		}
 	}
+</script>
+
+<script type="text/javascript">
+	document.querySelectorAll('.profile-noreserv').forEach(function(btn){
+		btn.onclick = function(){
+			let id = btn.getAttribute('data-id');
+			if(confirm('예약 취소하시겠습니까?')){
+				location.replace("${pageContext.request.contextPath}/my/buy?noreserv=" + id);
+			}
+		}
+	})
 </script>
 
 <script>

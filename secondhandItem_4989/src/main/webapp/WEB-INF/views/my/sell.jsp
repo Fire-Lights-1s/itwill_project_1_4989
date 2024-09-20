@@ -224,7 +224,10 @@ display: inline-block;
 							<button class="profile-nosell" data-id="${productDTO.product_id}">판매 취소</button>
 						</c:if>
 						<c:if test="${productDTO.trade_status eq '예약 중'}">
-							<button class="profile-noreserv" data-id="${productDTO.product_id}">예약 취소</button>
+							<div style="position: absolute; left: -140px;">
+								<button class="profile-noreserv" data-id="${productDTO.product_id}">예약 취소</button>&emsp;
+								<button onclick="location.href='${pageContext.request.contextPath}/chat'">구매자와 채팅</button>
+							</div>
 						</c:if>
 						<c:if test="${productDTO.trade_status eq '거래 완료'}">
 							<span style="border: 1px solid black; padding: 5px; border-radius: 5px;">구매 후기</span>
