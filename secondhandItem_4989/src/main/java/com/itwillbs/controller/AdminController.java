@@ -1,7 +1,6 @@
 package com.itwillbs.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ReportDTO;
 import com.itwillbs.service.AdminService;
@@ -48,11 +48,34 @@ public class AdminController {
 //		return "/admin/sample";
 //	}
 	
-//	@GetMapping("/member")
-//	public String member() {
-//		return "/admin/member/list";
-//	}
-//	
+	@GetMapping("/member")
+	public String member(HttpServletRequest request, Model model) {
+		PageDTO pageDTO = new PageDTO();
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		int pageSize = 10;
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setPageSize(pageSize);
+		int count = adminService.getMemberCount(pageDTO);
+		
+		int pageBlock = 10;
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		
+		List<MemberDTO> memberList = adminService.getMemberList(pageDTO);
+		
+		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("memberList", memberList);
+		
+		
+		
+		return "/admin/member/list";
+	}
+	
 	/*
 	 * @GetMapping("/trade") public String getTradeList(Model model) {
 	 * List<Map<String, Object>> tradeList = adminService.getTradeList();
