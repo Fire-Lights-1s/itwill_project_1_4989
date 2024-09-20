@@ -83,8 +83,12 @@ display: inline-block;
 
 .star1 {
   font-size: 24px;
-  cursor: pointer;
   color: gray;
+}
+
+.star2 {
+  font-size: 24px;
+  color: gold;
 }
 
 .star.selected {
@@ -118,6 +122,50 @@ display: inline-block;
 	</aside>
 		<div class="main-container-side-profile">
 		<main>
+		<div id="reviewComModal" class="modal" style="display: none;">
+			<div class="modal-content" style="cursor: default;">
+				<span class="close">&times;</span>
+				<h2 style="margin-bottom: 20px;">구매 후기</h2>
+				<div style="float: left; overflow:hidden;">
+					<img id="modalComImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
+		    	</div>
+					<div class="starRating">
+					<label for="quality">품&emsp;&emsp;질 :</label>
+						<div class="stars1" data-name="quality" style="display: inline-block;">
+						    <span class="star1" data-value="1">★</span>
+						    <span class="star1" data-value="2">★</span>
+						    <span class="star1" data-value="3">★</span>
+						    <span class="star1" data-value="4">★</span>
+						    <span class="star1" data-value="5">★</span>
+						</div><br>
+				    <label for="price">가&emsp;&emsp;격 :</label>
+						<div class="stars1" data-name="price" style="display: inline-block;">
+						    <span class="star1" data-value="1">★</span>
+						    <span class="star1" data-value="2">★</span>
+						    <span class="star1" data-value="3">★</span>
+						    <span class="star1" data-value="4">★</span>
+						    <span class="star1" data-value="5">★</span>
+						</div><br>
+					<label for="punctuality">시간 약속 :</label>
+					    <div class="stars1" data-name="punctuality" style="display: inline-block;">
+						    <span class="star1" data-value="1">★</span>
+						    <span class="star1" data-value="2">★</span>
+						    <span class="star1" data-value="3">★</span>
+						    <span class="star1" data-value="4">★</span>
+						    <span class="star1" data-value="5">★</span>
+					    </div><br>
+					<label for="manner">매&emsp;&emsp;너 :</label>
+					    <div class="stars1" data-name="manner" style="display: inline-block; margin-bottom: 20px;">
+						    <span class="star1" data-value="1">★</span>
+						    <span class="star1" data-value="2">★</span>
+						    <span class="star1" data-value="3">★</span>
+						    <span class="star1" data-value="4">★</span>
+						    <span class="star1" data-value="5">★</span>
+					    </div>
+					</div>
+		      		<textarea id="reviewText1" name="reviewText" rows="4" cols="50" style="cursor: default;" readonly></textarea><br>
+			</div>
+		</div>
 			<h2>판매 내역</h2>
 			<div class="profile-a">				
 				<c:if test="${empty param.sort}">		
@@ -149,7 +197,8 @@ display: inline-block;
 			<c:forEach var="productDTO" items="${productList}">
 				<div class="profile-item-list-piece">
 					<div class="profile-item-image-div">
-						<img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" class="profile-item-imagesell">
+						<img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" class="profile-item-imagesell"
+						data-image-src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}" data-product-id="${productDTO.product_id}">
 					</div>
 					<div class="profile-item-image-div">
 					<c:if test="${productDTO.trade_status eq '거래 가능'}">
@@ -157,7 +206,7 @@ display: inline-block;
 							판매 중
 						</div>
 					</c:if>
-					<c:if test="${productDTO.trade_status eq '거래 완료'}">
+					<c:if test="${productDTO.trade_status eq '거래 완료' or productDTO.trade_status eq '후기 작성 완료'}">
 						<div class="profile-item-image-cover2">
 							판매 완료
 						</div>	
@@ -174,13 +223,19 @@ display: inline-block;
 						<h5><fmt:formatNumber value="${productDTO.product_price}" type="number" pattern="#,###"/>원</h5>
 					</div>
 					<div class="profile-item-review2" data-date="${productDTO.created_datetime}">
-<!-- 						평점 : 4.7&emsp;&emsp; -->
+
 						<div class="zzim-time" style="display: inline;">
 						</div>
 					</div>
 					<div class="profile-item-review3">
 						<c:if test="${productDTO.trade_status eq '거래 완료'}">
-							<button>구매 후기</button>
+							<span style="border: 1px solid black; padding: 5px; border-radius: 5px;">구매 후기</span>
+						</c:if>
+						<c:if test="${productDTO.trade_status eq '후기 작성 완료'}">
+							<button class="reviewComBtn" style="background-color: #0040FF;" data-content="${productDTO.review_content}" data-reviewQ="${productDTO.review_quality}" 
+						    data-reviewP="${productDTO.review_price}" data-reviewT="${productDTO.review_time}" data-reviewM="${productDTO.review_manner}">구매 후기</button>
+						    <br>
+							<div style="position: absolute; top: 27px; left: 12px;"><span class="star2">★</span>${(productDTO.review_time + productDTO.review_quality + productDTO.review_manner + productDTO.review_price) / 4}</div>
 						</c:if>
 					</div>
 					<div class="profile-item-detail1">
@@ -213,6 +268,50 @@ display: inline-block;
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
+<script type="text/javascript">
+	function updateStarRating(category, value) {
+	    const starsCom = document.querySelectorAll('.stars1[data-name="' + category + '"] .star1');
+	    starsCom.forEach(star1 => {
+	        const starValue = parseInt(star1.getAttribute('data-value'), 10);
+	        if (starValue <= value) {
+	            star1.classList.add('active');
+	        } else {
+	            star1.classList.remove('active');
+	        }
+	    });
+	}
+	const modalComImage = document.querySelector("#modalComImage");
+	const modalCom = document.querySelector("#reviewComModal");
+	const span = document.getElementsByClassName("close")[0];
+	
+	document.querySelectorAll('.reviewComBtn').forEach(function(btn) {
+		btn.onclick = function(event) {
+			const productElement = event.target.closest('.profile-item-list-piece');
+            const img = productElement.querySelector('img.profile-item-imagesell');
+            const imageSrc = img.getAttribute('data-image-src');
+            const productId = img.getAttribute('data-product-id');
+            const reviewContent = event.target.getAttribute('data-content');
+            document.querySelector('#reviewText1').value = reviewContent;
+            modalComImage.src = imageSrc;
+            updateStarRating('quality', parseInt(event.target.getAttribute('data-reviewQ'), 10));
+            updateStarRating('price', parseInt(event.target.getAttribute('data-reviewP'), 10));
+            updateStarRating('punctuality', parseInt(event.target.getAttribute('data-reviewT'), 10));
+            updateStarRating('manner', parseInt(event.target.getAttribute('data-reviewM'), 10));
+			modalCom.style.display = "block";
+		}
+	});
+		
+	span.onclick = function() {
+		  modalCom.style.display = "none";
+		}
+		
+	window.onclick = function(event) {
+		if (event.target == modalCom) {
+			modalCom.style.display = "none";
+		}
+	}
+</script>
 
 <script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() {
