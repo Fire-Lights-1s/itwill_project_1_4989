@@ -9,13 +9,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.ReportDTO;
 import com.itwillbs.service.MemberService;
 import com.itwillbs.service.MyPageService;
+import com.itwillbs.service.ProductService;
 
 @Controller
 @RequestMapping("/your/*")
@@ -23,9 +26,10 @@ public class YourPageController {
 	
 	@Inject
 	private MyPageService myPageService;
-	
 	@Inject
 	private MemberService memberService;
+	@Inject
+	private ProductService productService;
 	
 	@GetMapping("/seller")
 	public String seller(HttpSession session, HttpServletRequest request, Model model) {
@@ -82,6 +86,22 @@ public class YourPageController {
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("productList", productList);
 		return "your/sellerHistory";
+	}
+	
+	@PostMapping("/reportPro")
+	public String reportPro(HttpServletRequest request, HttpSession session) {
+		String reporterId = (String)session.getAttribute("member_id");
+		String reporteeId = request.getParameter("otherUser");
+		String reportContents = request.getParameter("report_contents");
+		ReportDTO reportDTO = new ReportDTO();
+		reportDTO.setReporter_id(reporterId);
+		reportDTO.setReportee_id(reporteeId);
+		reportDTO.setReported_item_id(10);
+		reportDTO.setReport_type("회원");
+		reportDTO.setReport_contents(reportContents);
+		reportDTO.setReport_status("접수"); // 초기 상태는 '접수'
+		productService.submitReport(reportDTO);
+		return "redirect:/your/seller?otherUser=" + reporteeId;
 	}
 	
 	
