@@ -262,36 +262,23 @@ public class ProductController {
 		if (!member_id.equals(existingProduct.getSeller_id())) {
 			throw new IllegalArgumentException("수정 권한이 없습니다.");
 		}
-
-		// **삭제된 이미지 처리 부분에서 null 값 체크 추가**
-	    String[] deletedImages = request.getParameter("deletedImages") != null ? request.getParameter("deletedImages").split(",") : new String[0];
-
-	    for (String imageName : deletedImages) {
-	        if (imageName != null && !imageName.isEmpty()) {
-	            // 이미지 파일 경로
-	            String filePath = session.getServletContext().getRealPath("/resources/upload/" + imageName);
-
-	            // 실제 파일 삭제
-	            File file = new File(filePath);
-	            if (file.exists()) {
-	                file.delete(); // 파일 삭제
-	                System.out.println("파일 삭제됨: " + filePath);
-	            }
-
-	            // 데이터베이스에서 이미지 필드 업데이트
-	            if (imageName.equals(existingProduct.getProduct_img1())) {
-	                productDTO.setProduct_img1(null);
-	            } else if (imageName.equals(existingProduct.getProduct_img2())) {
-	                productDTO.setProduct_img2(null);
-	            } else if (imageName.equals(existingProduct.getProduct_img3())) {
-	                productDTO.setProduct_img3(null);
-	            } else if (imageName.equals(existingProduct.getProduct_img4())) {
-	                productDTO.setProduct_img4(null);
-	            } else if (imageName.equals(existingProduct.getProduct_img5())) {
-	                productDTO.setProduct_img5(null);
-	            }
-	        }
+		// 기존 이미지 유지 로직 추가**: 새로운 이미지가 없으면 기존 이미지 유지
+	    if (productDTO.getProduct_img1() == null || productDTO.getProduct_img1().isEmpty()) {
+	        productDTO.setProduct_img1(existingProduct.getProduct_img1());
 	    }
+	    if (productDTO.getProduct_img2() == null || productDTO.getProduct_img2().isEmpty()) {
+	        productDTO.setProduct_img2(existingProduct.getProduct_img2());
+	    }
+	    if (productDTO.getProduct_img3() == null || productDTO.getProduct_img3().isEmpty()) {
+	        productDTO.setProduct_img3(existingProduct.getProduct_img3());
+	    }
+	    if (productDTO.getProduct_img4() == null || productDTO.getProduct_img4().isEmpty()) {
+	        productDTO.setProduct_img4(existingProduct.getProduct_img4());
+	    }
+	    if (productDTO.getProduct_img5() == null || productDTO.getProduct_img5().isEmpty()) {
+	        productDTO.setProduct_img5(existingProduct.getProduct_img5());
+	    }
+		
 
 		// 상품 정보 수정
 		productService.updateProduct(productDTO);
