@@ -82,8 +82,12 @@ display: inline-block;
 
 .star1 {
   font-size: 24px;
-  cursor: pointer;
   color: gray;
+}
+
+.star2 {
+  font-size: 24px;
+  color: gold;
 }
 
 .star.selected {
@@ -121,35 +125,35 @@ display: inline-block;
 					<div class="starRating">
 					<label for="quality">품&emsp;&emsp;질 :</label>
 						<div class="stars" data-name="quality" style="display: inline-block;">
-						    <span class="star" data-value="1">☆</span>
-						    <span class="star" data-value="2">☆</span>
-						    <span class="star" data-value="3">☆</span>
-						    <span class="star" data-value="4">☆</span>
-						    <span class="star" data-value="5">☆</span>
+						    <span class="star" data-value="1">★</span>
+						    <span class="star" data-value="2">★</span>
+						    <span class="star" data-value="3">★</span>
+						    <span class="star" data-value="4">★</span>
+						    <span class="star" data-value="5">★</span>
 						</div><br>
 				    <label for="price">가&emsp;&emsp;격 :</label>
 						<div class="stars" data-name="price" style="display: inline-block;">
-						    <span class="star" data-value="1">☆</span>
-						    <span class="star" data-value="2">☆</span>
-						    <span class="star" data-value="3">☆</span>
-						    <span class="star" data-value="4">☆</span>
-						    <span class="star" data-value="5">☆</span>
+						    <span class="star" data-value="1">★</span>
+						    <span class="star" data-value="2">★</span>
+						    <span class="star" data-value="3">★</span>
+						    <span class="star" data-value="4">★</span>
+						    <span class="star" data-value="5">★</span>
 						</div><br>
 					<label for="punctuality">시간 약속 :</label>
 					    <div class="stars" data-name="punctuality" style="display: inline-block;">
-						    <span class="star" data-value="1">☆</span>
-						    <span class="star" data-value="2">☆</span>
-						    <span class="star" data-value="3">☆</span>
-						    <span class="star" data-value="4">☆</span>
-						    <span class="star" data-value="5">☆</span>
+						    <span class="star" data-value="1">★</span>
+						    <span class="star" data-value="2">★</span>
+						    <span class="star" data-value="3">★</span>
+						    <span class="star" data-value="4">★</span>
+						    <span class="star" data-value="5">★</span>
 					    </div><br>
 					<label for="manner">매&emsp;&emsp;너 :</label>
 					    <div class="stars" data-name="manner" style="display: inline-block; margin-bottom: 20px;">
-						    <span class="star" data-value="1">☆</span>
-						    <span class="star" data-value="2">☆</span>
-						    <span class="star" data-value="3">☆</span>
-						    <span class="star" data-value="4">☆</span>
-						    <span class="star" data-value="5">☆</span>
+						    <span class="star" data-value="1">★</span>
+						    <span class="star" data-value="2">★</span>
+						    <span class="star" data-value="3">★</span>
+						    <span class="star" data-value="4">★</span>
+						    <span class="star" data-value="5">★</span>
 					    </div>
 					</div>
 					<input type="hidden" id="qualityRating" name="qualityRating" value="1">
@@ -163,7 +167,7 @@ display: inline-block;
 			</div>
 		</div>
 		<div id="reviewComModal" class="modal" style="display: none;">
-			<div class="modal-content">
+			<div class="modal-content" style="cursor: default;">
 				<span class="close">&times;</span>
 				<h2 style="margin-bottom: 20px;">구매 후기</h2>
 				<div style="float: left; overflow:hidden;">
@@ -172,38 +176,38 @@ display: inline-block;
 					<div class="starRating">
 					<label for="quality">품&emsp;&emsp;질 :</label>
 						<div class="stars1" data-name="quality" style="display: inline-block;">
-						    <span class="star1" data-value="1">☆</span>
-						    <span class="star1" data-value="2">☆</span>
-						    <span class="star1" data-value="3">☆</span>
-						    <span class="star1" data-value="4">☆</span>
-						    <span class="star1" data-value="5">☆</span>
+						    <span class="star1" data-value="1">★</span>
+						    <span class="star1" data-value="2">★</span>
+						    <span class="star1" data-value="3">★</span>
+						    <span class="star1" data-value="4">★</span>
+						    <span class="star1" data-value="5">★</span>
 						</div><br>
 				    <label for="price">가&emsp;&emsp;격 :</label>
 						<div class="stars1" data-name="price" style="display: inline-block;">
-						    <span class="star1" data-value="1">☆</span>
-						    <span class="star1" data-value="2">☆</span>
-						    <span class="star1" data-value="3">☆</span>
-						    <span class="star1" data-value="4">☆</span>
-						    <span class="star1" data-value="5">☆</span>
+						    <span class="star1" data-value="1">★</span>
+						    <span class="star1" data-value="2">★</span>
+						    <span class="star1" data-value="3">★</span>
+						    <span class="star1" data-value="4">★</span>
+						    <span class="star1" data-value="5">★</span>
 						</div><br>
 					<label for="punctuality">시간 약속 :</label>
 					    <div class="stars1" data-name="punctuality" style="display: inline-block;">
-						    <span class="star1" data-value="1">☆</span>
-						    <span class="star1" data-value="2">☆</span>
-						    <span class="star1" data-value="3">☆</span>
-						    <span class="star1" data-value="4">☆</span>
-						    <span class="star1" data-value="5">☆</span>
+						    <span class="star1" data-value="1">★</span>
+						    <span class="star1" data-value="2">★</span>
+						    <span class="star1" data-value="3">★</span>
+						    <span class="star1" data-value="4">★</span>
+						    <span class="star1" data-value="5">★</span>
 					    </div><br>
 					<label for="manner">매&emsp;&emsp;너 :</label>
 					    <div class="stars1" data-name="manner" style="display: inline-block; margin-bottom: 20px;">
-						    <span class="star1" data-value="1">☆</span>
-						    <span class="star1" data-value="2">☆</span>
-						    <span class="star1" data-value="3">☆</span>
-						    <span class="star1" data-value="4">☆</span>
-						    <span class="star1" data-value="5">☆</span>
+						    <span class="star1" data-value="1">★</span>
+						    <span class="star1" data-value="2">★</span>
+						    <span class="star1" data-value="3">★</span>
+						    <span class="star1" data-value="4">★</span>
+						    <span class="star1" data-value="5">★</span>
 					    </div>
 					</div>
-		      		<textarea id="reviewText1" name="reviewText" rows="4" cols="50" readonly></textarea><br>
+		      		<textarea id="reviewText1" name="reviewText" rows="4" cols="50" style="cursor: default;" readonly></textarea><br>
 			</div>
 		</div>
 			<h2>구매 내역</h2>
@@ -257,13 +261,15 @@ display: inline-block;
 						<h5><fmt:formatNumber value="${productDTO.product_price}" type="number" pattern="#,###"/>원</h5>
 					</div>
 					<div class="profile-item-review2" data-date="${productDTO.created_datetime}">
-<!-- 						평점 : 4.7&emsp;&emsp; -->
 						<div class="zzim-time" style="display: inline;">
 						</div>
 					</div>
 					<div class="profile-item-review4">
 						<c:if test="${productDTO.trade_status eq '예약 중'}">
-							<button>판매자와 채팅</button>
+							<div style="position: absolute; left: -154px;">
+								<button class="profile-noreserv" data-id="${productDTO.product_id}">예약 취소</button>&emsp;
+								<button onclick="location.href='${pageContext.request.contextPath}/chat'">판매자와 채팅</button>
+							</div>
 						</c:if>
 						<c:if test="${productDTO.trade_status eq '거래 완료'}">
 							&emsp;<button class="reviewBtn">후기 작성</button>&emsp;
@@ -271,6 +277,8 @@ display: inline-block;
 						<c:if test="${productDTO.trade_status eq '후기 작성 완료'}">
 							&emsp;<button class="reviewComBtn" style="background-color: #0040FF;" data-content="${productDTO.review_content}" data-reviewQ="${productDTO.review_quality}" 
 						    data-reviewP="${productDTO.review_price}" data-reviewT="${productDTO.review_time}" data-reviewM="${productDTO.review_manner}">나의 후기</button>&emsp;
+							<br>
+							<div style="position: absolute; top: 27px; left: 31px;"><span class="star2">★</span>${(productDTO.review_time + productDTO.review_quality + productDTO.review_manner + productDTO.review_price) / 4 }</div>
 						</c:if>
 					</div>
 					<div class="profile-item-detail1">
@@ -393,6 +401,17 @@ display: inline-block;
 			modal.style.display = "none";
 		}
 	}
+</script>
+
+<script type="text/javascript">
+	document.querySelectorAll('.profile-noreserv').forEach(function(btn){
+		btn.onclick = function(){
+			let id = btn.getAttribute('data-id');
+			if(confirm('예약 취소하시겠습니까?')){
+				location.replace("${pageContext.request.contextPath}/my/buy?noreserv=" + id);
+			}
+		}
+	})
 </script>
 
 <script>

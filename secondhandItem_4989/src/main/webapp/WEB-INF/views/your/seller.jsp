@@ -49,10 +49,11 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="reportForm">
+                            <form id="reportForm" action="${pageContext.request.contextPath}/your/reportPro" method="post">
                                 <div class="accordion-subject"><b>신고 내용</b></div>
                                 <textarea class="form-control" placeholder="신고 사유를 입력해주세요" id="report_contents" name="report_contents" required></textarea>
-                                <button type="button" class="btn btn-primary mt-3" id="reportBtn" onclick="submitReport()">신고하기</button>
+                                <input type="hidden" value="${otherUserDTO.member_id}" name="otherUser">
+                                <button type="submit" class="btn btn-primary mt-3" id="reportBtn">신고하기</button>
                             </form>
                         </div>
                     </div>
@@ -75,35 +76,8 @@
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
 <script>
-function submitReport() {
-    var reportContents = $("#report_contents").val();
-    var reporterId = "${sessionScope.member_id}";
-    var reporteeId = "${otherUserDTO.member_id}";
-    var reportedItemId = "${productDTO.product_id}";
-    var reportType = "상품"; // 고정값
-
-    $.ajax({
-        type: "POST",
-        url: "${pageContext.request.contextPath}/product/report",
-        data: {
-            reporter_id: reporterId,
-            reportee_id: reporteeId,
-            reported_item_id: reportedItemId,
-            report_type: reportType,
-            report_contents: reportContents
-        },
-        success: function(response) {
-            if (response.success) {
-                alert("신고가 접수되었습니다.");
-                $('#reportModal').modal('hide');
-            } else {
-                alert("신고 접수 중 오류가 발생했습니다.");
-            }
-        },
-        error: function() {
-            alert("서버 통신 중 오류가 발생했습니다.");
-        }
-    });
+function submitReport(){
+	confirm("신고 접수 하시겠습니까?");
 }
 </script>
 
