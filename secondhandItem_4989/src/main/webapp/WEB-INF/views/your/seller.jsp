@@ -28,12 +28,13 @@
 		</div>
 	</header>
 	<div class="content-container">
-<aside class="side-nav">
-	<h3>Other User</h3>
-	<br>
-	<ul>
-		<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUserDTO.member_id}">${otherUserDTO.member_id}님의 프로필</a></li>
-		<li><a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUserDTO.member_id}">판매 내역</a></li>
+<aside class="side-nav" style="padding-top: 0;">
+	<div style="background-color: #4E229E; color: white; height: 80px; border-radius: 7px 7px 0 0; display: flex; justify-content: center; align-items: center;">
+		<h3>Other User</h3>
+	</div>
+	<ul style="font-size: 20px; font-weight: 500;">
+		<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUserDTO.member_id}" style=" color: #372161; padding: 15px 15px; display: block;">${otherUserDTO.member_id}님의 프로필</a></li>
+		<li><a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUserDTO.member_id}" style=" color: #372161; padding: 15px 15px; display: block;">판매 내역</a></li>
 	</ul>
 </aside>
 		<div class="main-container-side-profile">

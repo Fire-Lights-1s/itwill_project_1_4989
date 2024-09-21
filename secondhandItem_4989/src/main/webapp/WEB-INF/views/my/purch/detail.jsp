@@ -14,15 +14,19 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/purchaseStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modalStyle.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/carouselStyle.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/animate.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
 </head>
 <body>
 <jsp:include page="../../inc/header.jsp"></jsp:include>
 <section>
 	<header>
 		<div id="menu-name">
-   			<a href="${pageContext.request.contextPath}">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/my/profile">마이 페이지 </a> >
-   			<a href="${pageContext.request.contextPath}/my/purchlist">매입 신청내역</a>
+   			<a href="${pageContext.request.contextPath}" style="color: #372161;">홈 </a> >
+   			<a href="${pageContext.request.contextPath}/my/profile" style="color: #372161;">마이 페이지 </a> >
+   			<a href="${pageContext.request.contextPath}/my/purchlist" style="color: #372161;">매입 신청내역</a>
 		</div>
 		
 	</header>
