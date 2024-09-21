@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -96,187 +97,164 @@
 
 							<!-- 이미지 업로드 및 미리보기 영역 -->
 							<div class="form-group image-upload">
-								<!-- 파일 선택 버튼을 구분하여 표시 -->
-								<label for="product_img1">파일1 선택</label> <input type="file"
-									id="product_img1" name="product_img[]" class="file_upload">
+								<label for="product_img">사진 선택</label>
+								 <!-- 파일 입력 버튼과 미리보기 컨테이너를 감싸는 wrapper 추가 -->
+    <div class="upload-wrapper">
+        <input type="file" id="product_img1" name="product_img" class="file_upload" data-preview="preview1"> <!-- ***data-preview 속성 추가*** -->
+        <div id="preview1" class="image-preview"></div> <!-- ***미리보기 컨테이너 추가*** -->
+    </div>
+    <div class="upload-wrapper">
+        <input type="file" id="product_img2" name="product_img" class="file_upload" data-preview="preview2"> <!-- ***data-preview 속성 추가*** -->
+        <div id="preview2" class="image-preview"></div> <!-- ***미리보기 컨테이너 추가*** -->
+    </div>
+    <div class="upload-wrapper">
+        <input type="file" id="product_img3" name="product_img" class="file_upload" data-preview="preview3"> <!-- ***data-preview 속성 추가*** -->
+        <div id="preview3" class="image-preview"></div> <!-- ***미리보기 컨테이너 추가*** -->
+    </div>
+    <div class="upload-wrapper">
+        <input type="file" id="product_img4" name="product_img" class="file_upload" data-preview="preview4"> <!-- ***data-preview 속성 추가*** -->
+        <div id="preview4" class="image-preview"></div> <!-- ***미리보기 컨테이너 추가*** -->
+    </div>
+    <div class="upload-wrapper">
+        <input type="file" id="product_img5" name="product_img" class="file_upload" data-preview="preview5"> <!-- ***data-preview 속성 추가*** -->
+        <div id="preview5" class="image-preview"></div> <!-- ***미리보기 컨테이너 추가*** -->
+    </div>
+</div>
 
-								<label for="product_img2">파일2 선택</label> <input type="file"
-									id="product_img2" name="product_img[]" class="file_upload">
 
-								<label for="product_img3">파일3 선택</label> <input type="file"
-									id="product_img3" name="product_img[]" class="file_upload">
-
-								<label for="product_img4">파일4 선택</label> <input type="file"
-									id="product_img4" name="product_img[]" class="file_upload">
-
-								<label for="product_img5">파일5 선택</label> <input type="file"
-									id="product_img5" name="product_img[]" class="file_upload">
+							</div>
+							<!-- 이미지 미리보기 영역 추가 -->
+							<div class="form-group image-preview-container">
+								<!-- 미리보기 이미지들이 여기에 추가됩니다. -->
 							</div>
 
-						</div>
-						<!-- 이미지 미리보기 영역 추가 -->
-						<div class="form-group image-preview-container">
-							<!-- 미리보기 이미지들이 여기에 추가됩니다. -->
-						</div>
 
-
-						<!-- 카테고리 등 다른 폼 요소 -->
-						<div class="form-group inline-group">
-							<label for="category_name">카테고리</label> <select
-								id="category_name" name="category_name">
-								<option value="" disabled selected>선택</option>
-								<option value="phone">휴대폰</option>
-								<option value="tablet">태블릿</option>
-								<option value="watch">스마트워치</option>
-								<option value="computer">PC / 노트북</option>
-								<option value="acc">PC주변기기</option>
-								<option value="game">게임기기</option>
-								<option value="etc">기타</option>
-							</select>
-						</div>
-
-						<div class="form-group inline-group">
-							<label for="product_name">제품명</label> <input type="text"
-								id="product_name" name="product_name"
-								placeholder="브랜드명, 모델명 함께 입력해주세요.">
-						</div>
-
-						<div class="form-group inline-group">
-							<label for="year_purchase">구입연도</label> <input type="number"
-								id="year_purchase" name="year_purchase"
-								placeholder="구입연도를 입력해주세요" min="1900" max="2024"
-								style="flex: 1;" maxlength="4" oninput="limitYearLength()">
-
-							<label style="margin-left: 10px;"> <input type="checkbox"
-								id="unknownCheckbox" onclick="handleYearCheckbox()"> 알 수
-								없음
-							</label>
-						</div>
-
-						<div class="form-group inline-group">
-							<label for="product_price">판매 가격</label> <input type="number"
-								id="product_price" name="product_price" placeholder="원"
-								oninput="addPriceSuffix()">
-						</div>
-
-						<div class="form-group inline-group">
-							<label for="post1">거래 지역</label>
-							<div style="display: flex; gap: 10px;">
-								<!-- 주소 검색 버튼을 왼쪽으로 이동 -->
-								<input type="button" value="주소 검색" onclick="daum_address();"
-									class="addr-bttn">
-								<!-- 		<input type="text" id="trade_area" name="trade_area" placeholder="시군구 코드"> -->
-								<input type="text" id="sido" name="sido" placeholder="도/시 이름">
-								<input type="text" id="sigungu" name="sigungu"
-									placeholder="시/군/구 이름">
-								<!-- 시와 구 합친 거래지역 값 저장 -->
-								<input type="hidden" id="trade_area" name="trade_area">
-							</div>
-						</div>
-
-						<br>
-						<div class="form-group inline-group">
+							<!-- 카테고리 등 다른 폼 요소 -->
 							<div class="form-group inline-group">
-								<!-- 거래 방식과 결제 방식을 한 줄에 배치 -->
-								<div style="display: flex; gap: 20px; width: 100%;">
-									<div style="flex: 1;">
-										<label for="trade_method">거래 방식</label> <select
-											id="trade_method" name="trade_method">
-											<option value="" disabled selected>선택</option>
-											<option value="직거래">직거래</option>
-											<option value="택배">택배</option>
-											<option value="직거래/택배">직거래/택배</option>
-										</select>
-									</div>
+								<label for="category_name">카테고리</label> <select
+									id="category_name" name="category_name">
+									<option value="" disabled selected>선택</option>
+									<option value="phone">휴대폰</option>
+									<option value="tablet">태블릿</option>
+									<option value="watch">스마트워치</option>
+									<option value="computer">PC / 노트북</option>
+									<option value="acc">PC주변기기</option>
+									<option value="game">게임기기</option>
+									<option value="etc">기타</option>
+								</select>
+							</div>
 
-									<div style="flex: 1;">
-										<label for="pay_method">결제 방식</label> <select id="pay_method"
-											name="pay_method">
-											<option value="" disabled selected>선택</option>
-											<option value="현금">현금</option>
-											<option value="페이">페이</option>
-											<option value="현금/페이">현금/페이</option>
-										</select>
+							<div class="form-group inline-group">
+								<label for="product_name">제품명</label> <input type="text"
+									id="product_name" name="product_name"
+									placeholder="브랜드명, 모델명 함께 입력해주세요.">
+							</div>
+
+							<div class="form-group inline-group">
+								<label for="year_purchase">구입연도</label> <input type="number"
+									id="year_purchase" name="year_purchase"
+									placeholder="구입연도를 입력해주세요" min="1900" max="2024"
+									style="flex: 1;" maxlength="4" oninput="limitYearLength()">
+
+								<label style="margin-left: 10px;"> <input
+									type="checkbox" id="unknownCheckbox"
+									onclick="handleYearCheckbox()"> 알 수 없음
+								</label>
+							</div>
+
+							<div class="form-group inline-group">
+								<label for="product_price">판매 가격</label> <input type="number"
+									id="product_price" name="product_price" placeholder="원"
+									oninput="addPriceSuffix()">
+							</div>
+
+							<div class="form-group inline-group">
+								<label for="post1">거래 지역</label>
+								<div style="display: flex; gap: 10px;">
+									<!-- 주소 검색 버튼을 왼쪽으로 이동 -->
+									<input type="button" value="주소 검색" onclick="daum_address();"
+										class="addr-bttn">
+									<!-- 		<input type="text" id="trade_area" name="trade_area" placeholder="시군구 코드"> -->
+									<input type="text" id="sido" name="sido" placeholder="도/시 이름">
+									<input type="text" id="sigungu" name="sigungu"
+										placeholder="시/군/구 이름">
+									<!-- 시와 구 합친 거래지역 값 저장 -->
+									<input type="hidden" id="trade_area" name="trade_area">
+								</div>
+							</div>
+
+							<br>
+							<div class="form-group inline-group">
+								<div class="form-group inline-group">
+									<!-- 거래 방식과 결제 방식을 한 줄에 배치 -->
+									<div style="display: flex; gap: 20px; width: 100%;">
+										<div style="flex: 1;">
+											<label for="trade_method">거래 방식</label> <select
+												id="trade_method" name="trade_method">
+												<option value="" disabled selected>선택</option>
+												<option value="직거래">직거래</option>
+												<option value="택배">택배</option>
+												<option value="직거래/택배">직거래/택배</option>
+											</select>
+										</div>
+
+										<div style="flex: 1;">
+											<label for="pay_method">결제 방식</label> <select id="pay_method"
+												name="pay_method">
+												<option value="" disabled selected>선택</option>
+												<option value="현금">현금</option>
+												<option value="페이">페이</option>
+												<option value="현금/페이">현금/페이</option>
+											</select>
+										</div>
 									</div>
+								</div>
+
+
+								<div class="form-group inline-group">
+									<label for="product_desc">물품 상태</label>
+									<textarea id="product_desc" name="product_desc"
+										placeholder="물품 상태(미개봉/신품/중고), 하자 등 상세내용을 적어주세요."></textarea>
+								</div>
+
+								<div class="form-group">
+									<button type="submit" class="submit-btn" value="save">등록하기</button>
 								</div>
 							</div>
 
 
-							<div class="form-group inline-group">
-								<label for="product_desc">물품 상태</label>
-								<textarea id="product_desc" name="product_desc"
-									placeholder="물품 상태(미개봉/신품/중고), 하자 등 상세내용을 적어주세요."></textarea>
-							</div>
-
-							<div class="form-group">
-								<button type="submit" class="submit-btn" value="save">등록하기</button>
-							</div>
 						</div>
+
+					</form>
 				</div>
 
-				</form>
-		</div>
-
-		<!-- 여러 파일 선택 후 미리보기 및 파일 누적 관리 -->
-		<script>
+<!-- 여러 파일 선택 후 미리보기 및 파일 누적 관리 -->
+<script>
 document.addEventListener("DOMContentLoaded", function() {
-    let uploadFiles = [];
-    let dataTransfer = new DataTransfer(); // **노란색 주석: 선택한 파일 순서대로 누적 관리**
-
     function getImageFiles(event) {
         const files = event.currentTarget.files;
+        const previewId = event.currentTarget.getAttribute('data-preview'); // ***data-preview 속성에서 미리보기 컨테이너 ID 가져오기***
+        const previewContainer = document.getElementById(previewId); // ***해당 미리보기 컨테이너 선택***
         
-        //alert( files);
-        // 선택된 파일들을 배열에 추가
+        previewContainer.innerHTML = ''; // ***기존 미리보기 초기화***
+
         [...files].forEach(file => {
-            uploadFiles.push(file);
-            dataTransfer.items.add(file);  // **노란색 주석: dataTransfer에 파일 추가**
-           
-            
-        });
-
-        // 이놈 때문에 업로드 안한 파일명에 중복 이름 들어갔음!!
-        //event.currentTarget.files = dataTransfer.files;
-
-        // 미리보기 업데이트
-        updateImagePreview();
-    }
-
-    function updateImagePreview() {
-        const container = document.querySelector('.image-preview-container');
-        container.innerHTML = ''; // 기존 미리보기 삭제
-
-        uploadFiles.forEach((file, index) => {
             const reader = new FileReader();
 
             reader.onload = function(e) {
-                const imgWrapper = document.createElement('div');
-                imgWrapper.className = 'img-wrapper';
-
                 const img = document.createElement('img');
                 img.src = e.target.result;
                 img.alt = '이미지 미리보기';
                 img.style.width = '100px';
                 img.style.height = '100px';
 
-                const deleteButton = document.createElement('button');
-                deleteButton.innerHTML = 'X';
-                deleteButton.onclick = function() {
-                    uploadFiles.splice(index, 1);  // 파일 배열에서 해당 파일 제거
-                    dataTransfer.items.remove(index);  // **노란색 주석: DataTransfer에서 해당 파일 제거**
-                    updateImagePreview();  // **노란색 주석: 미리보기 업데이트**
-                };
-
-                imgWrapper.appendChild(img);
-                imgWrapper.appendChild(deleteButton);
-                container.appendChild(imgWrapper);
+                previewContainer.appendChild(img); // ***미리보기 이미지 추가***
             }
 
             reader.readAsDataURL(file);
         });
     }
 
-    // 모든 파일 입력 요소에 동일한 이벤트 핸들러 연결
     const fileInputs = document.querySelectorAll('.file_upload');
     fileInputs.forEach(input => {
         input.addEventListener('change', getImageFiles);
@@ -285,8 +263,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 </script>
-		<!-- 다음 주소 api				 -->
-		<script>
+
+				<!-- 다음 주소 api				 -->
+				<script>
 					//다음 주소 api
 					function daum_address() {
 
@@ -320,7 +299,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				</script>
 
 
-		</main>
+			</main>
 		</div>
 	</section>
 
