@@ -10,19 +10,19 @@
       <li><a href="${pageContext.request.contextPath}/product" class="category_btn desktop-item">三</a>
         <ul class="drop-menu">
           <li><a href="${pageContext.request.contextPath}/product">전체</a></li>
-          <li><a href="${pageContext.request.contextPath}/product/phone">휴대폰</a></li>
-          <li><a href="${pageContext.request.contextPath}/product/tablet">태블릿</a></li>
-          <li><a href="${pageContext.request.contextPath}/product/watch">스마트워치</a></li>
-          <li><a href="${pageContext.request.contextPath}/product/computer">PC/노트북</a></li>
-          <li><a href="${pageContext.request.contextPath}/product/acc">PC주변기기</a></li>
-          <li><a href="${pageContext.request.contextPath}/product/game">게임기기</a></li>
-          <li><a href="${pageContext.request.contextPath}/product/etc">기타</a></li>
+          <li><a href="${pageContext.request.contextPath}/product?category=phone">휴대폰</a></li>
+          <li><a href="${pageContext.request.contextPath}/product?category=tablet">태블릿</a></li>
+          <li><a href="${pageContext.request.contextPath}/product?category=watch">스마트워치</a></li>
+          <li><a href="${pageContext.request.contextPath}/product?category=computer">PC/노트북</a></li>
+          <li><a href="${pageContext.request.contextPath}/product?category=acc">PC주변기기</a></li>
+          <li><a href="${pageContext.request.contextPath}/product?category=game">게임기기</a></li>
+          <li><a href="${pageContext.request.contextPath}/product?category=etc">기타</a></li>
         </ul>
       </li>
       <li>
         <div class="search-bar">
-          <form action="${pageContext.request.contextPath}/product/search" method="get">
-            <input type="text" name="query" class="search" placeholder="원하는 상품을 검색해보세요">
+          <form action="${pageContext.request.contextPath}/product" method="get">
+            <input type="text" id="search_bar" name="search" class="search" value="${search}" placeholder="원하는 상품을 검색해보세요">
           </form>
         </div>
       </li>

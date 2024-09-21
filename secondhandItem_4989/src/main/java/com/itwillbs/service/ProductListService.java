@@ -2,10 +2,7 @@ package com.itwillbs.service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.inject.Inject;
 
@@ -20,105 +17,88 @@ public class ProductListService {
 	@Inject
 	private ProductListDAO productListDAO;
 
-	public List<ProductDTO> getPopList() {
-		return productListDAO.getPopList();
-	}
-	
-	public List<ProductDTO> getProductListAll() {
-		return productListDAO.getProductListAll();
-	}
-	
-	public List<ProductDTO> getListByCategory(String category_name) {
-		return productListDAO.getProductListByC(category_name);
-	}
+	public List<ProductDTO> getProductList(String category, String searchKey, int itemsPerPage, int offset) {
 
-	
-	public List<ProductDTO> getFilteredProducts(String category, List<String> method, List<String> pay, String price,
-			List<String> status, String sorting, Integer minPrice, Integer maxPrice) {
-		
-		// 사실상 조건 없이 전체를 가져와야 하는 경우, null로 두고 매퍼에서 동적쿼리를 짤 때 활용
-		
-		System.out.println("service start=" + category + method + pay + price + status + minPrice + maxPrice);
-		
-		
 		String category_name = category;
 		if (category.equals("all")) {
 			category_name = null;
 		}
-		
-		String trade_method = null;
-		if (method != null && method.size() == 1) {
-		    trade_method = method.get(0);
+
+		String search = null;
+		if (searchKey != null) {
+			search = "%" + searchKey + "%";
 		}
 
-		String pay_method = null;
-		if (pay != null && pay.size() == 1) {
-		    pay_method = pay.get(0);
-		}
-
-		String trade_status = null;
-		if (status != null && status.size() == 1) {
-		    trade_status = status.get(0);
-		}
-		
-		String sort = "created_datetime DESC";
-		if (sorting.equals("price_high_to")) {
-			sort = "product_price DESC";
-		} else if (sorting.equals("price_low_to")) {
-			sort = "product_price";
-		}
-		
-		Integer startPrice = 0;
-		Integer endPrice = 0;
-		
-		if (minPrice == null && maxPrice == null) {			// 직접 지정값이 하나도 없을 때
-	
-			if (price.equals("all")) {
-				startPrice = null;
-				endPrice = null;
-			} else if (price.equals("free")) {
-				startPrice = 0;
-				endPrice = 0;
-			} else if (price.equals("under_10")) {
-				startPrice = 1;
-				endPrice = 100000;
-			} else if (price.equals("under_30")) {
-				startPrice = 100001;
-				endPrice = 300000;
-			} else if (price.equals("under_50")) {
-				startPrice = 300001;
-				endPrice = 500000;
-			}
-			
-		} else {											// 직접 지정값이 하나라도 있을 때
-			startPrice = minPrice;
-			endPrice = maxPrice;
-		}
-		
-		// 카테고리 - 그냥 들어가면 됨. all인 경우에만 동적쿼리로 처리
-		// 거래방법 - length가 1이면 0번 인덱스값, length가 2이면 직거래/택배
-		// 결제방법 - length가 1이면 0번 인덱스값, length가 2이면 현금/페이
-		// 거래상태 - '거래 가능' / '예약 중', '거래 완료' 구분하여 후자만 동적쿼리로 처리
-		// 가격 - startPrice, endPrice로 정리. 동적쿼리로 처리
-		
-		// 값 정리해서 dao로 보내기
-	
 		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("category_name", category_name);
+		paramMap.put("search", search);
+		paramMap.put("itemsPerPage", itemsPerPage);
+		paramMap.put("offset", offset);
+		paramMap.put("trade_status", "able"); // 초기 필터값과 맞춰주기 위한 조치
+
+		return productListDAO.getProductList(paramMap);
+	}
+
+	public List<ProductDTO> getProductList(String category, List<String> method, List<String> pay, String price,
+										   List<String> status, String sorting, Integer minPrice, Integer maxPrice,
+										   String search, int itemsPerPage, int offset) {
+
+		// 필터 값 데이터베이스 변수에 맞춰 전처리
+
+		String category_name = Optional.ofNullable(category).filter(c -> !"all".equals(c)).orElse(null);
+		String trade_method = Optional.ofNullable(method).filter(m -> m.size() == 1).map(m -> m.get(0)).orElse(null);
+		String pay_method = Optional.ofNullable(pay).filter(p -> p.size() == 1).map(p ->p.get(0)).orElse(null);
+		String trade_status = Optional.ofNullable(status).filter(s -> s.size() == 1).map(s -> s.get(0)).orElse(null);
+
+		Integer startPrice = null;
+		Integer endPrice = null;
+
+		if (price != null) {
+			if (minPrice == null && maxPrice == null) {            // 직접 입력해 지정한 값이 하나도 없을 때 (버튼으로만 선택한 경우)
+
+				if (price.equals("all")) {                // 전체
+					startPrice = null;
+					endPrice = null;
+				} else if (price.equals("free")) {        // 나눔
+					startPrice = 0;
+					endPrice = 0;
+				} else if (price.equals("under_10")) {    // 10만원 이하
+					startPrice = 1;
+					endPrice = 100000;
+				} else if (price.equals("under_30")) {    // 10~30만원
+					startPrice = 100001;
+					endPrice = 300000;
+				} else if (price.equals("under_50")) {    // 30~50만원
+					startPrice = 300001;
+					endPrice = 500000;
+				}
+
+			} else {                                            // 직접 입력해 지정한 값이 하나라도 있을 때
+				startPrice = minPrice == null ? 0 : minPrice;
+				endPrice = maxPrice == null ? 0 : maxPrice;
+			}
+		}
+		// 필터 처리한 값 + 다른 파라미터들 DAO로 보내기 전 맵에 저장
+		Map<String, Object> paramMap = new HashMap<>();
+		// 필터 처리한 값
 		paramMap.put("category_name", category_name);
 		paramMap.put("trade_method", trade_method);
 		paramMap.put("pay_method", pay_method);
 		paramMap.put("trade_status", trade_status);
-		paramMap.put("sort", sort);
+		paramMap.put("sorting", sorting);
 		paramMap.put("startPrice", startPrice);
 		paramMap.put("endPrice", endPrice);
-		
-		
-		System.out.println("service end=" + paramMap);
-		
-		return productListDAO.getFilteredProducts(paramMap);
+		// 다른 파라미터들
+		if (search != null) {
+			paramMap.put("search", "%" + search + "%");
+		}
+		paramMap.put("itemsPerPage", itemsPerPage);
+		paramMap.put("offset", offset);
+
+		return productListDAO.getProductList(paramMap);
 	}
 
-	
+
 	// 등록 후 경과시간 계산해서 넘겨주기
 	public List<String> getElapsedTimeList(List<ProductDTO> productList) {
 	    	LocalDateTime now = LocalDateTime.now();
@@ -145,12 +125,16 @@ public class ProductListService {
 	        return elapsedTimeList;
 	    }
 
-	public List<ProductDTO> getItemsBySearch(String query) {
-		return productListDAO.getItemsBySearch(query);
+
+
+	// 메인 인기상품 리스트 출력용
+
+	public List<ProductDTO> getPopList() {
+		return productListDAO.getPopList();
 	}
 
 	public List<ProductDTO> loadMoreList(int offset, int itemsPerPage, String listName) {
 		return productListDAO.loadMoreList(offset, itemsPerPage, listName);
 	}
-	
+
 }
