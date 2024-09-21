@@ -86,6 +86,7 @@ a:hover{
 .items .drop-menu{
 	position: absolute;
     background: #400080;
+    color: #fff;
     border-radius: 10px;
     width: 120px;
     line-height: 45px;
@@ -265,13 +266,13 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 	height:40px;
 	border: 0;
 	border-radius:20px; 
-	background-color: #d940ff;
+	background-color: #400080;
 	font-size: 1.2rem;
 	font-weight: 900;
 	color: white;
 }
 #productInfo > div button:hover{
-	background-color: #b300df;
+	background-color: #7300e6;
 }
 #chatContent{
 	flex:6 1 auto;
