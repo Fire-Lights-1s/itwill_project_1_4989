@@ -38,7 +38,6 @@ function connect(chatRoom_json){
             showChat(JSON.parse(chatMessage.body));
         });
         stompClient.subscribe('/topic/product/' + chatRoomGlobal.product_id, function (product){
-        	productLoadingStart();
         	changeProductState(product.body);
         	productLoadingEnd();
         });
@@ -102,6 +101,7 @@ function loadProduct(chatRoom_json){
 		        $('#productInfo div:nth-child(3) p').text("거래 지역 : "+productGlobal.trade_area);
 	        }
 	        if(productGlobal.seller_id == userId){
+	        	$(TXButton).off('click');
 	        	switch(productGlobal.trade_status) {
 				  case '거래 가능':
 				  	$(TXButton).text('판매 예약');
@@ -273,6 +273,7 @@ function promiseTrade(){
 	    	"buyer_id": chatRoomGlobal.buyer_id,
 	    	}
 	    	
+	    	productLoadingStart();
 	        stompClient.send('/send/product/' + productGlobal.product_id, {},
 	            JSON.stringify(data));
     	}
@@ -322,8 +323,9 @@ function changeProductState(product){
 	//console.log('changeProductState : ' + product);
 	productGlobal = JSON.parse(product);
 	$('#productInfo div:nth-child(2) p:nth-child(4)').text("거래 상태 : "+ productGlobal.trade_status);
-	let TXButton = '#productInfo div:nth-child(3) button';
+	let TXButton = '#productInfo div:nth-child(3) #trade-btn';
 	if(productGlobal.seller_id == userId){
+		$(TXButton).off('click');
 		switch(productGlobal.trade_status) {
 			case '거래 가능':
 			$(TXButton).text('판매 예약');
