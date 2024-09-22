@@ -22,8 +22,18 @@
 <!-- postcode.v2.js 우편번호 서비스 기능을 가진 외부 자바스크립트 연결 -->
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- JavaScript -->
+
+<script>
+    const contextPath = '${pageContext.request.contextPath}';
+    <c:if test="${sessionScope.member_id == null || sessionScope.member_id == ''}">
+    alert('로그인한 회원만 이용 가능한 기능입니다');
+    window.location.href = contextPath + '/member/login';
+    </c:if>
+</script>
+
 <script>
 	//구입연도 '알 수 없음' 선택 함수
 	function handleYearCheckbox() {
@@ -190,38 +200,38 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const uploadImage = document.getElementById("uploadImage");
-    const fileInput = document.getElementById("product_img");
-    const previewContainer = document.getElementById("previewContainer");
 
-    // *** 선택된 파일들을 저장할 배열 추가 ***
-    let fileArray = [];  // 선택한 파일들을 저장할 배열
+$(document).ready(function() {
 
-    // 이미지를 클릭하면 파일 선택창을 연다
-    uploadImage.addEventListener("click", function() {
-        fileInput.click();
-    });
+    // 이미지 파일 모을 배열 선언
+    let selectedFiles = [];
 
-    // 파일 선택 후 미리보기를 표시
-    fileInput.addEventListener("change", function(event) {
-        const files = event.target.files;
+    // 업로드이미지 클릭 시 파일 선택창 열기
+    document.getElementById('uploadImage').addEventListener('click', function () {
+        document.getElementById('product_img').click();
+    })
 
-        // *** 새로운 파일을 선택할 때마다 배열에 추가 ***
-        for (let i = 0; i < files.length; i++) {
-            fileArray.push(files[i]);  // 파일을 배열에 추가
+    // 파일 선택 시 미리보기
+    document.getElementById('product_img').addEventListener('change', function (event) {
+        let files = event.target.files;
+        let previewContainer = document.getElementById('previewContainer');
+        let remainingSlots = 5 - selectedFiles.length;
+
+        if (files.length > remainingSlots) {
+            alert('최대 5개의 이미지만 첨부할 수 있습니다.');
+            return;
         }
 
-        // *** 미리보기 갱신 로직 추가 ***
-        previewFiles(fileArray);  // 미리보기 갱신
-
-        // 기존 미리보기 로직
+        // 들어온 파일 반복 처리
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
+            selectedFiles.push(file);   // 배열 추가
+
+            // 미리보기 추가
             const reader = new FileReader();
-            reader.onload = function(e) {
-                const imgWrapper = document.createElement("div");
-                imgWrapper.classList.add("imageItem"); // 이미지 래퍼에 스타일 적용
+            reader.onload = function (e) {
+                const imgWrapper = document.createElement('div');
+                imgWrapper.classList.add('imageItem'); // 이미지 래퍼에 스타일 적용
 
                 const img = document.createElement("img");
                 img.src = e.target.result;
@@ -231,122 +241,87 @@ document.addEventListener("DOMContentLoaded", function() {
                 const closeButton = document.createElement("span");
                 closeButton.classList.add("imageClose"); // 외부 CSS의 imageClose 클래스 적용
                 closeButton.textContent = "X"; // X 텍스트 추가
-                closeButton.addEventListener("click", function() {
-                    previewContainer.removeChild(imgWrapper); // 미리보기 삭제
+
+                // 닫기 버튼 클릭 시 미리보기와 파일목록에서 삭제
+                closeButton.addEventListener('click', function () {
+                    previewContainer.removeChild(imgWrapper);
+                    const fileIndex = selectedFiles.indexOf(file);
+                    if (fileIndex > -1) {
+                        selectedFiles.splice(fileIndex, 1);
+                    }
                 });
 
-                // 미리보기 컨테이너에 이미지와 닫기 버튼 추가
+                // 이미지 래퍼에 이미지, 닫기 버튼 추가
                 imgWrapper.appendChild(img);
                 imgWrapper.appendChild(closeButton);
                 previewContainer.appendChild(imgWrapper);
             };
             reader.readAsDataURL(file);
         }
+        event.target.value = ''; // 파일 하나 선택하면 input 필드 초기화
     });
 
-    // Ajax를 이용하여 폼을 전송하고 파일을 업로드하는 함수 추가
-    function fileSubmit() {
-        var form = $("#fileUploadForm")[0]; // form 객체 선택
-        var formData = new FormData(form);  // FormData 객체 생성
+    $('form').on('submit', function (event) {
+        event.preventDefault();
 
-        // *** fileArray에 저장된 모든 파일을 FormData에 추가 ***
-        for (let i = 0; i < fileArray.length; i++) {
-            formData.append("product_img", fileArray[i]);  // 모든 파일을 FormData에 추가
-        }
+        let formData = new FormData(this);
+        $.each(selectedFiles, function (i, file) {
+            formData.append('product_img', file);
+        });
 
         $.ajax({
-            type: 'post',
-            url: 'fileUpload.do',  // 서버의 파일 업로드 처리 URL
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
             data: formData,
-            processData: false,  // 파일 전송을 위해 데이터를 문자열이 아닌 FormData로 처리
-            contentType: false,  // 파일 전송 시 ContentType을 false로 설정 (자동으로 multipart/form-data 처리)
-            success: function(html) {
-                alert("파일 업로드가 성공했습니다.");
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                alert('상품 등록이 완료되었습니다.')
             },
-            error: function(error) {
-                alert("파일 업로드에 실패했습니다.");
-                console.log(error);
+            error: function (error) {
+                alert('상품 등록에 실피했습니다.')
             }
         });
-    }
-
-    // 전송 버튼을 클릭하면 fileSubmit() 함수 호출
-    document.getElementById("submitBtn").addEventListener("click", fileSubmit);
+    });
 });
 
-// *** 미리보기 갱신을 위한 previewFiles 함수 ***
-function previewFiles(files) {
-    const previewContainer = document.getElementById("previewContainer");
-    previewContainer.innerHTML = "";  // 이전 미리보기 삭제 (필요한 경우)
 
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const imgWrapper = document.createElement("div");
-            imgWrapper.classList.add("imageItem");
+</script>
 
-            const img = document.createElement("img");
-            img.src = e.target.result;
-            img.classList.add("imageSize");
+<!-- 다음 주소 api				 -->
+<script>
+    //다음 주소 api
+    function daum_address() {
 
-            const closeButton = document.createElement("span");
-            closeButton.classList.add("imageClose");
-            closeButton.textContent = "X";
-            closeButton.addEventListener("click", function() {
-                previewContainer.removeChild(imgWrapper);
-            });
-
-            imgWrapper.appendChild(img);
-            imgWrapper.appendChild(closeButton);
-            previewContainer.appendChild(imgWrapper);
+        let themeObj = {
+            searchBgColor : "#0B65C8",
+            queryTextColor : "#FFFFFF"
         };
-        reader.readAsDataURL(file);
+
+        new daum.Postcode(
+                {
+                    oncomplete : function(data) {
+                        console.log(data);
+
+                        // 시/도 및 구/군 값을 입력 필드에 설정
+                        document.getElementById('sido').value = data.sido;
+                        document.getElementById('sigungu').value = data.sigungu;
+                        /* document.getElementById('addr2')
+                                .focus(); // addr2 필드가 있을 경우 */
+                        //trade_area에 시/도 + 구/군 값을 합쳐서 설정
+                        document.getElementById('trade_area').value = data.sido
+                                + " " + data.sigungu;
+                    },
+
+                    theme : themeObj
+                }).open();
     }
-}
 </script>
 
 
-
-				<!-- 다음 주소 api				 -->
-				<script>
-					//다음 주소 api
-					function daum_address() {
-
-						let themeObj = {
-							searchBgColor : "#0B65C8",
-							queryTextColor : "#FFFFFF"
-						};
-
-						new daum.Postcode(
-								{
-									oncomplete : function(data) {
-										console.log(data);
-
-										// 시/도 및 구/군 값을 입력 필드에 설정
-										document.getElementById('sido').value = data.sido;
-										document.getElementById('sigungu').value = data.sigungu;
-										/* document.getElementById('addr2')
-												.focus(); // addr2 필드가 있을 경우 */
-										//trade_area에 시/도 + 구/군 값을 합쳐서 설정		
-										document.getElementById('trade_area').value = data.sido
-												+ " " + data.sigungu;
-										// 창을 자동으로 닫음
-										document.getElementById("close")
-												.click();
-
-									},
-
-									theme : themeObj
-								}).open();
-
-					}
-				</script>
-
-
-			</main>
-		</div>
-	</section>
+        </main>
+    </div>
+</section>
 
 	<jsp:include page="../inc/footer.jsp"></jsp:include>
 

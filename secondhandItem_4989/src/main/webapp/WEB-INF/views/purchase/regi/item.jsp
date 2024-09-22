@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/purchaseStyle.css">
 
+
 <style>
 
 h1, h3 { text-align:center; }
@@ -50,10 +51,20 @@ th, td {
 	background-color: #eee;
 }
 
-
 </style>
+
+	<script>
+		const contextPath = '${pageContext.request.contextPath}';
+		<c:if test="${sessionScope.member_id == null || sessionScope.member_id == ''}">
+			alert('로그인한 회원만 이용 가능한 기능입니다');
+			window.location.href = contextPath + '/member/login';
+		</c:if>
+	</script>
+
+
 </head>
 <body>
+
 
   <jsp:include page="../../inc/header.jsp"></jsp:include>
 
@@ -62,6 +73,7 @@ th, td {
 		매입신청 > 매입 신청하기
 	</div>
 </header>
+
 <!-- 메뉴 아래 시작 -->
 <section>
 	<div class="content-container">
@@ -130,6 +142,7 @@ th, td {
 <!-- 본문영역 끝 -->
   
   <jsp:include page="../../inc/footer.jsp"></jsp:include>
-  
+
+
 </body>
 </html>

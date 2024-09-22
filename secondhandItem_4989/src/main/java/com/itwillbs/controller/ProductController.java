@@ -98,7 +98,7 @@ public class ProductController {
 	    // ProductDTO에 저장된 파일 이름을 설정
 	    productService.registerProduct(productDTO, savedFileNames);
 
-	    return "redirect:/product/all";
+	    return "redirect:/product/list";
 	}
 
 	

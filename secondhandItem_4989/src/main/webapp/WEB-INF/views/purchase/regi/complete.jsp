@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,15 @@ h1, h3 { text-align:center; }
 }
 
 </style>
+
+	<script>
+		const contextPath = '${pageContext.request.contextPath}';
+		<c:if test="${sessionScope.member_id == null || sessionScope.member_id == ''}">
+		alert('로그인한 회원만 이용 가능한 기능입니다');
+		window.location.href = contextPath + '/member/login';
+		</c:if>
+	</script>
+
 </head>
 <body>
 

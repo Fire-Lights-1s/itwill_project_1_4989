@@ -50,8 +50,10 @@
 <!-- 썸네일 이미지들 -->    
          
 <div class="thumbnail-images"> 
-            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img2}" 
-            class="img" alt="#" style="height: 100px;" onclick="switchMainImage(this)"> 
+            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}"
+            class="img" alt="#" style="height: 100px;" onclick="switchMainImage(this)">
+            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img2}"
+            class="img" alt="#" style="height: 100px;" onclick="switchMainImage(this)">
             <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img3}" 
             class="img" alt="#" style="height: 100px;" onclick="switchMainImage(this)"> 
             <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img4}" 
