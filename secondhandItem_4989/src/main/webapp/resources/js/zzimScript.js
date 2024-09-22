@@ -12,7 +12,6 @@ function selectZzim() {
 function zzimHandler(event) {
     const product_id = this.getAttribute('data-product_id');
     const member_id = this.getAttribute('data-member_id');
-    const contextPath = "/secondhand4989";
 
     if (member_id === null || member_id === '') {
         alert('로그인한 회원만 이용 가능한 기능입니다');
@@ -47,7 +46,7 @@ function zzimHandler(event) {
 //찜 여부 가져와서 표시
 
 function loadZzimStatus() {
-	 const contextPath = "/secondhand4989";
+
  const member_id = document.querySelector('.zzim-button').getAttribute('data-member_id');
 
  if (member_id !== null && member_id !== '') {

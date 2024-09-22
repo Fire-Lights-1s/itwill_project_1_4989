@@ -168,7 +168,9 @@
        </c:forEach>
        </c:if>
         <c:if test="${size == 0}">
-        <p>상품이 없습니다</p>
+            <div style="display:flex; width:100%; height:100%; justify-content:center; align-items:center;">
+                <img src="${pageContext.request.contextPath}/resources/img/no_result.png" style="display:block; width:45%;">
+            </div>
         </c:if>
 	</div>
 	</div>

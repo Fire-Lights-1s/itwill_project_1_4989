@@ -297,7 +297,7 @@ aside {
 }
 
 .side-nav ul li a:hover {
-    background-color: #898989;
+    background-color: rgba(78, 34, 158, 0.23);
 }
 
 #main-container {

@@ -91,11 +91,11 @@ public class AdminController {
 //		return "/admin/puchase/list";
 //	}
 //	
-//	@GetMapping("/pay")
-//	public String pay() {
-//		return "/admin/pay/list";
-//	}
-//	
+	@GetMapping("/pay")
+	public String pay() {
+		return "/admin/pay";
+	}
+
 	@GetMapping(value = "/report", produces = "application/text; charset=UTF-8")
 	public String report(HttpServletRequest request, Model model) {
 		PageDTO pageDTO = new PageDTO();

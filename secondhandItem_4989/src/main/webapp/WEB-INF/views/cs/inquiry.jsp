@@ -11,6 +11,15 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/CsStyle.css">
+
+<script>
+	const contextPath = '${pageContext.request.contextPath}';
+	<c:if test="${sessionScope.member_id == null || sessionScope.member_id == ''}">
+	alert('로그인한 회원만 이용 가능한 기능입니다');
+	window.location.href = contextPath + '/member/login';
+	</c:if>
+</script>
+
 </head>
 <body>
 
@@ -78,26 +87,25 @@
 
 <script>
 
-document.getElementById('submit_btn').addEventListener('click', function(event) {
-	
-	event.preventDefault();
-	
-	const inquiry_type = document.forms['inquiry_form'].inquiry_type.value;
-	const inquiry_title = document.getElementById('inquiry_title').value;
-	const inquiry_contents = document.getElementById('inquiry_contents').value;
-	
-	if(inquiry_type == '선택') {
-		alert('문의 유형을 선택해주세요.');
-	} else if (inquiry_title == null || inquiry_title == '') {
-		alert('문의글 제목을 적어주세요.');
-	} else if (inquiry_contents == null || inquiry_contents == '') {
-		alert('문의내용을 적어주세요.');
-	} else {
-		document.forms['inquiry_form'].submit();
-	}
-	
-});
+	document.getElementById('submit_btn').addEventListener('click', function (event) {
 
+		event.preventDefault();
+
+		const inquiry_type = document.forms['inquiry_form'].inquiry_type.value;
+		const inquiry_title = document.getElementById('inquiry_title').value;
+		const inquiry_contents = document.getElementById('inquiry_contents').value;
+
+		if (inquiry_type == '선택') {
+			alert('문의 유형을 선택해주세요.');
+		} else if (inquiry_title == null || inquiry_title == '') {
+			alert('문의글 제목을 적어주세요.');
+		} else if (inquiry_contents == null || inquiry_contents == '') {
+			alert('문의내용을 적어주세요.');
+		} else {
+			document.forms['inquiry_form'].submit();
+		}
+
+	});
 </script>
 
 </body>

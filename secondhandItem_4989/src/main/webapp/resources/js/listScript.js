@@ -212,7 +212,10 @@ window.addEventListener('load', function() {
         });
 
         if (!tradeMethodSelected || !paymentMethodSelected || !tradeStatusSelected) {
-        	document.getElementById('product-list').innerHTML = '<p style="text-align:center;">결과가 없습니다.</p>'; // 각 그룹에서 아무것도 선택되지 않으면 결과 비우기
+        	document.getElementById('product-list').innerHTML =
+                `<div style="display:flex; width:100%; height:100%; justify-content:center; align-items:center;">
+                <img src="${contextPath}/resources/img/no_result.png" style="display:block; width:45%;">
+            </div>`; // 각 그룹에서 아무것도 선택되지 않으면 결과 비우기
             return; // 함수 종료
         }
         
@@ -272,7 +275,10 @@ window.addEventListener('load', function() {
         
     // 상품 목록 업데이트 함수 (서버에서 받은 HTML을 DOM에 추가하는 방식)
     function updateProductList(productsHtml) {
-    document.getElementById('product-list').innerHTML = productsHtml || '<p>결과가 없습니다.</p>';
+    document.getElementById('product-list').innerHTML = productsHtml ||
+        `<div style="display:flex; width:100%; height:100%; justify-content:center; align-items:center;">
+                <img src="${contextPath}/resources/img/no_result.png" style="display:block; width:45%;">
+            </div>`;
 	}
 	
 });

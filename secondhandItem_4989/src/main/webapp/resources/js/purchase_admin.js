@@ -8,14 +8,13 @@ $(document).ready(function(){
     });
 });
 
-
 // 모달창 오픈 시 상세정보 가져오기
 
 function loadPurchaseDetails(purchase_id) {
 
     $.ajax({
     	type: 'GET',
-        url: '/secondhand4989/admin/getPurchaseInfo',
+        url: contextPath + '/admin/getPurchaseInfo',
         data: { purchase_id: purchase_id },
         dataType: 'json',
         success: function (data) {
@@ -50,7 +49,7 @@ $('#status_save').on('click', function() {
 	
 	$.ajax({
 		type: 'POST',
-		url: '/secondhand4989/admin/savePurchaseInfo',
+		url: contextPath + '/admin/savePurchaseInfo',
 		data: JSON.stringify(formData),
 		contentType: 'application/json',
 		success: function() {

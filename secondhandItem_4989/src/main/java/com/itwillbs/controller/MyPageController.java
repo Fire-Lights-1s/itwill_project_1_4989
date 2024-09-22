@@ -315,7 +315,7 @@ public class MyPageController {
 		}
 		model.addAttribute("memberDTO", memberDTO);
 		
-		return "/my/pay/point";
+		return "/my/pay/notyet";
 	}
 	@GetMapping("/payAccount")
 	public String payAccount(HttpSession session, Model model) {
