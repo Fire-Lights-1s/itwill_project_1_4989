@@ -83,6 +83,8 @@ public class YourPageController {
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
+		MemberDTO otherUserDTO = memberService.getMember(otherUser);
+		model.addAttribute("otherUserDTO", otherUserDTO);
 		model.addAttribute("otherUser", otherUser);
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("productList", productList);
