@@ -21,6 +21,16 @@
 
 <style>
 
+.profile-a button:hover {
+	background-color: #4E229E;
+	color: white;
+}
+
+.profile-a  button.active {
+    background-color: #4E229E;
+    color: white;
+}
+
 textarea {
     width: 100%;
     height: 6.25em;
@@ -162,29 +172,30 @@ display: inline-block;
 			<h2>판매 내역</h2>
 			<div class="profile-a">				
 				<c:if test="${empty param.sort}">		
-					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}' btnChange();">가격 순</button>
+					<button class="dateBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceDesc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
+					<button class="dateBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceAsc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
+					<button class="dateBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateDesc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
+					<button class="dateBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateAsc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
+					<button class="dateBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
 				</c:if>
 				<br>
-				<button onclick="location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=pro'">판매 중</button>
-				<button onclick="location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=rsv'">예약 중</button>
-				<button onclick="location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=com'">판매 완료</button>
+<%-- 				<button class="sellonBtn <c:if test='${param.sale eq "pro"}'>active</c:if>'" onclick="location.href='${pageContext.request.contextPath}/my/sell?sort=${param.sort}&sale=pro'">판매 중</button> --%>
+				<button class="sellonBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=pro'">판매 중</button>
+				<button class="sellingBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=rsv'">예약 중</button>
+				<button class="sellcomBtn" onclick="location.href='${pageContext.request.contextPath}/my/sell?sort=dateDesc&sale=com'">판매 완료</button>
 			</div>
 			<div class="profile-item-list">
 			<c:forEach var="productDTO" items="${productList}">
@@ -269,6 +280,17 @@ display: inline-block;
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
+<script type="text/javascript">
+// 	document.querySelectorAll('.priceBtn').forEach(function(btn){
+// 		btn.onclick = function(event){
+// 			event.target.style.backgroundColor = '#4E229E';
+// 			event.target.style.color = 'white';
+// 		}
+// 	})
+		
+	
+</script>
 
 <script type="text/javascript">
 	function updateStarRating(category, value) {
