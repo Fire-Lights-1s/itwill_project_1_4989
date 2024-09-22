@@ -196,3 +196,34 @@ input[type='number'] {
     transition: background-color 0.3s;
 }
 
+/* 끌어 올리기 */
+
+#scrollToTop {
+    position: fixed;
+    bottom: 32%;
+    right: 3%;
+    background-color: #4e229e;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    display: none; /* 처음에는 숨김 처리 */
+    z-index: 1000; /* 다른 요소들 위에 표시되도록 */
+}
+
+#scrollToTop:hover {
+    background-color: #764ac4;
+}
+
+/* 판매불가 상품 안내 */
+
+.centered-text {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-45%, -50%);
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}

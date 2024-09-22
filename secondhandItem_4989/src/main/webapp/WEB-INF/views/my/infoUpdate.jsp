@@ -72,11 +72,11 @@
             </div>
             <div class="form-group">
                 <label for="name">이름</label>
-                <input type="text" id="name" name="name" value="${memberDTO.name}" required readonly>
+                <input type="text" id="name" name="name" value="${memberDTO.name}" required>
             </div>
             <div class="form-group">
                 <label for="phoneNumber">휴대폰 번호</label>
-                <input type="tel" id="phoneNumber" name="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="${memberDTO.phone}" required readonly>
+                <input type="tel" id="phoneNumber" name="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="${memberDTO.phone}" required>
             </div>
             <div class="form-group">
                 <label for="email">이메일</label>

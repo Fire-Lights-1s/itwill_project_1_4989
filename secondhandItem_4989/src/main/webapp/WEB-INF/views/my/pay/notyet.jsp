@@ -28,51 +28,8 @@
 		<div class="content-container">
 			<jsp:include page="../../inc/myPageLefter.jsp"></jsp:include>
 			<div class="main-container-payPoint">
-				<div id="payPoint">
-					<div id="pay_member">
-						<div>
-							<img src="${pageContext.request.contextPath}/resources/img/img_topplace01.jpg">
-						</div>
-						<div>
-							<p>${memberDTO.nickname} 님</p>
-							<p>${memberDTO.member_id}</p>
-						</div>
-					</div>
-					<div id="pay_descript">
-						<div>
-							<img alt="" src="${pageContext.request.contextPath}/resources/img/Logo_C.png">
-							<a href="${pageContext.request.contextPath}/my/payAccount">
-								내 계좌
-							</a>
-						</div>
-						<div>
-							<p>0 원</p>
-						</div>
-						<div>
-							<a href="${pageContext.request.contextPath}/my/payCharge">충전하기</a>
-							<a href="${pageContext.request.contextPath}/my/paySend">송금하기</a>
-						</div>
-					</div>
-				</div>
-				<div id="TXList">
-					<div class="select_items">
-						<a class="type_select form-control" href="#" onclick="">전체 내역</a>
-						<ul class="drop-menu">
-	                        <li><a onclick="">전체 내역</a></li>
-	                        <li><a onclick="">구매 내역</a></li>
-	                        <li><a onclick="">판매 내역</a></li>
-	                    </ul>
-					</div>
-					<div class="TX_item">
-						<div class="img">
-							<img alt="" src="">
-						</div>
-						<div class="desc">
-							<p>2024-09-09</p>
-							<p>중고 노트북 거래</p>
-							<p>500,000 원</p>
-						</div>
-					</div>
+				<div style="display:flex; width:100%; height:100%; justify-content:center; align-items:center;">
+					<img src="${pageContext.request.contextPath}/resources/img/notyet.png" style="display:block; width:50%;">
 				</div>
 			</div>
 		</div>

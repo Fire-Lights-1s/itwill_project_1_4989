@@ -21,106 +21,43 @@
 		LIMIT #{offset}, #{itemsPerPage}
 	</select>
 
-	<select id="getProductListAll" resultType="com.itwillbs.domain.ProductDTO">
-		SELECT * FROM Product ORDER BY created_datetime DESC LIMIT 20
-	</select>
-	
-	<select id="loadMoreAllList" parameterType="map" resultType="com.itwillbs.domain.ProductDTO">
-		SELECT * FROM Product ORDER BY created_datetime DESC LIMIT #{offset}, #{itemsPerPage}
-	</select>
-	
-	<select id="getProductListByC" parameterType="java.lang.String" resultType="com.itwillbs.domain.ProductDTO">
-		SELECT * FROM Product WHERE category_name=#{category_name} ORDER BY created_datetime DESC LIMIT 20
-	</select>
-
-	<select id="loadMoreCList" parameterType="map" resultType="com.itwillbs.domain.ProductDTO">
-		SELECT * FROM Product WHERE category_name=#{category_name} ORDER BY created_datetime DESC LIMIT #{offset}, #{itemsPerPage}
-	</select>
-
-	<select id="getFilteredProducts" parameterType="map" resultType="com.itwillbs.domain.ProductDTO">
+	<select id="getProductList" parameterType="map" resultType="com.itwillbs.domain.ProductDTO">
 		SELECT * FROM Product WHERE 1=1
-    	<if test="category_name != null">
- 			AND category_name = #{category_name}
-    	</if>
-    	<if test="trade_method != null">
-	    	AND trade_method=#{trade_method} OR trade_method='직거래/택배'
-	    </if>
-	    <if test="pay_method != null">
-	    	AND pay_method=#{pay_method} OR pay_method='현금/페이'
-	    </if>
-	    <if test="trade_status != null">
-	    	<if test="trade_status == 'disable'">
-	 		AND trade_status='예약 중' OR trade_status='거래 완료'
-	    	</if>
-	    	<if test="trade_status == 'able'">
-	    	AND trade_status = '거래 가능'
-	    	</if>
-	    </if>
-	    <if test="(startPrice != null) and (endPrice != null)">
-	        AND product_price BETWEEN #{startPrice} AND #{endPrice}
-	    </if>
-	    <if test="(startPrice != null) and endPrice == null">
-	    <![CDATA[
-	        AND product_price > #{startPrice}
-	        ]]>
-	    </if>
-	    <if test="startPrice == null and (endPrice != null)">
-	    <![CDATA[
-	        AND product_price <= #{endPrice}
-	        ]]>
-	    </if>
-		ORDER BY ${sort} LIMIT 20
-	</select>
-	
-	<select id="loadMoreFilteredList" parameterType="map" resultType="com.itwillbs.domain.ProductDTO">
-		SELECT * FROM Product WHERE 1=1
-    	<if test="category_name != null">
- 			AND category_name = #{category_name}
-    	</if>
-    	<if test="trade_method != null">
-	    	AND trade_method=#{trade_method} OR trade_method='직거래/택배'
-	    </if>
-	    <if test="pay_method != null">
-	    	AND pay_method=#{pay_method} OR pay_method='현금/페이'
-	    </if>
-	    <if test="trade_status != null">
-	    	<if test="trade_status == 'disable'">
-	 		AND trade_status='예약 중' OR trade_status='거래 완료'
-	    	</if>
-	    	<if test="trade_status == 'able'">
-	    	AND trade_status = '거래 가능'
-	    	</if>
-	    </if>
-	    <if test="(startPrice != null) and (endPrice != null)">
-	        AND product_price BETWEEN #{startPrice} AND #{endPrice}
-	    </if>
-	    <if test="(startPrice != null) and endPrice == null">
-	    <![CDATA[
-	        AND product_price > #{startPrice}
-	        ]]>
-	    </if>
-	    <if test="startPrice == null and (endPrice != null)">
-	    <![CDATA[
-	        AND product_price <= #{endPrice}
-	        ]]>
-	    </if>
-		ORDER BY ${sort} LIMIT #{offset}, #{itemsPerPage}
-	</select>
-	
-	<select id="getItemsBySearch" parameterType="java.lang.String" resultType="com.itwillbs.domain.ProductDTO">
-		SELECT * FROM Product WHERE 1=1
-   		<if test="value != null">
-        AND (product_name LIKE #{value} OR product_desc LIKE #{value})
-    	</if>
-    	LIMIT 20
-	</select>
-	
-	<select id="loadMoreSearchedList" parameterType="map" resultType="com.itwillbs.domain.ProductDTO">
-		SELECT * FROM Product WHERE 1=1
-   		<if test="value != null">
-        AND (product_name LIKE #{value} OR product_desc LIKE #{value})
-    	</if>
-    	LIMIT #{offset}, #{itemsPerPage}
+		<if test="search != null">
+			AND (category_name LIKE #{search} OR product_name LIKE #{search} OR product_desc LIKE #{search})
+		</if>
+		<if test="category_name != null">
+			AND category_name = #{category_name}
+		</if>
+		<if test="trade_method != null">
+			AND (trade_method=#{trade_method} OR trade_method='직거래/택배')
+		</if>
+		<if test="pay_method != null">
+			AND (pay_method=#{pay_method} OR pay_method='현금/페이')
+		</if>
+		<if test="trade_status != null">
+			<if test="trade_status == 'disable'">
+				AND (trade_status='예약 중' OR trade_status='거래 완료' OR trade_status='후기 작성 완료')
+			</if>
+			<if test="trade_status == 'able'">
+				AND trade_status = '거래 가능'
+			</if>
+		</if>
+		<if test="(startPrice != null) and (endPrice != null)">
+			AND product_price BETWEEN #{startPrice} AND #{endPrice}
+		</if>
+		<choose>
+			<when test="sorting == 'latest' or sorting == null">
+				ORDER BY created_datetime DESC
+			</when>
+			<when test="sorting == 'price_high_to'">
+				ORDER BY product_price DESC
+			</when>
+			<when test="sorting == 'price_low_to'">
+				ORDER BY product_price
+			</when>
+		</choose>
+		LIMIT #{itemsPerPage} OFFSET #{offset}
 	</select>
 	
 </mapper>

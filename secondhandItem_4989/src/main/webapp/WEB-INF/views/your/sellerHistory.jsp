@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${otherUser}님의 판매 내역</title>
+<title>${otherUserDTO.nickname}님의 판매 내역</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileStyle.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
@@ -107,18 +107,19 @@ display: inline-block;
 	<header>
 		<div id="menu-name">
    			<a href="${pageContext.request.contextPath}" style="color: #372161;">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUser}" style="color: #372161;">${otherUser}님의 프로필 </a> >
-   			<a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}" style="color: #372161;">${otherUser}님의 판매 내역</a>
+   			<a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUser}" style="color: #372161;">${otherUserDTO.nickname}님의 프로필 </a> >
+   			<a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}" style="color: #372161;">${otherUserDTO.nickname}님의 판매 내역</a>
 		</div>
 	</header>
 	<div class="content-container">
-	<aside class="side-nav">
-		<h3 style="overflow:hidden; text-overflow:ellipsis;">Other User</h3>
-		<br>
-		<ul>
-			<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUser}">${otherUser}님의 프로필</a></li>
-			<li><a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}">판매 내역</a></li>
-		</ul>
+	<aside class="side-nav" style="padding-top: 0;">
+	<div style="background-color: #4E229E; color: white; height: 80px; border-radius: 7px 7px 0 0; display: flex; justify-content: center; align-items: center;">
+		<h3>판매자 페이지</h3>
+	</div>
+	<ul style="font-size: 20px; font-weight: 500;">
+		<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUser}" style=" color: #372161; padding: 15px 15px; display: block;">${otherUserDTO.nickname}님의 프로필</a></li>
+		<li><a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}" style=" color: #372161; padding: 15px 15px; display: block;">판매 내역</a></li>
+	</ul>
 	</aside>
 		<div class="main-container-side-profile">
 		<main>

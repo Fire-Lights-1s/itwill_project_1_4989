@@ -86,6 +86,7 @@ a:hover{
 .items .drop-menu{
 	position: absolute;
     background: #400080;
+    color: #fff;
     border-radius: 10px;
     width: 120px;
     line-height: 45px;
@@ -228,6 +229,7 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 	visibility: hidden;
 	position: relative;
 }
+
 #productInfo > div:nth-child(1){
 	margin-right: 10px;
 	width: 140px;
@@ -247,12 +249,32 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 	justify-content:space-between;
 	width: 50px;
 	height: 100%;
+	overflow: auto;
+}
+#productInfo > div:nth-child(2)::-webkit-scrollbar {
+    width: 4px;  /* 스크롤바의 너비 */
+}
+
+#productInfo > div:nth-child(2)::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #c9c9c9; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+#productInfo > div:nth-child(2)::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+#productInfo > div:nth-child(2) p:nth-child(1){
+	font-size: 1.2rem;
+	font-weight: 900;
 }
 #productInfo > div:nth-child(3){
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	margin: 0 4px;
 	width: 50px;
 	height: 100%;
 }
@@ -265,13 +287,13 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 	height:40px;
 	border: 0;
 	border-radius:20px; 
-	background-color: #d940ff;
+	background-color: #400080;
 	font-size: 1.2rem;
 	font-weight: 900;
 	color: white;
 }
 #productInfo > div button:hover{
-	background-color: #b300df;
+	background-color: #7300e6;
 }
 #chatContent{
 	flex:6 1 auto;

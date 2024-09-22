@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 		<aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a>
-                    <img src="${pageContext.request.contextPath }/resources/img/Logo_C.png" alt="Cool Admin" />
+            <div class="logo" style="justify-content:center;">
+                <a href="${pageContext.request.contextPath}/admin/">
+                    <img src="${pageContext.request.contextPath }/resources/img/logo_admin.png" style="width:230px;" alt="4989">
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">

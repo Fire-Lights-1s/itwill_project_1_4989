@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${otherUserDTO.member_id}님의 프로필</title>
+<title>${otherUserDTO.nickname}님의 프로필</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileStyle.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
@@ -24,21 +24,22 @@
 	<header>
 		<div id="menu-name">
    			<a href="${pageContext.request.contextPath}" style="color: #372161;">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUserDTO.member_id}" style="color: #372161;">${otherUserDTO.member_id}님의 프로필</a>
+   			<a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUserDTO.member_id}" style="color: #372161;">${otherUserDTO.nickname}님의 프로필</a>
 		</div>
 	</header>
 	<div class="content-container">
-<aside class="side-nav">
-	<h3>Other User</h3>
-	<br>
-	<ul>
-		<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUserDTO.member_id}">${otherUserDTO.member_id}님의 프로필</a></li>
-		<li><a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUserDTO.member_id}">판매 내역</a></li>
+<aside class="side-nav" style="padding-top: 0;">
+	<div style="background-color: #4E229E; color: white; height: 80px; border-radius: 7px 7px 0 0; display: flex; justify-content: center; align-items: center;">
+		<h3>판매자 페이지</h3>
+	</div>
+	<ul style="font-size: 20px; font-weight: 500;">
+		<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUserDTO.member_id}" style=" color: #372161; padding: 15px 15px; display: block;">${otherUserDTO.nickname}님의 프로필</a></li>
+		<li><a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUserDTO.member_id}" style=" color: #372161; padding: 15px 15px; display: block;">판매 내역</a></li>
 	</ul>
 </aside>
 		<div class="main-container-side-profile">
 		<main>
-			<h2>${otherUserDTO.member_id}님의 프로필</h2>
+			<h2>${otherUserDTO.nickname}님의 프로필</h2>
 			<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">

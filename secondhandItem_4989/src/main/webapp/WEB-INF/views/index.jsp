@@ -128,7 +128,7 @@
                                 <h5><fmt:formatNumber value="${product.product_price }" type="number"/>원</h5>
                                 <!-- 거래방법 (직거래 시 지역명) -->
                                 <small style="margin-top:5px;">${product.trade_method }
-                                <c:if test="${product.trade_method eq '직거래'}">(${product.trade_area })</c:if></small>
+                                <c:if test="${product.trade_method eq '직거래' || product.trade_method eq '직거래/택배' || product.trade_method eq '택배/직거래'}">(${product.trade_area })</c:if></small>
                                 <br>
                                 <!-- 경과시간 -->
                                 <small style="text-align:right;">${elapsedTime }</small>
@@ -290,8 +290,6 @@ document.querySelectorAll('.accordion-button').forEach(button => {
         accordionItem.classList.toggle('active');
     });
 });
-
-
 
 </script>
 

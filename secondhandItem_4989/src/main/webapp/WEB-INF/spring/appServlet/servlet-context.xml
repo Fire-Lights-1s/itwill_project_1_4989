@@ -47,13 +47,15 @@
  		<beans:property name="maxUploadSize" value="10485760"></beans:property>
  	</beans:bean>
 	<!-- 경로 설정 -->
-	<beans:bean id="uploadPath" class="java.lang.String">
-	    <beans:constructor-arg value="C:\\4989_Img" />
-	</beans:bean>
-	<!-- 	리눅스에서 업로드 폴더 찾아가서 경로 pwd로 확인 -->
 <!-- 	<beans:bean id="uploadPath" class="java.lang.String"> -->
-<!-- 		<beans:constructor-arg value="usr/local/upload"></beans:constructor-arg> -->
+<!-- 	    <beans:constructor-arg value="C:\\4989_Img" /> -->
 <!-- 	</beans:bean> -->
+
+	<!-- 	리눅스에서 업로드 폴더 찾아가서 경로 pwd로 확인 -->
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="/usr/local/tomcat/webapps/secondhandItem_4989/resources/upload"></beans:constructor-arg>
+	</beans:bean>
+	
 	<context:component-scan base-package="com.itwillbs.secondhand4989"/>
 	<context:component-scan base-package="com.itwillbs.controller"/>
 	<context:component-scan base-package="com.itwillbs.service"/>
