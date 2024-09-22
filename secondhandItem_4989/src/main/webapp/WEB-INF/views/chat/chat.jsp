@@ -130,8 +130,8 @@
 
                         <!-- Textarea for report details -->
                         <div class="accordion-subject"><b>신고 대상</b></div>
-                        <label><input type="radio" name="reportType" value="회원" checked>회원</label>
-                        <input type="radio" name="reportType" value="상품">상품
+                        <label id="reportM"><input type="radio" name="reportType" value="회원" checked>회원</label>
+                        <label id="reportP"><input type="radio" name="reportType" value="상품">상품</label>
                         <div class="accordion-subject"><b>신고 내용</b></div>
                         <textarea class="form-control" placeholder="상품 신고 사유를 입력해주세요" id="report_contents" name="report_contents" required></textarea>
 

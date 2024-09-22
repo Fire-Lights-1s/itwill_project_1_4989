@@ -33,7 +33,7 @@
         on room.chat_room_id = message.chat_room_id 
         and message.chat_id in (select max(chat_id) from ChatMessage
 									group by chat_room_id)
-		where room.buyer_id = #{member_id} or room.seller_id = #{member_id} and message.message is not null
+		where room.buyer_id = #{member_id} and message.message is not null or room.seller_id = #{member_id} and message.message is not null
 		order by message.send_time desc
 	</select>
 	

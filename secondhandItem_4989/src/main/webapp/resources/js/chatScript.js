@@ -24,7 +24,6 @@ function setConnected() {
 function connect(chatRoom_json){
 	
 	chatRoomGlobal = JSON.parse(chatRoom_json.replaceAll("&#034;", "\"").replaceAll("\n","<br>"));
-    disconnect();
     let socket = new SockJS('./chatting');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame){
@@ -76,6 +75,7 @@ function loadChatList(chatRoom_json){
 
 // product 정보 가져오기
 function loadProduct(chatRoom_json){
+	productLoadingStart();
 	$.ajax({
 	    type: "POST",
 	    url : "./chat/reciveRoomProduct/",
@@ -102,7 +102,7 @@ function loadProduct(chatRoom_json){
 	        }
 	        //거래 관련 버튼 조작 함수
         	productState_btn();
-	        
+	        ControllReportModal();
 	        $('#productInfo').css('visibility', 'visible');
 	    },error : function(){
 	        //Ajax 실패시
@@ -210,6 +210,7 @@ function productState_btn(){
 		$(TXButton).css('visibility', 'hidden');
     }
 }// productState-btn()
+
 //채팅 보내기
 function sendChat() {
 	let sendMessage = $("#message").val();
@@ -326,6 +327,17 @@ function productLoadingEnd(){
 	$('#productLoading').addClass('loading_visibility');
 }
 
+//신고하기 모달 조작
+function ControllReportModal(){
+	if(productGlobal.seller_id == userId){
+		$('#reportP').css('visibility', 'hidden');
+	}else{
+		$('#reportP').css('visibility', 'visible');
+	
+	}
+}
+
+// 신고하기
 function submitReport() {
     var reportContents = $("#report_contents").val();
     var reporterId = userId;
