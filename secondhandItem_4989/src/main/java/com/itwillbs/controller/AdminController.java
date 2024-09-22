@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,6 +23,7 @@ import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ReportDTO;
 import com.itwillbs.service.AdminService;
 import com.itwillbs.service.MemberService;
+import com.itwillbs.service.MyPageService;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,8 +31,11 @@ public class AdminController {
 	@Inject
 	private AdminService adminService;
 	
-	@Autowired
-    private MemberService memberService;
+	@Inject
+	private MyPageService myPageService;
+	
+	@Inject
+	private MemberService memberService;
 	
 	//admin이 아닐경우 admin페이지에 접근차단
 	@GetMapping("/")
@@ -82,13 +86,20 @@ public class AdminController {
 		return "/admin/member/list";
 	}
 	
-//	@GetMapping("/member/details?member_id=${member.member_id}")
-//    public String getMemberDetails(@PathVariable("member_id") String member_id, Model model) {
-//        // memberId를 기반으로 회원 정보를 조회
-//        MemberDTO member = memberService.findMemberById(member_id);
-//        model.addAttribute("member", member);
-//        return "/admin/member/details"; // 회원 상세 정보를 보여줄 JSP 또는 HTML 페이지 반환
-//    }
+	@GetMapping("/member/details")
+	public String getMemberDetails(@RequestParam("member_id") String member_id, Model model) {
+	    // member_id를 기반으로 회원 정보를 조회
+	    MemberDTO memberDTO = memberService.getMember(member_id);
+	    
+	    // 회원 정보가 있는지 확인
+	    if (memberDTO != null) {
+	        model.addAttribute("member", memberDTO);
+	        return "/admin/member/details"; // 회원 상세 정보를 보여줄 JSP 또는 HTML 페이지로 반환
+	    }
+	    
+	    // 회원 정보가 없을 경우, 회원 목록 페이지로 리다이렉트
+	    return "redirect:/admin/member";
+	}
 	
 	/*
 	 * @GetMapping("/trade") public String getTradeList(Model model) {

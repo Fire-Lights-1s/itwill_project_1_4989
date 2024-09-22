@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/member/details.css">
 <head>
 	<!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -78,10 +79,7 @@
             </div>
             <button type="submit" class="submit-button" onclick="updateCheck();">수정 완료</button>
         </form>
-		</main>
-		</div>
-	</div>
-</section>
+	
             
             
             <!-- 이 사이에 넣어주세요.-->
