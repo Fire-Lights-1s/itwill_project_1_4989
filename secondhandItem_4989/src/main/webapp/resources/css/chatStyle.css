@@ -15,6 +15,12 @@ a:hover{
 	color:#000000;
 	text-decoration: none;
 }
+.btn{
+	background-color: #400080;
+}
+.btn:hover{
+	background-color: #7300e6;
+}
 #main-container-chat{
 	margin-top: 0px;
 }
@@ -422,6 +428,23 @@ div#chatContent::-webkit-scrollbar-track {
   -webkit-animation: loader10d 3s ease-in-out infinite;
       animation: loader10d 3s ease-in-out infinite;
 }
+#modalImage{
+	width: 50%; height: 300px; 
+	object-fit: cover !important; 
+	margin-bottom: 20px;
+}
+.starRating .stars:nth-last-child(1){
+	margin-bottom: 20px;
+}
+.star {
+	font-size: 24px;
+	cursor: pointer;
+	color: gray;
+}
+.star.selected {
+  color: gold;
+}
+
 
 @-webkit-keyframes loader10g{
   0%{background-color: rgba(255, 255, 255, .2);}
