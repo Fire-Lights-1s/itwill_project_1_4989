@@ -115,6 +115,9 @@ function loadProduct(chatRoom_json){
 function productState_btn(){
 	let TXButton = '#productInfo div:nth-child(3) #trade-btn';
 	$(TXButton).off('click');
+	$(TXButton).attr('data-toggle', "");
+	$(TXButton).attr('data-target', "");
+	
     if(productGlobal.seller_id == userId){
     	switch(productGlobal.trade_status) {
 		  case '거래 가능':
@@ -167,7 +170,9 @@ function productState_btn(){
 		  	$(TXButton).text('후기 작성');
 		  	$(TXButton).css('visibility', 'visible');
 		  	$(TXButton).addClass('reviewBtn');
-		  	
+		  	$(TXButton).attr('data-toggle', "modal");
+			$(TXButton).attr('data-target', "#reviewModal");
+		  	//후기 작성 버튼 이벤트 
 		  	$(TXButton).on('click', function(event){
 		  		document.querySelectorAll('.stars').forEach(function(starGroup) {
 				    const stars = starGroup.querySelectorAll('.star');
@@ -193,12 +198,12 @@ function productState_btn(){
 				      });
 				    });
 				  });
-	            
+				  
 	            const imageSrc = productGlobal.product_img1;
 	            const productId = productGlobal.product_id;
-	            modalImage.src = imageSrc;
-	            productIdInput.value = productId;
-				modal.style.display = "block";
+	            console.log(imageSrc);
+	            $('modalImage').attr('src', `${imageSrc}`);
+	            $('productId').val(productId);
 		  	});
 		    break;
 		  default:
