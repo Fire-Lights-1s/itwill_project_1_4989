@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.mapper.AdminMapper">
+	<select id="getReportCount" resultType="java.lang.Integer">
+		select count(*)
+		from Report
+		<if test="search != null">
+			where report_id like CONCAT('%',#{search},'%')
+			or reporter_id like CONCAT('%',#{search},'%') 
+			or reportee_id like CONCAT('%',#{search},'%') 
+			or CONVERT(reported_item_id, CHAR) like CONCAT('%',#{search},'%') 
+			or report_type like CONCAT('%',#{search},'%') 
+			or report_contents like CONCAT('%',#{search},'%') 
+			or reported_at like CONCAT('%',#{search},'%') 
+			or report_status like CONCAT('%',#{search},'%') 
+		</if>
+		order by reported_at desc
+	</select>
+	<select id="getReportList" resultType="com.itwillbs.domain.ReportDTO"> 
+		select *
+		from Report
+		<if test="search != null">
+			where report_id like CONCAT('%',#{search},'%')
+			or reporter_id like CONCAT('%',#{search},'%') 
+			or reportee_id like CONCAT('%',#{search},'%') 
+			or CONVERT(reported_item_id, CHAR) like CONCAT('%',#{search},'%') 
+			or report_type like CONCAT('%',#{search},'%') 
+			or report_contents like CONCAT('%',#{search},'%') 
+			or reported_at like CONCAT('%',#{search},'%') 
+			or report_status like CONCAT('%',#{search},'%') 
+		</if>
+		order by reported_at desc
+		limit #{startRow}, #{pageSize}
+	</select>
+	<update id="updateReport">
+		update Report set report_contents = #{report_contents}, report_status = #{report_status}
+		where report_id = #{report_id}
+	</update>
+	
+<!-- 	member -->
+	<select id="getMemberCount" resultType="java.lang.Integer">
+    select count(*)
+    from Mem
+    <if test="search != null">
+        where member_id like "%#{search}%" 
+        or name like "%#{search}%" 
+        or email like "%#{search}%" 
+<!--         or phone like "%#{search}%" -->
+        or created_at like "%#{search}%"
+    </if>
+		order by created_at desc
+	</select>
+	
+	<select id="getMemberList" resultType="com.itwillbs.domain.MemberDTO"> 
+    select member_id,
+        nickname,
+        name,
+        email,
+<!--         phone, -->
+        social_loginfo,
+        rating,
+        created_at
+    from Mem
+    <if test="search != null">
+        where member_id like "%#{search}%"
+        or name like "%#{search}%"
+        or email like "%#{search}%"
+<!--         or phone like "%#{search}%" -->
+        or nickname like "%#{search}%"
+        or created_at like "%#{search}%"
+    </if>
+    order by created_at desc
+    limit #{startRow}, #{pageSize}
+</select>
+
+	
+	
+</mapper>

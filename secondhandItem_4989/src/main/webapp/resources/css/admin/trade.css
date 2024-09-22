@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+}
+
+table, th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+}
+
+th {
+	background-color: #f4f4f4;
+}
+
+.details-button {
+	background-color: #4e229e;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.details-button:hover {
+	background-color: #5a1b9a;
+}

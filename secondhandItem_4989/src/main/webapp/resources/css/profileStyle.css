@@ -1,11 +1,16 @@
 @charset "UTF-8";
 
+* {
+	font-family: "Noto Sans KR", sans-serif;
+}
+
 a {
 	text-decoration:none;
+	color: black;
 }
 
 aside {
-	height:450px;
+	height:500px;
 }
 
 h2 {
@@ -39,10 +44,24 @@ main {
     margin-bottom:10px;
 }
 
+.profile-circle-edit {
+    position: absolute;
+    top:0;
+    right:20px;
+    cursor: pointer;
+}
+
+.profile-circle-cancel {
+    position: absolute;
+    top:0;
+    right:-20px;
+}
+
 .profile-circle-div {
 	display:flex;
 	align-items: center;
     justify-content: center;
+    position:relative;
 }
 
 .profile-edit-a {
@@ -50,6 +69,11 @@ main {
 	font-size:19px;
 }
 
+.profile-a-update {
+	display:flex;
+	justify-content:flex-end;
+	font-size: 2em;
+}
 .profile-a {
 	text-align:right;
 	font-size:19px;
@@ -60,7 +84,24 @@ main {
 }
 
 .profile-a button {
-	font-size:1em;
+	background-color: white;
+    color: #4e229e;
+    border: 1px solid #4e229e;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.profile-item-list button {
+	background-color: #4e229e;
+    color: white;
+    border: 1px solid #4e229e;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .profile-nickname{
@@ -124,11 +165,6 @@ main {
 }
 
 .profile-item-list {
-	width:1038px;
-	border:1px solid black;
-	border-radius:20px;
-	padding:20px;
-	height:700px;
 	margin-top:10px;
 	display:flex;
 	flex-wrap:wrap;
@@ -136,50 +172,178 @@ main {
 	align-items:flex-start;	
 }
 
+.profile-item-list a {
+	color: black;
+}
+
 .profile-item-list-piece {
-	border:1px solid black;
-	border-radius:10px;
-	height:320px;
-	width:245px;
-	margin:1px;
+	border:#212529;
+	background-color: #fff;
+	height:500px;
+	width:242px;
+	margin:10px;
+	border: 1px solid rgba(0, 0, 0, .125);
+	
 }
 
 .profile-item-image {
-	border-radius:10px 10px 0 0;
-	height:190px;
-	width:233px;
-	margin:5px 5px 0 5px;
+	height:260px;
+	background-color: #fff;
+    background-clip: border-box;
+    border-radius: .25rem .25rem 0 0;
+    object-fit: cover !important;
+}
+
+.profile-item-imagesell {
+	height:236px;
+	background-color: #fff;
+    background-clip: border-box;
+    border-radius: .25rem .25rem 0 0;
+    object-fit: cover !important;
+}
+
+.profile-item-image-zzim1 {
+	position: absolute;
+	top: 15px;
+	right: 15px;
 }
 
 .profile-item-image-div {
 	display:flex;
 	flex-direction:column;	
+	position: relative;
 }
 
-.profile-item-image-cover {
-	background-color:black;
+.profile-item-image-cover1 {
+	background-color: #78E150;
 	color:white;
 	text-align:center;
-	border-radius:0 0 10px 10px;
-	width:233px;	
+	width:240px;	
+	margin:0 auto;
+}
+
+.profile-item-image-cover2 {
+	background-color:gray;
+	color:white;
+	text-align:center;
+	width:240px;	
+	margin:0 auto;
+}
+
+.profile-item-image-cover3 {
+	background-color: #5ACCFF;
+	color:white;
+	text-align:center;
+	width:240px;	
 	margin:0 auto;
 }
 
 .profile-item-name {
 	text-align:center;	
-	white-space:nowrap; /* 줄바꿈 방지 */
+	margin: 20px 20px 0;
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow:hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
+}
+
+.profile-item-name1 {
+	text-align:center;	
+	margin: 0 20px 0;
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
     overflow:hidden; /* 넘치는 텍스트 숨김 */
     text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
 }
 
 .profile-item-review {
 	text-align:center;
+	white-space:nowrap; /* 줄바꿈 방지 */
+    overflow:hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
+    position: absolute;
+	top: 110px;
+	right: 98px;
 }
 
-.pagination {padding:40px 0 0; text-align:center;}
-.pagination a {display:inline-block; }
-.pagination a.pbtn {display:inline-block; padding:7px; text-align:center; vertical-align:middle; font-size:0;}
-.pagination a .pagenum {display:inline-block; width:25px; height:25px; line-height:25px; text-align:center; vertical-align:middle;}
-.pagination a .currentpage {border-radius:3px; background:#384d75; color:#fff;}
-.pagination a:hover .pagenum {border-radius:3px; background:#ddd;}
+.profile-item-review1 {
+	text-align:center;
+	font-size: 1.2em;
+	position: absolute;
+	top: 140px;
+	right: 12px;
+	margin:0 65px;
+	padding: 1px 10px;
+}
+
+.profile-item-review2 {
+	text-align:center;
+	white-space:nowrap; /* 줄바꿈 방지 */
+    overflow:hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
+    position: absolute;
+	top: 134px;
+	right: 98px;
+}
+
+.profile-item-review3 {
+	text-align:center;
+	white-space:nowrap; /* 줄바꿈 방지 */
+    position: absolute;
+	top: 165px;
+	right: 80px;
+}
+
+.profile-item-review4 {
+	text-align:center;
+	white-space:nowrap; /* 줄바꿈 방지 */
+    position: absolute;
+	top: 165px;
+	right: 65px;
+}
+
+.asdf {
+	text-align:center;
+	white-space:nowrap; /* 줄바꿈 방지 */
+    overflow:hidden; /* 넘치는 텍스트 숨김 */
+    text-overflow:ellipsis; /* 줄임 표시(...) 추가 */
+    position: absolute;
+	top: 110px;
+	right: 98px;
+}
+
+.profile-item-detail {
+	width:150px;
+	text-align:center;
+	font-size: 1.2em;
+	position: absolute;
+	top: 200px;
+	right: -20px;
+	margin:0 65px;
+	border :1px solid #343a40;
+	border-radius: 5px;
+	padding: 0px 10px;
+}
+
+.profile-item-detail1 {
+	width:150px;
+	text-align:center;
+	font-size: 1.2em;
+	position: absolute;
+	top: 224px;
+	right: -20px;
+	margin:0 65px;
+	border :1px solid #343a40;
+	border-radius: 5px;
+	padding: 0px 10px;
+}
+
+.pagination1 {padding:40px 0 0; text-align:center;}
+.pagination1 a {display:inline-block; }
+.pagination1 a .pbtn {display:inline-block; padding:7px; text-align:center; vertical-align:middle; font-size:0;}
+.pagination1 a .pagenum {display:inline-block; width:25px; height:25px; line-height:25px; text-align:center; vertical-align:middle;}
+.pagination1 a .currentpage {border-radius:3px; background:#384d75; color:#fff;}
+.pagination1 a:hover .pagenum {border-radius:3px; background:#ddd;}
 

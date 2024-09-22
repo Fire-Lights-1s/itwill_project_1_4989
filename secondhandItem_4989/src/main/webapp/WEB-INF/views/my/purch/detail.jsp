@@ -13,64 +13,27 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/purchaseStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modalStyle.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/carouselStyle.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/animate.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
 </head>
 <body>
 <jsp:include page="../../inc/header.jsp"></jsp:include>
 <section>
 	<header>
 		<div id="menu-name">
-   			<a href="${pageContext.request.contextPath}">홈 </a> >
-   			<a href="${pageContext.request.contextPath}/my/profile">마이 페이지 </a> >
-   			<a href="${pageContext.request.contextPath}/my/purchlist">매입 신청내역</a>
+   			<a href="${pageContext.request.contextPath}" style="color: #372161;">홈 </a> >
+   			<a href="${pageContext.request.contextPath}/my/profile" style="color: #372161;">마이 페이지 </a> >
+   			<a href="${pageContext.request.contextPath}/my/purchlist" style="color: #372161;">매입 신청내역</a>
 		</div>
 		
-		<style>
-		
-		/* 모달 창 스타일 */
-        .modal {
-            display: none; /* 처음에는 숨김 */
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 500px;
-            text-align: center;
-        }
-
-        .close, .confirm, .cancel {
-            margin: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        .confirm {
-            background-color: #4e229e;
-            color: white;
-        }
-
-        .cancel {
-            background-color: #4e229e;
-            color: white;
-        }
-		
-		</style>
 	</header>
 	<div class="content-container">
 		<jsp:include page="../../inc/myPageLefter.jsp"></jsp:include>
 		<div class="main-container-side-profile">
 		<main>
-			
-			
 			
 		<br>
 		<h1 style="text-align:center;">매입 신청내역</h1>
@@ -99,7 +62,7 @@
         </tr>
         <tr>
             <th>은행</th>
-            <td>${detail.transfer_bank}</td>
+            <td>${detail.bank_name}</td>
             <th>계좌번호</th>
             <td>${detail.transfer_account}</td>
         </tr>
@@ -112,8 +75,8 @@
  		<br>
  		<div style="text-align:center;">
 		<button id="reset" onclick="window.history.back();">목록으로 돌아가기</button>
-		<c:if test="${detail.purchase_status ne '매입 취소' }"> &nbsp;&nbsp;
-		<button id="submit_form">신청 취소하기</button>
+		<c:if test="${detail.purchase_status ne '매입 취소' && detail.purchase_status ne '매입 완료'}"> &nbsp;&nbsp;
+			<button id="submit_form">신청 취소하기</button>
 		</c:if>
 		</div>
 			<br><br><br>
@@ -141,6 +104,7 @@
     const modal = document.getElementById('myModal');
     const confirmButton = document.getElementById('confirmButton');
     const cancelButton = document.getElementById('cancelButton');
+    let purchase_id = '${detail.purchase_id}';
 
     // 버튼을 클릭하면 모달 창 열기
     submit_form.addEventListener('click', function() {
@@ -149,7 +113,7 @@
 
     // '확인' 버튼을 클릭하면 링크로 이동
     confirmButton.addEventListener('click', function() {
-        window.location.href = 'cancel?purchase_id=${detail.purchase_id}'; // 원하는 링크로 이동
+        window.location.href = 'cancel?purchase_id=' + purchase_id; // 원하는 링크로 이동
     });
 
     // '취소' 버튼을 클릭하면 모달 창 닫기

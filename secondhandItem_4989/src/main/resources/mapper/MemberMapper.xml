@@ -5,20 +5,28 @@
   
 <mapper namespace="com.itwillbs.mapper.MemberMapper">
 	<insert id="insertMember">
-		insert into Mem(member_id, pass, nickname, name, phone, email, created_at) 
-		values(#{member_id}, #{pass}, #{nickname}, #{name}, #{phone}, #{email}, #{created_at})
+		insert into Mem(member_id, pass, nickname, name, phone, email, created_at, social_loginfo) 
+		values(#{member_id}, #{pass}, #{nickname}, #{name}, #{phone}, #{email}, #{created_at}, "일반")
 	</insert>
 	<select id="userCheck" resultType="com.itwillbs.domain.MemberDTO">
 		select * from Mem
 		where member_id = #{member_id} and pass = #{pass} 
 	</select>
+	
+<!-- 	자동 로그인 쿠키값 비교용 -->
+	<select id="userCheck1" resultType="com.itwillbs.domain.MemberDTO">
+		select * from Mem
+		where member_id = #{member_id} 
+	</select>
+<!-- 	자동 로그인 쿠키값 비교용 -->
+	
 	<select id="getMember" resultType="com.itwillbs.domain.MemberDTO">
 		select * from Mem
-		where member_id = #{member_id}
+		where member_id = #{id}
 	</select>
 	<update id="updateMember">
 		update Mem
-		set pass = #{pass}, nickname = #{nickname}, name = #{name}, phone = #{phone}, email = #{email}
+		set pass = #{pass}, nickname = #{nickname}, name = #{name}, phone = #{phone}, email = #{email}, profile_img = #{profile_img}
 		where member_id = #{member_id}
 	</update>
 	
@@ -29,14 +37,23 @@
 	</select>
 	
 	<insert id="insertSocial">
-		insert into Mem(member_id, pass, nickname, name, phone, email, created_at) 
-		values(#{member_id}, #{member_id}, #{nickname}, #{name}, #{phone}, #{email}, #{created_at})
+		insert into Mem(member_id, pass, nickname, name, phone, email, created_at, social_loginfo) 
+		values(#{email}, #{member_id}, #{nickname}, #{name}, #{phone}, #{email}, #{created_at}, "네이버")
 	</insert>
 	
 	<select id="idCheck" resultType="com.itwillbs.domain.MemberDTO">
 		select * from Mem
-		where name = #{name} and pass = #{email} and phone = #{phone} 
+		where name = #{name} and email = #{email} and phone = #{phone} 
 	</select>
 	
+	<select id="passCheck" resultType="com.itwillbs.domain.MemberDTO">
+		select * from Mem
+		where member_id = #{member_id} and name = #{name} and email = #{email} and phone = #{phone} 
+	</select>
+	
+	<select id="nickCheck" resultType="com.itwillbs.domain.MemberDTO">
+		select * from Mem
+		where nickname = #{nickname}
+	</select>
 	
 </mapper>

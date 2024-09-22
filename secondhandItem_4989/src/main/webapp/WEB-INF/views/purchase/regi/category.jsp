@@ -7,6 +7,7 @@
 <title>매입 신청하기 : 4989</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
+
 <style>
 
 h1, h3 { text-align:center; }

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/purchaseStyle.css">
+
 <style>
 
 .content-container {

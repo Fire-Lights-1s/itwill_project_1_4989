@@ -7,9 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>매입 신청하기 : 4989</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/purchaseStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/purchaseStyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modalStyle.css">
+
 <style>
 
 h1, h3 { text-align:center; }
@@ -49,11 +51,12 @@ h1, h3 { text-align:center; }
 		
 	<div id="form-container">
 	
-	<form action="registerPurchase" method="post">
+	<form action="registerPurchase" method="post" name="fr">
 	<div id="center-input">
     <div class="form-group">
-        <div id="label_title"><label for="productName">신청인 아이디</label></div>
-        <input type="text" class="textform" name="member_id" value="${sessionScope.member_id}" readonly>
+	    <input type="hidden" class="textform" name="member_id" value="${sessionScope.member_id}" readonly>
+        <div id="label_title"><label for="productName">신청인 이름</label></div>
+		<input type="text" id="member_name" name="member_name" value="${member_name }" readonly>
     </div>
     
     <div class="form-group">
@@ -63,9 +66,8 @@ h1, h3 { text-align:center; }
 
     <div class="form-group">
         <div id="label_title"><label for="grade">등급/매입가</label></div>
-        <fmt:formatNumber value="${expected_price}" type="number" var="formattedExpectedPrice"/>
         <input type="text" class="textform" name="expected_grade" value="${expected_grade }" style="width:60px; text-align:center;"readonly>
-         / <input type="text" class="textform" name="expected_price" value="${formattedExpectedPrice}" style="width:100px; text-align:right;" readonly>원 
+         / <input type="text" class="textform" name="expected_price" value="${expected_price}" style="width:100px; text-align:right;" readonly>원 
         <span class="info_span">※ 등급 및 매입가는 실제 검수 결과에 따라 달라질 수 있습니다.</span>
     </div>
 
@@ -76,7 +78,7 @@ h1, h3 { text-align:center; }
             <input type="radio" name="shipping_method" value="방문"> 센터 직접 방문
         </div>
     </div>
-  	<div class="form-group">
+  	<div class="form-group" style="height:100px;">
         <div id="label_title"> </div>
         <div id="service-center-box">
             <p><strong>4989 매입서비스센터</strong><br>
@@ -89,15 +91,14 @@ h1, h3 { text-align:center; }
     <div class="form-group">
         <div class="select-group">
         <div id="label_title"><label for="bank">정산계좌등록</label></div>
-            <select id="bank_code" name="transfer_bank" style="max-height:100px; overflow-y:auto;">
-                <option>은행명 선택</option>
+            <select id="bank_code" name="transfer_bank" style="height:40px;" required>
+                <option disabled selected>은행명 선택</option>
                 <c:forEach var="banks" items="${banks}">
-                <option value="${banks.bank_code }">${banks.bank_name }</option>
+                <option value="${banks.bank_code }" >${banks.bank_name }</option>
                 </c:forEach>
             </select>
-            <input type="text" id="bank_account" class="textform" name="transfer_account" placeholder="계좌번호(숫자만 입력)">
-            <input type="hidden" id="member_name" name="member_name" value="${member_name }">
-            <button id="account_confirm" type="button">확인</button></div>
+            <input type="text" id="bank_account" class="textform" name="transfer_account" placeholder="계좌번호(하이픈 포함 가능)" style="margin:0;" required>
+            <button id="account_confirm" type="button">확인</button> &nbsp;&nbsp; <small><span id="account-checked" style="color:blue;"></span></small></div>
         </div>
         <div id="label_title"> </div>
         	<p style="display:inline-block; margin:0;"><span class="info_span">※ 신청자 본인명의의 계좌만 등록 가능합니다.</span>
@@ -105,17 +106,37 @@ h1, h3 { text-align:center; }
         </div>
         <br>
         <div class="checkbox-group">
-          <label><input type="checkbox" > 매입 신청에 따른 유의사항 및 판매조건 확인</label><br>
-          <label><input type="checkbox" > 개인정보 수집 및 이용 동의</label>
+          <label><input type="checkbox" name="confirm"> 매입 신청에 따른 유의사항 및 판매조건 확인</label><br>
+          <label><input type="checkbox" name="agree"> 개인정보 수집 및 이용 동의</label>
     	</div>
         <br>
     	<div class="buttons">
-        	<button id="reset" type="button" onclick="window.history.back();">다시 선택하기</button>
-      	  	<button id="submit_form" type="submit" disabled>매입 신청</button>
+        	<button id="reset" type="button">다시 선택하기</button>
+      	  	<button id="submit_form" type="submit">매입 신청</button>
    		 </div>
      </form>
     </div>
 	<br><br><br>
+
+
+<!-- 모달 창 -->
+		<div id="cancel-modal" class="modal">
+		    <div class="modal-content">
+		        <p>정말 취소하시겠습니까?<br>지금까지 입력하신 내용이 모두 지워집니다.</p>
+		        <button class="confirm" id="cancelConfirm">예 (취소)</button>
+		        <button class="cancel" id="cancelCancel">아니오</button>
+		    </div>
+		</div>
+		
+		<div id="submit-modal" class="modal">
+		    <div class="modal-content">
+		        <p>위 내용대로 신청하시겠습니까?<br>매입신청 특성 상 수정이 불가능합니다.</p>
+		        <button class="confirm" id="submitConfirm">예 (제출)</button>
+		        <button class="cancel" id="submitCancel">아니오</button>
+		    </div>
+		</div>
+		
+
 
   </main>
 
@@ -133,14 +154,44 @@ h1, h3 { text-align:center; }
   
 <script>
 
+// 다시 선택하기 누르면 나오는 모달창 컨트롤
+const cancelModal = document.getElementById('cancel-modal');
+const reset = document.getElementById('reset');
+const cancelConfirm = document.getElementById('cancelConfirm');
+const cancelCancel = document.getElementById('cancelCancel');  
+
+	reset.addEventListener('click', function() {
+		cancelModal.style.display = "block";
+	})
+	
+	cancelConfirm.addEventListener('click', function() {
+		window.history.back();
+	})
+	cancelCancel.addEventListener('click', function() {
+		cancelModal.style.display = "none";
+    });    
+
+// 모달 창 밖을 클릭하면 모달 창 닫기
+window.addEventListener('click', function(event) {
+    if (event.target == cancelModal) {
+        cancelModal.style.display = "none";
+    }
+});
+
+const submitForm = document.getElementById('submit-form')
+
+	// 기본: 제출 조건 미충족으로 설정
+	let do_not_submit = true;
+	
+	// 계좌인증
 	document.getElementById('account_confirm').addEventListener('click', function(event) {
-    event.preventDefault();
-    
+
+	event.preventDefault();
+	
 	const bank_code = document.getElementById('bank_code').value;
 	const bank_account = document.getElementById('bank_account').value;
 	const member_name = document.getElementById('member_name').value;
-	
-	// 서버에 데이터 보내고 응답
+    
 	fetch('validate-account', {
 		method: 'POST',
 		headers: {
@@ -152,21 +203,72 @@ h1, h3 { text-align:center; }
 			member_name: member_name
 		})
 	})
-		.then(response => response.json())
-		.then(data => {
-			if (data.valid) {
-				alert('인증 성공');
-				document.getElementById('submit_form').disabled = false;
-			} else {
-				alert('인증 실패 / 올바르게 입력했는지 확인해주세요.');
-				document.getElementById('submit_form').disabled = true;
-			}
-		})
-		.catch(error => console.error('Error:', error));
+	.then(response => response.json())
+	.then(data => {
+		if (data.valid) {
+			alert('인증 성공');
+			document.getElementById('account-checked').innerText = "인증 완료";
+			do_not_submit = false;
+		} else {
+			alert('인증 실패 / 올바르게 입력했는지 확인해주세요.');
+			do_not_submit = true;
+		}
+	})
+	.catch(error => console.error('Error:', error));
 	});
 
+	// 제출 조건 만족여부 체크, 제출버튼 활성화 여부 결정
+	document.getElementById('submit_form').addEventListener('click', function(event) {
+		
+		event.preventDefault();
+		
+		const bank_account = document.getElementById('bank_account').value;
+		const member_name = document.getElementById('member_name').value;
+		const shipping_method = document.fr.shipping_method.value;
+		
+		
+		if(member_name == null || member_name == '') {
+			alert('올바른 사용자가 아닙니다. 다시 로그인해주세요.');
+		} else if (shipping_method == null || shipping_method == '') {
+			alert('발송방법을 선택해주세요.');
+		} else if (bank_account == null || bank_account == '') {
+			alert('매입대금을 받을 계좌를 입력하고 인증해주세요.');
+		} else if(do_not_submit) {
+			alert('계좌가 인증되지 않았습니다.');
+		} else if(document.fr.confirm.checked == false) {
+			alert('유의사항과 판매조건을 확인하셔야 합니다');
+			document.fr.confirm.focus();
+		} else if(document.fr.agree.checked == false) {
+			alert('개인정보 수집 및 이용에 동의하셔야 합니다');
+			document.fr.agree.focus();
+		} else {
+			
+			const submitModal = document.getElementById('submit-modal');
+			const submitConfirm = document.getElementById('submitConfirm');
+			const submitCancel = document.getElementById('submitCancel');
+			
+			submitModal.style.display = "block";	
+			
+			submitConfirm.addEventListener('click', function() {
+			    document.fr.submit();
+			});
+			
+			submitCancel.addEventListener('click', function() {
+			    submitModal.style.display = "none";
+			});
+
+			window.addEventListener('click', function(event) {
+			    if (event.target == submitModal) {
+			        submitModal.style.display = "none";
+			    }
+			});
+		}
+	});
+	
 </script>
-  
+
+
+
   
 </body>
 </html>

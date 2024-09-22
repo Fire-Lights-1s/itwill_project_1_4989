@@ -28,12 +28,14 @@
 		VALUES(#{pc_item_name}, #{member_id}, #{expected_grade}, #{expected_price}, #{shipping_method}, #{transfer_bank}, #{transfer_account})
 	</insert>
 	
-	<select id="getPurchList" resultType="com.itwillbs.domain.PurchaseRequestDTO">
-		SELECT purchase_id, pc_item_name, expected_grade, request_date, purchase_status FROM PurchaseRequest WHERE member_id=#{member_id}
+	<select id="getPurchList" parameterType="map" resultType="com.itwillbs.domain.PurchaseRequestDTO">
+		SELECT purchase_id, pc_item_name, expected_grade, request_date, purchase_status FROM PurchaseRequest
+		WHERE member_id=#{member_id} ORDER BY request_date DESC
+		LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
 	</select>
 
 	<select id="getPurchDetail" resultType="com.itwillbs.domain.PurchaseRequestDTO">
-		SELECT * FROM PurchaseRequest WHERE purchase_id=#{purchase_id}
+		SELECT p.*, b.bank_name AS bank_name FROM PurchaseRequest p JOIN Banks b ON p.transfer_bank = b.bank_code WHERE purchase_id=#{purchase_id}
 	</select>
 
 	<update id="cancelRequest">
@@ -48,5 +50,8 @@
 		SELECT name FROM Mem WHERE member_id = #{member_id};
 	</select>
 
+	<select id="getPurchCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM PurchaseRequest WHERE member_id=#{member_id}
+	</select>
 </mapper>
 
