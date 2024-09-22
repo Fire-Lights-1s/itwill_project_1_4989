@@ -43,8 +43,8 @@ public class PurchaseDAO {
 		sqlSession.insert(namespace + ".register", purchaseRequestDTO);
 	}
 
-	public List<PurchaseRequestDTO> getPurchList(String member_id) {
-		return sqlSession.selectList(namespace + ".getPurchList", member_id);
+	public List<PurchaseRequestDTO> getPurchList(Map<String, Object> purchaseMap) {
+		return sqlSession.selectList(namespace + ".getPurchList", purchaseMap);
 	}
 
 	public PurchaseRequestDTO getPurchDetail(int purchase_id) {
@@ -62,6 +62,10 @@ public class PurchaseDAO {
 
 	public String getMemberName(String member_id) {
 		return sqlSession.selectOne(namespace + ".getMemberName", member_id);
+	}
+
+	public int getPurchCount(String member_id) {
+		return sqlSession.selectOne(namespace + ".getPurchCount", member_id);
 	}
 
 	

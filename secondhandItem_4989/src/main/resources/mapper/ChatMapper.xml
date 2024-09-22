@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.mapper.ChatMapper">
+	<select id="checkRoomId" resultType="java.lang.Integer"> 
+		select count(*)
+		from ChatRoom
+		where chat_room_id = #{chat_room_id}
+	</select>
+	<insert id="createRoom">
+		insert into ChatRoom(chat_room_id, product_id, buyer_id, seller_id, title)
+		values(#{chat_room_id}, #{product_id}, #{buyer_id}, #{seller_id}, #{title})
+	</insert>
+	
+	<select id="getProductInfo" resultType="com.itwillbs.domain.ProductDTO">
+		select p.product_id, p.product_img1, p.seller_id, p.product_name, p.product_price, p.year_purchase, 
+		p.trade_status, p.trade_area, TX.buyer_id
+		from Product p LEFT OUTER join TX
+		on p.product_id = TX.product_id
+		and p.product_id = #{product_id}       
+        and TX.is_reserved = true
+        where p.product_id = #{product_id}
+	</select>
+	
+	<select id="getChatRoomList" resultType="com.itwillbs.domain.ChatRoomDTO">
+		SELECT room.chat_room_id, room.product_id, room.seller_id, room.buyer_id, room.title,
+			Product.product_img1, message.message, message.send_time
+		FROM ChatRoom room inner join Product
+		on room.product_id = Product.product_id
+		LEFT OUTER join ChatMessage message
+        on room.chat_room_id = message.chat_room_id 
+        and message.chat_id in (select max(chat_id) from ChatMessage
+									group by chat_room_id)
+		where room.buyer_id = #{member_id} or room.seller_id = #{member_id} and message.message is not null
+		order by message.send_time desc
+	</select>
+	
+	<update id="updateProductTradeStatus">
+		update Product set trade_status = #{trade_status} 
+		where product_id = #{product_id}
+	</update>
+	
+	<select id="checkProductTX" resultType="java.lang.Integer">
+		select count(*)
+		from TX
+		where product_id = #{product_id} and is_reserved = true;
+	</select>
+	<insert id="createTX">
+		insert into TX(product_id,buyer_id, reservation_date)
+		values(#{product_id}, #{buyer_id}, #{reservation_date})
+	</insert>
+	<update id="updateTX">
+		update TX 
+		<!-- 판매 예약을 취소 할 때 -->
+		<if test="is_reserved == true">
+			set is_reserved = false
+		</if>
+		<!-- 구매 확정을 할 때 -->
+		<if test="transaction_end_date != null and transaction_method != null">
+			set transaction_end_date = #{transaction_end_date}, transaction_method = #{transaction_method}
+		</if>
+		where product_id = #{product_id} and is_reserved = true;
+	</update>
+	<insert id="createChatMessage">
+		insert into ChatMessage(chat_room_id, message_type, alarm, user_id, message, send_time)
+		values(#{chat_room_id},#{message_type},#{alarm},#{user_id},#{message},#{send_time})
+	</insert>
+	<select id="getChatMessageList" resultType="com.itwillbs.domain.ChatMessageDTO">
+		select * 
+		from ChatMessage
+		where chat_room_id = #{chat_room_id}
+		order by send_time asc;
+	</select>
+</mapper>

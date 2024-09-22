@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.mapper.CSMapper">
+
+	<select id="getNoticeCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM Notice
+		WHERE 1=1
+	    <if test="search != null and search != ''">
+	        AND notice_id LIKE CONCAT('%', #{search}, '%')
+	        OR	notice_name LIKE CONCAT('%', #{search}, '%')
+	        OR	notice_cont LIKE CONCAT('%', #{search}, '%')
+	    </if>
+	</select>
+	
+	<select id="getNoticeList" resultType="com.itwillbs.domain.NoticeDTO">
+		SELECT * FROM Notice
+		WHERE 1=1
+		<if test="search != null and search != ''">
+	        AND notice_id LIKE CONCAT('%', #{search}, '%')
+	        OR	notice_name LIKE CONCAT('%', #{search}, '%')
+	        OR	notice_cont LIKE CONCAT('%', #{search}, '%')
+	    </if>
+		ORDER BY notice_id DESC LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<select id="getFaqCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM FAQ
+		WHERE 1=1
+	    <if test="search != null and search != ''">
+	        AND faq_quest LIKE CONCAT('%', #{search}, '%')
+	        OR	faq_answer LIKE CONCAT('%', #{search}, '%')
+	    </if>
+	</select>
+	
+	<select id="getFaqList" resultType="com.itwillbs.domain.FaqDTO">
+		SELECT * FROM FAQ
+		WHERE 1=1
+		<if test="search != null and search != ''">
+	        AND faq_quest LIKE CONCAT('%', #{search}, '%')
+	        OR	faq_answer LIKE CONCAT('%', #{search}, '%')
+	    </if>
+		ORDER BY faq_id DESC LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<select id="getInquiryCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM Inquiry
+		WHERE 1=1
+	    <if test="search != null and search != ''">
+	        AND member_id LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_type LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_title LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_contents LIKE CONCAT('%', #{search}, '%')
+	    </if>
+	</select>
+	
+	<select id="getInquiryList" resultType="com.itwillbs.domain.InquiryDTO">
+		SELECT * FROM Inquiry
+		WHERE 1=1
+		<if test="search != null and search != ''">
+	        AND member_id LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_type LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_title LIKE CONCAT('%', #{search}, '%')
+	        OR	inquiry_contents LIKE CONCAT('%', #{search}, '%')
+	    </if>
+		ORDER BY inquiry_id DESC LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<insert id="submitNotice">
+	INSERT INTO Notice(notice_name, notice_cont) VALUES(#{notice_name}, #{notice_cont})
+	</insert>
+	
+	<select id="noticeDetail" resultType="com.itwillbs.domain.NoticeDTO">
+	SELECT * FROM Notice WHERE notice_id=#{notice_id}
+	</select>
+	
+	<update id="editNotice">
+	UPDATE Notice SET notice_name=#{notice_name}, notice_cont=#{notice_cont} WHERE notice_id=#{notice_id}
+	</update>
+	
+	<delete id="deleteNotice">
+	DELETE FROM Notice WHERE notice_id=#{notice_id}
+	</delete>
+	
+	<insert id="submitFaq">
+	INSERT INTO FAQ(faq_quest, faq_answer) VALUES(#{faq_quest}, #{faq_answer})
+	</insert>
+	
+	<select id="faqDetail" resultType="com.itwillbs.domain.FaqDTO">
+	SELECT * FROM FAQ WHERE faq_id=#{faq_id}
+	</select>
+	
+	<update id="editFaq">
+	UPDATE FAQ SET faq_quest=#{faq_quest}, faq_answer=#{faq_answer} WHERE faq_id=#{faq_id}
+	</update>
+	
+	<delete id="deleteFaq">
+	DELETE FROM FAQ WHERE faq_id=#{faq_id}
+	</delete>
+	
+	<insert id="inquirySubmit">
+	INSERT INTO Inquiry(member_id, inquiry_type, inquiry_title, inquiry_contents, inquired_at)
+	VALUES(#{member_id}, #{inquiry_type}, #{inquiry_title}, #{inquiry_contents}, #{inquired_at})
+	</insert>
+	
+	<select id="inquiryDetail" resultType="com.itwillbs.domain.InquiryDTO">
+	SELECT * FROM Inquiry WHERE inquiry_id=#{inquiry_id}
+	</select>
+	
+	<select id="getMyInquiryList" parameterType="map" resultType="com.itwillbs.domain.InquiryDTO">
+	SELECT * FROM Inquiry WHERE member_id=#{member_id}
+	ORDER BY inquiry_id DESC LIMIT #{pageDTO.startRow}, #{pageDTO.pageSize}
+	</select>
+	
+	<select id="getMyInquiryCount" parameterType="map" resultType="java.lang.Integer">
+	SELECT count(*) FROM Inquiry WHERE member_id=#{member_id}
+	</select>
+	
+	<update id="inquiryReply">
+	UPDATE Inquiry SET inquiry_reply=#{inquiry_reply}, replied_at=#{replied_at} WHERE inquiry_id=#{inquiry_id}
+	</update>
+	
+<!-- 	<update id="savePurchaseInfo" parameterType="map"> -->
+<!-- 		UPDATE PurchaseRequest SET expected_grade=#{expected_grade}, expected_price=#{expected_price}, -->
+<!-- 		purchase_status=#{purchase_status} WHERE purchase_id=#{purchase_id} -->
+<!-- 	</update> -->
+	
+</mapper>

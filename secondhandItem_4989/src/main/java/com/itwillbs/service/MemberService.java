@@ -26,6 +26,12 @@ public class MemberService {
 		return memberDAO.userCheck(memberDTO);
 	}
 	
+	public MemberDTO userCheck1(MemberDTO memberDTO) {
+		System.out.println("MemberService userCheck1()");
+		
+		return memberDAO.userCheck1(memberDTO);
+	}
+	
 	public void insertMember(MemberDTO memberDTO) {
 		System.out.println("MemberService insertMember()");
 		
@@ -66,6 +72,17 @@ public class MemberService {
 		System.out.println("MemberService idCheck()");
 		
 		return memberDAO.idCheck(memberDTO);
+	}
+	
+	public MemberDTO passCheck(MemberDTO memberDTO) {
+		System.out.println("MemberService passCheck()");
+		
+		return memberDAO.passCheck(memberDTO);
+	}
+	
+	public MemberDTO nickCheck(String nickname) {
+		System.out.println("MemberService nickCheck()");
+		return memberDAO.nickCheck(nickname);
 	}
 	
 }

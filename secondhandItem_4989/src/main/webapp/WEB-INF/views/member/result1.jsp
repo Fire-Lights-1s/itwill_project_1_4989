@@ -40,7 +40,8 @@ out.println(profileInfo.get("email"));
 session.setAttribute("member_id", profileInfo.get("id"));
 session.setAttribute("name", profileInfo.get("name"));
 session.setAttribute("email", profileInfo.get("email"));
-
+%>
+<%
 response.sendRedirect("callPro");
 %>
 </body>

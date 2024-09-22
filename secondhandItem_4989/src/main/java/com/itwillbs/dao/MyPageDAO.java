@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
+import com.itwillbs.domain.ReviewDTO;
+import com.itwillbs.domain.ZzimDTO;
 
 @Repository
 public class MyPageDAO {
@@ -19,15 +21,62 @@ public class MyPageDAO {
 	private static final String namespace="com.itwillbs.mapper.MyPageMapper";
 	
 	public List<ProductDTO> getProductList(PageDTO pageDTO) {
-		System.out.println("MyPageDAO getProductList()");
 		return sqlSession.selectList(namespace + ".getProductList", pageDTO);
 	}
 	
-	public int getProductCount(ProductDTO productDTO) {
-		System.out.println("MyPageDAO getProductCount()");
-		return sqlSession.selectOne(namespace + ".getProductCount", productDTO);
+	public int getProductCount(PageDTO pageDTO) {
+		return sqlSession.selectOne(namespace + ".getProductCount", pageDTO);
 	}
 	
+	public List<ProductDTO> getZzimList(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace + ".getZzimList", pageDTO);
+	}
+	
+	public int getZzimCount(PageDTO pageDTO) {
+		return sqlSession.selectOne(namespace + ".getZzimCount", pageDTO);
+	}
+
+	public void deleteZzim(ZzimDTO zzimDTO) {
+		sqlSession.delete(namespace + ".deleteZzim", zzimDTO);
+	}
+
+	public List<ProductDTO> getBuyList(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace + ".getBuyList", pageDTO);
+	}
+
+	public int getBuyCount(PageDTO pageDTO) {
+		return sqlSession.selectOne(namespace + ".getBuyCount", pageDTO);
+	}
+
+	public void deleteMem(String member_id) {
+		sqlSession.update(namespace + ".deleteMem", member_id);
+	}
+
+	public int allTX(String id) {
+		return sqlSession.selectOne(namespace + ".allTX", id);
+	}
+
+	public void deleteSell(ProductDTO productDTO) {
+		sqlSession.delete(namespace + ".deleteSell", productDTO);
+	}
+
+	public void updateReserv(ProductDTO productDTO) {
+		sqlSession.update(namespace + ".updateReserv", productDTO);
+	}
+
+	public void insertReview(ReviewDTO reviewDTO) {
+		sqlSession.insert(namespace + ".insertReview", reviewDTO);		
+	}
+
+	public void updateReviewStatus(int product_id) {
+		sqlSession.update(namespace + ".updateReviewStatus", product_id);		
+	}
+
+	public double allRating(String id) {
+		return sqlSession.selectOne(namespace + ".allRating", id);
+	}
+	
+		
 	
 	
 	

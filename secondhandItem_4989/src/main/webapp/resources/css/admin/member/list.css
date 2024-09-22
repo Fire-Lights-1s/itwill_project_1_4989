@@ -1,0 +1,63 @@
+@charset "UTF-8";
+.flex-right-50pct {
+    margin-left: auto;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 50%;
+}
+.btn img {
+    width: 1rem;
+    height: 1rem;
+}
+.table-earning {
+    width: 100%;
+    text-align: center !important; /* 테이블 전체 가운데 정렬 */
+}
+.table-earning th, .table-earning td {
+    vertical-align: middle !important; /* 수직 가운데 정렬 */
+    text-align: center !important; /* 텍스트 가운데 정렬 */
+    padding: 10px !important; /* 셀 안의 여백 추가 */
+}
+.table-earning thead th {
+    background-color: #4b0082 !important;
+    color: white !important;
+    text-align: center !important; /* 헤더도 가운데 정렬 */
+    padding: 20px !important; /* 보라색 줄 세로 간격 넓힘 */
+}
+.table-earning tbody td {
+    text-align: center !important; /* 본문 가운데 정렬 */
+}
+.up-triangle {
+    float: right;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0px 10px 10px 10px;
+    border-color: transparent transparent #ebe8ff transparent;
+}
+.down-triangle {
+    float: right;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0px 10px;
+    border-color: transparent transparent #ebe8ff transparent;
+}
+.page-link {
+    min-width: 35px;
+    text-align: center;
+}
+.page-item.active .page-link {
+    background-color: #4b0082;
+    border-color: #4b0082;
+}
+.page-link {
+    color: #4b0082;
+}
+.btn-purple {
+    color: #fff;
+    background-color: #4b0082;
+    border-color: #4b0082;
+}

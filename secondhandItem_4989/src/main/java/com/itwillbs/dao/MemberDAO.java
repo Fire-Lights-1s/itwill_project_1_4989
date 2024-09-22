@@ -24,6 +24,12 @@ public class MemberDAO {
 		return sqlSession.selectOne(namespace + ".userCheck", memberDTO);
 	}
 	
+	public MemberDTO userCheck1(MemberDTO memberDTO) {
+		System.out.println("MemberDAO userCheck1()");
+		
+		return sqlSession.selectOne(namespace + ".userCheck1", memberDTO);
+	}
+	
 	public void insertMember(MemberDTO memberDTO) {
 		System.out.println("MemberDAO insertMember()");
 		
@@ -57,6 +63,17 @@ public class MemberDAO {
 		System.out.println("MemberDAO idCheck()");
 		
 		return sqlSession.selectOne(namespace + ".idCheck", memberDTO);
+	}
+	
+	public MemberDTO passCheck(MemberDTO memberDTO) {
+		System.out.println("MemberDAO passCheck()");
+		
+		return sqlSession.selectOne(namespace + ".passCheck", memberDTO);
+	}
+	
+	public MemberDTO nickCheck(String nickname) {
+		System.out.println("MemberDAO nickCheck()");
+		return sqlSession.selectOne(namespace + ".nickCheck", nickname);
 	}
 	
 }

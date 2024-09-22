@@ -1,26 +1,40 @@
+<%@page import="java.sql.Timestamp"%>
+<%@ page import="java.util.Date" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>4989 채팅</title>
+<jsp:useBean id="current" class="java.util.Date" />
 <c:set var="sessionUID" value="${sessionScope.member_id }"></c:set>
+<c:set var="chatRoomDTO" value="${chatRoomDTO }"></c:set>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-3.4.0.min.js"></script>
 <script type="text/javascript" th:inline="javascript">
 	let sessionUserId = '<c:out value="${sessionUID}"/>';
+	let objChatRoomDTO = '<c:out value="${chatRoomDTO}"/>'.replaceAll("&#034;", "\"");
 </script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css?">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/chatStyle.css?">
+
 <!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
-<script type="text/javascript" src="//code.jquery.com/jquery-3.4.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath }/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
 <script src="${pageContext.request.contextPath }/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/chatScript.js"></script>
 </head>
 <body>
 	<jsp:include page="../inc/header.jsp"></jsp:include>
+	<header>
+        <div id="menu-name">채팅</div>
+    </header>
 	<section>
 	<div id="main-container-chat">
 		<div id="container">
@@ -40,36 +54,29 @@
 					</button>
 				</div>	
 				<div id="chatTotalRoom">
-					<div id="testRoom1" onclick="connect($(this).attr('id'));">
+					<c:forEach var="chatRoom" items="${chatRoomDTOList }">
+					<div id="${chatRoom.chat_room_id }" onclick="connect(`<c:out value="${chatRoom}"/>`);">
 						<div class="profile">
-							<img alt="" src="">
+							<img alt="" src="${chatRoom.product_img1 }">
 						</div>
 						<div class="chatDescript">
 							<div class="chatContnet">
-								<p>채팅방 제목</p>
-								<p>채팅방 내용</p>
+								<p>${chatRoom.title }</p>
+								<p>${chatRoom.seller_id } -> ${chatRoom.buyer_id }</p>
+								<p>${chatRoom.message }</p>
 							</div>
 							<div>
-								<p>오후 2:40</p>
-								<p class="alamIcon">1</p>
+								<c:if test="${(current.time - chatRoom.send_time.time) / (1000 * 60 * 60 * 24) < 1 }">
+									<p><fmt:formatDate pattern="hh:mm" value="${chatRoom.send_time}"/></p>
+								</c:if>
+								<c:if test="${(current.time - chatRoom.send_time.time) / (1000 * 60 * 60 * 24) >= 1 }">
+									<p><fmt:formatDate pattern="MM-dd hh:mm" value="${chatRoom.send_time}"/></p>
+								</c:if>
+<!-- 								<p class="alamIcon">1</p> -->
 							</div>
 						</div>
 					</div>
-					<div id="testRoom2" onclick="connect($(this).attr('id'));">
-						<div class="profile">
-							<img alt="" src="">
-						</div>
-						<div class="chatDescript">
-							<div class="chatContnet">
-								<p>채팅방 제목</p>
-								<p>채팅방 내용</p>
-							</div>
-							<div>
-								<p>오후 2:40</p>
-								<p></p>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>	
 			</div>
 			<div id="chatRoom">
@@ -78,49 +85,114 @@
 						<img alt="product" src="">
 					</div>
 					<div>
-						<h3>거래 상품명</h3>
-						<p>거래 상품명</p>
-						<p>거래 상품명</p>
-						<p>거래 상품명</p>
+						<p></p>
+						<p></p>
+						<p></p>
+						<p></p>
 					</div>
 					<div>
-						<p>거래 주소</p>
-						<button>구매하기</button>
+						<p></p>
+						<div>
+							<button id="trade-btn"></button>
+							<button id="openReportModal" data-toggle="modal" data-target="#reportModal">신고하기</button>
+						</div>
+					</div>
+					<div id="productLoading" class="box">
+						<div class="loader10"></div>
 					</div>
 				</div>
 				<div id="chatContent">
-					<div class="reciveMessage">
-						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasda</p>
-						<p>오후 2:40</p>
-					</div>
-					<div class="sendMessage">
-						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasdasd</p>
-						<p>오후 2:40</p>
-					</div>
-					<div class="sendMessage">
-						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasdasd</p>
-						<p>오후 2:40</p>
-					</div>
-					<div class="reciveMessage">
-						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasda</p>
-						<p>오후 2:40</p>
-					</div>
-					<div class="reciveMessage">
-						<p>asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasdasda</p>
-						<p>오후 2:40</p>
-					</div>
-				
 				</div>
 				<div id="inputMessage" class="flexBoxRow">
 					<button>
 						<img alt="" src="${pageContext.request.contextPath }/resources/img/icon/plus_icon.png">
 					</button>
-					<textarea id="message"></textarea>
+					<textarea id="message" onkeyup="enterkey()"></textarea>
 					<button onclick="sendChat()">
 						<img alt="" src="${pageContext.request.contextPath }/resources/img/icon/chat_send.png">
 					</button>
 				</div>
 			</div>
+		</div>
+	</div>
+	<!-- 신고하기 모달 -->
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">신고하기</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="reportForm">
+
+                        <!-- Textarea for report details -->
+                        <div class="accordion-subject"><b>신고 대상</b></div>
+                        <label><input type="radio" name="reportType" value="회원" checked>회원</label>
+                        <input type="radio" name="reportType" value="상품">상품
+                        <div class="accordion-subject"><b>신고 내용</b></div>
+                        <textarea class="form-control" placeholder="상품 신고 사유를 입력해주세요" id="report_contents" name="report_contents" required></textarea>
+
+                        <!-- Submission button -->
+                        <button type="button" class="btn btn-primary mt-3" id="reportBtn">상품 신고</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 후기작성 모달 -->
+    <div id="reviewModal" class="modal" style="display: none;">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h2 style="margin-bottom: 20px;">구매 후기</h2>
+			<div style="float: left; overflow:hidden;">
+				<img id="modalImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
+	    	</div>
+	    	<form action="${pageContext.request.contextPath}/my/reviewPro" method="post">
+				<div class="starRating">
+				<label for="quality">품&emsp;&emsp;질 :</label>
+					<div class="stars" data-name="quality" style="display: inline-block;">
+					    <span class="star" data-value="1">★</span>
+					    <span class="star" data-value="2">★</span>
+					    <span class="star" data-value="3">★</span>
+					    <span class="star" data-value="4">★</span>
+					    <span class="star" data-value="5">★</span>
+					</div><br>
+			    <label for="price">가&emsp;&emsp;격 :</label>
+					<div class="stars" data-name="price" style="display: inline-block;">
+					    <span class="star" data-value="1">★</span>
+					    <span class="star" data-value="2">★</span>
+					    <span class="star" data-value="3">★</span>
+					    <span class="star" data-value="4">★</span>
+					    <span class="star" data-value="5">★</span>
+					</div><br>
+				<label for="punctuality">시간 약속 :</label>
+				    <div class="stars" data-name="punctuality" style="display: inline-block;">
+					    <span class="star" data-value="1">★</span>
+					    <span class="star" data-value="2">★</span>
+					    <span class="star" data-value="3">★</span>
+					    <span class="star" data-value="4">★</span>
+					    <span class="star" data-value="5">★</span>
+				    </div><br>
+				<label for="manner">매&emsp;&emsp;너 :</label>
+				    <div class="stars" data-name="manner" style="display: inline-block; margin-bottom: 20px;">
+					    <span class="star" data-value="1">★</span>
+					    <span class="star" data-value="2">★</span>
+					    <span class="star" data-value="3">★</span>
+					    <span class="star" data-value="4">★</span>
+					    <span class="star" data-value="5">★</span>
+				    </div>
+				</div>
+				<input type="hidden" id="qualityRating" name="qualityRating" value="1">
+				<input type="hidden" id="priceRating" name="priceRating" value="1">
+				<input type="hidden" id="punctualityRating" name="punctualityRating" value="1">
+				<input type="hidden" id="mannerRating" name="mannerRating" value="1">
+	      		<textarea class="reviewText" name="reviewText" rows="4" cols="50" placeholder="후기 내용"></textarea><br>
+	      		<input type="hidden" id="productId" name="productId" value="">
+	      		<button type="submit" style="background-color: #4E229E; padding: 5px; color: white; border-radius: 5px; cursor: pointer;">작성 완료</button>
+	    	</form>
 		</div>
 	</div>
 	</section>

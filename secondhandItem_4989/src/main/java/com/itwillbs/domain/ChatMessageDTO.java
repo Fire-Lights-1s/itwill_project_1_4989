@@ -26,7 +26,7 @@ public class ChatMessageDTO {
 	
 	@Override
 	public String toString() {
-		return "ChatMessageDTO[user_id = "+user_id+", message = "+message+"]";
+		return "{user_id = "+user_id+", message = "+message+"}";
 	}
 
 	public String getChat_id() {

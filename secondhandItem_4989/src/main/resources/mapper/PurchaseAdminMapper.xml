@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.mapper.PurchaseAdminMapper">
+
+	<select id="getPurchaseCount" resultType="java.lang.Integer">
+		SELECT count(*) FROM PurchaseRequest
+		WHERE 1=1
+	    <if test="search != null and search != ''">
+	        AND pc_item_name LIKE CONCAT('%', #{search}, '%')
+	        OR	member_id LIKE CONCAT('%', #{search}, '%')
+	        OR	purchase_id LIKE CONCAT('%', #{search}, '%')
+	        OR	expected_grade LIKE CONCAT('%', #{search}, '%')
+	        OR	expected_price LIKE CONCAT('%', #{search}, '%')
+	        OR	purchase_status LIKE CONCAT('%', #{search}, '%')
+	        OR 	shipping_method LIKE CONCAT('%', #{search}, '%')
+	    </if>
+	</select>
+	
+	<select id="getPurchaseList" resultType="com.itwillbs.domain.PurchaseRequestDTO">
+		SELECT * FROM PurchaseRequest 
+		WHERE 1=1
+		<if test="search != null and search != ''">
+	        AND pc_item_name LIKE CONCAT('%', #{search}, '%')
+	        OR	member_id LIKE CONCAT('%', #{search}, '%')
+	        OR	purchase_id LIKE CONCAT('%', #{search}, '%')
+	        OR	expected_grade LIKE CONCAT('%', #{search}, '%')
+	        OR	expected_price LIKE CONCAT('%', #{search}, '%')
+	        OR	purchase_status LIKE CONCAT('%', #{search}, '%')
+	        OR 	shipping_method LIKE CONCAT('%', #{search}, '%')
+	    </if>
+		ORDER BY purchase_id DESC LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<update id="savePurchaseInfo" parameterType="map">
+		UPDATE PurchaseRequest SET expected_grade=#{expected_grade}, expected_price=#{expected_price},
+		purchase_status=#{purchase_status} WHERE purchase_id=#{purchase_id}
+	</update>
+	
+</mapper>

@@ -2,22 +2,134 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="com.itwillbs.mapper.ProductMapper">
-    <insert id="insertProduct">
-        insert into Product (seller_id, category_name, product_name, product_price, year_purchase, product_desc, product_img1, trade_method, pay_method, trade_area)
-        values (#{seller_id}, #{category_name}, #{product_name}, #{product_price}, #{year_purchase}, #{product_desc}, #{product_img1}, #{trade_method}, #{pay_method}, #{trade_area})
-    </insert>
-    
-    <!-- SELECT 구문: product_id로 특정 상품 검색 -->
-    <select id="getProductDetail" resultType="com.itwillbs.domain.ProductDTO">
-        select product_id, category_name, seller_id, product_name, product_price, 
-               year_purchase, product_desc, product_img1, product_img2, product_img3, 
-               product_img4, product_img5, created_datetime, view_count, 
-               like_count, trade_method, pay_method, trade_area
-        from Product
-        where product_id = #{product_id}
-    </select>
 
-	
+<mapper namespace="com.itwillbs.mapper.ProductMapper">
+
+	<!-- 판매 상품 5개 등록 -->
+	<insert id="insertProduct">
+		INSERT INTO Product (
+		seller_id, category_name,
+		product_name, product_price,
+		year_purchase, product_desc, product_img1,
+		product_img2, product_img3,
+		product_img4, product_img5, trade_method,
+		pay_method, trade_area,
+		view_count, like_count, trade_status
+		)
+		VALUES (
+		#{seller_id}, #{category_name}, #{product_name}, #{product_price},
+		#{year_purchase}, #{product_desc}, #{product_img1}, #{product_img2},
+		#{product_img3},
+		#{product_img4}, #{product_img5}, #{trade_method},
+		#{pay_method}, #{trade_area},
+		#{view_count}, #{like_count}, '거래 가능'
+		);
+	</insert>
+
+	<!-- product_id로 상품 상세정보 가져오기. null일 경우 빈 문자열 반환 COALESCE -->
+<select id="getProductDetail" resultType="com.itwillbs.domain.ProductDTO">
+    SELECT 
+        product_id,
+        category_name,
+        seller_id,  <!-- 반드시 seller_id가 포함되어야 함 -->
+        product_name,
+        product_price,
+        year_purchase,
+        product_desc,
+        product_img1,
+        product_img2,
+        product_img3,
+        product_img4,
+        product_img5,
+        created_datetime,
+        COALESCE(view_count, 0) as view_count,
+        COALESCE(like_count, 0) as like_count,
+        COALESCE(trade_area, '') as trade_area,
+        trade_method,
+        pay_method
+    FROM Product
+    WHERE product_id = #{product_id}
+</select>
+
+<resultMap id="productDetailMap" type="com.itwillbs.domain.ProductDTO">
+    <result property="product_id" column="product_id"/>
+    <result property="category_name" column="category_name"/>
+    <result property="seller_id" column="seller_id"/> <!-- 명시적으로 매핑 -->
+    <result property="product_name" column="product_name"/>
+    <result property="product_price" column="product_price"/>
+    <result property="year_purchase" column="year_purchase"/>
+    <result property="product_desc" column="product_desc"/>
+    <result property="product_img1" column="product_img1"/>
+    <result property="product_img2" column="product_img2"/>
+    <result property="product_img3" column="product_img3"/>
+    <result property="product_img4" column="product_img4"/>
+    <result property="product_img5" column="product_img5"/>
+    <result property="created_datetime" column="created_datetime"/>
+    <result property="view_count" column="view_count"/>
+    <result property="like_count" column="like_count"/>
+    <result property="trade_area" column="trade_area"/>
+    <result property="trade_method" column="trade_method"/>
+    <result property="pay_method" column="pay_method"/>
+</resultMap>
+
+	<!-- 찜할 때마다 해당 상품 like_count 필드를 증가 -->
+	<update id="increaseLikeCount">
+		UPDATE Product
+		SET like_count = like_count + 1
+		WHERE
+		product_id = #{product_id}
+	</update>
+
+	<!-- 조회수 증가 -->
+	<update id="increaseViewCount">
+		UPDATE Product
+		SET view_count = view_count + 1
+		WHERE
+		product_id = #{product_id}
+	</update>
+
+	<!-- 특정 상품에 대한 전체 찜 개수 조회 -->
+	<select id="getLikeCount" parameterType="int" resultType="int">
+		select
+		like_count from Product where product_id = #{product_id}
+	</select>
+
+
+	<update id="updateProduct">
+    UPDATE Product
+    SET
+        product_name = #{product_name},
+        category_name = #{category_name},
+        product_price = #{product_price},
+        trade_area = #{trade_area},
+        trade_method = #{trade_method},
+        pay_method = #{pay_method},
+        product_desc = #{product_desc},
+        product_img1 = #{product_img1},
+        product_img2 = #{product_img2},
+        product_img3 = #{product_img3},
+        product_img4 = #{product_img4},
+        product_img5 = #{product_img5},
+        year_purchase = #{year_purchase}
+            
+        WHERE product_id = #{product_id}
+</update>
+
+    <!-- 신고 정보 삽입 쿼리 -->
+<!--     <insert id="insertReport"> -->
+<!--         INSERT INTO Report (reporter_id, reportee_id, reported_item_id, report_type, report_contents, reported_at, report_status) -->
+<!--         VALUES (#{reporter_id}, #{reportee_id}, #{reported_item_id}, #{report_type}, #{report_contents}, NOW(), #{report_status}) -->
+<!--     </insert> -->
+	<insert id="insertReport">
+        INSERT INTO Report (reporter_id, reportee_id, reported_item_id, report_type, report_contents, reported_at, report_status)
+        VALUES (#{reporter_id}, #{reportee_id}, 
+	        <if test="reported_item_id == 0">
+	        	null,
+	        </if>
+	        <if test="reported_item_id != 0">
+	        	#{reported_item_id},
+	        </if>
+        	#{report_type}, #{report_contents}, NOW(), #{report_status})
+    </insert>
+
 </mapper>
