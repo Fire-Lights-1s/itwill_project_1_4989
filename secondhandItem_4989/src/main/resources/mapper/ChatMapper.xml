@@ -33,7 +33,8 @@
         on room.chat_room_id = message.chat_room_id 
         and message.chat_id in (select max(chat_id) from ChatMessage
 									group by chat_room_id)
-		where room.buyer_id = #{member_id} or room.seller_id = #{member_id}
+		where room.buyer_id = #{member_id} or room.seller_id = #{member_id} and message.message is not null
+		order by message.send_time desc
 	</select>
 	
 	<update id="updateProductTradeStatus">
@@ -46,22 +47,19 @@
 		from TX
 		where product_id = #{product_id} and is_reserved = true;
 	</select>
-	<select id="getProductTX">
-		select count(*)
-		from TX
-		where product_id = #{product_id} and is_reserved = true;
-	</select>
 	<insert id="createTX">
 		insert into TX(product_id,buyer_id, reservation_date)
 		values(#{product_id}, #{buyer_id}, #{reservation_date})
 	</insert>
 	<update id="updateTX">
 		update TX 
+		<!-- 판매 예약을 취소 할 때 -->
 		<if test="is_reserved == true">
 			set is_reserved = false
 		</if>
+		<!-- 구매 확정을 할 때 -->
 		<if test="transaction_end_date != null and transaction_method != null">
-			set is_reserved = false, transaction_end_date = #{transaction_end_date}, transaction_method = #{transaction_method}
+			set transaction_end_date = #{transaction_end_date}, transaction_method = #{transaction_method}
 		</if>
 		where product_id = #{product_id} and is_reserved = true;
 	</update>

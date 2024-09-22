@@ -13,7 +13,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>4989 관리자 메뉴</title>
+    <title>4989 관리자 신고 관리</title>
 
 	<jsp:include page="../inc/cssLink.jsp"></jsp:include>
 	<!-- 본인의 커스텀 css link 위치는 여기서부터 -->
@@ -37,7 +37,7 @@
             <!-- 본문내용은-->
             <div class="container-fluid">
 				<div class="col-lg-auto">
-	                <h2 class="title-1 m-b-25">테이블 제목 </h2>
+	                <h2 class="title-1 m-b-25">신고 관리 </h2>
 	                <div class="input-group mb-3 flex-right-50pct">
 	                <form action="../admin/report" method="get" class="input-group ">
 					  <input type="text" class="form-control" id="search" name="search" value="${pageDTO.search }" placeholder="검색어 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
