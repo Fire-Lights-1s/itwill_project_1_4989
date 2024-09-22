@@ -11,8 +11,8 @@ body {
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ddd;
-    background-color: #f8f8f8;
-    border-radius: 5px;
+   
+    border-radius:10px;
     margin-top: 50px;
 }
 
@@ -25,6 +25,40 @@ label {
     font-weight: bold;
     margin-bottom: 8px;
 }
+
+/* 이미지 항목 스타일 */
+.imageItem {
+  display: inline-block;
+  position: relative; /* 이미지 위에 X 버튼을 배치하기 위해 상대적 위치 설정 */
+}
+
+/* 업로드한 이미지 크기 조정 */
+.imageSize {
+  width: 100px;  /* 이미지의 너비 설정 */
+  height: 100px; /* 이미지의 높이 설정 */
+  margin-left: 1em; /* 이미지 간 간격 설정 */
+}
+
+.imageClose {
+    position: absolute; /* X 버튼을 이미지 위에 배치 */
+    top: 2px; /* X 버튼의 상단 위치 */
+    right: 2px; /* X 버튼의 우측 위치 */
+    background-color: white; /* X 버튼의 배경색 */
+    color: black; /* X 버튼의 글씨색 */
+    border: none; /* X 버튼의 테두리 없음 */
+    cursor: pointer; /* 커서가 포인터로 변경 */
+    border-radius: 50%; /* X 버튼을 원형으로 만듦 */
+    padding: 3px; /* X 버튼의 크기 설정 */
+    font-family: 'noto sans'; /* X 버튼의 폰트 설정 */
+    font-weight: bold; /* X 버튼의 글씨 두께 설정 */
+    display: flex; /* Flexbox를 사용해 중앙 정렬 */
+    justify-content: center; /* X 버튼을 가로 중앙 정렬 */
+    align-items: center; /* X 버튼을 세로 중앙 정렬 */
+    width: 25px; /* X 버튼의 너비 설정 */
+    height: 25px; /* X 버튼의 높이 설정 */
+}
+
+
 
 input[type="text"], input[type="number"], select, textarea {
     width: 100%;
@@ -58,61 +92,50 @@ textarea {
     background-color: #4B0082;
 }
 
-/* 이미지 업로드 스타일 */
-.image-upload {
-    text-align: center;
-    margin-bottom: 20px;
+/* 대표 이미지 텍스트 */
+.mainImage {
+  position: absolute;
+  height: 1.5rem;
+  padding: 0px 0.5rem;
+  display: flex;
+  align-items: center;
+  top: 0.5rem;
+  left: 17px;
+  background: rgba(25, 25, 25, 0.3);
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+  z-index: 1;
 }
 
-.image-upload img {
-    width: 150px;
-    height: 150px;
-    border: 1px solid #ddd;
-    background-color: #f8f8f8;
-    padding: 20px;
-    cursor: pointer;
-}
-
-/* 미리보기 이미지 컨테이너 및 스타일 */
-.image-preview-container {
+.form-container {
     display: flex;
-    gap: 10px; /* 이미지 간 간격 설정 */
-    flex-wrap: wrap; /* 여러 줄로 이미지를 표시할 수 있도록 설정 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 100vh; /* 전체 화면 높이에서 중앙에 위치하게 함 */
+    
 }
 
-.img-wrapper {
-    width: 100px;  /* 미리보기 이미지의 너비 설정 */
-    height: 100px; /* 미리보기 이미지의 높이 설정 */
-    position: relative; /* X 버튼을 절대 위치로 배치하기 위해 relative 사용 */
+.image-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* 이미지 등록 버튼과 미리보기 사이 간격 */
 }
 
-.img-wrapper img {
-    width: 100%;   /* 컨테이너에 꽉 차게 설정 */
-    height: 100%;  /* 컨테이너에 꽉 차게 설정 */
-    object-fit: cover; /* 이미지 비율 유지 */
+.image-preview {
+    position: relative; /* 자식 요소를 기준으로 위치 설정 */
+    display: inline-block;
 }
 
-/* 미리보기 이미지 스타일 */
-#imagePreview {
-    display: none; /* 기본적으로 숨김 */
-    width: 86px; /* 너비 설정 */
-    height: 80px; /* 높이 설정 */
-    object-fit: cover; /* 이미지 비율 유지 */
-    margin-top: 10px; /* 위쪽 여백 */
+
+.submit-btn {
+    display: block;
+    margin: 0 auto; /* 버튼을 중앙으로 정렬 */
 }
 
-/* 이미지 삭제(X) 버튼 스타일 */
-.img-wrapper button {
-    position: absolute; /* X 버튼을 이미지 위에 배치 */
-    top: 5px; /* X 버튼의 상단 위치 */
-    right: 5px; /* X 버튼의 우측 위치 */
-    background-color: grey; /* X 버튼의 배경색 */
-    color: white; /* X 버튼의 글씨색 */
-    border: none; /* X 버튼 테두리 없음 */
-    cursor: pointer; /* 커서 포인터로 변경 */
-    border-radius: 50%; /* X 버튼을 원형으로 만들기 */
-    padding: 5px 10px; /* X 버튼의 크기 설정 */
-}
+
 
 /* ---------- 상품 수정 페이지 ---------- */
 

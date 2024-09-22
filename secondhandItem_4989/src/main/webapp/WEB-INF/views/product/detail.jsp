@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -14,7 +13,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <!-- 추가된 스타일 -->
+    <!-- CSS 파일 경로 -->
+    <link href="${pageContext.request.contextPath}/resources/css/admin/trade.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/productDetail.css">
@@ -90,7 +90,7 @@
 
         <!-- 버튼 그룹 -->
         <div class="button-group" style="display: flex; align-items: center; gap: 10px;">
-            <div class="zzim-button" data-product_id="${productDTO.product_id }" data-member_id="${sessionScope.member_id }" style="bottom: 50%;">♥</div>
+            <div class="zzim-button" data-product_id="${productDTO.product_id }" data-nickname="${sessionScope.nickname}" style="bottom: 50%;">♥</div>
             <button class="button" id="startChat">채팅하기</button>
             <button class="button" id="openReportModal" data-toggle="modal" data-target="#reportModal">신고하기</button>
         </div>
