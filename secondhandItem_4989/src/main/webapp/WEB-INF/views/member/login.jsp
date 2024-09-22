@@ -81,7 +81,8 @@
 <body>
 
   <jsp:include page="../inc/header.jsp"></jsp:include>
-
+	
+	
     <header>
     	<div id="menu-name">
 			로그인

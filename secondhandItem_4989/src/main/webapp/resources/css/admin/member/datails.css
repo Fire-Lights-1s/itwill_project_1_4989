@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+/* 전체 폼 스타일 */
+.profile-update-form {
+    font-family: 'Arial', sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 프로필 이미지 영역 스타일 */
+.profile-circle-div {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover; /* 이미지가 원형을 벗어나지 않도록 */
+}
+
+.profile-circle-edit {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 75%; /* 이미지 하단 중앙에 배치 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.profile-circle-cancel {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+/* 각 폼 필드 스타일 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="tel"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* 비밀번호 변경 버튼 */
+.form-group button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #5c67f2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.form-group button:hover {
+    background-color: #5058cc;
+}
+
+/* 닉네임 중복 확인 버튼 */
+#nickBtn {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#nickBtn:hover {
+    background-color: #5a6268;
+}
+
+/* 제출 버튼 스타일 */
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .profile-update-form {
+        padding: 10px;
+    }
+
+    .profile-circle {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-circle-edit {
+        width: 20px;
+        height: 20px;
+    }
+}

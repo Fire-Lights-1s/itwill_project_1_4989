@@ -109,6 +109,10 @@
 			alert("비밀번호를 입력해주세요.");
 			event.preventDefault();
 		}
+		if(pass1.value != pass2.value) {
+			alert("비밀번호와 비밀번호 확인이 맞지 않습니다.");
+			event.preventDefault();
+		}
 		if(nickname.value === "") {
 			alert("닉네임을 입력해주세요.");
 			event.preventDefault();
