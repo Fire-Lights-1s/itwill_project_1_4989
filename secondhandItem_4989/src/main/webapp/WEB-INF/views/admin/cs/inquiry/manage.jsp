@@ -75,6 +75,9 @@
 				    	<c:when test="${inquiryDTO.replied_at != null && inquiryDTO.replied_at != ''}">
 				          <label for="reply-message"><fmt:formatDate value="${inquiryDTO.replied_at}" pattern="yyyy-MM-dd"/> 답변 완료</label>
 				          <textarea id="reply-message" class="reply-textarea" readonly>${inquiryDTO.inquiry_reply }</textarea>
+							<div style="text-align:right;">
+								<button type="button" class="reply-submit-btn" onclick="window.history.back();">목록으로 돌아가기</button>
+							</div>
 		            	</c:when>
 				    	<c:otherwise>
 				    	 <form action="${pageContext.request.contextPath}/admin/cs/inquiry/reply?inquiry_id=${inquiryDTO.inquiry_id}" method="post">
