@@ -14,18 +14,16 @@ body {
     align-items: center;     /* 중앙 정렬 */
     justify-content: center; /* 수직 방향 중앙 정렬 */
 }
-.product-desc {
-	font-size:
-	flex-direction: column;  /* 요소들을 수직으로 배치 */
-    align-items: center;     /* 중앙 정렬 */
-    justify-content: center; /* 수직 방향 중앙 정렬 */
-	
-}
+
 
 .image-box {
 	width: 100%;  /* 모든 박스의 폭을 컨테이너 폭에 맞춤 */
     max-width: 600px;  /* 최대 너비를 600px로 설정 */
-    margin-bottom: 20px; /* 박스 간 간격 */   
+    margin-bottom: 20px; /* 박스 간 간격 */
+    display: flex;
+    flex-direction: column;  /* 요소들을 수직으로 배치 */
+    align-items: center;  /* 모든 자식 요소들을 가로 방향으로 중앙에 배치 */
+    justify-content: center;  /* 모든 자식 요소들을 세로 방향으로 중앙에 배치 */   
     
     /* flex: 1;
     padding-right: 20px;
@@ -55,15 +53,6 @@ body {
     
 }
 
-/* .details-box pre {
-    white-space: pre-wrap; 내용이 박스 너비를 초과하면 줄바꿈
-    word-wrap: break-word; 단어 단위로 줄바꿈
-}
- */
-.product-description {
-    margin-top: 20px;
-}
-
 
 /* .card { */
 /*     border: 1px solid #ddd; */
@@ -83,8 +72,13 @@ body {
 
 .main-image {
     width: 100%; /* 메인 이미지를 컨테이너 너비에 맞게 설정 */
-    display: block; /* 이미지를 블록 요소로 만듦 */
+    max-width: 480px;
+    object-fit: contain;
+    border-raidus: 8px;
+ 
     margin-bottom: 5px; /* 메인 이미지와 썸네일 이미지 사이의 간격 */
+    height: auto;  /* 높이를 자동으로 설정하여 비율 유지 */
+    object-fit: contain; /* 이미지 비율을 유지하면서 요소 내에 맞춤 */
 }
 
 
@@ -120,10 +114,15 @@ body {
 }
 
 .product-desc {
-	font-size: 24px;
+	font-size: 18px;
+	margin-top: 20px;  /* 위쪽 마진 */
     margin-bottom: 10px;
+    flex-direction: column;  /* 요소들을 수직으로 배치 */
+    align-items: center;     /* 중앙 정렬 */
+    justify-content: center; /* 수직 방향 중앙 정렬 */
 		
 }
+
 
 .product-price {
     font-size: 28px;
@@ -161,7 +160,7 @@ body {
 
 .button-group {
     display: flex;
-    flex-wrap: wrap; /* ✨ 버튼이 한 줄이 넘으면 자동으로 줄바꿈 */
+    flex-wrap: wrap; /* 버튼이 한 줄이 넘으면 자동으로 줄바꿈 */
     margin-top: 20px;
 }
 

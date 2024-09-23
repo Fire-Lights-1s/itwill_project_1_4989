@@ -141,19 +141,21 @@
 									<button class="button" id="openReportModal" data-toggle="modal"
 										data-target="#reportModal">신고하기</button>
 								</div>
+								
+								<div class="product-desc">
+					
+							<div class="card">
+								<strong>상품 정보</strong><br> <span>${productDTO.product_desc}</span>
+							</div>
+					
+					</div>
+								
 							</div>
 						</div>
 					</div>
 
 					<!-- 별도 컨테이너로 상품 설명 추가 -->
-					<div class="product-desc">
-						<!-- 새로운 컨테이너 -->
-						<div class="product-desc">
-							<div class="card">
-								<strong>상품 정보</strong><br> <span>${productDTO.product_desc}</span>
-							</div>
-						</div>
-					</div>
+					
 			</main>
 
 			<%-- <!-- 상품 상세 정보 및 이미지 영역 -->
