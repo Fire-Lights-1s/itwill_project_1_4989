@@ -94,6 +94,16 @@ main {
     margin-top: 5px;
 }
 
+.profile-a button:hover {
+	background-color: #4E229E;
+	color: white;
+}
+
+.profile-a button.active {
+    background-color: #4E229E;
+    color: white;
+}
+
 .profile-item-list button {
 	background-color: #4e229e;
     color: white;

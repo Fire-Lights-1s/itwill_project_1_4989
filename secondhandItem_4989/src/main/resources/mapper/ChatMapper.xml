@@ -16,11 +16,13 @@
 	
 	<select id="getProductInfo" resultType="com.itwillbs.domain.ProductDTO">
 		select p.product_id, p.product_img1, p.seller_id, p.product_name, p.product_price, p.year_purchase, 
-		p.trade_status, p.trade_area, TX.buyer_id
-		from Product p LEFT OUTER join TX
+		p.trade_status, p.trade_area, TX.buyer_id, Review.review_content
+		from Product p LEFT OUTER JOIN TX
 		on p.product_id = TX.product_id
 		and p.product_id = #{product_id}       
         and TX.is_reserved = true
+        LEFT OUTER JOIN Review
+        on TX.product_id = Review.product_id
         where p.product_id = #{product_id}
 	</select>
 	
@@ -29,7 +31,7 @@
 			Product.product_img1, message.message, message.send_time
 		FROM ChatRoom room inner join Product
 		on room.product_id = Product.product_id
-		LEFT OUTER join ChatMessage message
+		LEFT OUTER JOIN ChatMessage message
         on room.chat_room_id = message.chat_room_id 
         and message.chat_id in (select max(chat_id) from ChatMessage
 									group by chat_room_id)
