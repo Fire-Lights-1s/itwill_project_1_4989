@@ -40,7 +40,7 @@
   	 	<br>
   	 	
   	 	<fieldset style="width:60%; margin:0 auto; padding:10px; border:solid #ccc 1px;">
-		<legend style="margin-left:5%; font-size:1em; font-weight:700; font-color:#ccc;"> < 매입 처리과정 ></legend>
+		<legend style="width:auto; margin-left:5%; font-size:1em; font-weight:700; font-color:#ccc;"> < 매입 처리과정 ></legend>
 		<div class="process-container">
 	        <div class="process-step">신청 완료</div> →
 	        <div class="process-step">검수 중</div> →

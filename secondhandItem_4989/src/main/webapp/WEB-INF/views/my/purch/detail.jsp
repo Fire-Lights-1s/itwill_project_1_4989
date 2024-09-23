@@ -83,7 +83,7 @@
 			
 		<!-- 모달 창 -->
 		<div id="myModal" class="modal">
-		    <div class="modal-content">
+		    <div class="modal-content" style="justify-content: center; width:500px;">
 		        <p>정말 취소하시겠습니까?<br>이미 제품을 보내셨다면 착불로 반송됩니다.</p>
 		        <button class="confirm" id="confirmButton">예 (취소)</button>
 		        <button class="cancel" id="cancelButton">아니오</button>
