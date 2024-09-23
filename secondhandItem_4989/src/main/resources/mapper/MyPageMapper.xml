@@ -163,7 +163,6 @@
 		on p.product_id = t.product_id
 		set t.is_reserved = false, p.trade_status = '거래 가능'
 		where p.product_id = #{product_id}
-		and p.seller_id = #{seller_id}
 		and t.is_reserved = true
 	</update>
 	
