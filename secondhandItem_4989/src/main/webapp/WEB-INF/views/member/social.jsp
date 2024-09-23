@@ -39,8 +39,8 @@
                 <div class="input-group">
                     <input type="text" id="nickname" name="nickname" placeholder="닉네임" required>
                     <button type="button" id="check-btn2" class="check-btn">중복 확인</button>
-                    <div id = "checkedNickResult" name = "checkedNickResult"></div>
                 </div>
+                <div id = "checkedNickResult" name = "checkedNickResult"></div>
             </div>
 
 			
