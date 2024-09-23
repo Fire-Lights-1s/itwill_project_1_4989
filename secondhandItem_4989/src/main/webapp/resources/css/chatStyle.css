@@ -15,11 +15,17 @@ a:hover{
 	color:#000000;
 	text-decoration: none;
 }
-.btn{
-	background-color: #400080;
+button:focus{
+	border: 0;
+	outline: 0;
 }
-.btn:hover{
+.bg-purple{
+	background-color: #400080;
+	color: white;
+}
+.bg-purple:hover{
 	background-color: #7300e6;
+	color: white;
 }
 #main-container-chat{
 	margin-top: 0px;
@@ -62,14 +68,9 @@ a:hover{
  	width:120px;
 	height: 40px;
 	border-radius: 10px;
-	background-color: #400080;
 	text-align: center;
 	font-size: 1.2rem;
 	font-weight: 900;
-	color: white;
-}
-.type_select:hover{
-	background-color: #7300e6;
 	color: white;
 }
 .items{
@@ -91,7 +92,6 @@ a:hover{
 }
 .items .drop-menu{
 	position: absolute;
-    background: #400080;
     color: #fff;
     border-radius: 10px;
     width: 120px;
@@ -107,9 +107,6 @@ a:hover{
     top: 40px;
     opacity: 1;
     visibility: visible;
-}
-.items .drop-menu li:hover{
-	background-color: #7300e6;
 }
 #searchText{
 	padding: 5px 10px;
@@ -293,13 +290,9 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 	height:40px;
 	border: 0;
 	border-radius:20px; 
-	background-color: #400080;
 	font-size: 1.2rem;
 	font-weight: 900;
 	color: white;
-}
-#productInfo > div button:hover{
-	background-color: #7300e6;
 }
 #chatContent{
 	flex:6 1 auto;
