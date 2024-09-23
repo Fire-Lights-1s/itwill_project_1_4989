@@ -78,7 +78,6 @@
         <hr>
 
         <!-- 거래 지역, 거래 방식, 결제방식. null일 경우 해당 버튼이 아예 안 뜨게  -->
-        <!-- 거래 지역, 거래 방식, 결제방식 -->
 <div class="button-container" style="display: flex; gap: 10px;">
     <c:if test="${not empty productDTO.trade_area}">
         <button class="button" type="button">${productDTO.trade_area}</button>
@@ -98,10 +97,14 @@
             <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}" class="button"> ${sellerNickname} </a>
         </div>
 
-                <!-- 판매자와 로그인한 사용자가 같으면 '상품 수정' 버튼 추가 -->
-                <c:if test="${productDTO.seller_id == sessionScope.member_id}">
-                    <a href="${pageContext.request.contextPath}/product/update?product_id=${productDTO.product_id}" class="button"> 상품 수정 </a>
-                </c:if>
+                <!-- 판매자와 로그인한 사용자가 같으면 상품수정, 삭제 가능-->
+   <!-- 판매자와 로그인한 사용자가 같으면 상품수정, 삭제 가능-->
+<c:if test="${productDTO.seller_id == sessionScope.member_id}">
+<div class="button-group">
+    <a href="${pageContext.request.contextPath}/product/update?product_id=${productDTO.product_id}" class="button"> 상품 수정 </a>
+    <a href="${pageContext.request.contextPath}/product/delete?product_id=${productDTO.product_id}" class="button"> 상품 삭제 </a>
+</c:if>
+
 
         <!-- 버튼 그룹 -->
         <div class="button-group" style="display: flex; align-items: center; gap: 10px;">
@@ -109,12 +112,16 @@
             <button class="button" id="startChat">채팅하기</button>
             <button class="button" id="openReportModal" data-toggle="modal" data-target="#reportModal">신고하기</button>
         </div>
-        <br>
-        <hr>
 
         <!-- 상품 설명 추가 -->
-        <h3>상품 정보</h3>
-        <pre><p>${productDTO.product_desc}</p></pre>
+        	
+         <br> <hr>
+         <div>
+    
+        <br><h3>상품 정보</h3>
+        <pre>${productDTO.product_desc}</pre>
+        </div>
+        
     </div>
 </div>
  

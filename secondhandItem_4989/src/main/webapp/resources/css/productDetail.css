@@ -3,31 +3,27 @@
 /* ---------- 상품 상세 페이지 ---------- */
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* 폰트 스타일 */
+    font-size: 16px; /* 기본 폰트 크기 */
+    font-weight: normal; /* 기본 폰트 두께 */
     margin: 0;
     padding: 0px; /* 페이지 전체 마진 제거 */
 }
 
 .container {
     display: flex;
-    flex-direction: column;  /* 요소들을 수직으로 배치 */
-    align-items: center;     /* 중앙 정렬 */
-    justify-content: center; /* 수직 방향 중앙 정렬 */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 320px; /* 최소 너비 설정 */
+    width: 80%; /* 상품 정보 박스 너비를 80%로 설정 */
+    margin: auto; /* 중앙 정렬 */
 }
 
 .image-box {
-	width: 100%;  /* 모든 박스의 폭을 컨테이너 폭에 맞춤 */
+    width: 100%;  /* 모든 박스의 폭을 컨테이너 폭에 맞춤 */
     max-width: 600px;  /* 최대 너비를 600px로 설정 */
     margin-bottom: 20px; /* 박스 간 간격 */   
-    
-    /* flex: 1;
-    padding-right: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column; 메인 이미지와 썸네일을 수직으로 배치
-    justify-content: flex-start; ✨ 메인 이미지를 상단에 배치
-    align-items: center; */
-    
 }
 
 .card {
@@ -43,10 +39,10 @@ body {
     border: 1px #aaa;
     border-radius: 10px;
     background-color: #fff;
-    
 }
 
 .details-box pre {
+	 font-family: Arial, sans-serif;
     white-space: pre-wrap; /* 내용이 박스 너비를 초과하면 줄바꿈 */
     word-wrap: break-word; /* 단어 단위로 줄바꿈 */
 }
@@ -55,29 +51,11 @@ body {
     margin-top: 20px;
 }
 
-
-/* .card { */
-/*     border: 1px solid #ddd; */
-/*     padding: 20px; */
-/*     border-radius: 10px; */
-/*     background-color: #fff; */
-/*     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-/* } */
-
-
-/* .main-image img {  메인 이미지 스타일
-    width: 100%; 메인 이미지를 컨테이너 너비에 맞게 설정
-    max-width: 600px; 최대 크기 제한
-    object-fit: contain;
-    border-radius: 8px;
-} */
-
 .main-image {
     width: 100%; /* 메인 이미지를 컨테이너 너비에 맞게 설정 */
     display: block; /* 이미지를 블록 요소로 만듦 */
     margin-bottom: 5px; /* 메인 이미지와 썸네일 이미지 사이의 간격 */
 }
-
 
 .thumbnail-images {  
     display: flex;
@@ -87,7 +65,7 @@ body {
     flex-wrap: nowrap; /* 썸네일 이미지를 한 줄로 배치 */
     overflow-x: auto; /*  썸네일이 한 줄로 넘어가면 가로 스크롤 */
     max-width: 100%; /* 컨테이너 너비에 맞추기 */
-     padding-top: 5px;
+    padding-top: 5px;
 }
 
 .thumbnail-images img {
@@ -103,6 +81,10 @@ body {
     opacity: 0.8;
 }
 
+.product-title, .product-price, .product-meta, .meta-item, .product-info, .tag {
+    font-size: inherit; /* 상속된 폰트 크기 사용 */
+    font-weight: inherit; /* 상속된 폰트 두께 사용 */
+}
 
 .product-title {
     font-size: 24px;
@@ -117,33 +99,9 @@ body {
     margin-bottom: 20px;
 }
 
-.product-meta {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 10px;
-}
-
-.meta-item {
-    margin-right: 10px;
-}
-
-.product-info {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.tag {
-    display: inline-block;
-    padding: 5px 10px;
-    background-color: #eee;
-    border-radius: 5px;
-    margin-right: 5px;
-    font-size: 14px;
-}
-
 .button-group {
     display: flex;
-    flex-wrap: wrap; /* ✨ 버튼이 한 줄이 넘으면 자동으로 줄바꿈 */
+    flex-wrap: wrap; /* 버튼이 한 줄이 넘으면 자동으로 줄바꿈 */
     margin-top: 20px;
 }
 
@@ -152,7 +110,7 @@ body {
     height: 40px; /* 고정된 높이 설정 */
     padding: 10px;
     border: none;
-    background-color: #4e229e;
+    background-color: #4e229e; /* 버튼 색상 */
     color: white;
     cursor: pointer;
     border-radius: 5px;
@@ -163,9 +121,8 @@ body {
 }
 
 .button:hover {
-    background-color: #5a1b9a;
+    background-color: #5a1b9a; /* 호버 시 색상 변경 */
 }
-
 
 .divider {
     margin: 20px 0;

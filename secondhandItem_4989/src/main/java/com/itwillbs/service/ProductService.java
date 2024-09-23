@@ -22,9 +22,9 @@ public class ProductService {
 	@Inject
 	ProductDAO productDAO;
 	ZzimService zzimService;
+
 	
 	//상품 등록
-	//public void registerProduct(ProductDTO productDTO, ) {
 	public void registerProduct(ProductDTO productDTO, List<String> savedFileNames) {
 	    System.out.println("ProductService registerProduct()");
 
@@ -193,6 +193,12 @@ public class ProductService {
 		public void submitReport(ReportDTO reportDTO) {
 			productDAO.insertReport(reportDTO);
 			
+		}
+
+		//상품 삭제
+		public void deleteProduct(int product_id) {
+			System.out.println("Deleting product with ID:" + product_id);	
+			productDAO.deleteProduct(product_id);
 		}
 
 
