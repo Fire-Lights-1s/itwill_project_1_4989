@@ -33,53 +33,55 @@
 			
 			<div class="main-content">
             <!-- 본문내용은-->
-            
-            		<form action="${pageContext.request.contextPath}/my/infoUpdatePro" method="post" class="profile-update-form" name="fr" enctype="multipart/form-data">
-			<div class="profile-circle-div">
-				<img src="${pageContext.request.contextPath}/resources/upload/${memberDTO.profile_img}" class="profile-circle" id="profileImage">
+<div class="container">
+            <form action="${pageContext.request.contextPath}/member/sendPro" method="post" name="fr">
+            <div class="profile-circle-div">
+				<img src="${pageContext.request.contextPath}/resources/upload/${member.profile_img}" class="profile-circle" id="profileImage">
 				<label for="fileInput" class="custom-file-upload">
 				    <img src="${pageContext.request.contextPath}/resources/img/btn_edit.png" class="profile-circle-edit" id="editIcon">
 				</label>
 				<input id="fileInput" type="file" accept="image/*" style="display:none;" name="file">
-				<input type="hidden" name="oldfile" value="${memberDTO.profile_img}">
+				<input type="hidden" name="oldfile" value="${member.profile_img}">
 				<a href="#"><img src="${pageContext.request.contextPath}/resources/img/btn_cancel.png" class="profile-circle-cancel"></a>
 			</div>
             <div class="form-group">
                 <label for="userId">아이디</label>
-                <input type="text" id="userId" name="member_id" value="${memberDTO.member_id}">
+                <input type="text" id="member_id" name="member_id" value="${member.member_id}" placeholder="아이디" required>
+                <button type="button" id="check-btn1" class="check-btn">중복 확인</button>
+                <div id = "checkedIdResult" name = "checkedIdResult"></div>
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="pass" value="${memberDTO.pass}" required>                
-                <p></p>
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">비밀번호 확인</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" value="${memberDTO.pass}" required>
-                <button type="button" onclick="removeReadonly()">비밀 번호 변경</button>
+                <input type="text" id="password" name="pass" value="${member.pass}" placeholder="비밀번호" required>
+                <div id = "checkedPassResult" name = "checkedPassResult"></div>
             </div>
             <div class="form-group">
                 <label for="nickname">닉네임</label>
-                <input type="text" id="nickname" name="nickname" value="${memberDTO.nickname}" required>
-                <button type="button" id="nickBtn">중복 확인</button>
-                <div id="nickCheck" class="form-group">
-                </div>
+                <input type="text" id="nickname" name="nickname" value="${member.nickname}" placeholder="닉네임" required>
+                <button type="button" id="check-btn2" class="check-btn">중복 확인</button>
+            	<div id = "checkedNickResult" name = "checkedNickResult"></div>
             </div>
             <div class="form-group">
                 <label for="name">이름</label>
-                <input type="text" id="name" name="name" value="${memberDTO.name}" required>
+                <input type="text" id="name" name="name" value="${member.name}" placeholder="이름" required>
+                <div id = "checkedNameResult" name = "checkedNameResult"></div>
             </div>
             <div class="form-group">
                 <label for="phoneNumber">휴대폰 번호</label>
-                <input type="tel" id="phoneNumber" name="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" value="${memberDTO.phone}" required>
+                <input type="tel" id="phoneNumber" name="phone" value="${member.phone}" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" placeholder="01012345678" required>
+                <div id = "checkedPhoneResult" name = "checkedPhoneResult"></div>
             </div>
             <div class="form-group">
                 <label for="email">이메일</label>
-                <input type="email" id="email" name="email" value="${memberDTO.email}" required>
+                <input type="email" id="email" name="email" value="${member.email}" placeholder="abcd@efgh.com" required>
+                <div id = "checkedEmailResult" name = "checkedEmailResult"></div>
             </div>
+            
+            
+            
             <button type="submit" class="submit-button" onclick="updateCheck();">수정 완료</button>
         </form>
-	
+</div>
             
             
             <!-- 이 사이에 넣어주세요.-->
