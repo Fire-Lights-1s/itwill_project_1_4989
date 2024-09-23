@@ -46,16 +46,16 @@
 			</div>
             <div class="form-group">
                 <label for="userId">아이디</label>
-                <input type="text" id="userId" name="member_id" value="${memberDTO.member_id}" readonly>
+                <input type="text" id="userId" name="member_id" value="${memberDTO.member_id}">
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="pass" value="${memberDTO.pass}" required readonly>                
+                <input type="password" id="password" name="pass" value="${memberDTO.pass}" required>                
                 <p></p>
             </div>
             <div class="form-group">
                 <label for="confirmPassword">비밀번호 확인</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" value="${memberDTO.pass}" required readonly>
+                <input type="password" id="confirmPassword" name="confirmPassword" value="${memberDTO.pass}" required>
                 <button type="button" onclick="removeReadonly()">비밀 번호 변경</button>
             </div>
             <div class="form-group">
@@ -75,7 +75,7 @@
             </div>
             <div class="form-group">
                 <label for="email">이메일</label>
-                <input type="email" id="email" name="email" value="${memberDTO.email}" required readonly>
+                <input type="email" id="email" name="email" value="${memberDTO.email}" required>
             </div>
             <button type="submit" class="submit-button" onclick="updateCheck();">수정 완료</button>
         </form>
