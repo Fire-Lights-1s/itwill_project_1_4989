@@ -77,17 +77,25 @@
         </div>
         <hr>
 
+        <!-- 거래 지역, 거래 방식, 결제방식. null일 경우 해당 버튼이 아예 안 뜨게  -->
         <!-- 거래 지역, 거래 방식, 결제방식 -->
-        <div class="button-container" style="display: flex; gap: 10px;">
-            <button class="button" type="button">${productDTO.trade_area}</button>
-            <button class="button" type="button">${productDTO.trade_method}</button>
-            <button class="button" type="button">${productDTO.pay_method}</button>
-        </div>
+<div class="button-container" style="display: flex; gap: 10px;">
+    <c:if test="${not empty productDTO.trade_area}">
+        <button class="button" type="button">${productDTO.trade_area}</button>
+    </c:if>
+    <c:if test="${not empty productDTO.trade_method}">
+        <button class="button" type="button">${productDTO.trade_method}</button>
+    </c:if>
+    <c:if test="${not empty productDTO.pay_method}">
+        <button class="button" type="button">${productDTO.pay_method}</button>
+    </c:if>
+</div>
+
 
         <!-- 판매자 정보 및 결제 방식 -->
         <div class="product-info">
             <strong>판매자 </strong>
-            <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}" class="button"> ${productDTO.seller_id} </a>
+            <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}" class="button"> ${sellerNickname} </a>
         </div>
 
         <!-- 버튼 그룹 -->

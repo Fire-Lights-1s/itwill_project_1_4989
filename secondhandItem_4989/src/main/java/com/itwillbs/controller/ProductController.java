@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.domain.ReportDTO;
+import com.itwillbs.service.MemberService;
 import com.itwillbs.service.ProductService;
 import com.itwillbs.service.ZzimService;
 
@@ -34,6 +36,9 @@ public class ProductController {
 
 	@Inject
 	private ProductService productService;
+	
+	@Inject
+	private MemberService memberService;
 
 	@Inject
 	private ZzimService zzimService;
@@ -98,7 +103,7 @@ public class ProductController {
 	    // ProductDTO에 저장된 파일 이름을 설정
 	    productService.registerProduct(productDTO, savedFileNames);
 
-	    return "redirect:/product/list";
+	    return "redirect:/product";
 	}
 
 	
@@ -208,13 +213,16 @@ public class ProductController {
 			member_id = ""; // 로그인하지 않은 상태에서는 member_id를 빈 값으로 설정
 		}
 
-		System.out.println("Product ID: " + product_id);
-		System.out.println("Member ID: " + member_id);
 		// 조회수 증가 처리
 		productService.increseViewCount(Integer.parseInt(product_id));
 
 		// 상품 상세 정보
 		ProductDTO productDTO = productService.getProductDetail(product_id);
+		
+		//판매자의 nickname을 조회**
+	    String seller_id = productDTO.getSeller_id();
+	    MemberDTO memDTO = memberService.getMember(seller_id);  // MemberDTO로부터 닉네임 조회
+	    String seller_nickname = memDTO.getNickname();  // 판매자의 닉네임
 
 		// 판매자와 로그인 사용자 일치여부 확인, 수정 가능 여부 결정
 		boolean canEdit = productDTO.getSeller_id().equals(member_id);
@@ -238,6 +246,7 @@ public class ProductController {
 		model.addAttribute("productDTO", productDTO);
 		model.addAttribute("isZzimSaved", isZzimSaved);
 		model.addAttribute("canEdit", canEdit);
+		model.addAttribute("sellerNickname", seller_nickname); 
 
 		return "/product/detail";
 	}
