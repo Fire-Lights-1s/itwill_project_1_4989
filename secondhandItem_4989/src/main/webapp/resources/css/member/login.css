@@ -91,47 +91,41 @@ h1 {
 }
 
 .signup-btn,
-.kakao-btn{
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-}
-
 .naver-btn {
-	border:none;
+    width: 170px; /* 네이버 로그인 버튼과 같은 너비 */
+    height: 50px; /* 네이버 로그인 버튼과 같은 높이 */
+    padding: 0;
+    display: inline-block;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
 }
 
 .login-bttn:active,
 .signup-btn:active,
-.kakao-btn:active,
 .naver-btn:active {
     transform: scale(0.98);
 }
 
 .signup-btn {
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #ccc;
+    background-color: #4b0082;
+    color: white;
 }
 
-.kakao-btn {
-    background-color: #ffe812;
-    color: #3c1e1e;
+.naver-btn {
+	 background-color: #03C75A;
+	 color: black;
 }
 
-
+.login-bttn:hover {
+    background-color: purple;
+}
 
 .signup-btn:hover {
-    background-color: #f1f1f1;
+    background-color: purple;
 }
 
-.kakao-btn:hover {
-    background-color: #ffde00;
+.naver-btn:hover {
+    background-color: green;
 }
 

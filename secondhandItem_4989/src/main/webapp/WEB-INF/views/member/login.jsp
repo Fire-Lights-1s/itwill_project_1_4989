@@ -116,7 +116,7 @@
             </div>
             <button type="button" class="signup-btn" onclick="redirectToJoin()">회원가입</button>
            
-            <button type="button" class="kakao-btn" onclick="redirectToSocial()">카카오톡으로 시작하기</button>
+            
            
            
 <!--            네이버 로그인 -->
@@ -143,7 +143,8 @@
 <!--      네이버 로그인       -->
            
               <!-- 네이버 로그인 버튼 -->
-  			<a href="<%= apiURL %>"><img width="170" height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+              <button type="button" class="naver-btn" onclick="window.location.href='<%= apiURL %>'">네이버 로그인하기</button>
+<%--   			<a href="<%= apiURL %>"><img width="170" height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a> --%>
 		
         </form>
     </div>
