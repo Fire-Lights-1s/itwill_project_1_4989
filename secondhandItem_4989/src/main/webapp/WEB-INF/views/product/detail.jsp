@@ -98,6 +98,11 @@
             <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}" class="button"> ${sellerNickname} </a>
         </div>
 
+                <!-- 판매자와 로그인한 사용자가 같으면 '상품 수정' 버튼 추가 -->
+                <c:if test="${productDTO.seller_id == sessionScope.member_id}">
+                    <a href="${pageContext.request.contextPath}/product/update?product_id=${productDTO.product_id}" class="button"> 상품 수정 </a>
+                </c:if>
+
         <!-- 버튼 그룹 -->
         <div class="button-group" style="display: flex; align-items: center; gap: 10px;">
             <div class="zzim-button" data-product_id="${productDTO.product_id }" data-nickname="${sessionScope.nickname}" style="bottom: 50%;">♥</div>
