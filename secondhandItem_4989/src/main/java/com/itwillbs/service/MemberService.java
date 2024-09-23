@@ -95,5 +95,11 @@ public class MemberService {
 		return memberDAO.emailCheck(email);
 	}
 	
+//	회원가입시 중복된 정보일경우 거절
+	public int userCheck2(MemberDTO memberDTO) {
+		System.out.println("MemberService userCheck2()");
+		
+		return memberDAO.userCheck2(memberDTO);
+	}
 	
 }

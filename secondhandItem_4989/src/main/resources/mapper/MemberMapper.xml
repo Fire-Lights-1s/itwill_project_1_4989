@@ -66,4 +66,10 @@
 		where email = #{email}
 	</select>
 	
+<!-- 	회원가입시 중복된 정보일경우 거절 -->
+	<select id="userCheck2" resultType="java.lang.Integer">
+		select count(*) from Mem
+		where member_id = #{member_id} or nickname = #{nickname} or email = #{email} or phone = #{phone} 
+	</select>
+	
 </mapper>

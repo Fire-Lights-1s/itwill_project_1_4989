@@ -70,30 +70,30 @@
   </section>
   
 <script>
-let checkedPhoneResult = false;
+// let checkedPhoneResult = false;
 
-document.fr.phone.onblur = function() {
+// document.fr.phone.onblur = function() {
 	
-	let phone = document.fr.phone.value;
-	let hasNumber = /\d/; // 숫자가 포함되어 있는지 확인하는 정규식
+// 	let phone = document.fr.phone.value;
+// 	let hasNumber = /\d/; // 숫자가 포함되어 있는지 확인하는 정규식
 	
-	if(phone.length ==11 && hasNumber.test(phone)){
-		document.querySelector('#checkedPhoneResult').innerText = "";
-		document.querySelector('#checkedPhoneResult').style.color = "red";
-		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
+// 	if(phone.length ==11 && hasNumber.test(phone)){
+// 		document.querySelector('#checkedPhoneResult').innerText = "";
+// 		document.querySelector('#checkedPhoneResult').style.color = "red";
+// 		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
 		
-	} else if(document.fr.phone.value == "") {
-		document.querySelector('#checkedPhoneResult').innerText = "휴대폰 번호를 입력해주세요.";
-		document.querySelector('#checkedPhoneResult').style.color = "red";
-		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
+// 	} else if(document.fr.phone.value == "") {
+// 		document.querySelector('#checkedPhoneResult').innerText = "휴대폰 번호를 입력해주세요.";
+// 		document.querySelector('#checkedPhoneResult').style.color = "red";
+// 		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
 		
-	} else {
-		document.querySelector('#checkedPhoneResult').innerText = "휴대폰 번호를 다시 확인해주세요.(11자리)";
-		document.querySelector('#checkedPhoneResult').style.color = "red";
-		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
+// 	} else {
+// 		document.querySelector('#checkedPhoneResult').innerText = "휴대폰 번호를 다시 확인해주세요.(11자리)";
+// 		document.querySelector('#checkedPhoneResult').style.color = "red";
+// 		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
 
-	}
-}
+// 	}
+// }
 
 </script>
   
@@ -122,6 +122,36 @@ $(function(){
 	});
 });
 </script>
+
+
+<!-- 휴대폰번호 중복확인 -->
+<script type="text/javascript">
+$(function(){
+	$('#phone').blur(function() {
+// 		alert("asd")
+		$.ajax({
+			url:'${pageContext.request.contextPath}/member/phoneCheck',
+			data:{'Phone':$('#phone').val()},
+			success:function(result){
+				
+				if (result == 'phonedup'){
+					result = "이미 등록된 휴대폰번호입니다.";
+					$('#checkedPhoneResult').html(result).css('color','red');
+				} else {
+					result = "사용가능한 휴대폰번호입니다.";
+					$('#checkedPhoneResult').html(result).css('color','green');
+				}
+				
+			}
+			
+		});
+		
+	});
+});
+
+</script>
+
+
 
   <jsp:include page="../inc/footer.jsp"></jsp:include>
   

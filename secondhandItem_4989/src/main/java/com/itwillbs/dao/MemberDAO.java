@@ -86,4 +86,11 @@ public class MemberDAO {
 		return sqlSession.selectOne(namespace + ".emailCheck", email);
 	}
 	
+//	회원가입시 중복된 정보일경우 거절
+	public int userCheck2(MemberDTO memberDTO) {
+		System.out.println("MemberDAO userCheck2()");
+		
+		return sqlSession.selectOne(namespace + ".userCheck2", memberDTO);
+	}
+	
 }
