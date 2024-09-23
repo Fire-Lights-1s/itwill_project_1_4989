@@ -153,8 +153,14 @@ button:focus{
 	height: 100px;
 	background-color: #eee;
 }
+#chatTotalRoom > div:focus{
+	background-color: #eee;
+}
 #chatTotalRoom > div > .profile{
-	background-color: #aaa;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	background-color: #eee;
 	border-radius:50%;
 	margin:10px;
 	width:80px;
@@ -162,7 +168,7 @@ button:focus{
 	overflow: hidden;
 }
 .profile img{
-	width:80px;
+	width: 80px;
 	height: 80px;
 }
 #chatTotalRoom > div > .chatDescript{
@@ -199,7 +205,7 @@ div#chatTotalRoom::-webkit-scrollbar-track {
 }
 
 .chatContnet p{
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 }
 .chatDescript .alamIcon{
 	margin: 0 auto;

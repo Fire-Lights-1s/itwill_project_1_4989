@@ -3,7 +3,7 @@ let chatList = null;
 let userId = sessionUserId;
 let chatRoomGlobal = null;
 let productGlobal = null;
-
+let contextPathGlobal = contextPath;
 
 $(document).ready(function(){
     if(userId == null || userId == ''){
@@ -24,6 +24,7 @@ function setConnected() {
 function connect(chatRoom_json){
 	
 	chatRoomGlobal = JSON.parse(chatRoom_json.replaceAll("&#034;", "\"").replaceAll("\n","<br>"));
+	setConnected();
     let socket = new SockJS('./chatting');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame){
@@ -92,8 +93,8 @@ function loadProduct(chatRoom_json){
 	        //Ajax 성공시
 	        //console.log(data);
 	        productGlobal = data;
-	        
-	        $('#productInfo div:nth-child(1) img').attr( "src", productGlobal.product_img1 );
+	        $('#productInfo div:nth-child(1) img').attr( "src", `${contextPathGlobal}/resources/upload/${productGlobal.product_img1}` );
+	        $('#productInfo div:nth-child(1) img').attr( "onerror", `this.onerror=null; this.src='${contextPathGlobal}/resources/img/icon/not_found.png';`);
 	        $('#productInfo div:nth-child(2) p:nth-child(1)').text(productGlobal.product_name);
 	        $('#productInfo div:nth-child(2) p:nth-child(2)').text("상품 가격 : "+productGlobal.product_price+"원");
 	        $('#productInfo div:nth-child(2) p:nth-child(3)').text("구매 연도 : "+productGlobal.year_purchase);

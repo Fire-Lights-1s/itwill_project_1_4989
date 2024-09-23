@@ -17,6 +17,7 @@
 <script type="text/javascript" th:inline="javascript">
 	let sessionUserId = '<c:out value="${sessionUID}"/>';
 	let objChatRoomDTO = '<c:out value="${chatRoomDTO}"/>'.replaceAll("&#034;", "\"");
+	let contextPath = '<c:out value="${pageContext.request.contextPath}"/>';
 </script>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -57,7 +58,8 @@
 					<c:forEach var="chatRoom" items="${chatRoomDTOList }">
 					<div id="${chatRoom.chat_room_id }" onclick="connect(`<c:out value="${chatRoom}"/>`);">
 						<div class="profile">
-							<img alt="" src="${chatRoom.product_img1 }">
+							<img onerror="this.onerror=null; this.src='${pageContext.request.contextPath }/resources/img/icon/not_found.png';" 
+							src="${pageContext.request.contextPath }/resources/upload/${chatRoom.product_img1 }">
 						</div>
 						<div class="chatDescript">
 							<div class="chatContnet">
