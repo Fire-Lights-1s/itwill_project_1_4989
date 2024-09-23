@@ -37,8 +37,11 @@ function connect(chatRoom_json){
             showChat(JSON.parse(chatMessage.body));
         });
         stompClient.subscribe('/topic/product/' + chatRoomGlobal.product_id, function (product){
+        	productLoadingStart();
         	changeProductState(product.body);
-        	productLoadingEnd();
+        	setTimeout(function(){
+        		productLoadingEnd();
+        	}, 1000);
         });
         $('#inputMessage').css('visibility', 'visible');
     });
@@ -167,44 +170,49 @@ function productState_btn(){
 		  	}
 		    break;
 		  case '거래 완료':
-		  	$(TXButton).text('후기 작성');
-		  	$(TXButton).css('visibility', 'visible');
-		  	$(TXButton).addClass('reviewBtn');
-		  	$(TXButton).attr('data-toggle', "modal");
-			$(TXButton).attr('data-target', "#reviewModal");
-		  	//후기 작성 버튼 이벤트 
-		  	$(TXButton).on('click', function(event){
-		  		document.querySelectorAll('.stars').forEach(function(starGroup) {
-				    const stars = starGroup.querySelectorAll('.star');
-				    const hiddenInputId = starGroup.getAttribute('data-name') + 'Rating';
-				    const hiddenInput = document.getElementById(hiddenInputId);
+			// 리뷰가 없을 때
+			if(productGlobal.review_content == null){
+				$(TXButton).text('후기 작성');
+				$(TXButton).css('visibility', 'visible');
+				$(TXButton).attr('data-toggle', "modal");
+			  	$(TXButton).attr('data-target', "#reviewModal");
+				//후기 작성 버튼 이벤트 
+				$(TXButton).on('click', function(event){
+					document.querySelectorAll('.stars').forEach(function(starGroup) {
+					  const stars = starGroup.querySelectorAll('.star');
+					  const hiddenInputId = starGroup.getAttribute('data-name') + 'Rating';
+					  const hiddenInput = document.getElementById(hiddenInputId);
+					  
+					  stars.forEach(function(star) {
+						  star.classList.remove('selected');
+					  });
+					  hiddenInput.value = ''; 
+					  
+					  stars.forEach(function(star, index) {
+						star.addEventListener('click', function() {
+						  // 선택된 별까지 색상 변경
+						  stars.forEach(function(s, i) {
+							if (i <= index) {
+							  s.classList.add('selected');
+							} else {
+							  s.classList.remove('selected');
+							}
+						  });
+						  hiddenInput.value = star.getAttribute('data-value');	
+						});
+					  });
+					});
 					
-				    stars.forEach(function(star) {
-				        star.classList.remove('selected');
-				    });
-				    hiddenInput.value = ''; 
-				    
-				    stars.forEach(function(star, index) {
-				      star.addEventListener('click', function() {
-				        // 선택된 별까지 색상 변경
-				        stars.forEach(function(s, i) {
-				          if (i <= index) {
-				            s.classList.add('selected');
-				          } else {
-				            s.classList.remove('selected');
-				          }
-				        });
-				        hiddenInput.value = star.getAttribute('data-value');	
-				      });
-				    });
-				  });
-				  
-	            const imageSrc = productGlobal.product_img1;
-	            const productId = productGlobal.product_id;
-	            console.log(imageSrc);
-	            $('modalImage').attr('src', `${imageSrc}`);
-	            $('productId').val(productId);
-		  	});
+				  const imageSrc = productGlobal.product_img1;
+				  const productId = productGlobal.product_id;
+				  console.log(imageSrc);
+				  $('#modalImage').attr('src', `${imageSrc}`);
+				  $('#productId').val(productId);
+				});
+			}else{
+				$(TXButton).text('후기 작성 완료');
+				$(TXButton).css('visibility', 'visible');
+			}
 		    break;
 		  default:
 		    $(TXButton).text('');
@@ -378,8 +386,8 @@ function changeProductState(product){
 	//console.log('changeProductState : ' + product);
 	productGlobal = JSON.parse(product);
 	$('#productInfo div:nth-child(2) p:nth-child(4)').text("거래 상태 : "+ productGlobal.trade_status);
-	
 	//거래 관련 버튼 조작 함수
     productState_btn();
-}//changeProductState()
+    
+}
 
