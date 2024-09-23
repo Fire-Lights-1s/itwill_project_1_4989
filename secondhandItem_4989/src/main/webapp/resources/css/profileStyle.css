@@ -125,6 +125,11 @@ main {
 	flex-direction:column;
 }
 
+.active-link {
+    background-color: rgba(78, 34, 158, 0.23); /* 클릭 시 변경될 배경색 */
+    color: white; /* 텍스트 색상 변경 */
+}
+
 .login-container {
     background: #f8f8f8;
     display:flex;

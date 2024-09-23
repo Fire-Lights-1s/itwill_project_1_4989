@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/carouselStyle.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/animate.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
-<%-- 	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script> --%>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
@@ -44,5 +43,16 @@
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
+<script>
+	const navLinks = document.querySelectorAll('#sideNavLinks .nav-link');
+	const currentUrl = window.location.pathname;
+	navLinks.forEach(link => {
+	    if (link.getAttribute('href') === currentUrl) {
+	        link.classList.add('active-link');
+	    }
+	});
+</script>
+
 </body>
 </html>
