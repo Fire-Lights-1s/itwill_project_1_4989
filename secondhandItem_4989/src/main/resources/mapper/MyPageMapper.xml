@@ -178,7 +178,7 @@
 	</update>
 	
 	<select id="allRating" resultType="java.lang.Double">
-		select (ifnull(AVG(r.review_quality), 1.0) + ifnull(AVG(r.review_price), 1.0) + ifnull(AVG(r.review_time), 1.0) + ifnull(AVG(r.review_manner), 1.0)) / 4
+		select round(((ifnull(AVG(r.review_quality), 1.0) + ifnull(AVG(r.review_price), 1.0) + ifnull(AVG(r.review_time), 1.0) + ifnull(AVG(r.review_manner), 1.0)) / 4), 1)
 		from Review r join Product p 
 		on r.product_id = p.product_id
 		where p.seller_id = #{id}

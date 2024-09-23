@@ -270,6 +270,16 @@ display: inline-block;
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
+<script>
+	const navLinks = document.querySelectorAll('#sideNavLinks .nav-link');
+	const currentUrl = window.location.pathname;
+	navLinks.forEach(link => {
+	    if (link.getAttribute('href') === currentUrl) {
+	        link.classList.add('active-link');
+	    }
+	});
+</script>
+
 <script type="text/javascript">
 	function priceAsc(){
 		location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}';
