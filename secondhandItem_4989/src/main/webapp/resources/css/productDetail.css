@@ -14,6 +14,13 @@ body {
     align-items: center;     /* 중앙 정렬 */
     justify-content: center; /* 수직 방향 중앙 정렬 */
 }
+.product-desc {
+	font-size:
+	flex-direction: column;  /* 요소들을 수직으로 배치 */
+    align-items: center;     /* 중앙 정렬 */
+    justify-content: center; /* 수직 방향 중앙 정렬 */
+	
+}
 
 .image-box {
 	width: 100%;  /* 모든 박스의 폭을 컨테이너 폭에 맞춤 */
@@ -29,6 +36,8 @@ body {
     align-items: center; */
     
 }
+
+
 
 .card {
     width: 100%;  /* 카드의 너비를 부모 요소에 맞춤 */
@@ -46,11 +55,11 @@ body {
     
 }
 
-.details-box pre {
-    white-space: pre-wrap; /* 내용이 박스 너비를 초과하면 줄바꿈 */
-    word-wrap: break-word; /* 단어 단위로 줄바꿈 */
+/* .details-box pre {
+    white-space: pre-wrap; 내용이 박스 너비를 초과하면 줄바꿈
+    word-wrap: break-word; 단어 단위로 줄바꿈
 }
-
+ */
 .product-description {
     margin-top: 20px;
 }
@@ -110,6 +119,12 @@ body {
     margin-bottom: 10px;
 }
 
+.product-desc {
+	font-size: 24px;
+    margin-bottom: 10px;
+		
+}
+
 .product-price {
     font-size: 28px;
     font-weight: bold;
@@ -127,7 +142,10 @@ body {
     margin-right: 10px;
 }
 
+
 .product-info {
+	display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
     font-size: 16px;
     margin-bottom: 10px;
 }
@@ -161,6 +179,7 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 
 .button:hover {
     background-color: #5a1b9a;

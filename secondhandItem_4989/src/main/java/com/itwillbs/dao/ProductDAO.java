@@ -15,7 +15,6 @@ public class ProductDAO {
 
 	@Inject
 	private SqlSession sqlSession;
-
 	private static final String namespace = "com.itwillbs.mapper.ProductMapper";
 
 	// 상품 등록
@@ -57,12 +56,12 @@ public class ProductDAO {
 	    // 기존 상품 정보 조회
 	    ProductDTO existingProduct = sqlSession.selectOne(namespace + ".getProductDetail", productDTO.getProduct_id());
 
-	    // **노란색 하이라이트: 기존의 view_count, like_count, trade_status 값 유지**
+	    //
 	    productDTO.setView_count(existingProduct.getView_count());
 	    productDTO.setLike_count(existingProduct.getLike_count());
 	    productDTO.setTrade_status(existingProduct.getTrade_status());
 
-	    // **노란색 하이라이트: 기존 이미지가 null이 아닐 경우, 이미지를 유지**
+	    // **기존 이미지가 null이 아닐 경우, 이미지를 유지**
 	    if (productDTO.getProduct_img1() == null || productDTO.getProduct_img1().isEmpty()) {
 	        productDTO.setProduct_img1(existingProduct.getProduct_img1());
 	    }
@@ -79,7 +78,7 @@ public class ProductDAO {
 	        productDTO.setProduct_img5(existingProduct.getProduct_img5());
 	    }
 
-	    // **노란색 하이라이트: 최종적으로 업데이트된 정보를 DB에 반영**
+	    //
 	    sqlSession.update(namespace + ".updateProduct", productDTO);
 	}
 
@@ -89,5 +88,13 @@ public class ProductDAO {
 		sqlSession.insert(namespace + ".insertReport", reportDTO);
 
 	}
+	
+	// 상품 삭제
+	  public void deleteProduct(int product_id) {
+		     System.out.println("ProductDAO deleteProduct() with ID: " + product_id);
+		        sqlSession.delete(namespace + ".deleteProduct", product_id);
+	    }
+		
+		
+	}//DAO
 
-}
