@@ -113,7 +113,7 @@ if(pass.length >= 8 && hasNumber.test(pass) && hasSpecialChar.test(pass) && hasL
 	
 	document.querySelector('#checkedPassResult').innerText = "사용가능한 비밀번호입니다.";
 	document.querySelector('#checkedPassResult').style.color = "blue";
-	document.querySelector('#checkedPassResult').style.fontWeight = "900";
+// 	document.querySelector('#checkedPassResult').style.fontWeight = "900";
 // 	document.querySelector('#checkedPassResult').style.textAlign = "center";
 	
 	//id 규칙 검사 적합 여부를 저장하는 변수에 true값 저장
@@ -122,7 +122,7 @@ if(pass.length >= 8 && hasNumber.test(pass) && hasSpecialChar.test(pass) && hasL
 	} else if(document.fr.pass.value == "") {
 		document.querySelector('#checkedPassResult').innerText = "비밀번호를 입력해주세요";
 		document.querySelector('#checkedPassResult').style.color = "red";
-		document.querySelector('#checkedPassResult').style.fontWeight = "900";
+// 		document.querySelector('#checkedPassResult').style.fontWeight = "900";
 // 		document.querySelector('#checkedPassResult').style.textAlign = "center";
 	
 		//id 규칙 검사 적합 여부를 저장하는 변수에 true값 저장
@@ -131,7 +131,7 @@ if(pass.length >= 8 && hasNumber.test(pass) && hasSpecialChar.test(pass) && hasL
 	} else if(pass.length <= 8) {
 		document.querySelector('#checkedPassResult').innerText = "8자 이상만 사용 가능합니다.";
 		document.querySelector('#checkedPassResult').style.color = "red";
-		document.querySelector('#checkedPassResult').style.fontWeight = "900";
+// 		document.querySelector('#checkedPassResult').style.fontWeight = "900";
 // 		document.querySelector('#checkedPassResult').style.textAlign = "center";
 	
 	//id 규칙 검사 적합 여부를 저장하는 변수에 true값 저장
@@ -140,7 +140,7 @@ if(pass.length >= 8 && hasNumber.test(pass) && hasSpecialChar.test(pass) && hasL
 	} else  {
 		document.querySelector('#checkedPassResult').innerText = "영문,숫자,특수문자가 반드시 포함되야 합니다.";
 		document.querySelector('#checkedPassResult').style.color = "red";
-		document.querySelector('#checkedPassResult').style.fontWeight = "900";
+// 		document.querySelector('#checkedPassResult').style.fontWeight = "900";
 // 		document.querySelector('#checkedPassResult').style.textAlign = "center";
 	
 	
@@ -162,12 +162,12 @@ let checkedPassResult1 = false;
 	if(confirmPassword == pass && confirmPassword != ""){
 		document.querySelector('#checkedPassResult1').innerText = "비밀번호가 일치합니다.";
 		document.querySelector('#checkedPassResult1').style.color = "blue";
-		document.querySelector('#checkedPassResult1').style.fontWeight = "900";
+// 		document.querySelector('#checkedPassResult1').style.fontWeight = "900";
 		
 	} else if(document.fr.confirmPassword.value == "") {
 		document.querySelector('#checkedPassResult1').innerText = "비밀번호를 입력해주세요";
 		document.querySelector('#checkedPassResult1').style.color = "red";
-		document.querySelector('#checkedPassResult1').style.fontWeight = "900";
+// 		document.querySelector('#checkedPassResult1').style.fontWeight = "900";
 	
 	
 	} else {
@@ -189,13 +189,13 @@ document.fr.name.onblur = function() {
 	if(document.fr.name.value == ""){
 		document.querySelector('#checkedNameResult').innerText = "이름을 입력해주세요.";
 		document.querySelector('#checkedNameResult').style.color = "red";
-		document.querySelector('#checkedNameResult').style.fontWeight = "900";
+// 		document.querySelector('#checkedNameResult').style.fontWeight = "900";
 		
 	} 
 	else {
 		document.querySelector('#checkedNameResult').innerText = "";
 		document.querySelector('#checkedNameResult').style.color = "red";
-		document.querySelector('#checkedNameResult').style.fontWeight = "900";
+// 		document.querySelector('#checkedNameResult').style.fontWeight = "900";
 		
 	}
 }
@@ -203,58 +203,58 @@ document.fr.name.onblur = function() {
 </script>
 
 <!-- 휴대폰번호 조건 -->
-<script>
-let checkedPhoneResult = false;
+<!-- <script> -->
+<!-- let checkedPhoneResult = false; -->
 
-document.fr.phone.onblur = function() {
+<!-- document.fr.phone.onblur = function() { -->
 	
-	let phone = document.fr.phone.value;
-	let hasNumber = /\d/; // 숫자가 포함되어 있는지 확인하는 정규식
+<!-- 	let phone = document.fr.phone.value; -->
+<!-- 	let hasNumber = /\d/; // 숫자가 포함되어 있는지 확인하는 정규식 -->
 	
-	if(phone.length ==11 && hasNumber.test(phone)){
-		document.querySelector('#checkedPhoneResult').innerText = "";
-		document.querySelector('#checkedPhoneResult').style.color = "red";
-		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
+<!-- 	if(phone.length ==11 && hasNumber.test(phone)){ -->
+<!-- 		document.querySelector('#checkedPhoneResult').innerText = ""; -->
+<!-- 		document.querySelector('#checkedPhoneResult').style.color = "red"; -->
+<!-- 		document.querySelector('#checkedPhoneResult').style.fontWeight = "900"; -->
 		
-	} else if(document.fr.phone.value == "") {
-		document.querySelector('#checkedPhoneResult').innerText = "휴대폰 번호를 입력해주세요.";
-		document.querySelector('#checkedPhoneResult').style.color = "red";
-		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
+<!-- 	} else if(document.fr.phone.value == "") { -->
+<!-- 		document.querySelector('#checkedPhoneResult').innerText = "휴대폰 번호를 입력해주세요."; -->
+<!-- 		document.querySelector('#checkedPhoneResult').style.color = "red"; -->
+<!-- 		document.querySelector('#checkedPhoneResult').style.fontWeight = "900"; -->
 		
-	}
+<!-- 	} -->
 	
-	else {
-		document.querySelector('#checkedPhoneResult').innerText = "휴대폰 번호를 다시 확인해주세요.(11자리)";
-		document.querySelector('#checkedPhoneResult').style.color = "red";
-		document.querySelector('#checkedPhoneResult').style.fontWeight = "900";
+<!-- 	else { -->
+<!-- 		document.querySelector('#checkedPhoneResult').innerText = "휴대폰 번호를 다시 확인해주세요.(11자리)"; -->
+<!-- 		document.querySelector('#checkedPhoneResult').style.color = "red"; -->
+<!-- 		document.querySelector('#checkedPhoneResult').style.fontWeight = "900"; -->
 
-	}
-}
+<!-- 	} -->
+<!-- } -->
 
-</script>
+<!-- </script> -->
 
 <!-- 이메일 조건 -->
-<script>
-let checkedEmailResult = false;
+<!-- <script> -->
+<!-- let checkedEmailResult = false; -->
 
-document.fr.email.onblur = function() {
+<!-- document.fr.email.onblur = function() { -->
 	
 	
-	if(document.fr.email.value == ""){
-		document.querySelector('#checkedEmailResult').innerText = "이메일을 입력해주세요.";
-		document.querySelector('#checkedEmailResult').style.color = "red";
-		document.querySelector('#checkedEmailResult').style.fontWeight = "900";
+<!-- 	if(document.fr.email.value == ""){ -->
+<!-- 		document.querySelector('#checkedEmailResult').innerText = "이메일을 입력해주세요."; -->
+<!-- 		document.querySelector('#checkedEmailResult').style.color = "red"; -->
+<!-- 		document.querySelector('#checkedEmailResult').style.fontWeight = "900"; -->
 		
-	} else {
-		document.querySelector('#checkedEmailResult').innerText = "";
-		document.querySelector('#checkedEmailResult').style.color = "blue";
-		document.querySelector('#checkedEmailResult').style.fontWeight = "900";
+<!-- 	} else { -->
+<!-- 		document.querySelector('#checkedEmailResult').innerText = ""; -->
+<!-- 		document.querySelector('#checkedEmailResult').style.color = "blue"; -->
+<!-- 		document.querySelector('#checkedEmailResult').style.fontWeight = "900"; -->
 		
-	}
+<!-- 	} -->
 	
-}
+<!-- } -->
 
-</script>
+<!-- </script> -->
 
 
 <!-- <div class="form-group"> -->
@@ -324,8 +324,121 @@ $(function(){
 	});
 });
 </script>
-  
+
+
+<!-- <div class="form-group"> -->
+<!--                 <label for="phoneNumber">휴대폰 번호</label> -->
+<!--                 <input type="tel" id="phoneNumber" name="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" placeholder="01012345678" required> -->
+<!--                 <div id = "checkedPhoneResult" name = "checkedPhoneResult"></div> -->
+<!--             </div> -->
+
+<!-- 휴대폰번호 중복확인 -->
+<script type="text/javascript">
+$(function(){
+	$('#phoneNumber').blur(function() {
+// 		alert("asd")
+		$.ajax({
+			url:'${pageContext.request.contextPath}/member/phoneCheck',
+			data:{'Phone':$('#phoneNumber').val()},
+			success:function(result){
+				
+				if (result == 'phonedup'){
+					result = "이미 등록된 휴대폰번호입니다.";
+					$('#checkedPhoneResult').html(result).css('color','red');
+				} else {
+					result = "사용가능한 휴대폰번호입니다.";
+					$('#checkedPhoneResult').html(result).css('color','green');
+				}
+				
+			}
+			
+		});
+		
+	});
+});
+
+</script>
+
+
+<!-- <div class="form-group"> -->
+<!--                 <label for="email">이메일</label> -->
+<!--                 <input type="email" id="email" name="email" placeholder="abcd@efgh.com" required> -->
+<!--                 <div id = "checkedEmailResult" name = "checkedEmailResult"></div> -->
+<!--             </div> -->
+
+<!-- 이메일 중복확인 -->
+<script type="text/javascript">
+$(function(){
+	$('#email').blur(function() {
+// 		alert("asd")
+		$.ajax({
+			url:'${pageContext.request.contextPath}/member/emailCheck',
+			data:{'Email':$('#email').val()},
+			success:function(result){
+				
+				if (result == 'emaildup'){
+					result = "이미 등록된 이메일입니다.";
+					$('#checkedEmailResult').html(result).css('color','red');
+				} else {
+					result = "사용가능한 이메일입니다.";
+					$('#checkedEmailResult').html(result).css('color','green');
+				}
+				
+			}
+			
+		});
+		
+	});
+});
+
+</script>
+
+
+
   <jsp:include page="../inc/footer.jsp"></jsp:include>
   
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -122,7 +122,7 @@ $(function(){
 	});
 });
 </script>
-  
+
   <jsp:include page="../inc/footer.jsp"></jsp:include>
   
 </body>

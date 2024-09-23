@@ -85,4 +85,15 @@ public class MemberService {
 		return memberDAO.nickCheck(nickname);
 	}
 	
+	public MemberDTO phoneCheck(String phone) {
+		System.out.println("MemberService phoneCheck()");
+		return memberDAO.phoneCheck(phone);
+	}
+	
+	public MemberDTO emailCheck(String email) {
+		System.out.println("MemberService emailCheck()");
+		return memberDAO.emailCheck(email);
+	}
+	
+	
 }

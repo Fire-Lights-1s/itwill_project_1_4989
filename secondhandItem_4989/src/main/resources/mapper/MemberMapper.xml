@@ -56,4 +56,14 @@
 		where nickname = #{nickname}
 	</select>
 	
+	<select id="phoneCheck" resultType="com.itwillbs.domain.MemberDTO">
+		select * from Mem
+		where phone = #{phone}
+	</select>
+	
+	<select id="emailCheck" resultType="com.itwillbs.domain.MemberDTO">
+		select * from Mem
+		where email = #{email}
+	</select>
+	
 </mapper>

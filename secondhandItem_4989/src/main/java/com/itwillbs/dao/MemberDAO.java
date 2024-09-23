@@ -76,4 +76,14 @@ public class MemberDAO {
 		return sqlSession.selectOne(namespace + ".nickCheck", nickname);
 	}
 	
+	public MemberDTO phoneCheck(String phone) {
+		System.out.println("MemberDAO phoneCheck()");
+		return sqlSession.selectOne(namespace + ".phoneCheck", phone);
+	}
+	
+	public MemberDTO emailCheck(String email) {
+		System.out.println("MemberDAO emailCheck()");
+		return sqlSession.selectOne(namespace + ".emailCheck", email);
+	}
+	
 }

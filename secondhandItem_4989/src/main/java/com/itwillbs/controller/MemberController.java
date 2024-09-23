@@ -349,6 +349,50 @@ public class MemberController {
 		return result;
 	}
 	
+	@GetMapping("/phoneCheck")
+	@ResponseBody
+	public String phoneCheck(HttpServletRequest request) {
+		System.out.println("AjaxController phoneCheck()");
+		String phone = request.getParameter("Phone");
+		
+		MemberDTO memberDTO = memberService.phoneCheck(phone);
+		
+		String result = "";
+		if(memberDTO != null) {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 중복";
+			result = "phonedup";
+		} else {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 사용가능";
+			result = "phoneok";
+		}
+		//결과값(html, xml, json) 리턴
+		return result;
+	}
+	
+	@GetMapping("/emailCheck")
+	@ResponseBody
+	public String emailCheck(HttpServletRequest request) {
+		System.out.println("AjaxController emailCheck()");
+		String email = request.getParameter("Email");
+		
+		MemberDTO memberDTO = memberService.emailCheck(email);
+		
+		String result = "";
+		if(memberDTO != null) {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 중복";
+			result = "emaildup";
+		} else {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 사용가능";
+			result = "emailok";
+		}
+		//결과값(html, xml, json) 리턴
+		return result;
+	}
+	
 	@GetMapping("/send")
 	public String send() {
 		return "/member/send";
