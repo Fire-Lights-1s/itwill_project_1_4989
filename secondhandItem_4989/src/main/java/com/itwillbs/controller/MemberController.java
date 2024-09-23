@@ -26,42 +26,42 @@ public class MemberController {
 //	@Autowired
 //	private MemberService memberService;
 	
-//	@GetMapping("/login")
-//	public String login() {
-//		return "/member/login";
-//	} 
-	
 	@GetMapping("/login")
-    public String loginPage(HttpServletRequest request, HttpSession session, MemberDTO memberDTO) {
-        // 쿠키에서 loginSessionId를 확인하여 자동 로그인 처리
-        Cookie[] cookies = request.getCookies();
-        System.out.println(cookies);
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("loginSessionId".equals(cookie.getName())) {
-                	
-                	String id = cookie.getValue();
-                	
-                	memberDTO.setMember_id(id);
-                	
-                	MemberDTO memberDTO2 = memberService.userCheck1(memberDTO);
-            		System.out.println(memberDTO2);
-            		if(memberDTO2 != null) {
-            			
-            			session.setAttribute("member_id", memberDTO2.getMember_id());
-            			session.setAttribute("nickname", memberDTO2.getNickname());
-            			// 쿠키에 저장된 세션 ID가 현재 세션과 일치할 경우 자동 로그인
-                        return "redirect:/";
-                        
-            		}
-                        
-                    
-                }
-            }
-        }
-        // 로그인 페이지로 이동
-        return "/member/login";
-    }
+	public String login() {
+		return "/member/login";
+	} 
+	
+//	@GetMapping("/login")
+//    public String loginPage(HttpServletRequest request, HttpSession session, MemberDTO memberDTO) {
+//        // 쿠키에서 loginSessionId를 확인하여 자동 로그인 처리
+//        Cookie[] cookies = request.getCookies();
+//        System.out.println(cookies);
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if ("loginSessionId".equals(cookie.getName())) {
+//                	
+//                	String id = cookie.getValue();
+//                	
+//                	memberDTO.setMember_id(id);
+//                	
+//                	MemberDTO memberDTO2 = memberService.userCheck1(memberDTO);
+//            		System.out.println(memberDTO2);
+//            		if(memberDTO2 != null) {
+//            			
+//            			session.setAttribute("member_id", memberDTO2.getMember_id());
+//            			session.setAttribute("nickname", memberDTO2.getNickname());
+//            			// 쿠키에 저장된 세션 ID가 현재 세션과 일치할 경우 자동 로그인
+//                        return "redirect:/";
+//                        
+//            		}
+//                        
+//                    
+//                }
+//            }
+//        }
+//        // 로그인 페이지로 이동
+//        return "/member/login";
+//    }
 	
 	@GetMapping("/join")
 	public String join() {
@@ -344,6 +344,50 @@ public class MemberController {
 			//아이디 없음, 아이디 사용가능
 			//result = "아이디 사용가능";
 			result = "nickok";
+		}
+		//결과값(html, xml, json) 리턴
+		return result;
+	}
+	
+	@GetMapping("/phoneCheck")
+	@ResponseBody
+	public String phoneCheck(HttpServletRequest request) {
+		System.out.println("AjaxController phoneCheck()");
+		String phone = request.getParameter("Phone");
+		
+		MemberDTO memberDTO = memberService.phoneCheck(phone);
+		
+		String result = "";
+		if(memberDTO != null) {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 중복";
+			result = "phonedup";
+		} else {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 사용가능";
+			result = "phoneok";
+		}
+		//결과값(html, xml, json) 리턴
+		return result;
+	}
+	
+	@GetMapping("/emailCheck")
+	@ResponseBody
+	public String emailCheck(HttpServletRequest request) {
+		System.out.println("AjaxController emailCheck()");
+		String email = request.getParameter("Email");
+		
+		MemberDTO memberDTO = memberService.emailCheck(email);
+		
+		String result = "";
+		if(memberDTO != null) {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 중복";
+			result = "emaildup";
+		} else {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 사용가능";
+			result = "emailok";
 		}
 		//결과값(html, xml, json) 리턴
 		return result;

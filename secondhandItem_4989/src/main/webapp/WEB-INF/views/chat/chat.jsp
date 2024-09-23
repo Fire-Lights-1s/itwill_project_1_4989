@@ -17,6 +17,7 @@
 <script type="text/javascript" th:inline="javascript">
 	let sessionUserId = '<c:out value="${sessionUID}"/>';
 	let objChatRoomDTO = '<c:out value="${chatRoomDTO}"/>'.replaceAll("&#034;", "\"");
+	let contextPath = '<c:out value="${pageContext.request.contextPath}"/>';
 </script>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -41,11 +42,11 @@
 			<div id="chatList">
 				<div class="flexBoxRow">
 					<div id="items_select" class="items">
-						<a class="type_select form-control" href="#" onclick="">전체 목록</a>
-						<ul class="drop-menu">
-	                        <li><a onclick="">전체 목록</a></li>
-	                        <li><a onclick="">구매 채팅</a></li>
-	                        <li><a onclick="">판매 채팅</a></li>
+						<a class="type_select form-control bg-purple" href="#" onclick="">전체 목록</a>
+						<ul class="drop-menu ">
+	                        <li><a onclick="" class="bg-purple">전체 목록</a></li>
+	                        <li><a onclick="" class="bg-purple">구매 채팅</a></li>
+	                        <li><a onclick="" class="bg-purple">판매 채팅</a></li>
 	                    </ul>
 					</div>
 					<input type="search" id="searchText" placeholder="제목을 입력하세요">
@@ -57,7 +58,8 @@
 					<c:forEach var="chatRoom" items="${chatRoomDTOList }">
 					<div id="${chatRoom.chat_room_id }" onclick="connect(`<c:out value="${chatRoom}"/>`);">
 						<div class="profile">
-							<img alt="" src="${chatRoom.product_img1 }">
+							<img onerror="this.onerror=null; this.src='${pageContext.request.contextPath }/resources/img/icon/not_found.png';" 
+							src="${pageContext.request.contextPath }/resources/upload/${chatRoom.product_img1 }">
 						</div>
 						<div class="chatDescript">
 							<div class="chatContnet">
@@ -93,8 +95,8 @@
 					<div>
 						<p></p>
 						<div>
-							<button id="trade-btn" data-toggle="modal" data-target="#reviewModal"></button>
-							<button id="openReportModal" data-toggle="modal" data-target="#reportModal">신고하기</button>
+							<button id="trade-btn" class="bg-purple" data-toggle="modal" data-target="#reviewModal"></button>
+							<button id="openReportModal" class="bg-purple" data-toggle="modal" data-target="#reportModal">신고하기</button>
 						</div>
 					</div>
 					<div id="productLoading" class="box">
@@ -136,7 +138,7 @@
                         <textarea class="form-control" placeholder="상품 신고 사유를 입력해주세요" id="report_contents" name="report_contents" required></textarea>
 
                         <!-- Submission button -->
-                        <button type="button" class="btn btn-primary mt-3" id="reportBtn">상품 신고</button>
+                        <button type="button" class="btn btn-primary mt-3 bg-purple" id="reportBtn">상품 신고</button>
                     </form>
                 </div>
             </div>
@@ -197,7 +199,7 @@
 						<input type="hidden" id="mannerRating" name="mannerRating" value="1">
 			      		<textarea class="reviewText" name="reviewText" rows="4" cols="50" placeholder="후기 내용"></textarea><br>
 			      		<input type="hidden" id="productId" name="productId" value="">
-			      		<button type="submit" class="btn btn-primary mt-3">작성 완료</button>
+			      		<button type="submit" class="btn btn-primary mt-3 bg-purple">작성 완료</button>
 			    	</form>
 		    	</div>
 			</div>
