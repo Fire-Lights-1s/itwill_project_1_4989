@@ -28,11 +28,14 @@ public class AuthController {
 
     @PostMapping("/sendPro")
     public String sendVerificationEmail(@RequestParam String email, HttpSession session,
-    		HttpServletRequest request, MemberDTO memberDTO, Model model) {
+    		HttpServletRequest request, MemberDTO memberDTO, Model model, @RequestParam("pass") String password) {
         
-    	int memberDTOCount = memberService.userCheck2(memberDTO);
-		System.out.println(memberDTOCount);
-    	
+    	String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+		
+    	if (password.matches(passwordPattern)) {
+			int memberDTOCount = memberService.userCheck2(memberDTO);
+			System.out.println(memberDTOCount);
+//		입력정보 중복 확인
 		if(memberDTOCount == 0) {
     	String token = TokenGenerator.generateToken();
 //        String verificationLink = "http://localhost:8080/secondhand4989/auth/verify?token=" + token;
@@ -57,6 +60,10 @@ public class AuthController {
 		} else {
 			model.addAttribute("alertMessage", "이미 등록된 정보입니다.다시 확인해주세요.");
 			return "member/join";
+		} 
+		} else {
+			model.addAttribute("alertMessage", "비밀번호는 영문,숫자,특수문자를 포함하여 8자리 이상이어야 합니다.");
+            return "member/join"; // 비밀번호가 8자리 미만이면 회원가입 페이지로 리다이렉트
 		}
     }
 

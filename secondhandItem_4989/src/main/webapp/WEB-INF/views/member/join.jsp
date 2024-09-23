@@ -10,7 +10,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/member/join.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js"></script>
- <script type="text/javascript">
+
+
+<script type="text/javascript">
         window.onload = function() {
             var message = "${alertMessage}";
             if (message) {
@@ -138,7 +140,7 @@ if(pass.length >= 8 && hasNumber.test(pass) && hasSpecialChar.test(pass) && hasL
 		//id 규칙 검사 적합 여부를 저장하는 변수에 true값 저장
 	
 	
-	} else if(pass.length <= 8) {
+	} else if(pass.length < 8) {
 		document.querySelector('#checkedPassResult').innerText = "8자 이상만 사용 가능합니다.";
 		document.querySelector('#checkedPassResult').style.color = "red";
 // 		document.querySelector('#checkedPassResult').style.fontWeight = "900";
