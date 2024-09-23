@@ -74,7 +74,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="trade" items="${tradeList}">
+                      <c:forEach var="trade" items="${tradeList}">
+            <tr>
+                <td class="text-center">${trade.product_id}</td>
+                <td class="text-center">${trade.trade_status}</td>
+                <td class="text-center">${trade.seller_id}</td>
+                <td class="text-center">${trade.buyer_id}</td>
+                <td class="text-center">${fn:escapeXml(trade.product_name)}</td>
+                <td class="text-center"><fmt:formatDate value="${trade.created_datetime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td class="text-center"><fmt:formatDate value="${trade.transaction_end_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <td class="text-center">
+                    <a href="getTradeInfo?product_id=${trade.product_id}">
+                     <%-- <c:set var="displayedIds" value="${new java.util.HashMap()}"/>
+                    <c:forEach var="trade" items="${tradeList}">
+                        <c:if test="${not displayedIds[trade.product_id]}">
+                            <!-- 이제부터는 이 상품 ID를 표시했다고 마크  -->
+                            <c:set var="displayedIds" target="${displayedIds}" property="${trade.product_id}" value="true"/>
+ 
                             <tr>
                                 <td class="text-center">${trade.product_id}</td>
                                 <td class="text-center">${trade.trade_status}</td>
@@ -91,7 +107,7 @@
                                 <!-- created_datetime 처리 -->
                                 <td class="text-center"><c:choose>
                                         <c:when test="${not empty trade.created_datetime}">
-                                            <%--                         <fmt:formatDate value="${trade.created_datetime}" pattern="yyyy-MM-dd HH:mm"/> --%>
+                                                                    <fmt:formatDate value="${trade.created_datetime}" pattern="yyyy-MM-dd HH:mm"/>
                         ${trade.formattedCreatedDatetime} 
                     </c:when>
                                         <c:otherwise>
@@ -101,17 +117,21 @@
                                 <!-- transaction_end_date 처리 -->
                                 <td class="text-center"><c:choose>
                                         <c:when test="${not empty trade.transaction_end_date}">
-                                            <%--                         <fmt:formatDate value="${trade.transaction_end_date}" pattern="yyyy-MM-dd HH:mm"/> --%>
+                                                                    <fmt:formatDate value="${trade.transaction_end_date}" pattern="yyyy-MM-dd HH:mm"/>
 ${trade.formattedTransactionEndDate}
                     </c:when>
                                         <c:otherwise>
                         N/A
                     </c:otherwise>
                                     </c:choose></td>
-                                <td class="text-center"><a href="${pageContext.request.contextPath}/admin/tradeDetail?product_id=${trade.product_id}">
+                                <td class="text-center"><a href="${pageContext.request.contextPath}/admin/tradeDetail?product_id=${trade.product_id}"> --%>
+                                        
+                                        
                                         <button class="details-button">상세보기</button>
                                 </a></td>
                             </tr>
+                            
+                             
                         </c:forEach>
                     </tbody>
                 </table>
