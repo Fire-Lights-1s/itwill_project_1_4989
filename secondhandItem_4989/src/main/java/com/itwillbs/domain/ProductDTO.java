@@ -56,11 +56,9 @@ public class ProductDTO {
     private int review_time;
     private int review_manner;
     
+    private String nickname;
    
   
-
-	
-	
 
 
 	@Override
@@ -76,7 +74,19 @@ public class ProductDTO {
 				+ ", formattedCreatedDatetime=" + formattedCreatedDatetime + ", formattedTransactionEndDate="
 				+ formattedTransactionEndDate + ", review_content=" + review_content + ", review_quality="
 				+ review_quality + ", review_price=" + review_price + ", review_time=" + review_time
-				+ ", review_manner=" + review_manner + "]";
+				+ ", review_manner=" + review_manner + ", nickname=" + nickname + "]";
+	}
+
+
+
+	public String getNickname() {
+		return nickname;
+	}
+
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 

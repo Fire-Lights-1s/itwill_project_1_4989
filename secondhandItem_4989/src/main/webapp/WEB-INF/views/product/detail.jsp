@@ -77,18 +77,31 @@
         </div>
         <hr>
 
+        <!-- 거래 지역, 거래 방식, 결제방식. null일 경우 해당 버튼이 아예 안 뜨게  -->
         <!-- 거래 지역, 거래 방식, 결제방식 -->
-        <div class="button-container" style="display: flex; gap: 10px;">
-            <button class="button" type="button">${productDTO.trade_area}</button>
-            <button class="button" type="button">${productDTO.trade_method}</button>
-            <button class="button" type="button">${productDTO.pay_method}</button>
-        </div>
+<div class="button-container" style="display: flex; gap: 10px;">
+    <c:if test="${not empty productDTO.trade_area}">
+        <button class="button" type="button">${productDTO.trade_area}</button>
+    </c:if>
+    <c:if test="${not empty productDTO.trade_method}">
+        <button class="button" type="button">${productDTO.trade_method}</button>
+    </c:if>
+    <c:if test="${not empty productDTO.pay_method}">
+        <button class="button" type="button">${productDTO.pay_method}</button>
+    </c:if>
+</div>
+
 
         <!-- 판매자 정보 및 결제 방식 -->
         <div class="product-info">
             <strong>판매자 </strong>
-            <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}" class="button"> ${productDTO.seller_id} </a>
+            <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}" class="button"> ${sellerNickname} </a>
         </div>
+
+                <!-- 판매자와 로그인한 사용자가 같으면 '상품 수정' 버튼 추가 -->
+                <c:if test="${productDTO.seller_id == sessionScope.member_id}">
+                    <a href="${pageContext.request.contextPath}/product/update?product_id=${productDTO.product_id}" class="button"> 상품 수정 </a>
+                </c:if>
 
         <!-- 버튼 그룹 -->
         <div class="button-group" style="display: flex; align-items: center; gap: 10px;">
