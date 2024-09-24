@@ -357,10 +357,15 @@ function ControllReportModal(){
 function submitReport() {
     var reportContents = $("#report_contents").val();
     var reporterId = userId;
-    var reporteeId = productGlobal.seller_id;
+    var reporteeId = null;
     var reportedItemId = productGlobal.product_id;
     var reportType = $('input[name=reportType]:checked').val(); // 고정값
-
+    
+	if(userId == productGlobal.seller_id){
+		reporteeId = chatRoomGlobal.buyer_id;
+	}else{
+		reporteeId = productGlobal.seller_id;
+	}
     $.ajax({
         type: "POST",
         url: "./product/report",
