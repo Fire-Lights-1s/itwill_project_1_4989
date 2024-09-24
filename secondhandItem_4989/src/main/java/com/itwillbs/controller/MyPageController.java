@@ -8,7 +8,9 @@ import java.time.temporal.ChronoUnit;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -267,9 +269,14 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/deleteMem")
-	public String deleteMem(HttpSession session) {
+	public String deleteMem(HttpSession session, HttpServletResponse response) {
 		String member_id = (String)session.getAttribute("member_id");
 		myPageService.deleteMem(member_id);
+		session.invalidate();
+        Cookie loginCookie = new Cookie("loginSessionId", null);
+        loginCookie.setMaxAge(0);
+        loginCookie.setPath("/");
+        response.addCookie(loginCookie);
 		return "redirect:/";
 	}
 	
