@@ -6,7 +6,9 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,6 +141,20 @@ public class AdminController {
 		memberDTO.setProfile_img(filename);
 		memberService.updateMember(memberDTO);
 		return "redirect:/member/list";
+	}
+	
+	@PostMapping("/member/deleteMember")
+	public String deleteMember(HttpServletRequest request) {
+		String member_id = request.getParameter("user_id");
+		myPageService.deleteMem(member_id);
+		return "redirect:/admin/member";
+	}
+	
+	@PostMapping("/member/resMember")
+	public String resMember(HttpServletRequest request) {
+		String member_id = request.getParameter("user_id");
+		myPageService.resMem(member_id);
+		return "redirect:/admin/member";
 	}
 	
 	/*

@@ -88,7 +88,7 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/infoUpdatePro")
-	public String infoUpdatePro(HttpServletRequest request, MultipartFile file)throws Exception {
+	public String infoUpdatePro(HttpServletRequest request, MultipartFile file, HttpSession session)throws Exception {
 		String filename = "";
 		if(file.isEmpty()) {
 			filename = "51d26ab9-a276-4d41-9196-2f12cd1d1e28_defaultUserImage.png";
@@ -116,6 +116,7 @@ public class MyPageController {
 		memberDTO.setEmail(email);
 		memberDTO.setProfile_img(filename);
 		memberService.updateMember(memberDTO);
+		session.setAttribute("nickname", memberDTO.getNickname());
 		return "redirect:/my/profile";
 	}
 	
