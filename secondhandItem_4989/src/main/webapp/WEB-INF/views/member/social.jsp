@@ -60,7 +60,7 @@
                 <label><input type="checkbox" name="ad"> 개인정보 광고활용 동의(선택)</label><br>
             </div>
 
-            <button type="submit" class="submit-btn">인증하기</button>
+            <button type="submit" class="submit-btn">가입하기</button>
         </form>
     </div>
 
