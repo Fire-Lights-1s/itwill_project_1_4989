@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/member/details.css">
@@ -10,6 +11,7 @@
     <meta name="description" content="au theme template">
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js"></script>
 
     <!-- Title Page-->
     <title>4989 관리자 메뉴</title>
@@ -34,7 +36,7 @@
 			<div class="main-content">
             <!-- 본문내용은-->
 <div class="container">
-            <form action="${pageContext.request.contextPath}/member/sendPro" method="post" name="fr">
+            <form action="${pageContext.request.contextPath}/admin/member/detailsPro" method="post" name="fr">
             <div class="profile-circle-div">
 				<img src="${pageContext.request.contextPath}/resources/upload/${member.profile_img}" class="profile-circle" id="profileImage">
 				<label for="fileInput" class="custom-file-upload">
@@ -48,8 +50,8 @@
                 <label for="userId">아이디</label>
                 <input type="text" id="member_id" name="member_id" value="${member.member_id}" placeholder="아이디" required>
                 <button type="button" id="check-btn1" class="check-btn">중복 확인</button>
-                <div id = "checkedIdResult" name = "checkedIdResult"></div>
             </div>
+            <div id = "checkedIdResult" name = "checkedIdResult"></div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
                 <input type="text" id="password" name="pass" value="${member.pass}" placeholder="비밀번호" required>
@@ -59,8 +61,8 @@
                 <label for="nickname">닉네임</label>
                 <input type="text" id="nickname" name="nickname" value="${member.nickname}" placeholder="닉네임" required>
                 <button type="button" id="check-btn2" class="check-btn">중복 확인</button>
-            	<div id = "checkedNickResult" name = "checkedNickResult"></div>
-            </div>
+           	</div>
+           	<div id = "checkedNickResult" name = "checkedNickResult"></div>
             <div class="form-group">
                 <label for="name">이름</label>
                 <input type="text" id="name" name="name" value="${member.name}" placeholder="이름" required>
@@ -135,5 +137,59 @@
         });
     });
 	</script>
+	
+	<!-- 아이디 중복확인 -->
+<script type="text/javascript">
+$(function(){
+	$('#check-btn1').click(function() {
+// 		alert("asd")
+		$.ajax({
+			url:'${pageContext.request.contextPath}/member/idCheck',
+			data:{'id':$('#member_id').val()},
+			success:function(result){
+				
+				if (result == 'iddup'){
+					result = "이미 존재하는 아이디입니다.";
+					$('#checkedIdResult').html(result).css('color','red');
+				} else {
+					result = "사용가능한 아이디입니다.";
+					$('#checkedIdResult').html(result).css('color','green');
+				}
+				
+			}
+			
+		});
+		
+	});
+});
+</script>
+
+<!-- 닉네임 중복확인   -->
+<script type="text/javascript">
+$(function(){
+	$('#check-btn2').click(function() {
+//  		alert("asd")
+		$.ajax({
+			url:'${pageContext.request.contextPath}/member/nickCheck',
+			data:{'nickname':$('#nickname').val()},
+			success:function(result){
+				
+				if (result == 'nickdup'){
+					result = "이미 존재하는 닉네임입니다.";
+					$('#checkedNickResult').html(result).css('color','red');
+				} else {
+					result = "사용가능한 닉네임입니다.";
+					$('#checkedNickResult').html(result).css('color','green');
+				}
+				
+			}
+			
+		});
+		
+	});
+});
+</script>
+	
+	
 </body>
 </html>

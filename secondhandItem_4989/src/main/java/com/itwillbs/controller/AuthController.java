@@ -30,7 +30,7 @@ public class AuthController {
     public String sendVerificationEmail(@RequestParam String email, HttpSession session,
     		HttpServletRequest request, MemberDTO memberDTO, Model model, @RequestParam("pass") String password) {
         
-    	String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+    	String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#%^&*()_+=?])[A-Za-z\\d@$!#%^&*()_+=?]{8,}$";
 		
     	if (password.matches(passwordPattern)) {
 			int memberDTOCount = memberService.userCheck2(memberDTO);
