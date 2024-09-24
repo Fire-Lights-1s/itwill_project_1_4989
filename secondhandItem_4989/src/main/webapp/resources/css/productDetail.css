@@ -50,6 +50,7 @@ body {
     border: 1px #aaa;
     border-radius: 10px;
     background-color: #fff;
+
     
 }
 
@@ -114,6 +115,8 @@ body {
 }
 
 .product-desc {
+	clear: both;  /* 이전 float 속성들의 영향을 제거 */
+	
 	font-size: 18px;
 	margin-top: 20px;  /* 위쪽 마진 */
     margin-bottom: 10px;

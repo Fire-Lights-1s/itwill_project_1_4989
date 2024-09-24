@@ -38,10 +38,12 @@
 				<div class="col-lg-auto">
 	                <h2 class="title-1 m-b-25">회원목록</h2>
 	                <div class="input-group mb-3 flex-right-50pct">
-					  <input type="text" class="form-control" placeholder="검색어 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
-					  <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+	                <form action="../admin/member" method="get" class="input-group ">
+					  <input type="text" class="form-control" id="search" name="search" value="${pageDTO.search }" placeholder="검색어 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
+					  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
 					  	<img alt="검색" src="${pageContext.request.contextPath }/resources/img/icon/search.png">
 					  </button>
+	                </form>
 					</div>
 	                <div class="table-responsive table--no-card m-b-40">
 	                    <table class="table table-borderless table-striped table-earning">
