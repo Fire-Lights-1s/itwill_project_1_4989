@@ -328,6 +328,10 @@
 		let chatRoomSellerID = '<c:out value="${productDTO.seller_id}"/>';
 		let chatRoomTitle = '<c:out value="${productDTO.product_name}"/>';
 	</script>
+	<!-- zzimScript.js에서는 아래의 js 코드가 필요 -->
+	<script>
+		const contextPath = '${pageContext.request.contextPath}';
+	</script>
 	<script
 		src="${pageContext.request.contextPath }/resources/js/go_to_chat.js"></script>
 </body>
