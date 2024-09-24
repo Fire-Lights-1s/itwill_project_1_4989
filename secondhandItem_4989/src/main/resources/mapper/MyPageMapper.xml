@@ -140,6 +140,12 @@
 		where member_id = #{member_id}
 	</update>
 	
+	<update id="resMem">
+		update Mem
+		set is_withdrawn = false, withdrawn_at = null
+		where member_id = #{member_id}
+	</update>
+	
 	<select id="allTX" resultType="java.lang.Integer">
 		SELECT 
 			(SELECT COUNT(*) 

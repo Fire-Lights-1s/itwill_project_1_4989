@@ -81,8 +81,20 @@
             
             
             
-            <button type="submit" class="submit-button" onclick="updateCheck();">수정 완료</button>
+            <button type="submit" class="submit-button" onclick="updateCheck();" style="display: inline-block; position: relative;">수정 완료</button>
         </form>
+        <c:if test="${!member.is_withdrawn}">
+	        <form action="${pageContext.request.contextPath}/admin/member/deleteMember" method="post">
+	        	<input type="hidden" name="user_id" value="${member.member_id}"> 
+	            <button type="submit" class="userTal" onclick="userTal();" style="position: absolute; bottom: 20px; left: 350px; width: 100px; background-color: gray; height: 50px;">회원 탈퇴</button>
+			</form>
+		</c:if>
+		<c:if test="${member.is_withdrawn}">
+	        <form action="${pageContext.request.contextPath}/admin/member/resMember" method="post">
+	        	<input type="hidden" name="user_id" value="${member.member_id}"> 
+	            <button type="submit" class="userRes" onclick="userRes();" style="position: absolute; bottom: 20px; left: 350px; width: 100px; background-color: gray; height: 50px;">탈퇴 복구</button>
+			</form>
+		</c:if>
 </div>
             
             
@@ -124,6 +136,7 @@
     <jsp:include page="../inc/jsLink.jsp"></jsp:include>
     <!-- 본인의 커스텀 js link 위치는 여기서부터 -->
     <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/admin_cs.js"></script>
+    
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const menuItems = document.querySelectorAll('.has-sub .js-arrow');
@@ -138,6 +151,7 @@
     });
 	</script>
 	
+
 	<!-- 아이디 중복확인 -->
 <script type="text/javascript">
 $(function(){
@@ -162,6 +176,34 @@ $(function(){
 		
 	});
 });
+</script>
+
+<!-- 	회원 탈퇴 -->
+<script type="text/javascript">
+	function userTal(){
+		const isConfirmed = confirm("정말로 회원 탈퇴를 하시겠습니까?");
+	    if (!isConfirmed) {
+	        event.preventDefault();
+	    }
+	}
+	function userRes(){
+		const isConfirmed = confirm("정말로 탈퇴 복구를 하시겠습니까?");
+	    if (!isConfirmed) {
+	        event.preventDefault();
+	    }
+	}
+// 	document.querySelector('.userTal').addEventListener('click', function(event) {
+// 	    const isConfirmed = confirm("정말로 회원 탈퇴를 하시겠습니까?");
+// 	    if (!isConfirmed) {
+// 	        event.preventDefault();
+// 	    }
+// 	});
+// 	document.querySelector('.userRes').addEventListener('click', function(event) {
+// 	    const isConfirmed = confirm("정말로 탈퇴 복구를 하시겠습니까?");
+// 	    if (!isConfirmed) {
+// 	        event.preventDefault();
+// 	    }
+// 	});
 </script>
 
 <!-- 닉네임 중복확인   -->

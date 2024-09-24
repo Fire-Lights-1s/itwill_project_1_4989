@@ -62,15 +62,16 @@
 <!--         phone, -->
         social_loginfo,
         rating,
-        created_at
+        created_at,
+        is_withdrawn
     from Mem
     <if test="search != null">
-        where member_id like "%#{search}%"
-        or name like "%#{search}%"
-        or email like "%#{search}%"
-<!--         or phone like "%#{search}%" -->
-        or nickname like "%#{search}%"
-        or created_at like "%#{search}%"
+        where member_id like CONCAT('%',#{search},'%')
+        or name like CONCAT('%',#{search},'%')
+        or email like CONCAT('%',#{search},'%')
+<!-- 		or phone like CONCAT('%',#{search},'%') -->
+        or nickname like CONCAT('%',#{search},'%')
+        or created_at like CONCAT('%',#{search},'%')
     </if>
     order by created_at desc
     limit #{startRow}, #{pageSize}
