@@ -250,25 +250,6 @@ public class ProductController {
 
 		return "/product/detail";
 	}
-	
-	  // 상품 삭제 처리
-		@GetMapping("/delete")
-		public String deleteProduct(@RequestParam("product_id") int product_id, HttpSession session) throws Exception {
-		    // 현재 로그인한 사용자 확인
-		    String member_id = (String) session.getAttribute("member_id");
-
-		    // 상품 정보 가져오기
-		    ProductDTO product = productService.getProductDetail(String.valueOf(product_id));
-
-		    // 로그인한 사용자가 판매자인지 확인
-		    if (product != null && product.getSeller_id().equals(member_id)) {
-		        productService.deleteProduct(product_id);
-		        return "redirect:/product";  // 절대 경로를 사용하여 상품 목록 페이지로 리다이렉트
-		    } else {
-		        return "redirect:/product/detail?product_id=" + product_id + "&error=unauthorized";  // 권한 없음 에러 처리
-		    }
-		}
-
 
 	@GetMapping("/update")
 	public String update(@RequestParam("product_id") String product_id, Model model, HttpSession session)
@@ -278,27 +259,11 @@ public class ProductController {
 
 		// 상품 정보 조회
 		ProductDTO productDTO = productService.getProductDetail(product_id);
-		
+
 		// 로그인한 사용자와 상품 등록자가 다를 경우 예외 처리
 		if (!member_id.equals(productDTO.getSeller_id())) {
 			throw new IllegalArgumentException("수정 권한이 없습니다.");
 		}
-
-		// trade_area를 sido와 sigungu로 분리
-	    String tradeArea = productDTO.getTrade_area();
-	    if (tradeArea != null && !tradeArea.isEmpty()) {
-	        String[] areaParts = tradeArea.split(" ");  // 공백을 기준으로 분리
-	        if (areaParts.length >= 2) {
-	            model.addAttribute("sido", areaParts[0]);     // 도/시 부분
-	            model.addAttribute("sigungu", areaParts[1]);  // 시/군/구 부분
-	        } else {
-	            model.addAttribute("sido", "");    // 도/시 부분이 없는 경우
-	            model.addAttribute("sigungu", ""); // 시/군/구 부분이 없는 경우
-	        }
-	    } else {
-	        model.addAttribute("sido", "");
-	        model.addAttribute("sigungu", "");
-	    }
 
 		// 모델에 상품 정보를 추가하여 update.jsp로 전달
 		model.addAttribute("productDTO", productDTO);
@@ -308,41 +273,63 @@ public class ProductController {
 
 	@PostMapping("/updatePro")
 	public String updateProductPro(ProductDTO productDTO,
-	        @RequestParam(value = "product_img[]", required = false) MultipartFile[] newFiles,
-	        @RequestParam(value = "delete", required = false) String deleteRequest, 
-	        HttpServletRequest request, HttpSession session) throws Exception {
+			@RequestParam(value = "product_img[]", required = false) MultipartFile[] newFiles,
+			HttpServletRequest request, HttpSession session) throws Exception {
 
-	    // 로그인한 사용자 확인
-	    String member_id = (String) session.getAttribute("member_id");
+		// 로그인한 사용자 확인
+		String member_id = (String) session.getAttribute("member_id");
 
-	    // 유효성 검사: 상품 정보 및 로그인 여부 확인
-	    if (productDTO == null || productDTO.getProduct_id() == 0 || member_id == null) {
-	        throw new IllegalArgumentException("유효하지 않은 요청입니다.");
-	    }
+		// 유효성 검사: 상품 정보 및 로그인 여부 확인
+		if (productDTO == null || productDTO.getProduct_id() == 0 || member_id == null) {
+			throw new IllegalArgumentException("유효하지 않은 요청입니다.");
+		}
 
-	    // 데이터베이스에서 상품의 실제 등록자 ID(seller_id) 가져오기
-	    ProductDTO existingProduct = productService.getProductDetail(String.valueOf(productDTO.getProduct_id()));
+		// 데이터베이스에서 상품의 실제 등록자 ID(seller_id) 가져오기
+		ProductDTO existingProduct = productService.getProductDetail(String.valueOf(productDTO.getProduct_id()));
 
-	    // 로그인한 사용자와 상품 등록자 일치 여부 확인
-	    if (!member_id.equals(existingProduct.getSeller_id())) {
-	        throw new IllegalArgumentException("수정 권한이 없습니다.");
-	    }
-	    
-	
-	    // sido와 sigungu를 합쳐 trade_area로 설정
-	    String sido = request.getParameter("sido");
-	    String sigungu = request.getParameter("sigungu");
-	    if (sido != null && sigungu != null && !sido.isEmpty() && !sigungu.isEmpty()) {
-	        productDTO.setTrade_area(sido + " " + sigungu);  // sido와 sigungu 합쳐서 trade_area에 저장
-	    }
+		// 로그인한 사용자와 상품 등록자 일치 여부 확인
+		if (!member_id.equals(existingProduct.getSeller_id())) {
+			throw new IllegalArgumentException("수정 권한이 없습니다.");
+		}
 
-	    // 상품 정보 수정
-	    productService.updateProduct(productDTO);
+		// **삭제된 이미지 처리 부분에서 null 값 체크 추가**
+		String[] deletedImages = request.getParameter("deletedImages") != null
+				? request.getParameter("deletedImages").split(",")
+				: new String[0];
 
-	    // 수정 후 상품의 상세 페이지로 리다이렉트
-	    return "redirect:/product/detail?product_id=" + productDTO.getProduct_id();
+		for (String imageName : deletedImages) {
+			if (imageName != null && !imageName.isEmpty()) {
+				// 이미지 파일 경로
+				String filePath = session.getServletContext().getRealPath("/resources/upload/" + imageName);
+
+				// 실제 파일 삭제
+				File file = new File(filePath);
+				if (file.exists()) {
+					file.delete(); // 파일 삭제
+					System.out.println("파일 삭제됨: " + filePath);
+				}
+
+				// 데이터베이스에서 이미지 필드 업데이트
+				if (imageName.equals(existingProduct.getProduct_img1())) {
+					productDTO.setProduct_img1(null);
+				} else if (imageName.equals(existingProduct.getProduct_img2())) {
+					productDTO.setProduct_img2(null);
+				} else if (imageName.equals(existingProduct.getProduct_img3())) {
+					productDTO.setProduct_img3(null);
+				} else if (imageName.equals(existingProduct.getProduct_img4())) {
+					productDTO.setProduct_img4(null);
+				} else if (imageName.equals(existingProduct.getProduct_img5())) {
+					productDTO.setProduct_img5(null);
+				}
+			}
+		}
+
+		// 상품 정보 수정
+		productService.updateProduct(productDTO);
+
+		// 수정 후 상품의 상세 페이지로 리다이렉트
+		return "redirect:/product/detail?product_id=" + productDTO.getProduct_id();
 	}
-	
 
 	// 신고하기
 	@PostMapping("/report")
@@ -373,5 +360,24 @@ public class ProductController {
 
 		return response;
 	}
+	//상품 삭제
+	@GetMapping("/delete")
+	public String deleteProduct(@RequestParam("product_id") int product_id, HttpSession session) throws Exception {
+	    // 로그인한 사용자 ID 가져오기
+	    String member_id = (String) session.getAttribute("member_id");
+
+	    // 상품 정보 가져오기
+	    ProductDTO product = productService.getProductDetail(String.valueOf(product_id));
+
+	    // 로그인한 사용자가 판매자인지 확인
+	    if (product != null && product.getSeller_id().equals(member_id)) {
+	        productService.deleteProduct(product_id);
+	        return "redirect:/product"; 
+//	        
+	    } else {
+	        return "redirect:/product/detail?product_id=" + product_id + "&error=unauthorized";  // 권한 없음 에러 처리
+	    }
+	}
+
 
 }// ProductController()

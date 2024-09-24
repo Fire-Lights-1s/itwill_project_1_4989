@@ -279,7 +279,7 @@ $(document).ready(function() {
                 alert('상품 등록이 완료되었습니다.')
             },
             error: function (error) {
-                alert('상품 등록에 실피했습니다.')
+                alert('상품 등록에 실패했습니다.')
             }
         });
     });
