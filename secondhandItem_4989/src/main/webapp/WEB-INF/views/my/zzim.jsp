@@ -36,24 +36,24 @@
 			<h2>찜 목록</h2>
 			<div class="profile-a">				
 				<c:if test="${empty param.sort}">		
-					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc'" style="margin-bottom: 41px;">날짜 순</button>
+					<button class="priceBtn" onclick="priceAsc();">가격 순</button>
+					<button class="dateBtn" onclick="dateAsc();" style="margin-bottom: 41px;">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceDesc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'" style="margin-bottom: 41px;">날짜 순</button>
+					<button class="priceBtn active" onclick="priceAsc();">가격 순</button>
+					<button class="dateBtn" onclick="dateDesc();" style="margin-bottom: 41px;">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceAsc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'" style="margin-bottom: 41px;">날짜 순</button>
+					<button class="priceBtn active" onclick="priceDesc();">가격 순</button>
+					<button class="dateBtn" onclick="dateDesc();" style="margin-bottom: 41px;">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateDesc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc'" style="margin-bottom: 41px;">날짜 순</button>
+					<button class="priceBtn" onclick="priceDesc();">가격 순</button>
+					<button class="dateBtn active" onclick="dateAsc();" style="margin-bottom: 41px;">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateAsc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc'" style="margin-bottom: 41px;">날짜 순</button>
+					<button class="priceBtn" onclick="priceDesc();">가격 순</button>
+					<button class="dateBtn active" onclick="dateDesc();" style="margin-bottom: 41px;">날짜 순</button>
 				</c:if>
 				<br>
 			</div>
@@ -107,10 +107,34 @@
 		</div>
 	</div>
 </section>
-<!-- querySelector('.profile-item-review') -->
 <jsp:include page="../inc/footer.jsp"></jsp:include>
-<script>
 
+<script>
+	const navLinks = document.querySelectorAll('#sideNavLinks .nav-link');
+	const currentUrl = window.location.pathname;
+	navLinks.forEach(link => {
+	    if (link.getAttribute('href') === currentUrl) {
+	        link.classList.add('active-link');
+	    }
+	});
+</script>
+
+<script type="text/javascript">
+	function priceAsc(){
+		location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}';
+	}
+	function priceDesc(){
+		location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}';
+	}
+	function dateAsc(){
+		location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}';
+	}
+	function dateDesc(){
+		location.href='${pageContext.request.contextPath}/my/zzim?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}';
+	}
+</script>
+
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     function formatTimeAgo(date) {
         const now = new Date();
@@ -148,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
 </script>
+
 </body>
 </html>

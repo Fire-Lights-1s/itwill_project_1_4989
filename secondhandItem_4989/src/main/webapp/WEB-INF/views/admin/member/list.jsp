@@ -59,7 +59,7 @@
 	                        </thead>
 	                        <tbody>
 	            			<c:forEach var="member" items="${memberList }">
-	                            <tr id="${member.member_id }">
+	                            <tr id="${member.member_id }" onclick="window.location.href='${pageContext.request.contextPath }/admin/member/details?member_id=${member.member_id}'">
 	                                <td>${member.nickname }</td>
 	                                <td>${member.member_id }</td>
 	                                <td>${member.name }</td>

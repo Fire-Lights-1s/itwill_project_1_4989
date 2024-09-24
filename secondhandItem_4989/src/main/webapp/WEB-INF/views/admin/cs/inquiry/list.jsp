@@ -39,7 +39,7 @@
 				<div class="col-lg-auto">
 	                <h2 class="title-1 m-b-25">1 : 1 문의 관리</h2>
 	                <div class="input-group mb-3 flex-right-50pct">
-	                  <form action="${pageContext.request.contextPath }/admin/inquiry" style="display:flex;">
+	                  <form action="${pageContext.request.contextPath }/admin/cs/inquiry" style="display:flex;">
 					    <input type="text" class="form-control" name="search" placeholder="회원아이디, 문의내용 등으로 검색" aria-label="Recipient's username" aria-describedby="button-addon2" style="width:300px;">
 					    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
 					  	  <img alt="검색" src="${pageContext.request.contextPath }/resources/img/icon/search.png">
@@ -60,7 +60,7 @@
 	                        </thead>
 	                        <tbody>
 	                        	<c:forEach var="inquiryList" items="${inquiryList }">
-	                            <tr data-inquiry-id="${inquiryList.inquiry_id }">
+	                            <tr class="get-detail" data-inquiry-id="${inquiryList.inquiry_id }">
 	                                <td class="text-center">${inquiryList.inquiry_id}</td>
 	                                <td class="text-center">${inquiryList.member_id}</td>
 	                                <td class="text-center">${inquiryList.inquiry_type}</td>
@@ -135,7 +135,6 @@
 
     <jsp:include page="../../inc/jsLink.jsp"></jsp:include>
     <!-- 본인의 커스텀 js link 위치는 여기서부터 -->
-    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/purchase_admin.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const menuItems = document.querySelectorAll('.has-sub .js-arrow');
@@ -151,7 +150,7 @@
     
 	const contextPath = '${pageContext.request.contextPath}/admin/cs/';
 	$(document).ready(function(){
-	    $("tr").off('click').on('click', function(){
+	    $('.get-detail').off('click').on('click', function(){
 			window.location.href = contextPath + 'inquirymanage?inquiry_id=' + $(this).data('inquiry-id');
 	    });
 	});

@@ -1,14 +1,17 @@
 package com.itwillbs.service;
 
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.time.Duration;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.itwillbs.dao.ProductDAO;
 import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.domain.ReportDTO;
@@ -19,16 +22,54 @@ public class ProductService {
 	@Inject
 	ProductDAO productDAO;
 	ZzimService zzimService;
+
 	
 	//상품 등록
-	public void registerProduct(ProductDTO productDTO) {
-		System.out.println("ProductService registerProduct()");
-		//등록 시간
-        productDTO.setCreated_datetime(new Timestamp(System.currentTimeMillis())); 
-        //조회수 0 설정
-        productDTO.setView_count(0);
-        productDAO.insertProduct(productDTO);  // DB에 상품 정보 저장
-    }
+	public void registerProduct(ProductDTO productDTO, List<String> savedFileNames) {
+	    System.out.println("ProductService registerProduct()");
+
+	    // List<String>에서 저장된 파일명을 ProductDTO에 순서대로 설정
+	    for (int i = 0; i < savedFileNames.size(); i++) {
+	        switch (i) {
+	            case 0:
+	                productDTO.setProduct_img1(savedFileNames.get(i));  // 첫 번째 파일
+	                break;
+	            case 1:
+	                productDTO.setProduct_img2(savedFileNames.get(i));  // 두 번째 파일
+	                break;
+	            case 2:
+	                productDTO.setProduct_img3(savedFileNames.get(i));  // 세 번째 파일
+	                break;
+	            case 3:
+	                productDTO.setProduct_img4(savedFileNames.get(i));  // 네 번째 파일
+	                break;
+	            case 4:
+	                productDTO.setProduct_img5(savedFileNames.get(i));  // 다섯 번째 파일
+	                break;
+	            default:
+	                // 최대 5개의 파일까지만 허용
+	                break;
+	        }
+	    }
+
+	    // 로그 찍기
+	    System.out.println("Product images set in DTO: " + 
+	        productDTO.getProduct_img1() + ", " +
+	        productDTO.getProduct_img2() + ", " +
+	        productDTO.getProduct_img3() + ", " +
+	        productDTO.getProduct_img4() + ", " +
+	        productDTO.getProduct_img5());
+
+	    // 등록 시간 설정
+	    productDTO.setCreated_datetime(new Timestamp(System.currentTimeMillis()));
+	    // 조회수 초기화
+	    productDTO.setView_count(0);
+
+	    // 데이터베이스에 상품 정보 저장
+	    productDAO.insertProduct(productDTO);
+	}
+
+
 	
 	//상품 상세 조회
 		public ProductDTO getProductDetail(String product_id) throws Exception {
@@ -152,6 +193,12 @@ public class ProductService {
 		public void submitReport(ReportDTO reportDTO) {
 			productDAO.insertReport(reportDTO);
 			
+		}
+
+		//상품 삭제
+		public void deleteProduct(int product_id) {
+			System.out.println("Deleting product with ID:" + product_id);	
+			productDAO.deleteProduct(product_id);
 		}
 
 

@@ -78,6 +78,16 @@
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
 <script>
+	const navLinks = document.querySelectorAll('#sideNavLinks .nav-link');
+	const currentUrl = window.location.pathname;
+	navLinks.forEach(link => {
+	    if (link.getAttribute('href') === currentUrl) {
+	        link.classList.add('active-link');
+	    }
+	});
+</script>
+
+<script>
 function submitReport(){
 	confirm("신고 접수 하시겠습니까?");
 }

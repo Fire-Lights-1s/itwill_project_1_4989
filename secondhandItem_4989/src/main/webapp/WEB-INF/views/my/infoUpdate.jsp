@@ -10,12 +10,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footerStyle.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profileUpdate.css">
-<!-- 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"> -->
-<%--     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/carouselStyle.css"> --%>
-<%-- 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main/animate.css"> --%>
-<!-- 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" > -->
-<%-- 	<script src="${pageContext.request.contextPath }/resources/js/zzimScript.js" defer></script> --%>
-<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js"></script>
 </head>
@@ -90,6 +84,16 @@
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
+<script>
+	const navLinks = document.querySelectorAll('#sideNavLinks .nav-link');
+	const currentUrl = window.location.pathname;
+	navLinks.forEach(link => {
+	    if (link.getAttribute('href') === currentUrl) {
+	        link.classList.add('active-link');
+	    }
+	});
+</script>
+
 <script type="text/javascript">
 	const pass1 = document.getElementById('password');
 	const pass2 = document.getElementById('confirmPassword');
@@ -107,6 +111,10 @@
 	function updateCheck() {
 		if(pass1.value === "" || pass2.value === "") {
 			alert("비밀번호를 입력해주세요.");
+			event.preventDefault();
+		}
+		if(pass1.value != pass2.value) {
+			alert("비밀번호와 비밀번호 확인이 맞지 않습니다.");
 			event.preventDefault();
 		}
 		if(nickname.value === "") {

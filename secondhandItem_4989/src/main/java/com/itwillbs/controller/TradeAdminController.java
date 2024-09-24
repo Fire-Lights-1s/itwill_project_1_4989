@@ -1,9 +1,11 @@
 package com.itwillbs.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -47,8 +49,7 @@ public class TradeAdminController {
 		if(searchKey != null && !searchKey.isEmpty()) {
 			pageDTO.setSearch(searchKey);
 		} 
-		
-		// 거래 목록과 거래 수 가져오기
+	
         List<ProductDTO> tradeList = tradeAdminService.getTradeList(pageDTO);
         int count = tradeAdminService.getTradeCount(pageDTO);
 

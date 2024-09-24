@@ -66,7 +66,7 @@
 				        </tr>
 				        <tr>
 				            <th>내용</th>
-				            <td colspan="5">${inquiryDTO.inquiry_contents }</td>
+							<td colspan="5"><pre>${inquiryDTO.inquiry_contents }</pre></td>
 				        </tr>
 				    </table>
 				    
@@ -75,6 +75,9 @@
 				    	<c:when test="${inquiryDTO.replied_at != null && inquiryDTO.replied_at != ''}">
 				          <label for="reply-message"><fmt:formatDate value="${inquiryDTO.replied_at}" pattern="yyyy-MM-dd"/> 답변 완료</label>
 				          <textarea id="reply-message" class="reply-textarea" readonly>${inquiryDTO.inquiry_reply }</textarea>
+							<div style="text-align:right;">
+								<button type="button" class="reply-submit-btn" onclick="window.history.back();">목록으로 돌아가기</button>
+							</div>
 		            	</c:when>
 				    	<c:otherwise>
 				    	 <form action="${pageContext.request.contextPath}/admin/cs/inquiry/reply?inquiry_id=${inquiryDTO.inquiry_id}" method="post">
@@ -99,7 +102,7 @@
 
     <jsp:include page="../../inc/jsLink.jsp"></jsp:include>
     <!-- 본인의 커스텀 js link 위치는 여기서부터 -->
-    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/purchase_admin.js"></script>
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const menuItems = document.querySelectorAll('.has-sub .js-arrow');
@@ -112,14 +115,7 @@
             });
         });
     });
-    
-	const contextPath = '${pageContext.request.contextPath}/admin/cs/';
-	$(document).ready(function(){
-	    $("tr").off('click').on('click', function(){
-			window.location.href = contextPath + 'inquirydetail?inquiry_id=' + $(this).data('inquiry-id');
-	    });
-	});
-    
+
 	</script>
 </body>
 </html>

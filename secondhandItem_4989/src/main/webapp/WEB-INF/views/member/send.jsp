@@ -23,6 +23,9 @@
 	<div id="container">
 	  <main>
 
+		<p style="font-size: 30px;">입력한 이메일로 인증번호를 전송했습니다.</p>
+		<p style="font-size: 30px; margin-bottom: 50px;">인증번호를 입력해주세요.</p>
+		
 		 <form action="${pageContext.request.contextPath}/member/verify" method="post" name="fr">
 			<div class="form-group">
                 <label for="userId">인증번호</label>
@@ -30,7 +33,7 @@
                 <button type="submit" class="submit-button">인증하기</button>
             </div>
            
-			<% out.println(session.getAttribute("name")); %>
+			
 		</form>
 	  </main>
 	</div>

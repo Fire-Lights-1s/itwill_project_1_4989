@@ -94,6 +94,16 @@ main {
     margin-top: 5px;
 }
 
+.profile-a button:hover {
+	background-color: #4E229E;
+	color: white;
+}
+
+.profile-a button.active {
+    background-color: #4E229E;
+    color: white;
+}
+
 .profile-item-list button {
 	background-color: #4e229e;
     color: white;
@@ -113,6 +123,11 @@ main {
 .profile-update-form {
 	display:flex;
 	flex-direction:column;
+}
+
+.active-link {
+    background-color: rgba(78, 34, 158, 0.23); /* 클릭 시 변경될 배경색 */
+    color: white; /* 텍스트 색상 변경 */
 }
 
 .login-container {

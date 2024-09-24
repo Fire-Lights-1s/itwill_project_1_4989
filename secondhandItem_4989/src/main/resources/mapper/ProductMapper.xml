@@ -95,6 +95,7 @@
 	</select>
 
 
+    
 	<update id="updateProduct">
     UPDATE Product
     SET
@@ -120,6 +121,13 @@
 <!--         INSERT INTO Report (reporter_id, reportee_id, reported_item_id, report_type, report_contents, reported_at, report_status) -->
 <!--         VALUES (#{reporter_id}, #{reportee_id}, #{reported_item_id}, #{report_type}, #{report_contents}, NOW(), #{report_status}) -->
 <!--     </insert> -->
+
+	<!-- 상품 삭제 -->
+    <delete id="deleteProduct">
+        DELETE FROM Product WHERE product_id = #{product_id}
+    </delete>
+    
+
 	<insert id="insertReport">
         INSERT INTO Report (reporter_id, reportee_id, reported_item_id, report_type, report_contents, reported_at, report_status)
         VALUES (#{reporter_id}, #{reportee_id}, 
@@ -132,4 +140,6 @@
         	#{report_type}, #{report_contents}, NOW(), #{report_status})
     </insert>
 
+
+	
 </mapper>

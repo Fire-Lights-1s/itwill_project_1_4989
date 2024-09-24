@@ -3,7 +3,7 @@ let chatList = null;
 let userId = sessionUserId;
 let chatRoomGlobal = null;
 let productGlobal = null;
-
+let contextPathGlobal = contextPath;
 
 $(document).ready(function(){
     if(userId == null || userId == ''){
@@ -24,7 +24,7 @@ function setConnected() {
 function connect(chatRoom_json){
 	
 	chatRoomGlobal = JSON.parse(chatRoom_json.replaceAll("&#034;", "\"").replaceAll("\n","<br>"));
-    disconnect();
+	setConnected();
     let socket = new SockJS('./chatting');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame){
@@ -38,8 +38,11 @@ function connect(chatRoom_json){
             showChat(JSON.parse(chatMessage.body));
         });
         stompClient.subscribe('/topic/product/' + chatRoomGlobal.product_id, function (product){
+        	productLoadingStart();
         	changeProductState(product.body);
-        	productLoadingEnd();
+        	setTimeout(function(){
+        		productLoadingEnd();
+        	}, 1000);
         });
         $('#inputMessage').css('visibility', 'visible');
     });
@@ -76,6 +79,7 @@ function loadChatList(chatRoom_json){
 
 // product 정보 가져오기
 function loadProduct(chatRoom_json){
+	productLoadingStart();
 	$.ajax({
 	    type: "POST",
 	    url : "./chat/reciveRoomProduct/",
@@ -89,8 +93,8 @@ function loadProduct(chatRoom_json){
 	        //Ajax 성공시
 	        //console.log(data);
 	        productGlobal = data;
-	        
-	        $('#productInfo div:nth-child(1) img').attr( "src", productGlobal.product_img1 );
+	        $('#productInfo div:nth-child(1) img').attr( "src", `${contextPathGlobal}/resources/upload/${productGlobal.product_img1}` );
+	        $('#productInfo div:nth-child(1) img').attr( "onerror", `this.onerror=null; this.src='${contextPathGlobal}/resources/img/icon/not_found.png';`);
 	        $('#productInfo div:nth-child(2) p:nth-child(1)').text(productGlobal.product_name);
 	        $('#productInfo div:nth-child(2) p:nth-child(2)').text("상품 가격 : "+productGlobal.product_price+"원");
 	        $('#productInfo div:nth-child(2) p:nth-child(3)').text("구매 연도 : "+productGlobal.year_purchase);
@@ -102,7 +106,7 @@ function loadProduct(chatRoom_json){
 	        }
 	        //거래 관련 버튼 조작 함수
         	productState_btn();
-	        
+	        ControllReportModal();
 	        $('#productInfo').css('visibility', 'visible');
 	    },error : function(){
 	        //Ajax 실패시
@@ -115,6 +119,9 @@ function loadProduct(chatRoom_json){
 function productState_btn(){
 	let TXButton = '#productInfo div:nth-child(3) #trade-btn';
 	$(TXButton).off('click');
+	$(TXButton).attr('data-toggle', "");
+	$(TXButton).attr('data-target', "");
+	
     if(productGlobal.seller_id == userId){
     	switch(productGlobal.trade_status) {
 		  case '거래 가능':
@@ -164,42 +171,49 @@ function productState_btn(){
 		  	}
 		    break;
 		  case '거래 완료':
-		  	$(TXButton).text('후기 작성');
-		  	$(TXButton).css('visibility', 'visible');
-		  	$(TXButton).addClass('reviewBtn');
-		  	
-		  	$(TXButton).on('click', function(event){
-		  		document.querySelectorAll('.stars').forEach(function(starGroup) {
-				    const stars = starGroup.querySelectorAll('.star');
-				    const hiddenInputId = starGroup.getAttribute('data-name') + 'Rating';
-				    const hiddenInput = document.getElementById(hiddenInputId);
+			// 리뷰가 없을 때
+			if(productGlobal.review_content == null){
+				$(TXButton).text('후기 작성');
+				$(TXButton).css('visibility', 'visible');
+				$(TXButton).attr('data-toggle', "modal");
+			  	$(TXButton).attr('data-target', "#reviewModal");
+				//후기 작성 버튼 이벤트 
+				$(TXButton).on('click', function(event){
+					document.querySelectorAll('.stars').forEach(function(starGroup) {
+					  const stars = starGroup.querySelectorAll('.star');
+					  const hiddenInputId = starGroup.getAttribute('data-name') + 'Rating';
+					  const hiddenInput = document.getElementById(hiddenInputId);
+					  
+					  stars.forEach(function(star) {
+						  star.classList.remove('selected');
+					  });
+					  hiddenInput.value = ''; 
+					  
+					  stars.forEach(function(star, index) {
+						star.addEventListener('click', function() {
+						  // 선택된 별까지 색상 변경
+						  stars.forEach(function(s, i) {
+							if (i <= index) {
+							  s.classList.add('selected');
+							} else {
+							  s.classList.remove('selected');
+							}
+						  });
+						  hiddenInput.value = star.getAttribute('data-value');	
+						});
+					  });
+					});
 					
-				    stars.forEach(function(star) {
-				        star.classList.remove('selected');
-				    });
-				    hiddenInput.value = ''; 
-				    
-				    stars.forEach(function(star, index) {
-				      star.addEventListener('click', function() {
-				        // 선택된 별까지 색상 변경
-				        stars.forEach(function(s, i) {
-				          if (i <= index) {
-				            s.classList.add('selected');
-				          } else {
-				            s.classList.remove('selected');
-				          }
-				        });
-				        hiddenInput.value = star.getAttribute('data-value');	
-				      });
-				    });
-				  });
-	            
-	            const imageSrc = productGlobal.product_img1;
-	            const productId = productGlobal.product_id;
-	            modalImage.src = imageSrc;
-	            productIdInput.value = productId;
-				modal.style.display = "block";
-		  	});
+				  const imageSrc = productGlobal.product_img1;
+				  const productId = productGlobal.product_id;
+				  console.log(imageSrc);
+				  $('#modalImage').attr('src', `${imageSrc}`);
+				  $('#productId').val(productId);
+				});
+			}else{
+				$(TXButton).text('후기 작성 완료');
+				$(TXButton).css('visibility', 'visible');
+			}
 		    break;
 		  default:
 		    $(TXButton).text('');
@@ -210,6 +224,7 @@ function productState_btn(){
 		$(TXButton).css('visibility', 'hidden');
     }
 }// productState-btn()
+
 //채팅 보내기
 function sendChat() {
 	let sendMessage = $("#message").val();
@@ -326,6 +341,17 @@ function productLoadingEnd(){
 	$('#productLoading').addClass('loading_visibility');
 }
 
+//신고하기 모달 조작
+function ControllReportModal(){
+	if(productGlobal.seller_id == userId){
+		$('#reportP').css('visibility', 'hidden');
+	}else{
+		$('#reportP').css('visibility', 'visible');
+	
+	}
+}
+
+// 신고하기
 function submitReport() {
     var reportContents = $("#report_contents").val();
     var reporterId = userId;
@@ -361,8 +387,8 @@ function changeProductState(product){
 	//console.log('changeProductState : ' + product);
 	productGlobal = JSON.parse(product);
 	$('#productInfo div:nth-child(2) p:nth-child(4)').text("거래 상태 : "+ productGlobal.trade_status);
-	
 	//거래 관련 버튼 조작 함수
     productState_btn();
-}//changeProductState()
+    
+}
 

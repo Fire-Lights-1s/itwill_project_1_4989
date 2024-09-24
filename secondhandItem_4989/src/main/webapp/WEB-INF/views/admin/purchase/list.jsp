@@ -62,7 +62,7 @@
 	                        </thead>
 	                        <tbody>
 	                        	<c:forEach var="purchaseList" items="${purchaseList }">
-	                            <tr data-purchase-id="${purchaseList.purchase_id }">
+	                            <tr class="get-detail" data-purchase-id="${purchaseList.purchase_id }">
 	                                <td class="text-center">${purchaseList.purchase_id}</td>
 	                                <td class="text-center">${purchaseList.member_id}</td>
 	                                <td class="text-center">

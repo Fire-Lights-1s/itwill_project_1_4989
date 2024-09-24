@@ -213,28 +213,28 @@ display: inline-block;
 			<h2>구매 내역</h2>
 			<div class="profile-a">				
 				<c:if test="${empty param.sort}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn" onclick="priceAsc();">가격 순</button>
+					<button class="dateBtn" onclick="dateAsc();">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceDesc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn active" onclick="priceAsc();">가격 순</button>
+					<button class="dateBtn" onclick="dateDesc();">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceAsc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn active" onclick="priceDesc();">가격 순</button>
+					<button class="dateBtn" onclick="dateDesc();">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateDesc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn" onclick="priceDesc();">가격 순</button>
+					<button class="dateBtn active" onclick="dateAsc();">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateAsc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn" onclick="priceDesc();">가격 순</button>
+					<button class="dateBtn active" onclick="dateDesc();">날짜 순</button>
 				</c:if>
 				<br>
-				<button onclick="location.href='${pageContext.request.contextPath}/my/buy?sort=dateDesc&sale=pro'">구매 진행 중</button>
-				<button onclick="location.href='${pageContext.request.contextPath}/my/buy?sort=dateDesc&sale=com'">구매 완료</button>
+				<button class="buying <c:if test="${pageDTO.sale == 'pro'}">active</c:if>" onclick="salePro();">구매 진행 중</button>
+				<button class="buycom <c:if test="${pageDTO.sale == 'com'}">active</c:if>" onclick="saleCom();">구매 완료</button>
 			</div>
 			<div class="profile-item-list">
 			<c:forEach var="productDTO" items="${productList}">
@@ -311,6 +311,37 @@ display: inline-block;
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
+<script>
+	const navLinks = document.querySelectorAll('#sideNavLinks .nav-link');
+	const currentUrl = window.location.pathname;
+	navLinks.forEach(link => {
+	    if (link.getAttribute('href') === currentUrl) {
+	        link.classList.add('active-link');
+	    }
+	});
+</script>
+
+<script type="text/javascript">
+	function priceAsc(){
+		location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}';
+	}
+	function priceDesc(){
+		location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}';
+	}
+	function dateAsc(){
+		location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}';
+	}
+	function dateDesc(){
+		location.href='${pageContext.request.contextPath}/my/buy?pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}';
+	}
+	function salePro(){
+		location.href='${pageContext.request.contextPath}/my/buy?sort=${pageDTO.sort}&sale=pro';
+	}
+	function saleCom(){
+		location.href='${pageContext.request.contextPath}/my/buy?sort=${pageDTO.sort}&sale=com';
+	}
+</script>
 
 <script>
 	function updateStarRating(category, value) {
