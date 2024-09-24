@@ -207,7 +207,9 @@ function productState_btn(){
 				  const imageSrc = productGlobal.product_img1;
 				  const productId = productGlobal.product_id;
 				  console.log(imageSrc);
-				  $('#modalImage').attr('src', `${imageSrc}`);
+				  $('#modalImage').attr('src', `${contextPathGlobal}/resources/upload/${imageSrc}`);
+				  $('#modalImage').attr( "onerror", `this.onerror=null; this.src='${contextPathGlobal}/resources/img/icon/not_found.png';`);
+	        
 				  $('#productId').val(productId);
 				});
 			}else{

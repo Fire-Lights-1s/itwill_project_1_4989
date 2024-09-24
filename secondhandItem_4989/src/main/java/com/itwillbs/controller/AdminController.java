@@ -50,14 +50,14 @@ public class AdminController {
     public String main(HttpSession session, RedirectAttributes redirectAttributes) {
         String memberId = (String) session.getAttribute("member_id");
 
+        
         // member_id가 admin이 아닌 경우 메인 페이지로 리다이렉트
         if (memberId == null || !memberId.equals("admin")) {
             redirectAttributes.addFlashAttribute("msg", "접근 권한이 없습니다.");
             return "redirect:/";  // 메인 페이지로 리다이렉트
+        } else {
+        	return "/admin/main";
         }
-
-        // member_id가 admin인 경우 admin 페이지로 이동
-        return "/admin/main";
     }
 	
 	
@@ -70,6 +70,9 @@ public class AdminController {
 	public String member(HttpServletRequest request, Model model) {
 		PageDTO pageDTO = new PageDTO();
 		String pageNum = request.getParameter("pageNum");
+		String searchKey = request.getParameter("search");
+		
+		
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -79,6 +82,10 @@ public class AdminController {
 		pageDTO.setCurrentPage(currentPage);
 		pageDTO.setPageSize(pageSize);
 		int count = adminService.getMemberCount(pageDTO);
+		
+		if(searchKey != null && !searchKey.isEmpty()) {
+			pageDTO.setSearch(searchKey);
+		} 
 		
 		int pageBlock = 10;
 		pageDTO.setCount(count);
@@ -141,6 +148,20 @@ public class AdminController {
 		return "redirect:/member/list";
 	}
 	
+	@PostMapping("/member/deleteMember")
+	public String deleteMember(HttpServletRequest request) {
+		String member_id = request.getParameter("user_id");
+		myPageService.deleteMem(member_id);
+		return "redirect:/admin/member";
+	}
+	
+	@PostMapping("/member/resMember")
+	public String resMember(HttpServletRequest request) {
+		String member_id = request.getParameter("user_id");
+		myPageService.resMem(member_id);
+		return "redirect:/admin/member";
+	}
+	
 	/*
 	 * @GetMapping("/trade") public String getTradeList(Model model) {
 	 * List<Map<String, Object>> tradeList = adminService.getTradeList();
@@ -164,7 +185,7 @@ public class AdminController {
 	@GetMapping(value = "/report", produces = "application/text; charset=UTF-8")
 	public String report(HttpServletRequest request, Model model) {
 		PageDTO pageDTO = new PageDTO();
-		String pageNum = request.getParameter("pageNum");
+		String pageNum = request.getParameter("page");
 		
 		System.out.println(request.getParameter("search"));
 		if(request.getParameter("search") != null && request.getParameter("search") != "") {
