@@ -187,7 +187,7 @@ public class AdminController {
 	@GetMapping(value = "/report", produces = "application/text; charset=UTF-8")
 	public String report(HttpServletRequest request, Model model) {
 		PageDTO pageDTO = new PageDTO();
-		String pageNum = request.getParameter("pageNum");
+		String pageNum = request.getParameter("page");
 		
 		System.out.println(request.getParameter("search"));
 		if(request.getParameter("search") != null && request.getParameter("search") != "") {
