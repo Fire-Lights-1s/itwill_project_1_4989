@@ -120,10 +120,21 @@
 			if(nickCheck.innerText == "" || nickCheck.innerText != "사용 가능한 닉네임입니다."){
 				alert("닉네임 중복 확인해주세요.");
 				event.preventDefault();
+			}else if(nickCheck.innerText == "닉네임은 최대 50자까지 작성 가능합니다."){
+				alert("닉네임은 최대 50자까지 작성 가능합니다.");
+				event.preventDefault();
 			}			
+		}
+		if(nickname.value.length > 50) {
+			alert("닉네임은 최대 50자까지 작성 가능합니다.");
+			event.preventDefault();
 		}
 		if(name.value === "") {
 			alert("이름을 입력해주세요.");
+			event.preventDefault();
+		}
+		if(name.value.length > 30) {
+			alert("이름은 최대 30자까지 작성 가능합니다.");
 			event.preventDefault();
 		}
 		if(phone.value === "") {
@@ -197,9 +208,15 @@ $(function(){
 					result = "이미 존재하는 닉네임입니다.";
 					$('#nickCheck').html(result).css('color', 'red');
 				}else{
-					result = "사용 가능한 닉네임입니다.";
-					$('#nickCheck').html(result).css('color', 'green');
-				}					
+					if($('#nickname').val().length > 50){
+						result = "닉네임은 최대 50자까지 작성 가능합니다.";
+						$('#nickCheck').html(result).css('color', 'red');
+					}else{
+						result = "사용 가능한 닉네임입니다.";
+						$('#nickCheck').html(result).css('color', 'green');
+					}
+				}
+				
 			}
 		});
 	});
