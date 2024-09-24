@@ -72,4 +72,14 @@
 		where member_id = #{member_id} or nickname = #{nickname} or email = #{email} or phone = #{phone} 
 	</select>
 	
+<!-- 	오늘 가입자 -->
+	<select id="memberCount" resultType="java.lang.Integer">
+		select count(*) from Mem
+		where date(created_at) = curdate()
+	</select>
+	
+	
+	
+	
+	
 </mapper>

@@ -44,5 +44,29 @@ public class AdminDAO {
 		int count = sqlSession.selectOne(namespace+".getMemberCount", pageDTO);
 		return count;
 	}
+	
+	public int memberCount(MemberDTO memberDTO) {
+		System.out.println("AdminDAO memberCount()");
+		
+		return sqlSession.selectOne(namespace + ".memberCount", memberDTO);
+	}
+	
+	public int productCount(MemberDTO memberDTO) {
+		System.out.println("AdminDAO productCount()");
+		
+		return sqlSession.selectOne(namespace + ".productCount", memberDTO);
+	}
+	
+	public int purchaseCount(MemberDTO memberDTO) {
+		System.out.println("AdminDAO purchaseCount()");
+		
+		return sqlSession.selectOne(namespace + ".purchaseCount", memberDTO);
+	}
+	
+	public int reportCount(MemberDTO memberDTO) {
+		System.out.println("AdminDAO reportCount()");
+		
+		return sqlSession.selectOne(namespace + ".reportCount", memberDTO);
+	}
 
 }
