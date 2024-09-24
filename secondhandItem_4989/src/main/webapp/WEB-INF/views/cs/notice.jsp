@@ -56,8 +56,8 @@
   	 				<td>${noticeList.notice_id }</td>
   	 				<td><a href="noticedetail?notice_id=${noticeList.notice_id }">
 					<c:choose>
-					    <c:when test="${fn:length(noticeList.notice_name) > 18}">
-					        ${fn:substring(noticeList.notice_name, 0, 18)}...
+					    <c:when test="${fn:length(noticeList.notice_name) > 40}">
+					        ${fn:substring(noticeList.notice_name, 0, 40)}...
 					    </c:when>
 					    <c:otherwise>
 					        ${noticeList.notice_name}

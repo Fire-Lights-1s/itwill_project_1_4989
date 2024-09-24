@@ -102,6 +102,9 @@
 	const name = document.getElementById('name');
 	const phone = document.getElementById('phoneNumber');
 	const email = document.getElementById('email');
+	let hasNumber = /\d/;
+	let hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
+	let hasLetter = /[a-zA-Z]/;
 	
 	function removeReadonly() {
         pass1.removeAttribute('readonly');
@@ -109,14 +112,6 @@
 		pass1.select();
 	}
 	function updateCheck() {
-		if(pass1.value === "" || pass2.value === "") {
-			alert("비밀번호를 입력해주세요.");
-			event.preventDefault();
-		}
-		if(pass1.value != pass2.value) {
-			alert("비밀번호와 비밀번호 확인이 맞지 않습니다.");
-			event.preventDefault();
-		}
 		if(nickname.value === "") {
 			alert("닉네임을 입력해주세요.");
 			event.preventDefault();
@@ -139,7 +134,30 @@
 			alert("이메일을 입력해주세요.");
 			event.preventDefault();
 		}
-		
+		if(pass1.value === "" || pass2.value === "") {
+			alert("비밀번호를 입력해주세요.");
+			event.preventDefault();
+		}
+		if(pass1.value != pass2.value) {
+			alert("비밀번호와 비밀번호 확인이 맞지 않습니다.");
+			event.preventDefault();
+		}
+		if(pass1.value.length < 8){
+			alert("비밀번호를 8자 이상 입력해 주세요.");
+			event.preventDefault();
+		}
+		else if(!hasNumber.test(pass1.value)){
+			alert("비밀번호에 숫자가 포함되어 있어야 합니다.");
+			event.preventDefault();
+		}
+		else if(!hasSpecialChar.test(pass1.value)){
+			alert("비밀번호에 특수문자가 포함되어 있어야 합니다.");
+			event.preventDefault();
+		}
+		else if(!hasLetter.test(pass1.value)){
+			alert("비밀번호에 영문자가 포함되어 있어야 합니다.");
+			event.preventDefault();
+		}
 	}
 
 	document.getElementById('fileInput').addEventListener('change', function(event) {
