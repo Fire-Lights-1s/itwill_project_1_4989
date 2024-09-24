@@ -47,7 +47,7 @@
                                             </div>
                                             <div class="text">
                                                 <span>오늘 가입자</span>
-                                                <h2>10368</h2>
+                                                <h2>${memberCount }</h2>
                                                 
                                             </div>
                                         </div>
@@ -64,7 +64,7 @@
                                             </div>
                                             <div class="text">
                                                 <span>오늘 등록된 상품</span>
-                                                <h2>388,688</h2>
+                                                <h2>${productCount }</h2>
                                             </div>
                                         </div>
                                         
@@ -80,7 +80,7 @@
                                             </div>
                                             <div class="text">
                                                 <span>오늘 등록된 매입신청</span>
-                                                <h2>1,086</h2>
+                                                <h2>${purchaseCount }</h2>
                                             </div>
                                         </div>
                                         
@@ -96,7 +96,7 @@
                                             </div>
                                             <div class="text">
                                             	<span>오늘 접수된 신고</span>
-                                                <h2>$1,060,386</h2>
+                                                <h2>${reportCount }</h2>
                                             </div>
                                         </div>
                                         

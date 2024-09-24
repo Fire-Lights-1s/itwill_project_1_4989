@@ -1,6 +1,8 @@
 package com.itwillbs.controller;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,7 +11,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -47,15 +48,23 @@ public class AdminController {
 	
 	//admin이 아닐경우 admin페이지에 접근차단
 	@GetMapping("/")
-    public String main(HttpSession session, RedirectAttributes redirectAttributes) {
+    public String main(HttpSession session, RedirectAttributes redirectAttributes, MemberDTO memberDTO, Model model) {
         String memberId = (String) session.getAttribute("member_id");
-
         
         // member_id가 admin이 아닌 경우 메인 페이지로 리다이렉트
         if (memberId == null || !memberId.equals("admin")) {
             redirectAttributes.addFlashAttribute("msg", "접근 권한이 없습니다.");
             return "redirect:/";  // 메인 페이지로 리다이렉트
         } else {
+        	int memberCount = adminService.memberCount(memberDTO);
+        	int productCount = adminService.productCount(memberDTO);
+        	int purchaseCount = adminService.purchaseCount(memberDTO);
+        	int reportCount = adminService.reportCount(memberDTO);
+            
+            model.addAttribute("memberCount", memberCount);
+            model.addAttribute("productCount", productCount);
+            model.addAttribute("purchaseCount", purchaseCount);
+            model.addAttribute("reportCount", reportCount);
         	return "/admin/main";
         }
     }

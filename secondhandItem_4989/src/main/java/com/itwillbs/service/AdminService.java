@@ -80,4 +80,28 @@ public class AdminService {
 		return count;
 	}
 	
+	public int memberCount(MemberDTO memberDTO) {
+		System.out.println("AdminService memberCount()");
+		
+		return adminDAO.memberCount(memberDTO);
+	}
+	
+	public int productCount(MemberDTO memberDTO) {
+		System.out.println("AdminService productCount()");
+		
+		return adminDAO.productCount(memberDTO);
+	}
+	
+	public int purchaseCount(MemberDTO memberDTO) {
+		System.out.println("AdminService purchaseCount()");
+		
+		return adminDAO.purchaseCount(memberDTO);
+	}
+	
+	public int reportCount(MemberDTO memberDTO) {
+		System.out.println("AdminService reportCount()");
+		
+		return adminDAO.reportCount(memberDTO);
+	}
+	
 }
