@@ -8,7 +8,9 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -157,6 +159,20 @@ public class AdminController {
 		return "redirect:/member/list";
 	}
 	
+	@PostMapping("/member/deleteMember")
+	public String deleteMember(HttpServletRequest request) {
+		String member_id = request.getParameter("user_id");
+		myPageService.deleteMem(member_id);
+		return "redirect:/admin/member";
+	}
+	
+	@PostMapping("/member/resMember")
+	public String resMember(HttpServletRequest request) {
+		String member_id = request.getParameter("user_id");
+		myPageService.resMem(member_id);
+		return "redirect:/admin/member";
+	}
+	
 	/*
 	 * @GetMapping("/trade") public String getTradeList(Model model) {
 	 * List<Map<String, Object>> tradeList = adminService.getTradeList();
@@ -180,7 +196,7 @@ public class AdminController {
 	@GetMapping(value = "/report", produces = "application/text; charset=UTF-8")
 	public String report(HttpServletRequest request, Model model) {
 		PageDTO pageDTO = new PageDTO();
-		String pageNum = request.getParameter("pageNum");
+		String pageNum = request.getParameter("page");
 		
 		System.out.println(request.getParameter("search"));
 		if(request.getParameter("search") != null && request.getParameter("search") != "") {

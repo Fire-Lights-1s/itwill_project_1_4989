@@ -62,7 +62,8 @@
 <!--         phone, -->
         social_loginfo,
         rating,
-        created_at
+        created_at,
+        is_withdrawn
     from Mem
     <if test="search != null">
         where member_id like CONCAT('%',#{search},'%')
