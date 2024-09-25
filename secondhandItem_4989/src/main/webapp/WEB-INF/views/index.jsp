@@ -98,12 +98,7 @@
 			<div class="col-12 col-md-6 col-lg-3 mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <c:if test="${empty product.product_img1 || product.product_img1 eq '' }">
-                        <img class="card-img-top img-height-fix" src="https://i.namu.wiki/i/tgJKui-B3sVdzHzJ_P2oLzBdPRihL7X4Jj5W9e7ReG6k9qcBRF-NuCmcM-j37ikoyBu7c_hq3P7juN3AnYlp0jiS3OD8wmaFC3SzSRHXOmTpxNdUrXcTs3ARbONhDcYAMbbMw7niOSM3khaPh7_DGQ.webp" alt="..." />
-                        </c:if>
-                        <c:if test="${!empty product.product_img1 && product.product_img1 ne '' }">
-                        <img class="card-img-top img-height-fix" src="${pageContext.request.contextPath }/resources/upload/${product.product_img1 }" alt="..." />                        
-                        </c:if>
+                        <img class="card-img-top img-height-fix" src="${pageContext.request.contextPath }/resources/upload/${product.product_img1 }" onerror="this.src='${pageContext.request.contextPath }/resources/img/default_image.png'" />                        
                         <!-- 페이 뱃지 -->
                     <c:if test="${product.pay_method eq '페이' || product.pay_method eq '현금/페이'}">
                         <div class="badge text-white position-absolute" style="background-color: #4e229e; top: 0.5rem; right: 0.5rem">PAY</div>
@@ -230,9 +225,7 @@ $('#load_more').click(function() {
              		 <div class="col-12 col-md-6 col-lg-3 mb-5">
                       <div class="card h-100">
                          <!-- Product image -->
-                         \${product.product_img1 ?
-                             `<img class="card-img-top img-height-fix" src="${pageContext.request.contextPath }/resources/upload/\${product.product_img1}" alt="Product Image" />` :
-                             `<img class="card-img-top img-height-fix" src="https://i.namu.wiki/i/tgJKui-B3sVdzHzJ_P2oLzBdPRihL7X4Jj5W9e7ReG6k9qcBRF-NuCmcM-j37ikoyBu7c_hq3P7juN3AnYlp0jiS3OD8wmaFC3SzSRHXOmTpxNdUrXcTs3ARbONhDcYAMbbMw7niOSM3khaPh7_DGQ.webp" alt="Default Image" />`}
+                        <img class="card-img-top img-height-fix" src="${pageContext.request.contextPath }/resources/upload/\${product.product_img1}" alt="Product Image" onerror="this.src='${pageContext.request.contextPath }/resources/img/default_image.png'" />
 
                          <!-- PAY Badge -->
                          \${product.pay_method === '페이' || product.pay_method === '현금/페이' ?
