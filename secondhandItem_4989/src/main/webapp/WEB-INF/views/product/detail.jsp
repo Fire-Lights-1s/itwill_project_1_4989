@@ -235,6 +235,7 @@
 		        .then(response => response.json())
 		        .then(data => {
 			        console.log(data);
+			        //찜 갯수 가져오기
 			        getZzimCount();
 		           if (data.save) {
 				        setTimeout(() => {
