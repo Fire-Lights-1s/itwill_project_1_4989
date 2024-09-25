@@ -134,7 +134,8 @@
                 <!-- 상품 설명 -->
                 <div class="product-desc">
                     <div class="card">
-                        <strong>상품 정보</strong><br> <span>${productDTO.product_desc}</span>
+                        <strong>상품 정보</strong><br> 
+                        <div><pre style="font-family:inherit;">${productDTO.product_desc}</pre></div>
                     </div>
                 </div>
             </div>
