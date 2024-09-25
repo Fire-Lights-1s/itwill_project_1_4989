@@ -250,7 +250,13 @@ public class ProductController {
 
 		return "/product/detail";
 	}
-
+	@PostMapping("/ZzimCount")
+	@ResponseBody
+	public int ZzimCount(String product_id) {
+		
+		int result = productService.getLikeCount(Integer.parseInt(product_id));
+		return result;
+	}
 	@GetMapping("/update")
 	public String update(@RequestParam("product_id") String product_id, Model model, HttpSession session)
 			throws Exception {

@@ -89,9 +89,9 @@
 	</update>
 
 	<!-- 특정 상품에 대한 전체 찜 개수 조회 -->
-	<select id="getLikeCount" parameterType="int" resultType="int">
+	<select id="getLikeCount" parameterType="int" resultType="java.lang.Integer">
 		select
-		like_count from Product where product_id = #{product_id}
+		count(*) from Zzim where product_id = #{product_id}
 	</select>
 
 

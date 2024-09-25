@@ -124,7 +124,7 @@
 
                 <!-- 찜하기, 채팅, 신고 버튼 -->
                 <div class="button-group" style="display: flex; align-items: center; gap: 10px;">
-                    <div class="zzim-button" data-product_id="${productDTO.product_id}" 
+                    <div class="zzim-button" id="${productDTO.product_id}" data-product_id="${productDTO.product_id}" 
                         data-member_id="${sessionScope.member_id}" style="bottom: 50%;">♥</div>
                     <button class="button" id="startChat">채팅하기</button>
                     <button class="button" id="openReportModal" data-toggle="modal"
@@ -186,10 +186,31 @@
 		</div>
 	</section>
 
-
-
+	<script>
+		const contextPath =  '${pageContext.request.contextPath}';
+		const zzim_button = document.getElementById('${productDTO.product_id}');
+		zzim_button.addEventListener('click', getZzimCount);      // 새 리스너 등록
+		let result = null;
+		function getZzimCount(){
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/product/ZzimCount",
+				data : {
+					product_id : '${productDTO.product_id}'
+				},
+				success : function(likeCount) {
+					$('#like_count').text(likeCount);
+				},
+				error : function() {
+					alert("detail 서버 통신 중 오류가 발생했습니다.");
+				}
+			});
+		}
+		
+	</script>
 	<!-- 신고 내용 서버로 보내기 -->
 	<script>
+	
 		function submitReport() {
 			var reportContents = $("#report_contents").val();
 			var reporterId = "${sessionScope.member_id}";
