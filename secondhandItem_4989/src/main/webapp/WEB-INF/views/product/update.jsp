@@ -248,9 +248,6 @@ $(document).ready(function() {
                 yearInput.value = yearInput.value.slice(0, 4);
             }
         }
-        document.getElementById('uploadImage').addEventListener('click', function() {
-            document.getElementById('product_img').click();
-        });
 
     </script>
     
