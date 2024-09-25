@@ -32,7 +32,12 @@ public class AuthController {
         
     	String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#%^&*()_+=?])[A-Za-z\\d@$!#%^&*()_+=?]{8,}$";
 		
-    	if (password.matches(passwordPattern)) {
+    	String pass = request.getParameter("pass");
+    	String pass1 = request.getParameter("confirmPassword");
+    	
+    	if(pass.equals(pass1)) {
+    	
+    	if (password.matches(passwordPattern) ) {
 			int memberDTOCount = memberService.userCheck2(memberDTO);
 			System.out.println(memberDTOCount);
 //		입력정보 중복 확인
@@ -65,6 +70,10 @@ public class AuthController {
 			model.addAttribute("alertMessage", "비밀번호는 영문,숫자,특수문자를 포함하여 8자리 이상이어야 합니다.");
             return "member/join"; // 비밀번호가 8자리 미만이면 회원가입 페이지로 리다이렉트
 		}
+    	} else {
+    		model.addAttribute("alertMessage", "비밀번호가 일치하지 않습니다.");
+            return "member/join";
+    	}
     }
 
 }

@@ -324,6 +324,7 @@ function promiseTrade(){
 	    	let data = {
 	    	"product_id":productGlobal.product_id,
 	    	"seller_id":productGlobal.seller_id,
+	    	"pay_method":productGlobal.pay_method,
 	    	"trade_status":tradeState,
 	    	"buyer_id": chatRoomGlobal.buyer_id,
 	    	}
