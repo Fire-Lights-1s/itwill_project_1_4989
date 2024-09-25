@@ -138,7 +138,7 @@
                         <textarea class="form-control" placeholder="상품 신고 사유를 입력해주세요" id="report_contents" name="report_contents" required></textarea>
 
                         <!-- Submission button -->
-                        <button type="button" class="btn btn-primary mt-3 bg-purple" id="reportBtn">상품 신고</button>
+                        <button type="button" class="btn btn-primary mt-3 bg-purple" id="reportBtn">신고하기</button>
                     </form>
                 </div>
             </div>
