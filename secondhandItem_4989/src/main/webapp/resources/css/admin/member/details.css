@@ -1,7 +1,7 @@
 @charset "UTF-8";
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
+    background-color: #e5e5e5;
     margin: 0;
     padding: 0;
 }
@@ -10,8 +10,10 @@ body {
     max-width: 500px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #f8f8f8;
+    background-color: #e5e5e5;
     border-radius: 8px;
+    position: relative; /* 추가 */
+    left: 400px; /* 오른쪽으로 이동 */
 }
 
 h1 {
@@ -23,38 +25,26 @@ h1 {
 .form-group {
     margin-bottom: 15px;
     display: flex;
-    flex-direction: column; /* 레이블을 입력 필드 위에 위치시키도록 수정 */
+    align-items: center;  /* 입력 필드와 버튼을 같은 줄에 배치 */
 }
 
 label {
-    display: block; /* 레이블이 입력 필드 위로 오도록 설정 */
+    display: block;
     font-weight: bold;
     margin-bottom: 5px;
-    text-align: left; /* 레이블을 왼쪽 정렬 */
+    text-align: left;
+    width: 100px;  /* 라벨의 고정 너비 */
 }
 
-#member_id,
-#nickname,
-#name,
-#residentRegNumber,
-#pass,
+input[type="text"],
 input[type="tel"],
 input[type="email"] {
-    width:300px;
+    width: 300px;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
-
-input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    margin-right: 10px;  /* 버튼과의 간격 조정 */
 }
 
 button[type="button"] {
@@ -65,13 +55,8 @@ button[type="button"] {
     background-color: #333;
     cursor: pointer;
     color: white;
-    margin-top: 5px;
-    width: 100px; /* 버튼 크기 고정 */
-}
-
-.check-btn {
-    background-color: #333;
-    color: white;
+    margin-left: 10px;  /* 입력 필드와 버튼 사이의 간격 */
+    flex-shrink: 0;  /* 버튼의 크기 고정 */
 }
 
 button[type="submit"] {

@@ -104,98 +104,9 @@ public class ProductController {
 	    productService.registerProduct(productDTO, savedFileNames);
 
 	    return "redirect:/product";
-	}
+	}//register
 
-	
 
-		/*
-		 * if (uploadPath == null) { System.out.println("업로드 경로가 설정되지 않았습니다."); return
-		 * "redirect:/product/register"; }
-		 * 
-		 * UUID uuid = UUID.randomUUID();
-		 * 
-		 * ProductDTO productDTO = new ProductDTO();
-		 * productDTO.setProduct_name(request.getParameter("product_name"));
-		 * productDTO.setCategory_name(request.getParameter("category_name"));
-		 * productDTO.setProduct_price(Integer.parseInt(request.getParameter(
-		 * "product_price")));
-		 * productDTO.setTrade_area(request.getParameter("trade_area"));
-		 * productDTO.setTrade_method(request.getParameter("trade_method"));
-		 * productDTO.setPay_method(request.getParameter("pay_method"));
-		 * productDTO.setProduct_desc(request.getParameter("product_desc"));
-		 * 
-		 * // 로그인한 사용자 productDTO.setSeller_id((String)
-		 * session.getAttribute("member_id"));
-		 * 
-		 * // 업로드된 파일이 있는지 확인 후 처리 (각 파일에 대해 고유 UUID 생성)
-		 * 
-		 * for (int i = 0; i < product_img.length; i++) { if (product_img[i] != null &&
-		 * !product_img[i].isEmpty()) { // UUID uuid = UUID.randomUUID(); // 각 파일에 대해
-		 * 새로운 // UUID 생성 String filename = uuid.toString() + "_" +
-		 * product_img[i].getOriginalFilename();
-		 * 
-		 * System.out.println("랜덤문자_파일이름 : " + filename);
-		 * 
-		 * FileCopyUtils.copy(product_img[i].getBytes(), new File(uploadPath,
-		 * filename));
-		 * 
-		 * // 업로드된 파일의 순서대로 파일명을 DTO에 저장 if (i == 0)
-		 * productDTO.setProduct_img1(filename); if (i == 1)
-		 * productDTO.setProduct_img2(filename); if (i == 2)
-		 * productDTO.setProduct_img3(filename); if (i == 3)
-		 * productDTO.setProduct_img4(filename); if (i == 4)
-		 * productDTO.setProduct_img5(filename);
-		 * 
-		 * } } // 나머지 이미지를 null로 설정 if (product_img.length < 5) { // *** 업로드된 파일 개수에 따라
-		 * 빈 이미지 필드를 null로 설정 *** if (product_img.length < 2)
-		 * productDTO.setProduct_img2(null); if (product_img.length < 3)
-		 * productDTO.setProduct_img3(null); if (product_img.length < 4)
-		 * productDTO.setProduct_img4(null); if (product_img.length < 5)
-		 * productDTO.setProduct_img5(null); }
-		 * 
-		 * 
-		 * // 배열 길이 확인 후 빈 파일 처리 if (product_img.length < 2 || product_img[1] == null ||
-		 * product_img[1].isEmpty()) { productDTO.setProduct_img2(null); } if
-		 * (product_img.length < 3 || product_img[2] == null ||
-		 * product_img[2].isEmpty()) { productDTO.setProduct_img3(null); } if
-		 * (product_img.length < 4 || product_img[3] == null ||
-		 * product_img[3].isEmpty()) { productDTO.setProduct_img4(null); } if
-		 * (product_img.length < 5 || product_img[4] == null ||
-		 * product_img[4].isEmpty()) { productDTO.setProduct_img5(null); }
-		 * 
-		 * 
-		 * 
-		 * // 업로드된 파일이 없으면 null 설정 if (product_img[1] == null ||
-		 * product_img[1].isEmpty()) { productDTO.setProduct_img2(null); } if
-		 * (product_img[2] == null || product_img[2].isEmpty()) {
-		 * productDTO.setProduct_img3(null); } if (product_img[3] == null ||
-		 * product_img[3].isEmpty()) { productDTO.setProduct_img4(null); } if
-		 * (product_img[4] == null || product_img[4].isEmpty()) {
-		 * productDTO.setProduct_img5(null); }
-		 * 
-		 * 
-		 * // 파일이 최소 1개 이상 업로드되었는지 확인 boolean hasFile = false; for (MultipartFile file :
-		 * product_img) { if (file != null && !file.isEmpty()) { hasFile = true; break;
-		 * } }
-		 * 
-		 * if (!hasFile) { // 파일이 하나도 없을 때 처리 (에러 메시지 출력 또는 페이지 리다이렉트)
-		 * System.out.println("최소 1개의 파일을 업로드해야 합니다."); return
-		 * "redirect:/product/register"; // 다시 업로드 페이지로 리다이렉트 }
-		 * 
-		 * // 판매자 ID 디버깅용 System.out.println("상품 등록자 ID (seller_id): " +
-		 * productDTO.getSeller_id());
-		 * 
-		 * String yearPurchase = request.getParameter("year_purchase"); if (yearPurchase
-		 * != null && !yearPurchase.isEmpty()) {
-		 * productDTO.setYear_purchase(Integer.parseInt(yearPurchase)); }
-		 * System.out.println("ProductController" + productDTO);
-		 * productService.registerProduct(productDTO);
-		
-            
-		return "redirect:/product/all";
-            
-           
-	} */
 
 	@GetMapping("/detail")
 	public String detail(HttpServletRequest request, Model model, HttpSession session) throws Exception {
@@ -250,26 +161,13 @@ public class ProductController {
 
 		return "/product/detail";
 	}
-	
-	  // 상품 삭제 처리
-		@GetMapping("/delete")
-		public String deleteProduct(@RequestParam("product_id") int product_id, HttpSession session) throws Exception {
-		    // 현재 로그인한 사용자 확인
-		    String member_id = (String) session.getAttribute("member_id");
-
-		    // 상품 정보 가져오기
-		    ProductDTO product = productService.getProductDetail(String.valueOf(product_id));
-
-		    // 로그인한 사용자가 판매자인지 확인
-		    if (product != null && product.getSeller_id().equals(member_id)) {
-		        productService.deleteProduct(product_id);
-		        return "redirect:/product";  // 절대 경로를 사용하여 상품 목록 페이지로 리다이렉트
-		    } else {
-		        return "redirect:/product/detail?product_id=" + product_id + "&error=unauthorized";  // 권한 없음 에러 처리
-		    }
-		}
-
-
+	@PostMapping("/ZzimCount")
+	@ResponseBody
+	public int ZzimCount(String product_id) {
+		
+		int result = productService.getLikeCount(Integer.parseInt(product_id));
+		return result;
+	}
 	@GetMapping("/update")
 	public String update(@RequestParam("product_id") String product_id, Model model, HttpSession session)
 			throws Exception {
@@ -278,71 +176,91 @@ public class ProductController {
 
 		// 상품 정보 조회
 		ProductDTO productDTO = productService.getProductDetail(product_id);
-		
-		// 로그인한 사용자와 상품 등록자가 다를 경우 예외 처리
-		if (!member_id.equals(productDTO.getSeller_id())) {
-			throw new IllegalArgumentException("수정 권한이 없습니다.");
-		}
-
-		// trade_area를 sido와 sigungu로 분리
-	    String tradeArea = productDTO.getTrade_area();
-	    if (tradeArea != null && !tradeArea.isEmpty()) {
-	        String[] areaParts = tradeArea.split(" ");  // 공백을 기준으로 분리
-	        if (areaParts.length >= 2) {
-	            model.addAttribute("sido", areaParts[0]);     // 도/시 부분
-	            model.addAttribute("sigungu", areaParts[1]);  // 시/군/구 부분
-	        } else {
-	            model.addAttribute("sido", "");    // 도/시 부분이 없는 경우
-	            model.addAttribute("sigungu", ""); // 시/군/구 부분이 없는 경우
-	        }
-	    } else {
-	        model.addAttribute("sido", "");
-	        model.addAttribute("sigungu", "");
-	    }
 
 		// 모델에 상품 정보를 추가하여 update.jsp로 전달
 		model.addAttribute("productDTO", productDTO);
 
 		return "product/update"; 
 	}
-
+	
 	@PostMapping("/updatePro")
-	public String updateProductPro(ProductDTO productDTO,
-	        @RequestParam(value = "product_img[]", required = false) MultipartFile[] newFiles,
-	        @RequestParam(value = "delete", required = false) String deleteRequest, 
-	        HttpServletRequest request, HttpSession session) throws Exception {
+	public String updatePro(MultipartHttpServletRequest request, HttpSession session) throws Exception {
+	    // 상품 ID 가져오기
+	    String productId = request.getParameter("product_id");
+	    ProductDTO productDTO = productService.getProductDetail(productId);
 
-	    // 로그인한 사용자 확인
-	    String member_id = (String) session.getAttribute("member_id");
+	    // 파일 리스트 가져오기
+	    List<MultipartFile> files = request.getFiles("product_img");
+	    List<String> savedFileNames = new ArrayList<>();
 
-	    // 유효성 검사: 상품 정보 및 로그인 여부 확인
-	    if (productDTO == null || productDTO.getProduct_id() == 0 || member_id == null) {
-	        throw new IllegalArgumentException("유효하지 않은 요청입니다.");
+	    // 파일 처리 로직
+	    for (MultipartFile file : files) {
+	        if (!file.isEmpty()) {
+	            String uniqueFilename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+	            File destinationFile = new File(uploadPath, uniqueFilename);
+	            file.transferTo(destinationFile);
+	            savedFileNames.add(uniqueFilename);
+	        }
 	    }
 
-	    // 데이터베이스에서 상품의 실제 등록자 ID(seller_id) 가져오기
-	    ProductDTO existingProduct = productService.getProductDetail(String.valueOf(productDTO.getProduct_id()));
+	    // 상품 수정 서비스 호출
+	    productService.updateProduct(productDTO, savedFileNames);
 
-	    // 로그인한 사용자와 상품 등록자 일치 여부 확인
-	    if (!member_id.equals(existingProduct.getSeller_id())) {
-	        throw new IllegalArgumentException("수정 권한이 없습니다.");
-	    }
-	    
-	
-	    // sido와 sigungu를 합쳐 trade_area로 설정
-	    String sido = request.getParameter("sido");
-	    String sigungu = request.getParameter("sigungu");
-	    if (sido != null && sigungu != null && !sido.isEmpty() && !sigungu.isEmpty()) {
-	        productDTO.setTrade_area(sido + " " + sigungu);  // sido와 sigungu 합쳐서 trade_area에 저장
-	    }
-
-	    // 상품 정보 수정
-	    productService.updateProduct(productDTO);
-
-	    // 수정 후 상품의 상세 페이지로 리다이렉트
-	    return "redirect:/product/detail?product_id=" + productDTO.getProduct_id();
+	    return "redirect:/product";
 	}
-	
+
+
+	/*
+	 * @PostMapping("/updatePro") public String updateProductPro(ProductDTO
+	 * productDTO,
+	 * 
+	 * @RequestParam(value = "product_img[]", required = false) MultipartFile[]
+	 * newFiles, HttpServletRequest request, HttpSession session) throws Exception {
+	 * 
+	 * // 로그인한 사용자 확인 String member_id = (String) session.getAttribute("member_id");
+	 * 
+	 * // 유효성 검사: 상품 정보 및 로그인 여부 확인 if (productDTO == null ||
+	 * productDTO.getProduct_id() == 0 || member_id == null) { throw new
+	 * IllegalArgumentException("유효하지 않은 요청입니다."); }
+	 * 
+	 * // 데이터베이스에서 상품의 실제 등록자 ID(seller_id) 가져오기 ProductDTO existingProduct =
+	 * productService.getProductDetail(String.valueOf(productDTO.getProduct_id()));
+	 * 
+	 * // 로그인한 사용자와 상품 등록자 일치 여부 확인 if
+	 * (!member_id.equals(existingProduct.getSeller_id())) { throw new
+	 * IllegalArgumentException("수정 권한이 없습니다."); }
+	 * 
+	 * // **삭제된 이미지 처리 부분에서 null 값 체크 추가** String[] deletedImages =
+	 * request.getParameter("deletedImages") != null ?
+	 * request.getParameter("deletedImages").split(",") : new String[0];
+	 * 
+	 * for (String imageName : deletedImages) { if (imageName != null &&
+	 * !imageName.isEmpty()) { // 이미지 파일 경로 String filePath =
+	 * session.getServletContext().getRealPath("/resources/upload/" + imageName);
+	 * 
+	 * // 실제 파일 삭제 File file = new File(filePath); if (file.exists()) {
+	 * file.delete(); // 파일 삭제 System.out.println("파일 삭제됨: " + filePath); }
+	 * 
+	 * // 데이터베이스에서 이미지 필드 업데이트 if
+	 * (imageName.equals(existingProduct.getProduct_img1())) {
+	 * productDTO.setProduct_img1(null); } else if
+	 * (imageName.equals(existingProduct.getProduct_img2())) {
+	 * productDTO.setProduct_img2(null); } else if
+	 * (imageName.equals(existingProduct.getProduct_img3())) {
+	 * productDTO.setProduct_img3(null); } else if
+	 * (imageName.equals(existingProduct.getProduct_img4())) {
+	 * productDTO.setProduct_img4(null); } else if
+	 * (imageName.equals(existingProduct.getProduct_img5())) {
+	 * productDTO.setProduct_img5(null); } } }
+	 * 
+	 * 
+	 * // 상품 정보 수정 productService.updateProduct(productDTO, null);
+	 * 
+	 * // 수정 후 상품의 상세 페이지로 리다이렉트 return "redirect:/product/detail?product_id=" +
+	 * productDTO.getProduct_id(); }
+	 */
+
+
 
 	// 신고하기
 	@PostMapping("/report")
@@ -373,5 +291,24 @@ public class ProductController {
 
 		return response;
 	}
+	//상품 삭제
+	@GetMapping("/delete")
+	public String deleteProduct(@RequestParam("product_id") int product_id, HttpSession session) throws Exception {
+	    // 로그인한 사용자 ID 가져오기
+	    String member_id = (String) session.getAttribute("member_id");
+
+	    // 상품 정보 가져오기
+	    ProductDTO product = productService.getProductDetail(String.valueOf(product_id));
+
+	    // 로그인한 사용자가 판매자인지 확인
+	    if (product != null && product.getSeller_id().equals(member_id)) {
+	        productService.deleteProduct(product_id);
+	        return "redirect:/product"; 
+//	        
+	    } else {
+	        return "redirect:/product/detail?product_id=" + product_id + "&error=unauthorized";  // 권한 없음 에러 처리
+	    }
+	}
+
 
 }// ProductController()

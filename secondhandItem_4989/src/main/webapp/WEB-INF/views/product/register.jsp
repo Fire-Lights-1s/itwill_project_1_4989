@@ -276,10 +276,11 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function (response) {
-                alert('상품 등록이 완료되었습니다.')
+                alert('상품 등록이 완료되었습니다.');
+                window.location.href = contextPath + '/product';
             },
             error: function (error) {
-                alert('상품 등록에 실피했습니다.')
+                alert('상품 등록에 실패했습니다.')
             }
         });
     });

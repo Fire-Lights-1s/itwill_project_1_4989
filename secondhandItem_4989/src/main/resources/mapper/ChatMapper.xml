@@ -16,7 +16,7 @@
 	
 	<select id="getProductInfo" resultType="com.itwillbs.domain.ProductDTO">
 		select p.product_id, p.product_img1, p.seller_id, p.product_name, p.product_price, p.year_purchase, 
-		p.trade_status, p.trade_area, TX.buyer_id, Review.review_content
+		p.pay_method, p.trade_status, p.trade_area, TX.buyer_id, Review.review_content
 		from Product p LEFT OUTER JOIN TX
 		on p.product_id = TX.product_id
 		and p.product_id = #{product_id}       

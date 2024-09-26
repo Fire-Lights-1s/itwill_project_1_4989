@@ -62,20 +62,44 @@
 <!--         phone, -->
         social_loginfo,
         rating,
-        created_at
+        created_at,
+        is_withdrawn
     from Mem
     <if test="search != null">
-        where member_id like "%#{search}%"
-        or name like "%#{search}%"
-        or email like "%#{search}%"
-<!--         or phone like "%#{search}%" -->
-        or nickname like "%#{search}%"
-        or created_at like "%#{search}%"
+        where member_id like CONCAT('%',#{search},'%')
+        or name like CONCAT('%',#{search},'%')
+        or email like CONCAT('%',#{search},'%')
+<!-- 		or phone like CONCAT('%',#{search},'%') -->
+        or nickname like CONCAT('%',#{search},'%')
+        or created_at like CONCAT('%',#{search},'%')
     </if>
     order by created_at desc
     limit #{startRow}, #{pageSize}
 </select>
 
+	<!-- 	오늘 가입자 -->
+	<select id="memberCount" resultType="java.lang.Integer">
+		select count(*) from Mem
+		where date(created_at) = curdate()
+	</select>
+	
+<!-- 	오늘 등록된 물품 -->
+	<select id="productCount" resultType="java.lang.Integer">
+		select count(*) from Product
+		where date(created_datetime) = curdate()
+	</select>
+	
+	<!-- 	오늘 등록된 매입신청 -->
+	<select id="purchaseCount" resultType="java.lang.Integer">
+		select count(*) from PurchaseRequest
+		where date(request_date) = curdate()
+	</select>
+	
+	<!-- 	오늘 접수된 신고 -->
+	<select id="reportCount" resultType="java.lang.Integer">
+		select count(*) from Report
+		where date(reported_at) = curdate()
+	</select>
 	
 	
 </mapper>

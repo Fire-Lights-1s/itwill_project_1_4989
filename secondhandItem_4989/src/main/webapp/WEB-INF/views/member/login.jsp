@@ -3,6 +3,7 @@
 <%@page import="java.security.SecureRandom"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,6 +14,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js"></script>
 <script>
         function redirectToSocial() {
             window.location.href = 'social'; // 소셜회원가입 페이지로 이동
@@ -75,6 +77,16 @@
         }
         return "";
     }
+</script>
+
+<script type="text/javascript">
+        window.onload = function() {
+            var message = "${alertMessage}";
+            if (message) {
+                alert(message);
+                window.location.href = "${pageContext.request.contextPath}/member/login";  // 원하는 리다이렉트 URL로 변경
+            }
+        }
 </script>
 
 </head>

@@ -60,7 +60,7 @@ public class ChatService {
 			}
 			if(productDTO.getTrade_status().equals("구매 확정")) {
 				txDTO.setTransaction_end_date(new Timestamp(System.currentTimeMillis()));
-				txDTO.setTransaction_method("현금");
+				txDTO.setTransaction_method(productDTO.getPay_method());
 				chatDAO.updateTX(txDTO);
 				productDTO.setTrade_status("거래 완료");
 				chatDAO.updateProductTradeStatus(productDTO);

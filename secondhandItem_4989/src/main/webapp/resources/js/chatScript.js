@@ -207,7 +207,9 @@ function productState_btn(){
 				  const imageSrc = productGlobal.product_img1;
 				  const productId = productGlobal.product_id;
 				  console.log(imageSrc);
-				  $('#modalImage').attr('src', `${imageSrc}`);
+				  $('#modalImage').attr('src', `${contextPathGlobal}/resources/upload/${imageSrc}`);
+				  $('#modalImage').attr( "onerror", `this.onerror=null; this.src='${contextPathGlobal}/resources/img/icon/not_found.png';`);
+	        
 				  $('#productId').val(productId);
 				});
 			}else{
@@ -322,6 +324,7 @@ function promiseTrade(){
 	    	let data = {
 	    	"product_id":productGlobal.product_id,
 	    	"seller_id":productGlobal.seller_id,
+	    	"pay_method":productGlobal.pay_method,
 	    	"trade_status":tradeState,
 	    	"buyer_id": chatRoomGlobal.buyer_id,
 	    	}
@@ -355,10 +358,15 @@ function ControllReportModal(){
 function submitReport() {
     var reportContents = $("#report_contents").val();
     var reporterId = userId;
-    var reporteeId = productGlobal.seller_id;
+    var reporteeId = null;
     var reportedItemId = productGlobal.product_id;
     var reportType = $('input[name=reportType]:checked').val(); // 고정값
-
+    
+	if(userId == productGlobal.seller_id){
+		reporteeId = chatRoomGlobal.buyer_id;
+	}else{
+		reporteeId = productGlobal.seller_id;
+	}
     $.ajax({
         type: "POST",
         url: "./product/report",

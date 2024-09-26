@@ -145,49 +145,82 @@ public class ProductService {
 			productDAO.increaseViewCount(product_id);
 		}
 		
-		//판매 상품 수정
-		public void updateProduct(ProductDTO productDTO) throws Exception {
-		    // 기존 상품 정보 조회
+		public void updateProduct(ProductDTO productDTO, List<String> newFileNames) throws Exception {
 		    ProductDTO existingProduct = productDAO.getProductDetail(String.valueOf(productDTO.getProduct_id()));
 
-		    // **노란색 하이라이트: 새로 업로드된 이미지가 없으면 기존 이미지를 유지**
-		    if (productDTO.getProduct_img1() == null || productDTO.getProduct_img1().isEmpty()) {
+		    // 이미지 파일이 업데이트된 경우, 새로운 파일명을 설정
+		    for (int i = 0; i < newFileNames.size(); i++) {
+		        switch (i) {
+		            case 0: productDTO.setProduct_img1(newFileNames.get(0)); break;
+		            case 1: productDTO.setProduct_img2(newFileNames.get(1)); break;
+		            case 2: productDTO.setProduct_img3(newFileNames.get(2)); break;
+		            case 3: productDTO.setProduct_img4(newFileNames.get(3)); break;
+		            case 4: productDTO.setProduct_img5(newFileNames.get(4)); break;
+		        }
+		    }
+
+		    // 이미지 파일이 없을 경우 기존 이미지 유지
+		    if (newFileNames.isEmpty()) {
 		        productDTO.setProduct_img1(existingProduct.getProduct_img1());
-		    }
-		    if (productDTO.getProduct_img2() == null || productDTO.getProduct_img2().isEmpty()) {
 		        productDTO.setProduct_img2(existingProduct.getProduct_img2());
-		    }
-		    if (productDTO.getProduct_img3() == null || productDTO.getProduct_img3().isEmpty()) {
 		        productDTO.setProduct_img3(existingProduct.getProduct_img3());
-		    }
-		    if (productDTO.getProduct_img4() == null || productDTO.getProduct_img4().isEmpty()) {
 		        productDTO.setProduct_img4(existingProduct.getProduct_img4());
-		    }
-		    if (productDTO.getProduct_img5() == null || productDTO.getProduct_img5().isEmpty()) {
 		        productDTO.setProduct_img5(existingProduct.getProduct_img5());
 		    }
 
-		    // **노란색 하이라이트: 새로 업로드된 이미지가 있으면 기존 이미지를 덮어씀**
-		    if (productDTO.getProduct_img1() != null && !productDTO.getProduct_img1().isEmpty()) {
-		        // 새로운 이미지 처리 로직이 이미 ProductController에서 처리되므로 여기서는 단순히 DTO를 업데이트
-		    }
-		    if (productDTO.getProduct_img2() != null && !productDTO.getProduct_img2().isEmpty()) {
-		        // 같은 방식으로 처리
-		    }
-		    if (productDTO.getProduct_img3() != null && !productDTO.getProduct_img3().isEmpty()) {
-		        // 같은 방식으로 처리
-		    }
-		    if (productDTO.getProduct_img4() != null && !productDTO.getProduct_img4().isEmpty()) {
-		        // 같은 방식으로 처리
-		    }
-		    if (productDTO.getProduct_img5() != null && !productDTO.getProduct_img5().isEmpty()) {
-		        // 같은 방식으로 처리
-		    }
-
-		    // 상품 정보 업데이트
 		    productDAO.updateProduct(productDTO);
 		}
 
+		
+		/*
+		 * //판매 상품 수정 public void updateProduct(ProductDTO productDTO, List<String>
+		 * newFileNames) throws Exception { // 기존 상품 정보 조회 ProductDTO existingProduct =
+		 * productDAO.getProductDetail(String.valueOf(productDTO.getProduct_id()));
+		 * 
+		 * 
+		 * 
+		 * // **노란색 하이라이트: 새로 업로드된 이미지가 없으면 기존 이미지를 유지** if
+		 * (productDTO.getProduct_img1() == null ||
+		 * productDTO.getProduct_img1().isEmpty()) {
+		 * productDTO.setProduct_img1(existingProduct.getProduct_img1()); } if
+		 * (productDTO.getProduct_img2() == null ||
+		 * productDTO.getProduct_img2().isEmpty()) {
+		 * productDTO.setProduct_img2(existingProduct.getProduct_img2()); } if
+		 * (productDTO.getProduct_img3() == null ||
+		 * productDTO.getProduct_img3().isEmpty()) {
+		 * productDTO.setProduct_img3(existingProduct.getProduct_img3()); } if
+		 * (productDTO.getProduct_img4() == null ||
+		 * productDTO.getProduct_img4().isEmpty()) {
+		 * productDTO.setProduct_img4(existingProduct.getProduct_img4()); } if
+		 * (productDTO.getProduct_img5() == null ||
+		 * productDTO.getProduct_img5().isEmpty()) {
+		 * productDTO.setProduct_img5(existingProduct.getProduct_img5()); }
+		 * 
+		 * // **노란색 하이라이트: 새로 업로드된 이미지가 있으면 기존 이미지를 덮어씀** if
+		 * (productDTO.getProduct_img1() != null &&
+		 * !productDTO.getProduct_img1().isEmpty()) { // 새로운 이미지 처리 로직이 이미
+		 * ProductController에서 처리되므로 여기서는 단순히 DTO를 업데이트 } if
+		 * (productDTO.getProduct_img2() != null &&
+		 * !productDTO.getProduct_img2().isEmpty()) { // 같은 방식으로 처리 } if
+		 * (productDTO.getProduct_img3() != null &&
+		 * !productDTO.getProduct_img3().isEmpty()) { // 같은 방식으로 처리 } if
+		 * (productDTO.getProduct_img4() != null &&
+		 * !productDTO.getProduct_img4().isEmpty()) { // 같은 방식으로 처리 } if
+		 * (productDTO.getProduct_img5() != null &&
+		 * !productDTO.getProduct_img5().isEmpty()) { // 같은 방식으로 처리 } // 새로운 이미지 파일이
+		 * 업로드된 경우, 새로운 파일 이름을 DTO에 설정 for (int i = 0; i < newFileNames.size(); i++) {
+		 * switch (i) { case 0: productDTO.setProduct_img1(newFileNames.get(i)); // 첫 번째
+		 * 파일 break; case 1: productDTO.setProduct_img2(newFileNames.get(i)); // 두 번째 파일
+		 * break; case 2: productDTO.setProduct_img3(newFileNames.get(i)); // 세 번째 파일
+		 * break; case 3: productDTO.setProduct_img4(newFileNames.get(i)); // 네 번째 파일
+		 * break; case 4: productDTO.setProduct_img5(newFileNames.get(i)); // 다섯 번째 파일
+		 * break; default: // 최대 5개의 파일까지만 허용 break; }
+		 * 
+		 * // 상품 정보 업데이트 productDAO.updateProduct(productDTO);
+		 * 
+		 * } }//update
+		 */	            
+	  
 		
 		//상품 신고
 		public void submitReport(ReportDTO reportDTO) {

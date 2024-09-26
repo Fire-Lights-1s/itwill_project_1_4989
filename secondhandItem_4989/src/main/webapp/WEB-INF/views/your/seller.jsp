@@ -33,7 +33,7 @@
 		<h3>판매자 페이지</h3>
 	</div>
 	<ul style="font-size: 20px; font-weight: 500;">
-		<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUserDTO.member_id}" style=" color: #372161; padding: 15px 15px; display: block;">${otherUserDTO.nickname}님의 프로필</a></li>
+		<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUserDTO.member_id}" style=" color: #372161; padding: 15px 15px; display: block; width: 200px; word-wrap: break-word;">${otherUserDTO.nickname}님의 프로필</a></li>
 		<li><a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUserDTO.member_id}" style=" color: #372161; padding: 15px 15px; display: block;">판매 내역</a></li>
 	</ul>
 </aside>
@@ -76,6 +76,17 @@
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
+<script type="text/javascript">
+	function truncateText(selector, maxLength) {
+	    const element = document.querySelector(selector);
+	    const text = element.innerText;
+	
+	    if (text.length > maxLength) {
+	      element.innerText = text.substring(0, maxLength) + "...";
+	    }
+	}
+</script>
 
 <script>
 	const navLinks = document.querySelectorAll('#sideNavLinks .nav-link');

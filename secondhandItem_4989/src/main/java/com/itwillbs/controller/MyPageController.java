@@ -8,7 +8,9 @@ import java.time.temporal.ChronoUnit;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -86,7 +88,7 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/infoUpdatePro")
-	public String infoUpdatePro(HttpServletRequest request, MultipartFile file)throws Exception {
+	public String infoUpdatePro(HttpServletRequest request, MultipartFile file, HttpSession session)throws Exception {
 		String filename = "";
 		if(file.isEmpty()) {
 			filename = "51d26ab9-a276-4d41-9196-2f12cd1d1e28_defaultUserImage.png";
@@ -114,6 +116,7 @@ public class MyPageController {
 		memberDTO.setEmail(email);
 		memberDTO.setProfile_img(filename);
 		memberService.updateMember(memberDTO);
+		session.setAttribute("nickname", memberDTO.getNickname());
 		return "redirect:/my/profile";
 	}
 	
@@ -267,9 +270,14 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/deleteMem")
-	public String deleteMem(HttpSession session) {
+	public String deleteMem(HttpSession session, HttpServletResponse response) {
 		String member_id = (String)session.getAttribute("member_id");
 		myPageService.deleteMem(member_id);
+		session.invalidate();
+        Cookie loginCookie = new Cookie("loginSessionId", null);
+        loginCookie.setMaxAge(0);
+        loginCookie.setPath("/");
+        response.addCookie(loginCookie);
 		return "redirect:/";
 	}
 	

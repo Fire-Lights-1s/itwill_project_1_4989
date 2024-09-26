@@ -28,9 +28,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/productDetail.css">
 
-<script
-	src="${pageContext.request.contextPath }/resources/js/zzimScript.js"
-	defer></script>
+<!-- <script -->
+<%-- 	src="${pageContext.request.contextPath }/resources/js/zzimScript.js" --%>
+<!-- 	defer></script> -->
 
 </head>
 <body>
@@ -45,202 +45,106 @@
 		<c:set var="productDTO" value="${productDTO}" />
 		<div id="main-container">
 
-			<main>
 <main>
-				<!-- 상품 상세 정보 및 이미지 영역 -->
-				<div class="container">
-					<!-- 이미지 영역 -->
-					<div class="image-box">
-						<!-- 메인 이미지 -->
-						<div class="main-image">
-							<img
-								src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}"
-								alt="#" style="width: 100%; display: block;" class="mx-auto"
-								id="current" onclick="imageModal(this)">
-						</div>
+    <!-- 상품 상세 정보 및 이미지 영역 -->
+    <div class="container">
+        <!-- 이미지 영역 -->
+        <div class="image-box">
+            <!-- 메인 이미지 -->
+            <div class="main-image">
+                <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}"
+                    alt="#" style="width: 100%; display: block;" class="mx-auto"
+                    id="current" onclick="imageModal(this)">
+            </div>
 
-
-
-						<!-- 썸네일 이미지들 -->
-
-						<div class="thumbnail-images">
-							<img
-								src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}"
-								class="img" alt="#" style="height: 100px;"
-								onclick="switchMainImage(this)"> <img
-								src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img2}"
-								class="img" alt="#" style="height: 100px;"
-								onclick="switchMainImage(this)"> <img
-								src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img3}"
-								class="img" alt="#" style="height: 100px;"
-								onclick="switchMainImage(this)"> <img
-								src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img4}"
-								class="img" alt="#" style="height: 100px;"
-								onclick="switchMainImage(this)"> <img
-								src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img5}"
-								class="img" alt="#" style="height: 100px;"
-								onclick="switchMainImage(this)">
-						</div>
-
-
-						<!-- 상품 상세 정보 -->
-						<div class="details-box">
-							<div class="card">
-								<!-- 기존 상세 정보 -->
-								<div class="product-title" id="category-name"
-									style="font-size: 14px; color: #888;"></div>
-								<div class="product-title">${productDTO.product_name}</div>
-								<div class="product-price" id="product-price"></div>
-								<div class="product-meta">
-									<span class="meta-item">${productDTO.elapsedTime}</span> <span
-										class="meta-item">찜 <span id="like_count">${productDTO.like_count}</span></span>
-									<span class="meta-item">조회수 ${productDTO.view_count}</span>
-								</div>
-								<hr>
-
-								<!-- 거래 지역, 거래 방식, 결제방식. null일 경우 해당 버튼이 아예 안 뜨게  -->
-								<div class="button-container" style="display: flex; gap: 10px;">
-									<c:if test="${not empty productDTO.trade_area}">
-										<button class="button" type="button">${productDTO.trade_area}</button>
-									</c:if>
-									<c:if test="${not empty productDTO.trade_method}">
-										<button class="button" type="button">${productDTO.trade_method}</button>
-									</c:if>
-									<c:if test="${not empty productDTO.pay_method}">
-										<button class="button" type="button">${productDTO.pay_method}</button>
-									</c:if>
-								</div>
-
-								<!-- 판매자 정보 및 결제 방식 -->
-								<br>
-								<div class="product-info">
-									<strong> 판매자 </strong><a
-										href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}"
-										class="button">${sellerNickname}</a>
-								</div> 
-
-
-								<!-- 판매자와 로그인한 사용자가 같으면 상품수정, 삭제 가능-->
-								<c:if test="${productDTO.seller_id == sessionScope.member_id}">
-									<div class="button-group">
-										<a
-											href="${pageContext.request.contextPath}/product/update?product_id=${productDTO.product_id}"
-											class="button"> 상품 수정 </a> <a
-											href="${pageContext.request.contextPath}/product/delete?product_id=${productDTO.product_id}"
-											class="button"> 상품 삭제 </a>
-								</c:if>
-
-
-								<!-- 버튼 그룹 -->
-								<div class="button-group"
-									style="display: flex; align-items: center; gap: 10px;">
-									<div class="zzim-button"
-										data-product_id="${productDTO.product_id }"
-										data-nickname="${sessionScope.nickname}" style="bottom: 50%;">♥</div>
-									<button class="button" id="startChat">채팅하기</button>
-									<button class="button" id="openReportModal" data-toggle="modal"
-										data-target="#reportModal">신고하기</button>
-								</div>
-								
-								<div class="product-desc">
-					
-							<div class="card">
-								<strong>상품 정보</strong><br> <span>${productDTO.product_desc}</span>
-							</div>
-					
-					</div>
-								
-							</div>
-						</div>
-					</div>
-
-					<!-- 별도 컨테이너로 상품 설명 추가 -->
-					
-			</main>
-
-			<%-- <!-- 상품 상세 정보 및 이미지 영역 -->
-<div class="container">
-    <!-- 이미지 영역 -->
-    <div class="image-box">
-        <!-- 메인 이미지 (크게 출력) -->
-        <div class="main-image">
-             <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}"
-             alt="#" style="width: 100%; display: block;" class="mx-auto" onclick="imageModal(this)">
+            <!-- 썸네일 이미지들 -->
+            <div class="thumbnail-images">
+                <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img1}"
+                    class="img" alt="#" style="height: 100px;"
+                    onclick="switchMainImage(this)">
+                <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img2}"
+                    class="img" alt="#" style="height: 100px;"
+                    onclick="switchMainImage(this)">
+                <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img3}"
+                    class="img" alt="#" style="height: 100px;"
+                    onclick="switchMainImage(this)">
+                <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img4}"
+                    class="img" alt="#" style="height: 100px;"
+                    onclick="switchMainImage(this)">
+                <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img5}"
+                    class="img" alt="#" style="height: 100px;"
+                    onclick="switchMainImage(this)">
+            </div>
         </div>
 
-        <!-- 썸네일 이미지들 (작게 출력) -->
-        <div class="thumbnail-images"> 
-            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img2}" 
-            class="img" alt="#" style="height: 100px;" onclick="switchMainImage(this)"> 
-            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img3}" 
-            class="img" alt="#" style="height: 100px;" onclick="switchMainImage(this)"> 
-            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img4}" 
-            class="img" alt="#" style="height: 100px;" onclick="switchMainImage(this)"> 
-            <img src="${pageContext.request.contextPath}/resources/upload/${productDTO.product_img5}" 
-            class="img" alt="#" style="height: 100px;" onclick="switchMainImage(this)"> 
-        </div>
-    </div>
+        <!-- 상품 상세 정보 -->
+        <div class="details-box">
+            <div class="card">
+                <!-- 기존 상세 정보 -->
+                <div class="product-title" id="category-name" style="font-size: 14px; color: #888;"></div>
+                <div class="product-title">${productDTO.product_name}</div>
+                <div class="product-price" id="product-price"></div>
+                <div class="product-meta">
+                    <span class="meta-item">${productDTO.elapsedTime}</span>
+                    <span class="meta-item">찜 <span id="like_count">${productDTO.like_count}</span></span>
+                    <span class="meta-item">조회수 ${productDTO.view_count}</span>
+                </div>
+                <hr>
 
-    <!-- 상품 상세 정보 -->
-    <div class="details-box">
-        <div class="card">
-            <!-- 카테고리 한글 변환 및 글씨 크기 작게 적용 -->
-            <div class="product-title" id="category-name" style="font-size: 14px; color: #888;"></div>
-            <div class="product-title">${productDTO.product_name}</div>
-            <!-- 상품 가격 (1000원 단위로 , 추가) -->
-            <div class="product-price" id="product-price"></div>
-            <div class="product-meta">
-                <span class="meta-item">${productDTO.elapsedTime}</span>
-                <!-- 찜, 조회수 개수 -->
-                <span class="meta-item">찜 <span id="like_count">${productDTO.like_count}</span></span>
-                <span class="meta-item">조회수 ${productDTO.view_count}</span>
-            </div>
-            <br>
-            <hr>
-            <br>
+                <!-- 거래 조건 버튼 -->
+                <div class="button-container" style="display: flex; gap: 10px;">
+                    <c:if test="${not empty productDTO.trade_area}">
+                        <button class="button" type="button">${productDTO.trade_area}</button>
+                    </c:if>
+                    <c:if test="${not empty productDTO.trade_method}">
+                        <button class="button" type="button">${productDTO.trade_method}</button>
+                    </c:if>
+                    <c:if test="${not empty productDTO.pay_method}">
+                        <button class="button" type="button">${productDTO.pay_method}</button>
+                    </c:if>
+                </div>
 
-            <!-- 거래 지역, 거래 방식, 결제방식 -->
-            <div class="button-container" style="display: flex; gap: 10px;">
-                <button class="button" type="button">${productDTO.trade_area}</button>
-                <button class="button" type="button">${productDTO.trade_method}</button>
-                <button class="button" type="button">${productDTO.pay_method}</button>
-            </div>
-            <br>
+                <!-- 판매자 정보 및 결제 방식 -->
+                <br>
+                <div class="product-info">
+                    <strong>판매자</strong>
+                    <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}"
+                        class="button">${sellerNickname}</a>
+                </div>
 
-            <!-- 판매자 정보 및 결제 방식 -->
-            <div class="product-info">
-                <strong>판매자 </strong>
-                <a href="${pageContext.request.contextPath}/your/seller?otherUser=${productDTO.seller_id}" class="button"> ${productDTO.seller_id} </a>
-                <br><br>
-
-                <!-- 판매자와 로그인한 사용자가 같으면 '상품 수정' 버튼 추가 -->
+                <!-- 상품 수정 및 삭제 버튼 -->
                 <c:if test="${productDTO.seller_id == sessionScope.member_id}">
-                    <a href="${pageContext.request.contextPath}/product/update?product_id=${productDTO.product_id}" class="button"> 상품 수정 </a>
+                    <div class="button-group">
+                        <a href="${pageContext.request.contextPath}/product/update?product_id=${productDTO.product_id}"
+                            class="button">상품 수정</a>
+                        <a href="${pageContext.request.contextPath}/product/delete?product_id=${productDTO.product_id}"
+                            class="button">상품 삭제</a>
+                    </div>
                 </c:if>
 
-            </div>
+                <!-- 찜하기, 채팅, 신고 버튼 -->
+                <div class="button-group" style="display: flex; align-items: center; gap: 10px;">
+                    <div class="zzim-button" id="${productDTO.product_id}" data-product_id="${productDTO.product_id}" 
+                        data-member_id="${sessionScope.member_id}" style="bottom: 50%;">♥</div>
+                    <button class="button" id="startChat">채팅하기</button>
+                    <button class="button" id="openReportModal" data-toggle="modal"
+                        data-target="#reportModal">신고하기</button>
+                </div>
 
-            <!-- 버튼 그룹 -->
-            <div class="button-group" style="display: flex; align-items: center; gap: 10px;">
-                <!-- 찜하기 버튼 -->
-                <div class="zzim-button" data-product_id="${productDTO.product_id }" data-member_id="${sessionScope.member_id }" style="bottom: 50%;">♥</div>
-                <button class="button" id="startChat">채팅하기</button>
-                <button class="button" id="openReportModal" data-toggle="modal" data-target="#reportModal">신고하기</button>
+                <!-- 상품 설명 -->
+                <div class="product-desc">
+                    <div class="card">
+                        <strong>상품 정보</strong><br> 
+                        <div><pre style="font-family:inherit;">${productDTO.product_desc}</pre></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-      
+</main>
 
-				<!-- 상품 설명 -->
-				<div class="details-box">
-					<h3>상품 정보</h3>
-					<pre>
-					<p>${productDTO.product_desc}
-					</p></pre>
-				</div>
-	
-			</main> --%>
+
+
 			<!-- 신고하기 모달 -->
 			<div class="modal fade" id="reportModal" tabindex="-1" role="dialog"
 				aria-labelledby="reportModalLabel" aria-hidden="true">
@@ -283,10 +187,120 @@
 		</div>
 	</section>
 
+	<script>
+		const contextPath =  '${pageContext.request.contextPath}';
+		const zzim_button = document.getElementById('${productDTO.product_id}');
+// 		zzim_button.addEventListener('click', getZzimCount);      // 새 리스너 등록
+		let result = null;
+		function getZzimCount(){
+			$.ajax({
+				type : "POST",
+				url : "${pageContext.request.contextPath}/product/ZzimCount",
+				data : {
+					product_id : '${productDTO.product_id}'
+				},
+				success : function(likeCount) {
+					$('#like_count').text(likeCount);
+				},
+				error : function() {
+					alert("detail 서버 통신 중 오류가 발생했습니다.");
+				}
+			});
+		}
+		// 찜 등록 및 취소
+
+		function selectZzim() {
+		    const zzim_buttons = document.querySelectorAll('.zzim-button');
+		    zzim_buttons.forEach(button => {
+		        // 중복 방지를 위해 기존 리스너를 제거하고 새로 등록
+		        button.removeEventListener('click', zzimHandler);  // 기존 리스너 제거
+		        button.addEventListener('click', zzimHandler);      // 새 리스너 등록
+		    });
+		}
+
+		function zzimHandler(event) {
+		    const product_id = this.getAttribute('data-product_id');
+		    const member_id = this.getAttribute('data-member_id');
+
+		    if (member_id === null || member_id === '') {
+		        alert('로그인한 회원만 이용 가능한 기능입니다');
+		        window.location.href = contextPath + '/member/login';
+		    } else {
+		        fetch(contextPath + '/zzim/save', {
+		            method: 'POST',
+		            headers: {
+		                'Content-Type': 'application/json'
+		            },
+		            body: JSON.stringify({ product_id: product_id, member_id: member_id })
+		        })
+		        .then(response => response.json())
+		        .then(data => {
+			        console.log(data);
+			        //찜 갯수 가져오기
+			        getZzimCount();
+		           if (data.save) {
+				        setTimeout(() => {
+				            this.classList.add('active');
+				        }, 0);  // DOM이 업데이트될 시간을 줌
+				    } else {
+				        setTimeout(() => {
+				            this.classList.remove('active');
+				        }, 0);
+				    }
+		        })
+		        .catch(error => {
+		            console.error('Error:', error);
+		        });
+		    }
+		}
+
+		//찜 여부 가져와서 표시
+
+		function loadZzimStatus() {
+
+		 const member_id = document.querySelector('.zzim-button').getAttribute('data-member_id');
+
+		 if (member_id !== null && member_id !== '') {
+		 	//찜 버튼이 달려있는 (열람된 모든) 상품들의 product_id를 배열로 만들어 저장
+		 	const productIds = Array.from(document.querySelectorAll('.zzim-button')).map(button => button.getAttribute('data-product_id'));
+				
+		     fetch(contextPath + '/zzim/status', {
+		         method: 'POST',
+		         headers: {
+		             'Content-Type': 'application/json'
+		         },
+		         body: JSON.stringify({ member_id: member_id, product_ids: productIds })
+		     })
+		     .then(response => response.json())
+		     .then(data => {
+		    	 const allButtons = Array.from(document.querySelectorAll('.zzim-button'));
+		         data.zzimList.forEach(product => {
+		        	 const matchingButton = allButtons.find(button => button.getAttribute('data-product_id') === product.product_id);
+		             if (matchingButton && product.isZzimSaved) {
+		                 matchingButton.classList.add('active');
+		             } else if (matchingButton) {
+		                 matchingButton.classList.remove('active');
+		             }
+		         });
+		     })
+		     .catch(error => {
+		         console.error('Error:', error);
+		     });
+		 }
+		};
 
 
+		// 처음 창 열릴 때 찜 활성화
+
+		window.onload = function() {
+			loadZzimStatus();
+			selectZzim();
+		};
+
+	</script>
 	<!-- 신고 내용 서버로 보내기 -->
 	<script>
+	
 		function submitReport() {
 			var reportContents = $("#report_contents").val();
 			var reporterId = "${sessionScope.member_id}";
@@ -424,6 +438,10 @@
 		let chatRoomProductID = '<c:out value="${productDTO.product_id}"/>';
 		let chatRoomSellerID = '<c:out value="${productDTO.seller_id}"/>';
 		let chatRoomTitle = '<c:out value="${productDTO.product_name}"/>';
+	</script>
+	<!-- zzimScript.js에서는 아래의 js 코드가 필요 -->
+	<script>
+		const contextPath = '${pageContext.request.contextPath}';
 	</script>
 	<script
 		src="${pageContext.request.contextPath }/resources/js/go_to_chat.js"></script>
