@@ -53,8 +53,8 @@ public class AccountApiService {
 		
 	// 예금주 조회
 		public String getAccountHolder(String bank_code, String bank_num) {
-			String apiKey = "2632446146310815";
-			String apiSecret = "ZspV4eZ5izjb1uWRc3oE2oq09H6cwFVXrHPqarlUwbqEyswTU6JOUBCuaYVIT2amp6YQ3Q7zF47Vt0eZ";
+			String apiKey = "YOUR_API_Key";
+			String apiSecret = "YOUR_API_Secret";
 			String token = getAccessToken(apiKey, apiSecret);
 			
 			String url = UriComponentsBuilder.fromHttpUrl("https://api.iamport.kr/vbanks/holder")
