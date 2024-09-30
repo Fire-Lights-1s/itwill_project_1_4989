@@ -11,8 +11,8 @@
   <body>
 <%
     // 애플리케이션 클라이언트 아이디와 시크릿값
-    String clientId = "i_o3Jb0ojMsUwp5niV4T";
-    String clientSecret = "4nsEAmGBri";
+    String clientId = "naver_api_key";
+    String clientSecret = "naver_api_pass";
 
     // 네이버에서 전달받은 코드와 상태값
     String code = request.getParameter("code");

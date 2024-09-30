@@ -134,7 +134,7 @@
 <!--            네이버 로그인 -->
            <%
     // 애플리케이션 클라이언트 아이디
-    String clientId = "i_o3Jb0ojMsUwp5niV4T"; 
+    String clientId = "naver_api_key"; 
     
     // 네이버 로그인 후 리다이렉트될 URI (수정된 부분)
     String redirectURI = URLEncoder.encode("http://c1d2405t2.itwillbs.com/secondhandItem_4989/member/call", "UTF-8");
