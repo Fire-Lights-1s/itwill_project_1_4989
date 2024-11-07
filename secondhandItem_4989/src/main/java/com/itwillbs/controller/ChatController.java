@@ -101,11 +101,9 @@ public class ChatController {
 	@SendTo("/topic/{roomId}")
     public ChatMessageDTO chat(@DestinationVariable("roomId") String roomId, 
     		ChatMessageDTO message){
-		System.out.println(message);
 		//클라이언트에서 받아야하는 DTO 변수 chat_room_id, message_type, user_id, message
 		ChatMessageDTO chat = chatService.createChatMessage(roomId ,message);
 		return chat;
-        //simpMessagingTemplate.convertAndSend("/topic/"+roomId,data);
     }
 }
 

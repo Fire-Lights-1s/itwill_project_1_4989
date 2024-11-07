@@ -19,7 +19,7 @@
     String state = request.getParameter("state");
 
     // redirectURI 설정
-    String redirectURI = URLEncoder.encode("http://localhost:8080/secondhand4989/member/call", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://c1d2405t2.itwillbs.com/secondhandItem_4989/member/call", "UTF-8");
 
     // 네이버 OAuth2.0 토큰 발급 요청 URL 구성
     String apiURL;

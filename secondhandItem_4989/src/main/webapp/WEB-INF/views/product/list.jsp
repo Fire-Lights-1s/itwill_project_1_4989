@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>상품 목록 : 4989</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/listStyle.css">
@@ -112,12 +112,8 @@
 			<div class="col-12 col-md-6 col-lg-3 mb-5">
                     <div class="card h-100" style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2)">
                         <!-- Product image-->
-                        <c:if test="${empty product.product_img1 || product.product_img1 eq '' }">
-                        <img class="card-img-top img-height-fix" src="https://i.namu.wiki/i/tgJKui-B3sVdzHzJ_P2oLzBdPRihL7X4Jj5W9e7ReG6k9qcBRF-NuCmcM-j37ikoyBu7c_hq3P7juN3AnYlp0jiS3OD8wmaFC3SzSRHXOmTpxNdUrXcTs3ARbONhDcYAMbbMw7niOSM3khaPh7_DGQ.webp" alt="..." />
-                        </c:if>
-                        <c:if test="${!empty product.product_img1 && product.product_img1 ne '' }">
-                        	<c:if test="${product.trade_status ne '거래 가능' }">
-                        	<img class="card-img-top img-height-fix" style="filter:brightness(0.3);" src="${pageContext.request.contextPath }/resources/upload/${product.product_img1 }" />
+                        <c:if test="${product.trade_status ne '거래 가능' }">
+                        	<img class="card-img-top img-height-fix" style="filter:brightness(0.3);" src="${pageContext.request.contextPath }/resources/upload/${product.product_img1 }" onerror="this.src='${pageContext.request.contextPath }/resources/img/default_image.png'"/>
                         	    <c:if test="${product.trade_status ne '예약 중'}">
                                     <div class="centered-text">거래 완료</div>
                                 </c:if>
@@ -126,9 +122,8 @@
                                 </c:if>
                             </c:if>
                         	<c:if test="${product.trade_status eq '거래 가능' }">
-                        	<img class="card-img-top img-height-fix" src="${pageContext.request.contextPath }/resources/upload/${product.product_img1 }" />
-                        	</c:if>                        
-                        </c:if>
+                        	<img class="card-img-top img-height-fix" src="${pageContext.request.contextPath }/resources/upload/${product.product_img1 }" onerror="this.src='${pageContext.request.contextPath }/resources/img/default_image.png'"/>
+                       	</c:if>                        
                         <!-- 페이 뱃지 -->
                     <c:if test="${product.pay_method eq '페이' || product.pay_method eq '현금/페이'}">
                         <div class="badge text-white position-absolute" style="background-color: #4e229e; top: 0.5rem; right: 0.5rem">PAY</div>

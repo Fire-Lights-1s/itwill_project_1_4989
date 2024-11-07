@@ -3,6 +3,7 @@
 <%@page import="java.security.SecureRandom"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,6 +14,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.min.js"></script>
 <script>
         function redirectToSocial() {
             window.location.href = 'social'; // 소셜회원가입 페이지로 이동
@@ -77,11 +79,22 @@
     }
 </script>
 
+<script type="text/javascript">
+        window.onload = function() {
+            var message = "${alertMessage}";
+            if (message) {
+                alert(message);
+                window.location.href = "${pageContext.request.contextPath}/member/login";  // 원하는 리다이렉트 URL로 변경
+            }
+        }
+</script>
+
 </head>
 <body>
 
   <jsp:include page="../inc/header.jsp"></jsp:include>
-
+	
+	
     <header>
     	<div id="menu-name">
 			로그인
@@ -115,7 +128,7 @@
             </div>
             <button type="button" class="signup-btn" onclick="redirectToJoin()">회원가입</button>
            
-            <button type="button" class="kakao-btn" onclick="redirectToSocial()">카카오톡으로 시작하기</button>
+            
            
            
 <!--            네이버 로그인 -->
@@ -124,7 +137,7 @@
     String clientId = "i_o3Jb0ojMsUwp5niV4T"; 
     
     // 네이버 로그인 후 리다이렉트될 URI (수정된 부분)
-    String redirectURI = URLEncoder.encode("http://localhost:8080/secondhand4989/member/call", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://c1d2405t2.itwillbs.com/secondhandItem_4989/member/call", "UTF-8");
     
     // state 값을 랜덤하게 생성 (보안 목적으로 사용)
     SecureRandom random = new SecureRandom();
@@ -142,7 +155,8 @@
 <!--      네이버 로그인       -->
            
               <!-- 네이버 로그인 버튼 -->
-  			<a href="<%= apiURL %>"><img width="170" height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+              <button type="button" class="naver-btn" onclick="window.location.href='<%= apiURL %>'">네이버 로그인하기</button>
+<%--   			<a href="<%= apiURL %>"><img width="170" height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a> --%>
 		
         </form>
     </div>

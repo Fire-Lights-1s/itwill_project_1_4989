@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항 : 4989</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/footerStyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/CsStyle.css">
@@ -56,8 +56,8 @@
   	 				<td>${noticeList.notice_id }</td>
   	 				<td><a href="noticedetail?notice_id=${noticeList.notice_id }">
 					<c:choose>
-					    <c:when test="${fn:length(noticeList.notice_name) > 18}">
-					        ${fn:substring(noticeList.notice_name, 0, 18)}...
+					    <c:when test="${fn:length(noticeList.notice_name) > 40}">
+					        ${fn:substring(noticeList.notice_name, 0, 40)}...
 					    </c:when>
 					    <c:otherwise>
 					        ${noticeList.notice_name}

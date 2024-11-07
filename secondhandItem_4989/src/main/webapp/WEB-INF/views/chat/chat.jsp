@@ -17,6 +17,7 @@
 <script type="text/javascript" th:inline="javascript">
 	let sessionUserId = '<c:out value="${sessionUID}"/>';
 	let objChatRoomDTO = '<c:out value="${chatRoomDTO}"/>'.replaceAll("&#034;", "\"");
+	let contextPath = '<c:out value="${pageContext.request.contextPath}"/>';
 </script>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -41,11 +42,11 @@
 			<div id="chatList">
 				<div class="flexBoxRow">
 					<div id="items_select" class="items">
-						<a class="type_select form-control" href="#" onclick="">전체 목록</a>
-						<ul class="drop-menu">
-	                        <li><a onclick="">전체 목록</a></li>
-	                        <li><a onclick="">구매 채팅</a></li>
-	                        <li><a onclick="">판매 채팅</a></li>
+						<a class="type_select form-control bg-purple" href="#" onclick="">전체 목록</a>
+						<ul class="drop-menu ">
+	                        <li><a onclick="" class="bg-purple">전체 목록</a></li>
+	                        <li><a onclick="" class="bg-purple">구매 채팅</a></li>
+	                        <li><a onclick="" class="bg-purple">판매 채팅</a></li>
 	                    </ul>
 					</div>
 					<input type="search" id="searchText" placeholder="제목을 입력하세요">
@@ -57,7 +58,8 @@
 					<c:forEach var="chatRoom" items="${chatRoomDTOList }">
 					<div id="${chatRoom.chat_room_id }" onclick="connect(`<c:out value="${chatRoom}"/>`);">
 						<div class="profile">
-							<img alt="" src="${chatRoom.product_img1 }">
+							<img onerror="this.onerror=null; this.src='${pageContext.request.contextPath }/resources/img/icon/not_found.png';" 
+							src="${pageContext.request.contextPath }/resources/upload/${chatRoom.product_img1 }">
 						</div>
 						<div class="chatDescript">
 							<div class="chatContnet">
@@ -93,8 +95,8 @@
 					<div>
 						<p></p>
 						<div>
-							<button id="trade-btn"></button>
-							<button id="openReportModal" data-toggle="modal" data-target="#reportModal">신고하기</button>
+							<button id="trade-btn" class="bg-purple" data-toggle="modal" data-target="#reviewModal"></button>
+							<button id="openReportModal" class="bg-purple" data-toggle="modal" data-target="#reportModal">신고하기</button>
 						</div>
 					</div>
 					<div id="productLoading" class="box">
@@ -130,69 +132,77 @@
 
                         <!-- Textarea for report details -->
                         <div class="accordion-subject"><b>신고 대상</b></div>
-                        <label><input type="radio" name="reportType" value="회원" checked>회원</label>
-                        <input type="radio" name="reportType" value="상품">상품
+                        <label id="reportM"><input type="radio" name="reportType" value="회원" checked>회원</label>
+                        <label id="reportP"><input type="radio" name="reportType" value="상품">상품</label>
                         <div class="accordion-subject"><b>신고 내용</b></div>
                         <textarea class="form-control" placeholder="상품 신고 사유를 입력해주세요" id="report_contents" name="report_contents" required></textarea>
 
                         <!-- Submission button -->
-                        <button type="button" class="btn btn-primary mt-3" id="reportBtn">상품 신고</button>
+                        <button type="button" class="btn btn-primary mt-3 bg-purple" id="reportBtn">신고하기</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
     <!-- 후기작성 모달 -->
-    <div id="reviewModal" class="modal" style="display: none;">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-			<h2 style="margin-bottom: 20px;">구매 후기</h2>
-			<div style="float: left; overflow:hidden;">
-				<img id="modalImage" src="" style="width: 50%; height: 300px; object-fit: cover !important; margin-bottom: 20px;">
-	    	</div>
-	    	<form action="${pageContext.request.contextPath}/my/reviewPro" method="post">
-				<div class="starRating">
-				<label for="quality">품&emsp;&emsp;질 :</label>
-					<div class="stars" data-name="quality" style="display: inline-block;">
-					    <span class="star" data-value="1">★</span>
-					    <span class="star" data-value="2">★</span>
-					    <span class="star" data-value="3">★</span>
-					    <span class="star" data-value="4">★</span>
-					    <span class="star" data-value="5">★</span>
-					</div><br>
-			    <label for="price">가&emsp;&emsp;격 :</label>
-					<div class="stars" data-name="price" style="display: inline-block;">
-					    <span class="star" data-value="1">★</span>
-					    <span class="star" data-value="2">★</span>
-					    <span class="star" data-value="3">★</span>
-					    <span class="star" data-value="4">★</span>
-					    <span class="star" data-value="5">★</span>
-					</div><br>
-				<label for="punctuality">시간 약속 :</label>
-				    <div class="stars" data-name="punctuality" style="display: inline-block;">
-					    <span class="star" data-value="1">★</span>
-					    <span class="star" data-value="2">★</span>
-					    <span class="star" data-value="3">★</span>
-					    <span class="star" data-value="4">★</span>
-					    <span class="star" data-value="5">★</span>
-				    </div><br>
-				<label for="manner">매&emsp;&emsp;너 :</label>
-				    <div class="stars" data-name="manner" style="display: inline-block; margin-bottom: 20px;">
-					    <span class="star" data-value="1">★</span>
-					    <span class="star" data-value="2">★</span>
-					    <span class="star" data-value="3">★</span>
-					    <span class="star" data-value="4">★</span>
-					    <span class="star" data-value="5">★</span>
-				    </div>
-				</div>
-				<input type="hidden" id="qualityRating" name="qualityRating" value="1">
-				<input type="hidden" id="priceRating" name="priceRating" value="1">
-				<input type="hidden" id="punctualityRating" name="punctualityRating" value="1">
-				<input type="hidden" id="mannerRating" name="mannerRating" value="1">
-	      		<textarea class="reviewText" name="reviewText" rows="4" cols="50" placeholder="후기 내용"></textarea><br>
-	      		<input type="hidden" id="productId" name="productId" value="">
-	      		<button type="submit" style="background-color: #4E229E; padding: 5px; color: white; border-radius: 5px; cursor: pointer;">작성 완료</button>
-	    	</form>
+    <div id="reviewModal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+    	<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">구매 후기</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+					<div style="overflow:hidden;">
+						<img id="modalImage" src="">
+			    	</div>
+			    	<form action="${pageContext.request.contextPath}/my/reviewPro" method="post">
+						<div class="starRating">
+							<div class="stars" data-name="quality">
+								<label for="quality">품&emsp;&emsp;질 :</label>
+							    <span class="star" data-value="1">★</span>
+							    <span class="star" data-value="2">★</span>
+							    <span class="star" data-value="3">★</span>
+							    <span class="star" data-value="4">★</span>
+							    <span class="star" data-value="5">★</span>
+							</div>
+							<div class="stars" data-name="price">
+					    		<label for="price">가&emsp;&emsp;격 :</label>
+							    <span class="star" data-value="1">★</span>
+							    <span class="star" data-value="2">★</span>
+							    <span class="star" data-value="3">★</span>
+							    <span class="star" data-value="4">★</span>
+							    <span class="star" data-value="5">★</span>
+							</div>
+						    <div class="stars" data-name="punctuality">
+								<label for="punctuality">시간 약속 :</label>
+							    <span class="star" data-value="1">★</span>
+							    <span class="star" data-value="2">★</span>
+							    <span class="star" data-value="3">★</span>
+							    <span class="star" data-value="4">★</span>
+							    <span class="star" data-value="5">★</span>
+						    </div>
+						    <div class="stars" data-name="manner" >
+								<label for="manner">매&emsp;&emsp;너 :</label>
+							    <span class="star" data-value="1">★</span>
+							    <span class="star" data-value="2">★</span>
+							    <span class="star" data-value="3">★</span>
+							    <span class="star" data-value="4">★</span>
+							    <span class="star" data-value="5">★</span>
+						    </div>
+						</div>
+						<input type="hidden" id="qualityRating" name="qualityRating" value="1">
+						<input type="hidden" id="priceRating" name="priceRating" value="1">
+						<input type="hidden" id="punctualityRating" name="punctualityRating" value="1">
+						<input type="hidden" id="mannerRating" name="mannerRating" value="1">
+			      		<textarea class="reviewText" name="reviewText" rows="4" cols="50" placeholder="후기 내용"></textarea><br>
+			      		<input type="hidden" id="productId" name="productId" value="">
+			      		<button type="submit" class="btn btn-primary mt-3 bg-purple">작성 완료</button>
+			    	</form>
+		    	</div>
+			</div>
 		</div>
 	</div>
 	</section>

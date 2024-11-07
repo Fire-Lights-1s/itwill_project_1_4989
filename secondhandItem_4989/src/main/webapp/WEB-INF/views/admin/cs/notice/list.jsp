@@ -59,7 +59,7 @@
 	                        </thead>
 	                        <tbody>
 	                        	<c:forEach var="noticeList" items="${noticeList }">
-	                            <tr data-notice-id="${noticeList.notice_id }">
+	                            <tr class="get-detail" data-notice-id="${noticeList.notice_id }">
 	                                <td class="text-center">${noticeList.notice_id}</td>
 	                                <td class="text-center">
 		                                <c:choose>
@@ -148,7 +148,7 @@
     
 	const contextPath = '${pageContext.request.contextPath}/admin/cs/';
 	$(document).ready(function(){
-	    $("tr").off('click').on('click', function(){
+	    $(".get-detail").off('click').on('click', function(){
 			window.location.href = contextPath + 'noticedetail?notice_id=' + $(this).data('notice-id');
 	    });
 	});

@@ -58,7 +58,7 @@
 	                        </thead>
 	                        <tbody>
 	                        	<c:forEach var="faqList" items="${faqList }">
-	                            <tr data-faq-id="${faqList.faq_id }">
+	                            <tr class="get-detail" data-faq-id="${faqList.faq_id }">
 	                                <td class="text-center">${faqList.faq_id}</td>
 	                                <td class="text-center">
 	                                <c:choose>
@@ -147,7 +147,7 @@
     // 디테일페이지 이동
 	const contextPath = '${pageContext.request.contextPath}/admin/cs/';
 	$(document).ready(function(){
-	    $("tr").off('click').on('click', function(){
+	    $(".get-detail").off('click').on('click', function(){
 			window.location.href = contextPath + 'faqdetail?faq_id=' + $(this).data('faq-id');
 	    });
 	});

@@ -86,4 +86,8 @@ public class MyPageService {
 	public double allRating(String id) {
 		return myPageDAO.allRating(id);
 	}
+
+	public void resMem(String user) {
+		myPageDAO.resMem(user);
+	}
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,42 +27,42 @@ public class MemberController {
 //	@Autowired
 //	private MemberService memberService;
 	
-//	@GetMapping("/login")
-//	public String login() {
-//		return "/member/login";
-//	} 
-	
 	@GetMapping("/login")
-    public String loginPage(HttpServletRequest request, HttpSession session, MemberDTO memberDTO) {
-        // 쿠키에서 loginSessionId를 확인하여 자동 로그인 처리
-        Cookie[] cookies = request.getCookies();
-        System.out.println(cookies);
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("loginSessionId".equals(cookie.getName())) {
-                	
-                	String id = cookie.getValue();
-                	
-                	memberDTO.setMember_id(id);
-                	
-                	MemberDTO memberDTO2 = memberService.userCheck1(memberDTO);
-            		System.out.println(memberDTO2);
-            		if(memberDTO2 != null) {
-            			
-            			session.setAttribute("member_id", memberDTO2.getMember_id());
-            			session.setAttribute("nickname", memberDTO2.getNickname());
-            			// 쿠키에 저장된 세션 ID가 현재 세션과 일치할 경우 자동 로그인
-                        return "redirect:/";
-                        
-            		}
-                        
-                    
-                }
-            }
-        }
-        // 로그인 페이지로 이동
-        return "/member/login";
-    }
+	public String login() {
+		return "/member/login";
+	} 
+	
+//	@GetMapping("/login")
+//    public String loginPage(HttpServletRequest request, HttpSession session, MemberDTO memberDTO) {
+//        // 쿠키에서 loginSessionId를 확인하여 자동 로그인 처리
+//        Cookie[] cookies = request.getCookies();
+//        System.out.println(cookies);
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if ("loginSessionId".equals(cookie.getName())) {
+//                	
+//                	String id = cookie.getValue();
+//                	
+//                	memberDTO.setMember_id(id);
+//                	
+//                	MemberDTO memberDTO2 = memberService.userCheck1(memberDTO);
+//            		System.out.println(memberDTO2);
+//            		if(memberDTO2 != null) {
+//            			
+//            			session.setAttribute("member_id", memberDTO2.getMember_id());
+//            			session.setAttribute("nickname", memberDTO2.getNickname());
+//            			// 쿠키에 저장된 세션 ID가 현재 세션과 일치할 경우 자동 로그인
+//                        return "redirect:/";
+//                        
+//            		}
+//                        
+//                    
+//                }
+//            }
+//        }
+//        // 로그인 페이지로 이동
+//        return "/member/login";
+//    }
 	
 	@GetMapping("/join")
 	public String join() {
@@ -96,35 +97,48 @@ public class MemberController {
 	//로그인 처리기능
 		@PostMapping("/loginPro")
 		public String loginPro(MemberDTO memberDTO,
-				HttpSession session,
+				HttpSession session, Model model,
 				@RequestParam(value = "autoLogin", required = false) String autoLogin,
 				HttpServletResponse response) {
 			
 			MemberDTO memberDTO2 = memberService.userCheck(memberDTO);
 			System.out.println(memberDTO2);
-			if(memberDTO2 != null) {
-				
-				session.setAttribute("member_id", memberDTO2.getMember_id());
-				session.setAttribute("nickname", memberDTO2.getNickname());
-				
-				String id = (String) session.getAttribute("member_id");
-				
-				// 자동 로그인이 체크된 경우
-	            if (autoLogin != null) {
-	                // 세션 아이디를 쿠키로 저장 (유효 기간 30일 설정)
-	                Cookie loginCookie = new Cookie("loginSessionId", id);
-	                loginCookie.setMaxAge(30 * 24 * 60 * 60); // 쿠키 유효 기간 30일 설정
-	                loginCookie.setPath("/"); // 웹사이트 전체에서 쿠키가 유효
-	                response.addCookie(loginCookie);
-	                System.out.println(loginCookie);
-	            }
-	            
-				
-				return "redirect:/";
-			}else {
-				
-				return "redirect:/member/login";
-			}
+			
+			
+				if(memberDTO2 != null) {
+					
+					boolean withdrawn = memberDTO2.getIs_withdrawn();
+					System.out.println(withdrawn);
+					
+					if(withdrawn == false) {
+					
+					session.setAttribute("member_id", memberDTO2.getMember_id());
+					session.setAttribute("nickname", memberDTO2.getNickname());
+					
+					String id = (String) session.getAttribute("member_id");
+					
+					// 자동 로그인이 체크된 경우
+		            if (autoLogin != null) {
+		                // 세션 아이디를 쿠키로 저장 (유효 기간 30일 설정)
+		                Cookie loginCookie = new Cookie("loginSessionId", id);
+		                loginCookie.setMaxAge(30 * 24 * 60 * 60); // 쿠키 유효 기간 30일 설정
+		                loginCookie.setPath("/"); // 웹사이트 전체에서 쿠키가 유효
+		                response.addCookie(loginCookie);
+		                System.out.println(loginCookie);
+		            }
+		            
+		            return "redirect:/";
+					} else {
+						model.addAttribute("alertMessage", "탈퇴한 회원입니다.");
+						return "member/login";
+					}
+				}else {
+					model.addAttribute("alertMessage", "등록되지 않은 회원입니다.");
+					return "member/login";
+				}
+			
+			
+			
 		}
 
 	
@@ -344,6 +358,50 @@ public class MemberController {
 			//아이디 없음, 아이디 사용가능
 			//result = "아이디 사용가능";
 			result = "nickok";
+		}
+		//결과값(html, xml, json) 리턴
+		return result;
+	}
+	
+	@GetMapping("/phoneCheck")
+	@ResponseBody
+	public String phoneCheck(HttpServletRequest request) {
+		System.out.println("AjaxController phoneCheck()");
+		String phone = request.getParameter("Phone");
+		
+		MemberDTO memberDTO = memberService.phoneCheck(phone);
+		
+		String result = "";
+		if(memberDTO != null) {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 중복";
+			result = "phonedup";
+		} else {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 사용가능";
+			result = "phoneok";
+		}
+		//결과값(html, xml, json) 리턴
+		return result;
+	}
+	
+	@GetMapping("/emailCheck")
+	@ResponseBody
+	public String emailCheck(HttpServletRequest request) {
+		System.out.println("AjaxController emailCheck()");
+		String email = request.getParameter("Email");
+		
+		MemberDTO memberDTO = memberService.emailCheck(email);
+		
+		String result = "";
+		if(memberDTO != null) {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 중복";
+			result = "emaildup";
+		} else {
+			//아이디 없음, 아이디 사용가능
+			//result = "아이디 사용가능";
+			result = "emailok";
 		}
 		//결과값(html, xml, json) 리턴
 		return result;

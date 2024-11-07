@@ -117,7 +117,7 @@ display: inline-block;
 		<h3>판매자 페이지</h3>
 	</div>
 	<ul style="font-size: 20px; font-weight: 500;">
-		<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUser}" style=" color: #372161; padding: 15px 15px; display: block;">${otherUserDTO.nickname}님의 프로필</a></li>
+		<li><a href="${pageContext.request.contextPath}/your/seller?otherUser=${otherUser}" style=" color: #372161; padding: 15px 15px; display: block; word-wrap: break-word;">${otherUserDTO.nickname}님의 프로필</a></li>
 		<li><a href="${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}" style=" color: #372161; padding: 15px 15px; display: block;">판매 내역</a></li>
 	</ul>
 	</aside>
@@ -170,29 +170,29 @@ display: inline-block;
 			<h2>판매 내역</h2>
 			<div class="profile-a">				
 				<c:if test="${empty param.sort}">		
-					<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn" onclick="priceAsc();">가격 순</button>
+					<button class="dateBtn" onclick="dateAsc();">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceDesc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn active" onclick="priceAsc();">가격 순</button>
+					<button class="dateBtn" onclick="dateDesc();">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'priceAsc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn active" onclick="priceDesc();">가격 순</button>
+					<button class="dateBtn" onclick="dateDesc();">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateDesc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn" onclick="priceDesc();">가격 순</button>
+					<button class="dateBtn active" onclick="dateAsc();">날짜 순</button>
 				</c:if>
 				<c:if test="${param.sort eq 'dateAsc'}">
-					<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}'">가격 순</button>
-					<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}'">날짜 순</button>
+					<button class="priceBtn" onclick="priceDesc();">가격 순</button>
+					<button class="dateBtn active" onclick="dateDesc();">날짜 순</button>
 				</c:if>
 				<br>
-				<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&sort=dateDesc&sale=pro'">판매 중</button>
-				<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&sort=dateDesc&sale=rsv'">예약 중</button>
-				<button onclick="location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&sort=dateDesc&sale=com'">판매 완료</button>
+				<button class="sellonBtn <c:if test="${pageDTO.sale == 'pro'}">active</c:if>" onclick="salePro();">판매 중</button>
+				<button class="sellingBtn <c:if test="${pageDTO.sale == 'rsv'}">active</c:if>" onclick="saleRsv();">예약 중</button>
+				<button class="sellcomBtn <c:if test="${pageDTO.sale == 'com'}">active</c:if>" onclick="saleCom();">판매 완료</button>
 			</div>
 			<div class="profile-item-list">
 			<c:forEach var="productDTO" items="${productList}">
@@ -269,6 +269,40 @@ display: inline-block;
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
+<script>
+	const navLinks = document.querySelectorAll('#sideNavLinks .nav-link');
+	const currentUrl = window.location.pathname;
+	navLinks.forEach(link => {
+	    if (link.getAttribute('href') === currentUrl) {
+	        link.classList.add('active-link');
+	    }
+	});
+</script>
+
+<script type="text/javascript">
+	function priceAsc(){
+		location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=priceAsc&sale=${pageDTO.sale}';
+	}
+	function priceDesc(){
+		location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=priceDesc&sale=${pageDTO.sale}';
+	}
+	function dateAsc(){
+		location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=dateAsc&sale=${pageDTO.sale}';
+	}
+	function dateDesc(){
+		location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&pageNum=${pageDTO.currentPage}&sort=dateDesc&sale=${pageDTO.sale}';
+	}
+	function salePro(){
+		location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&sort=${pageDTO.sort}&sale=pro';
+	}
+	function saleRsv(){
+		location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&sort=${pageDTO.sort}&sale=rsv';
+	}
+	function saleCom(){
+		location.href='${pageContext.request.contextPath}/your/sellerHistory?otherUser=${otherUser}&sort=${pageDTO.sort}&sale=com';
+	}
+</script>
 
 <script type="text/javascript">
 	function updateStarRating(category, value) {

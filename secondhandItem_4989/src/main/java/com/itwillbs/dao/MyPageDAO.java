@@ -75,6 +75,10 @@ public class MyPageDAO {
 	public double allRating(String id) {
 		return sqlSession.selectOne(namespace + ".allRating", id);
 	}
+
+	public void resMem(String user) {
+		sqlSession.update(namespace + ".resMem", user);
+	}
 	
 		
 	

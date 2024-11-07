@@ -85,4 +85,21 @@ public class MemberService {
 		return memberDAO.nickCheck(nickname);
 	}
 	
+	public MemberDTO phoneCheck(String phone) {
+		System.out.println("MemberService phoneCheck()");
+		return memberDAO.phoneCheck(phone);
+	}
+	
+	public MemberDTO emailCheck(String email) {
+		System.out.println("MemberService emailCheck()");
+		return memberDAO.emailCheck(email);
+	}
+	
+//	회원가입시 중복된 정보일경우 거절
+	public int userCheck2(MemberDTO memberDTO) {
+		System.out.println("MemberService userCheck2()");
+		
+		return memberDAO.userCheck2(memberDTO);
+	}
+	
 }

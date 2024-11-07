@@ -44,6 +44,17 @@
 	</div>
 </section>
 <jsp:include page="../inc/footer.jsp"></jsp:include>
+
+<script>
+	const navLinks = document.querySelectorAll('#sideNavLinks .nav-link');
+	const currentUrl = location.pathname;
+	navLinks.forEach(link => {
+	    if (link.getAttribute('href') === currentUrl) {
+	        link.classList.add('active-link');
+	    }
+	});
+</script>
+
 <script type="text/javascript">
 	function loginCheck() {
 		const pass = document.getElementById('password').value;
